@@ -1321,6 +1321,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .repinput{width:100%;min-height:44px;padding:0 var(--sp-3);border:1.5px solid var(--line);border-radius:var(--r-md);background:var(--surface);color:var(--fg);font:16px var(--body)}
 .repstatus{margin:0;font-size:var(--fs-sm);color:var(--muted)}.repstatus.err{color:#b3261e}
 .linkbtn{background:none;border:0;color:var(--accent);font:500 var(--fs-sm) var(--body);text-decoration:underline;min-height:40px;cursor:pointer}
+
+.mlang{display:flex;align-items:center;gap:var(--sp-2);font:600 var(--fs-sm)/1.2 var(--body);color:var(--fg)}
+.mlang select{flex:1;min-height:44px;padding:0 var(--sp-3);border:1.5px solid var(--line);border-radius:var(--r-md);background:var(--surface);color:var(--fg);font:500 15px var(--body)}
 </style>
 </head>
 <body>
@@ -4862,6 +4865,7 @@ if(!D.some(d=>d.id==="uhsa-marseille")){
  d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
  d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
  d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Envoi d'une fiche (texte, PDF, image) : au choix pour un soignant ou pour la personne, dans sa langue");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Les fiches se mettent à jour depuis le tableau Google Sheets MAP-fiches");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Signaler une erreur ou proposer un lieu se fait maintenant directement dans l'appli, sans e-mail (l'e-mail reste possible) ; comptage anonyme des consultations, sans cookie");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Nouvelle adresse : mapannuaire.github.io/map ; les messages arrivent à mapannuaire@gmail.com");
@@ -5574,12 +5578,15 @@ function fiche(d){
       <button class="fab-back" type="button" data-close>← Retour</button>
       <section class="sec" id="mail-sec"><h3>Envoyer cette fiche par e-mail</h3>
         <div class="box mailbox">
+          <label class="mlang"><span>Pour</span><select id="mlang-${d.id}" aria-label="Destinataire et langue de la fiche">
+            <option value="pro">un soignant (fiche complète)</option>
+            <optgroup label="la personne, en :"><option value="fr">français</option><option value="en">anglais</option><option value="ar">arabe</option><option value="ary">darija (lettres arabes)</option><option value="ary-lat">darija (lettres latines)</option><option value="es">espagnol</option><option value="it">italien</option><option value="ka">géorgien</option></optgroup>
+          </select></label>
           <input id="to-${d.id}" type="email" value="${esc(def)}" placeholder="adresse@exemple.fr" aria-label="Destinataire">
           <div class="shgrid"><a class="btn primary" id="send-${d.id}" href="#">${ico("mail")}Envoyer le texte</a>${EMBED?`<a class="btn primary" id="gsend-${d.id}" href="#" target="_blank" rel="noopener">Gmail</a>`:""}</div>
           <div class="shgrid"><button type="button" class="btn" data-file="pdf">${ico("doc")}Fiche en PDF</button><button type="button" class="btn" data-file="jpg">${ico("photo")}Fiche en image</button></div>
-          <p class="note" style="margin:0">PDF ou image : la fiche complète avec la carte, à joindre à un mail ou un message.</p>
-          <textarea id="body-${d.id}" aria-label="Contenu de l'e-mail" readonly>${esc(mailText(d))}</textarea>
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn" type="button" data-copytext="body-${d.id}">Copier le texte</button><span class="note">Le message contient les liens vers les dossiers, pas les fichiers. Si la messagerie ne s'ouvre pas, copiez le texte.</span></div>
+          <textarea id="body-${d.id}" hidden aria-hidden="true">${esc(mailText(d))}</textarea>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn" type="button" data-copytext="body-${d.id}">Copier le texte</button><span class="note">PDF ou image : la fiche avec la carte, à joindre à un message. Le texte contient les liens, pas les fichiers.</span></div>
         </div>
       </section>
     </div>`;
@@ -5594,10 +5601,11 @@ function openFiche(id){
   miniReal(d);
   const to=document.getElementById("to-"+id),send=document.getElementById("send-"+id);
   const gsend=document.getElementById("gsend-"+id)||{};
-  const upd=()=>{const t=to.value.trim(),su="Addictologie – "+d.n,bo=mailText(d);
+  const ml=document.getElementById("mlang-"+id),bt=document.getElementById("body-"+id);
+  const upd=()=>{const lg=ml?ml.value:"pro",t=to.value.trim(),su=lg==="pro"?"Addictologie – "+d.n:d.n,bo=lg==="pro"?mailText(d):patientText(d,lg);if(bt)bt.value=bo;
     send.href="mailto:"+encodeURIComponent(t).replace(/%40/g,"@")+"?subject="+encodeURIComponent(su)+"&body="+encodeURIComponent(bo);
     gsend.href="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(t)+"&su="+encodeURIComponent(su)+"&body="+encodeURIComponent(bo);};
-  upd();to.addEventListener("input",upd);
+  upd();to.addEventListener("input",upd);if(ml)ml.addEventListener("change",upd);
   fEl.focus({preventScroll:true});
 }
 function hideFiche(){if(fEl.hidden)return;fEl.hidden=true;fEl.innerHTML="";fEl.dataset.id="";document.body.classList.remove("locked");if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});}
@@ -5606,7 +5614,7 @@ fEl.addEventListener("click",e=>{
   if(e.target.closest("[data-close]"))return closeFiche();
   if(e.target.closest("[data-tomail]")){document.getElementById("mail-sec").scrollIntoView({behavior:"smooth",block:"start"});return;}
   if(e.target.closest("[data-print]")){openPlang();return;}
-  const fb=e.target.closest("[data-file]");if(fb){sendFiche(D.find(x=>x.id===fEl.dataset.id),fb.dataset.file,fb);return;}
+  const fb=e.target.closest("[data-file]");if(fb){const ml=document.getElementById("mlang-"+fEl.dataset.id);MLANG=ml?ml.value:"pro";sendFiche(D.find(x=>x.id===fEl.dataset.id),fb.dataset.file,fb);return;}
   const sh=e.target.closest("[data-share]");if(sh){const d=D.find(x=>x.id===fEl.dataset.id);shareFiche(d,sh);return;}
   const c=e.target.closest(".copy[data-v]");if(c)return copy(c.dataset.v,c);
   const t=e.target.closest("[data-copytext]");if(t){const ta=document.getElementById(t.dataset.copytext);return copy(ta.value,t,ta);}
@@ -5683,7 +5691,7 @@ async function ficheFile(d,fmt){
   if(!window.html2canvas)await loadJS("vendor/html2canvas.min.js","https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
   if(fmt==="pdf"&&!(window.jspdf&&window.jspdf.jsPDF))await loadJS("vendor/jspdf.umd.min.js","https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
   printDone();
-  const sh=document.createElement("div");sh.id="printsheet";sh.className="capture";sh.innerHTML=printSheet(d);document.body.appendChild(sh);
+  const sh=document.createElement("div");sh.id="printsheet";sh.className="capture";sh.innerHTML=MLANG==="pro"?printSheet(d):patientSheet(d,MLANG);document.body.appendChild(sh);
   const mm=fEl.querySelector(".minimap");
   if(mm){PR={mm,parent:mm.parentNode,next:mm.nextSibling};const w=mm.offsetWidth,h=mm.offsetHeight;document.getElementById("ps-map").appendChild(mm);mm.style.width=w+"px";mm.style.height=h+"px";}
   try{
@@ -5743,7 +5751,7 @@ function patientSheet(d,lg){
   const T=PT[lg]||PT.fr,F=PT.fr,bi=(t,f)=>lg==="fr"?t:`${t}<small class="ps-fr" dir="ltr" lang="fr">${f}</small>`;
   const H=d.hours;
   const hrs=H&&H.semaine?T.days.map((j,i)=>{const sl=H.semaine[i+1]||[];return `<tr><td>${j}</td><td dir="ltr">${sl.length?sl.map(([a,b])=>fmtH(a)+"–"+fmtH(b)).join(", "):`<span dir="auto">${T.closed}</span>`}</td></tr>`;}).join(""):"";
-  const tr=access(d).map(x=>`<span dir="ltr">${x.lines.join("/")} ${esc(x.txt)}</span>${x.min?` (${x.min} ${T.walk})`:""}`).join(" · ");
+  const tr=access(d).map(x=>`<span dir="ltr">${x.lines.join("/")} ${esc(x.txt)}</span>${x.min?(T.dir==="rtl"?` · <bdi dir="rtl" style="white-space:nowrap">${x.min} ${T.walk}</bdi>`:` (${x.min} ${T.walk})`):""}`).join("<br>");
   const ph=d.c.filter(([l,v])=>telHref(v)&&!/fax/i.test(l)).slice(0,3),em=d.c.filter(([l,v])=>/e-?mail|courriel/i.test(l)).slice(0,1);
   return `<div class="ps-pat" dir="${T.dir}" lang="${lg==="ary"?"ar":lg==="ary-lat"?"ary-Latn":lg}">
   <div class="ps-head"><div class="ps-qr"><img src="${qrImg(ficheUrl(d),2)}" alt=""><span>${T.online}</span></div>
@@ -5773,6 +5781,19 @@ plEl.addEventListener("click",e=>{
   PLANG=b.dataset.plang;plEl.hidden=true;printFiche(D.find(x=>x.id===fEl.dataset.id));});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!plEl.hidden)plEl.hidden=true;});
 window.addEventListener("afterprint",()=>{PLANG="pro";});
+
+/* Texte à envoyer à la personne, dans sa langue */
+function patientText(d,lg){
+  const T=PT[lg]||PT.fr,L=[d.n,"",T.intro,"",T.addr+" : "+(d.a||"")];
+  const tr=access(d).map(x=>`${x.lines.join("/")} ${x.txt}${x.min?` (${x.min} ${T.walk})`:""}`).join(" · ");if(tr)L.push(T.access+" : "+tr);
+  d.c.filter(([l,v])=>telHref(v)&&!/fax/i.test(l)).slice(0,3).forEach(([l,v])=>L.push(T.phone+" : "+v));
+  d.c.filter(([l])=>/e-?mail|courriel/i.test(l)).slice(0,1).forEach(([l,v])=>L.push(T.email+" : "+v));
+  const S=d.hours&&d.hours.semaine;
+  if(S){L.push("",T.hours+" :");T.days.forEach((j,i)=>{const sl=S[i+1]||[];L.push(j+" : "+(sl.length?sl.map(([a,b])=>fmtH(a)+"–"+fmtH(b)).join(", "):T.closed));});}
+  L.push("",T.bring+" : "+T.list,T.call,"",T.urg,"","Google Maps : "+dirUrl(d),T.online+" : "+ficheUrl(d));
+  return L.join("\n");
+}
+let MLANG="pro";
 function printDone(){
   if(PR){PR.mm.style.width="";PR.mm.style.height="";PR.parent.insertBefore(PR.mm,PR.next);PR=null;}
   const sh=document.getElementById("printsheet");if(sh)sh.remove();document.body.classList.remove("printing");

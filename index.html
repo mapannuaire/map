@@ -4945,7 +4945,7 @@ function applySheet(text){
     if(DAYS.some(k=>g(k)!==undefined)||g("horaires precisions")!==undefined){
       const sem={};let any=false;DAYS.forEach((k,j)=>{const v=sheetDay(g(k));sem[j+1]=v;if(v.length)any=true;});
       const tx=g("horaires precisions")||"";
-      if(any||tx){d.hours={...(any?{semaine:sem}:{}),texte:tx,src:(d.hours&&d.hours.src)||""};}else delete d.hours;}
+      if(any||tx){const nh={...(d.hours||{}),texte:tx};if(any)nh.semaine=sem;else delete nh.semaine;d.hours=nh;}else delete d.hours;}
     if(g("remarque")!==undefined)d.note=g("remarque");if(d.note===undefined)d.note="";
     if(g("a confirmer")!==undefined){if(sheetYes(g("a confirmer")))d.v=1;else delete d.v;}
     set("chk",g("verifie le")!==undefined?sheetDate(g("verifie le")):undefined);

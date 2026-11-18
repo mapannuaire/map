@@ -17,6 +17,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
+:root{--fs-xs:11px;--fs-sm:13px;--fs-md:15px;--fs-lg:17px;--fs-xl:22px;--fs-2xl:28px;
+--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;--sp-6:24px;--sp-8:32px;
+--r-xs:4px;--r-sm:8px;--r-md:12px;--r-lg:16px;--r-full:999px;--focus:var(--accent)}
+
 /* Mise en page centrée portable : 1) questions en parcours guidé, 2) résultats avec carte dessinée + liste numérotée, 3) fiche plein écran.
    Palette : sable des calanques, bleu de rade, pastilles de métro RTM. */
 :root{
@@ -61,320 +65,320 @@ a{color:var(--accent)}
 :focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
 .mono{font-family:var(--mono)}
 .view{min-height:100vh;min-height:100dvh}
-.col{max-width:640px;margin:0 auto;padding:0 16px}
+.col{max-width:640px;margin:0 auto;padding:0 var(--sp-4)}
 
 /* ---------- Bandeau ---------- */
-.hero{background:linear-gradient(180deg,#0d5a88,#0b4a70);color:#fff;position:relative;padding:22px 0 40px}
-.hero .col{display:grid;gap:6px}
-.eyebrow{display:flex;align-items:center;gap:8px;font:600 11.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:.9}
-.dot13{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1.5px solid rgba(255,255,255,.7);font:600 11px var(--mono);letter-spacing:0}
-.hero h1{font:600 clamp(26px,7.4vw,34px)/1.1 var(--display);margin:6px 0 2px;letter-spacing:-.01em}
-.hero p{margin:0;opacity:.88;font-size:15px;max-width:34em}
+.hero{background:linear-gradient(180deg,#0d5a88,#0b4a70);color:#fff;position:relative;padding:var(--sp-6) 0 40px}
+.hero .col{display:grid;gap:var(--sp-2)}
+.eyebrow{display:flex;align-items:center;gap:var(--sp-2);font:600 var(--fs-xs) var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+.dot13{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1.5px solid rgba(255,255,255,.7);font:600 var(--fs-xs) var(--mono);letter-spacing:0}
+.hero h1{font:600 clamp(26px,7.4vw,34px)/1.1 var(--display);margin:var(--sp-2) 0 2px;letter-spacing:-.01em}
+.hero p{margin:0;opacity:.88;font-size:var(--fs-md);max-width:34em}
 .wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:26px;display:block}
 .wave path{fill:var(--bg)}
-.hero.small{padding:14px 0 34px}
+.hero.small{padding:var(--sp-4) 0 var(--sp-8)}
 .hero.small h1{font-size:clamp(23px,6.4vw,28px)}
-.backlink{background:none;border:0;color:#fff;opacity:.9;padding:6px 0;font-size:14.5px;font-weight:500;justify-self:start;display:inline-flex;gap:6px;align-items:center}
+.backlink{background:none;border:0;color:#fff;opacity:.9;padding:var(--sp-2) 0;font-size:var(--fs-md);font-weight:500;justify-self:start;display:inline-flex;gap:var(--sp-2);align-items:center}
 
 /* ---------- Questions ---------- */
-.prog{display:flex;gap:6px;margin:6px 0 16px}
-.prog i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.prog{display:flex;gap:var(--sp-2);margin:var(--sp-2) 0 var(--sp-4)}
+.prog i{flex:1;height:5px;border-radius:var(--r-xs);background:var(--line)}
 .prog i.on{background:var(--accent)}
-.qh{font:600 23px/1.2 var(--display);margin:0}
-.qsub{color:var(--muted);font-size:14px;margin:2px 0 14px}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.op{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:12px 12px 11px;display:grid;gap:3px;text-align:left;position:relative;align-content:start;min-height:132px;transition:border-color .15s,background .15s,transform .1s}
+.qh{font:600 var(--fs-xl)/1.2 var(--display);margin:0}
+.qsub{color:var(--muted);font-size:var(--fs-md);margin:2px 0 var(--sp-4)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)}
+.op{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-3) var(--sp-3) var(--sp-3);display:grid;gap:3px;text-align:left;position:relative;align-content:start;min-height:132px;transition:border-color .15s,background .15s,transform .1s}
 .op:active{transform:scale(.98)}
-.op .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;margin-bottom:4px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
+.op .ic{width:38px;height:38px;border-radius:var(--r-md);display:grid;place-items:center;margin-bottom:var(--sp-1);color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
 .op .ic svg{width:22px;height:22px}
-.op b{font-size:15.5px;line-height:1.25}
-.op span{font-size:12.8px;color:var(--muted);line-height:1.3}
-.op em{font:500 11.5px var(--mono);font-style:normal;color:var(--muted);margin-top:auto;padding-top:4px}
+.op b{font-size:var(--fs-md);line-height:1.25}
+.op span{font-size:var(--fs-sm);color:var(--muted);line-height:1.3}
+.op em{font:500 var(--fs-xs) var(--mono);font-style:normal;color:var(--muted);margin-top:auto;padding-top:var(--sp-1)}
 .op:last-child:nth-child(odd){grid-column:1/-1;min-height:0}
 .op[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
-.op .tick{position:absolute;top:11px;right:11px;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:700;color:transparent}
+.op .tick{position:absolute;top:11px;right:11px;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:var(--fs-sm);font-weight:700;color:transparent}
 .op[aria-pressed="true"] .tick{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.alllink{display:block;margin:16px auto 0;background:none;border:0;color:var(--accent);font-weight:600;font-size:14.5px;padding:8px}
-.arca{margin:18px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;gap:4px;font-size:13.5px;color:var(--muted)}
-.arca b{color:var(--fg);font-size:14.5px}
-.arca .arcanum{font:600 17px var(--mono);color:var(--fg);text-decoration:none}
+.alllink{display:block;margin:var(--sp-4) auto 0;background:none;border:0;color:var(--accent);font-weight:600;font-size:var(--fs-md);padding:var(--sp-2)}
+.arca{margin:var(--sp-5) 0 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-3) var(--sp-4);display:grid;gap:var(--sp-1);font-size:var(--fs-sm);color:var(--muted)}
+.arca b{color:var(--fg);font-size:var(--fs-md)}
+.arca .arcanum{font:600 var(--fs-lg) var(--mono);color:var(--fg);text-decoration:none}
 
-.qcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;display:grid;gap:10px;margin-bottom:12px}
-.qcard .lbl{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.qcard h3{margin:0;font:600 19px/1.25 var(--display)}
-.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;background:var(--sunk);border-radius:14px;padding:4px}
-.seg button{border:0;background:none;border-radius:11px;padding:11px 6px;font-weight:600;font-size:15px;color:var(--muted);line-height:1.2}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-4);display:grid;gap:var(--sp-3);margin-bottom:var(--sp-3)}
+.qcard .lbl{font:600 var(--fs-xs) var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.qcard h3{margin:0;font:600 var(--fs-lg)/1.25 var(--display)}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:var(--sp-2);background:var(--sunk);border-radius:var(--r-lg);padding:var(--sp-1)}
+.seg button{border:0;background:none;border-radius:var(--r-md);padding:var(--sp-3) var(--sp-2);font-weight:600;font-size:var(--fs-md);color:var(--muted);line-height:1.2}
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,.14)}
 .seg.four{grid-auto-flow:row;grid-template-columns:1fr 1fr}
-.hint{margin:0;font-size:13.3px;color:var(--muted);line-height:1.4}
-select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:12px;font-size:15.5px}
+.hint{margin:0;font-size:var(--fs-sm);color:var(--muted);line-height:1.4}
+select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:var(--sp-3);font-size:var(--fs-md)}
 
-.bottombar{position:sticky;bottom:0;z-index:5;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line);margin-top:20px}
-.bottombar .col{display:flex;gap:12px;align-items:center;padding-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
-.bb-arca{font-size:12px;color:var(--muted);line-height:1.2;text-decoration:none;flex:none}
-.bb-arca b{display:block;color:var(--fg);font:600 13px var(--mono)}
-.cta{flex:1;border:0;background:var(--accent);color:var(--on-accent);border-radius:14px;padding:14px 16px;font-weight:600;font-size:16px;text-align:center;text-decoration:none}
-.qpad{padding-bottom:8px}
+.bottombar{position:sticky;bottom:0;z-index:5;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line);margin-top:var(--sp-5)}
+.bottombar .col{display:flex;gap:var(--sp-3);align-items:center;padding-top:var(--sp-3);padding-bottom:calc(var(--sp-3) + env(safe-area-inset-bottom))}
+.bb-arca{font-size:var(--fs-sm);color:var(--muted);line-height:1.2;text-decoration:none;flex:none}
+.bb-arca b{display:block;color:var(--fg);font:600 var(--fs-sm) var(--mono)}
+.cta{flex:1;border:0;background:var(--accent);color:var(--on-accent);border-radius:var(--r-lg);padding:var(--sp-4) var(--sp-4);font-weight:600;font-size:16px;text-align:center;text-decoration:none}
+.qpad{padding-bottom:var(--sp-2)}
 
-.modetabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:4px;margin-top:12px}
-.modetabs button{border:0;background:none;color:#fff;border-radius:10px;padding:10px 6px;font-weight:600;font-size:14.5px;opacity:.85}
+.modetabs{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-1);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:var(--r-lg);padding:var(--sp-1);margin-top:var(--sp-3)}
+.modetabs button{border:0;background:none;color:#fff;border-radius:var(--r-md);padding:var(--sp-3) var(--sp-2);font-weight:600;font-size:var(--fs-md);opacity:.85}
 .modetabs button[aria-selected="true"]{background:#fff;color:#0b4a70;opacity:1;box-shadow:0 1px 4px rgba(0,0,0,.2)}
-.howgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.howgrid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)}
 .howgrid .op{min-height:0}
-.dob{display:grid;grid-template-columns:1fr 1.6fr;gap:8px}
-.presult{margin-top:12px;background:var(--surface);border:2px solid var(--t-cmp);border-radius:18px;padding:14px;display:grid;gap:8px}
-.presult .lbl{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--t-cmp)}
-.presult h3{margin:0;font:600 20px/1.2 var(--display)}
-.presult .meta{font-size:13.5px;color:var(--muted)}
-.presult .row{display:flex;gap:8px;flex-wrap:wrap}
+.dob{display:grid;grid-template-columns:1fr 1.6fr;gap:var(--sp-2)}
+.presult{margin-top:var(--sp-3);background:var(--surface);border:2px solid var(--t-cmp);border-radius:var(--r-lg);padding:var(--sp-4);display:grid;gap:var(--sp-2)}
+.presult .lbl{font:600 var(--fs-xs) var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--t-cmp)}
+.presult h3{margin:0;font:600 var(--fs-xl)/1.2 var(--display)}
+.presult .meta{font-size:var(--fs-sm);color:var(--muted)}
+.presult .row{display:flex;gap:var(--sp-2);flex-wrap:wrap}
 .presult.err{border-color:var(--warn)}
 .sectbox{border-left:4px solid var(--t-cmp)}
 
 .iconback{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.1);color:#fff;font-size:20px;line-height:1;display:grid;place-items:center}
-.fab-back{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:25;border:0;border-radius:99px;padding:12px 18px;background:var(--accent);color:var(--on-accent);font-weight:600;font-size:15px;box-shadow:0 6px 18px -6px rgba(0,0,0,.45)}
+.fab-back{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:25;border:0;border-radius:var(--r-full);padding:var(--sp-3) var(--sp-5);background:var(--accent);color:var(--on-accent);font-weight:600;font-size:var(--fs-md);box-shadow:0 6px 18px -6px rgba(0,0,0,.45)}
 @media (min-width:900px){.fab-back{left:calc(50% - 320px)}}
-.mobbtn{margin-top:10px;width:100%;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:12px 14px;color:var(--fg)}
-.mobbtn .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:var(--t-mob);background:color-mix(in srgb,var(--t-mob) 14%,transparent)}
+.mobbtn{margin-top:var(--sp-3);width:100%;display:grid;grid-template-columns:auto 1fr auto;gap:var(--sp-3);align-items:center;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-3) var(--sp-4);color:var(--fg)}
+.mobbtn .ic{width:38px;height:38px;border-radius:var(--r-md);display:grid;place-items:center;color:var(--t-mob);background:color-mix(in srgb,var(--t-mob) 14%,transparent)}
 .mobbtn .ic svg{width:22px;height:22px}
-.mobbtn b{display:block;font-size:15.5px}
-.mobbtn small{display:block;font-size:12.8px;color:var(--muted);line-height:1.3}
+.mobbtn b{display:block;font-size:var(--fs-md)}
+.mobbtn small{display:block;font-size:var(--fs-sm);color:var(--muted);line-height:1.3}
 .list{grid-template-columns:minmax(0,1fr)}
 .list>section,.cards,.card{min-width:0}
 .group-h h2{min-width:0;overflow-wrap:anywhere}
 .card h3,.card .org,.fact,.crow .v,.box{overflow-wrap:anywhere}
 .maptog{white-space:nowrap}
 @media (max-width:440px){.legend .lg-hint{display:none}}
-@media (max-width:400px){.legend{gap:6px;font-size:10.5px}.legend i{width:11px}.maptools{padding-left:12px}.maptog{padding:6px 10px}}
-.installbtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:6px 0 0;border:1.5px dashed var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:14px;padding:12px;font-weight:600;font-size:15px}
+@media (max-width:400px){.legend{gap:var(--sp-2);font-size:var(--fs-xs)}.legend i{width:11px}.maptools{padding-left:var(--sp-3)}.maptog{padding:var(--sp-2) var(--sp-3)}}
+.installbtn{display:flex;align-items:center;justify-content:center;gap:var(--sp-2);width:100%;margin:var(--sp-2) 0 0;border:1.5px dashed var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:var(--r-lg);padding:var(--sp-3);font-weight:600;font-size:var(--fs-md)}
 .installbtn svg{width:20px;height:20px}
 .isheet-scrim{position:fixed;inset:0;z-index:40;background:rgba(10,20,30,.55);display:flex;align-items:flex-end;justify-content:center}
-.isheet{background:var(--bg);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:10px 18px calc(18px + env(safe-area-inset-bottom));display:grid;gap:12px}
-.isheet .grab{width:40px;height:5px;border-radius:3px;background:var(--line);margin:0 auto}
-.isheet h2{margin:0;font:600 22px/1.2 var(--display)}
-.steps{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:s}
-.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;font-size:15px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
-.steps li::before{content:counter(s);width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:700;font-size:13px}
-.steps .k{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--sunk);border-radius:8px;padding:1px 7px;font-weight:600;white-space:nowrap}
+.isheet{background:var(--bg);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:var(--r-lg) var(--r-lg) 0 0;padding:var(--sp-3) var(--sp-5) calc(var(--sp-5) + env(safe-area-inset-bottom));display:grid;gap:var(--sp-3)}
+.isheet .grab{width:40px;height:5px;border-radius:var(--r-xs);background:var(--line);margin:0 auto}
+.isheet h2{margin:0;font:600 var(--fs-xl)/1.2 var(--display)}
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:var(--sp-3);counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:var(--sp-3);align-items:start;font-size:var(--fs-md);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-3) var(--sp-3)}
+.steps li::before{content:counter(s);width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:700;font-size:var(--fs-sm)}
+.steps .k{display:inline-flex;align-items:center;gap:var(--sp-1);border:1px solid var(--line);background:var(--sunk);border-radius:var(--r-sm);padding:1px var(--sp-2);font-weight:600;white-space:nowrap}
 .steps .k svg{width:16px;height:16px}
-.searchopen{display:flex;align-items:center;gap:10px;width:100%;margin-top:12px;border:0;border-radius:14px;background:#fff;color:#5f6b75;padding:13px 14px;font-size:15.5px;text-align:left;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.searchopen{display:flex;align-items:center;gap:var(--sp-3);width:100%;margin-top:var(--sp-3);border:0;border-radius:var(--r-lg);background:#fff;color:#5f6b75;padding:var(--sp-3) var(--sp-4);font-size:var(--fs-md);text-align:left;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 .searchopen svg{width:20px;height:20px;flex:none;color:#0d5a88}
-.stop{position:sticky;top:0;z-index:6;background:#0d5a88;padding:10px 0}
-.stop .col{display:flex;gap:10px;align-items:center}
-.sfield{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:#fff;border-radius:14px;padding:0 6px 0 12px}
+.stop{position:sticky;top:0;z-index:6;background:#0d5a88;padding:var(--sp-3) 0}
+.stop .col{display:flex;gap:var(--sp-3);align-items:center}
+.sfield{flex:1;min-width:0;display:flex;align-items:center;gap:var(--sp-2);background:#fff;border-radius:var(--r-lg);padding:0 var(--sp-2) 0 var(--sp-3)}
 .sfield svg{width:19px;height:19px;flex:none;color:#0d5a88}
-.sfield input{flex:1;min-width:0;border:0;outline:0;background:none;color:#1b2a35;font-size:16px;padding:12px 0}
+.sfield input{flex:1;min-width:0;border:0;outline:0;background:none;color:#1b2a35;font-size:16px;padding:var(--sp-3) 0}
 .sfield input::-webkit-search-cancel-button{display:none}
-.sfield button{border:0;background:#eef1f3;color:#1b2a35;border-radius:50%;width:30px;height:30px;font-size:18px;line-height:1;flex:none}
-.sugg{display:flex;flex-wrap:wrap;gap:8px}
-.sugg button{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:8px 13px;font-size:14px;font-weight:600;color:var(--fg)}
-.scard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;gap:5px;text-align:left;width:100%;min-width:0}
-.scard h3{margin:0;font:600 17px/1.25 var(--display);overflow-wrap:anywhere}
-.scard .org{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
-.scard .where{font:500 12px var(--mono);color:var(--muted)}
-.scard mark{background:color-mix(in srgb,var(--accent) 22%,transparent);color:inherit;border-radius:3px;padding:0 1px}
+.sfield button{border:0;background:#eef1f3;color:#1b2a35;border-radius:50%;width:30px;height:30px;font-size:var(--fs-lg);line-height:1;flex:none}
+.sugg{display:flex;flex-wrap:wrap;gap:var(--sp-2)}
+.sugg button{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-full);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-md);font-weight:600;color:var(--fg)}
+.scard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-3) var(--sp-4);display:grid;gap:var(--sp-1);text-align:left;width:100%;min-width:0}
+.scard h3{margin:0;font:600 var(--fs-lg)/1.25 var(--display);overflow-wrap:anywhere}
+.scard .org{font-size:var(--fs-sm);color:var(--muted);overflow-wrap:anywhere}
+.scard .where{font:500 var(--fs-sm) var(--mono);color:var(--muted)}
+.scard mark{background:color-mix(in srgb,var(--accent) 22%,transparent);color:inherit;border-radius:var(--r-xs);padding:0 1px}
 /* ===== accueil condensé ===== */
-#v-q1 .hero,#v-p1 .hero{padding:12px 0 26px}
-#v-q1 .hero .col,#v-p1 .hero .col{gap:4px}
-#v-q1 .hero h1,#v-p1 .hero h1{font-size:clamp(21px,6vw,26px);margin:4px 0 0}
-#v-q1 .eyebrow,#v-p1 .eyebrow{font-size:10.5px}
-#v-q1 .dot13,#v-p1 .dot13{width:22px;height:22px;font-size:10px}
-.searchopen{margin-top:8px;padding:11px 12px;font-size:15px}
-.modetabs{margin-top:8px}.modetabs button{padding:8px 6px;font-size:14px}
+#v-q1 .hero,#v-p1 .hero{padding:var(--sp-3) 0 var(--sp-6)}
+#v-q1 .hero .col,#v-p1 .hero .col{gap:var(--sp-1)}
+#v-q1 .hero h1,#v-p1 .hero h1{font-size:clamp(21px,6vw,26px);margin:var(--sp-1) 0 0}
+#v-q1 .eyebrow,#v-p1 .eyebrow{font-size:var(--fs-xs)}
+#v-q1 .dot13,#v-p1 .dot13{width:22px;height:22px;font-size:var(--fs-xs)}
+.searchopen{margin-top:var(--sp-2);padding:var(--sp-3) var(--sp-3);font-size:var(--fs-md)}
+.modetabs{margin-top:var(--sp-2)}.modetabs button{padding:var(--sp-2) var(--sp-2);font-size:var(--fs-md)}
 #v-q1 .wave,#v-p1 .wave{height:18px}
 #v-q1 .prog{display:none}
-#v-q1 .qh,#v-p1 .qh{font-size:19px;margin-top:4px}
-#v-q1 .qsub{margin:0 0 8px;font-size:13px}
-.opts{gap:8px;margin-top:10px}
+#v-q1 .qh,#v-p1 .qh{font-size:var(--fs-lg);margin-top:var(--sp-1)}
+#v-q1 .qsub{margin:0 0 var(--sp-2);font-size:var(--fs-sm)}
+.opts{gap:var(--sp-2);margin-top:var(--sp-3)}
 #v-q1 .bottombar[hidden]{display:none!important}
-.opts .op{display:grid;grid-template-columns:36px 1fr;column-gap:9px;align-items:center;min-height:0;padding:8px 9px;border-radius:14px}
-.opts .op .ic{width:36px;height:42px;margin:0;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;transition:background .15s,color .15s}
+.opts .op{display:grid;grid-template-columns:36px 1fr;column-gap:var(--sp-2);align-items:center;min-height:0;padding:var(--sp-2) var(--sp-2);border-radius:var(--r-lg)}
+.opts .op .ic{width:36px;height:42px;margin:0;border-radius:var(--r-md);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;transition:background .15s,color .15s}
 .opts .op .ic svg{width:18px;height:18px}
 .opts .op[aria-pressed="true"] .ic{background:var(--c);color:#fff}
 .opts .op .tick{display:none}
 .opts .op .tx{display:block;min-width:0}
-.opts .op b{display:block;font-size:14px;line-height:1.2}
-.opts .op .ds{display:block;margin-top:2px;font-size:11.8px;color:var(--muted);line-height:1.25}
-.opts .op em{position:static;padding:0;margin:0;font:700 11px/1 var(--mono);font-style:normal;color:inherit}
+.opts .op b{display:block;font-size:var(--fs-md);line-height:1.2}
+.opts .op .ds{display:block;margin-top:2px;font-size:var(--fs-xs);color:var(--muted);line-height:1.25}
+.opts .op em{position:static;padding:0;margin:0;font:700 var(--fs-xs)/1 var(--mono);font-style:normal;color:inherit}
 .opts .op:last-child:nth-child(odd){grid-column:1/-1}
-#v-q1 .alllink{margin-top:8px;padding:6px}
-#v-q1 .installbtn{padding:9px;font-size:14px}
-#v-q1 .arca{margin-top:12px;padding:10px 12px;font-size:13px}
+#v-q1 .alllink{margin-top:var(--sp-2);padding:var(--sp-2)}
+#v-q1 .installbtn{padding:var(--sp-2);font-size:var(--fs-md)}
+#v-q1 .arca{margin-top:var(--sp-3);padding:var(--sp-3) var(--sp-3);font-size:var(--fs-sm)}
 #v-q1 .arca .arcanum{font-size:16px}
-#v-p1 .qcard{padding:12px}
-#v-p1 .qsub{margin:0 0 8px;font-size:13px}
-#p-how{gap:8px}
-#p-how .op{padding:10px 10px 10px;gap:2px}
+#v-p1 .qcard{padding:var(--sp-3)}
+#v-p1 .qsub{margin:0 0 var(--sp-2);font-size:var(--fs-sm)}
+#p-how{gap:var(--sp-2)}
+#p-how .op{padding:var(--sp-3) var(--sp-3) var(--sp-3);gap:2px}
 #p-how .op .ic{width:32px;height:32px;margin-bottom:2px}
 #p-how .op .ic svg{width:19px;height:19px}
-#p-how .op b{font-size:14.5px}
-#p-how .op span:not(.ic):not(.tick){font-size:12px}
-#p-how .op .tick{width:18px;height:18px;font-size:10px;top:8px;right:8px}
-.mobbtn{padding:9px 12px;gap:10px}.mobbtn .ic{width:32px;height:32px}
-#v-p1 .alllink{margin-top:6px;padding:6px}
-#v-p1 .installbtn{padding:9px;font-size:14px}
+#p-how .op b{font-size:var(--fs-md)}
+#p-how .op span:not(.ic):not(.tick){font-size:var(--fs-sm)}
+#p-how .op .tick{width:18px;height:18px;font-size:var(--fs-xs);top:8px;right:8px}
+.mobbtn{padding:var(--sp-2) var(--sp-3);gap:var(--sp-3)}.mobbtn .ic{width:32px;height:32px}
+#v-p1 .alllink{margin-top:var(--sp-2);padding:var(--sp-2)}
+#v-p1 .installbtn{padding:var(--sp-2);font-size:var(--fs-md)}
 /* ---------- Résultats ---------- */
 .rtop{position:sticky;top:0;z-index:6;background:#0d5a88;color:#fff}
-.rtop .col{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:10px;padding-bottom:10px}
-.rtop h1{margin:0;font:600 20px/1.2 var(--display)}
-.rtop .sub{font-size:12.5px;opacity:.85}
-.pill{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.1);color:#fff;border-radius:99px;padding:8px 13px;font-size:14px;font-weight:600;white-space:nowrap}
-.chips{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;scrollbar-width:none;background:var(--surface);border-bottom:1px solid var(--line)}
+.rtop .col{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);padding-top:var(--sp-3);padding-bottom:var(--sp-3)}
+.rtop h1{margin:0;font:600 var(--fs-xl)/1.2 var(--display)}
+.rtop .sub{font-size:var(--fs-sm);opacity:.85}
+.pill{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.1);color:#fff;border-radius:var(--r-full);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-md);font-weight:600;white-space:nowrap}
+.chips{display:flex;gap:var(--sp-2);overflow-x:auto;padding:var(--sp-3) var(--sp-4);scrollbar-width:none;background:var(--surface);border-bottom:1px solid var(--line)}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:none;white-space:nowrap;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 11px;font-size:13px;font-weight:600;display:inline-flex;gap:6px;align-items:center;color:var(--fg)}
+.chip{flex:none;white-space:nowrap;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-full);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-sm);font-weight:600;display:inline-flex;gap:var(--sp-2);align-items:center;color:var(--fg)}
 .chip i{width:9px;height:9px;border-radius:50%;background:var(--c)}
 .chip.cond{background:var(--sunk);border-color:transparent;color:var(--muted)}
 .chip.edit{color:var(--accent);border-style:dashed}
-.searchbox{padding:10px 16px 0}
-.searchbox input{width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:11px 12px;font-size:15.5px}
+.searchbox{padding:var(--sp-3) var(--sp-4) 0}
+.searchbox input{width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-3);font-size:var(--fs-md)}
 
 .mapwrap{background:var(--surface);border-bottom:1px solid var(--line);overflow:hidden}
-.maptools{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 10px 7px 16px}
-.legend{display:flex;flex-wrap:wrap;min-width:0;gap:10px;row-gap:4px;align-items:center;font:600 11.5px var(--mono);color:var(--muted)}
-.legend span{display:inline-flex;gap:5px;align-items:center}
-.legend i{width:16px;height:4px;border-radius:2px;background:var(--c)}
-.legend .lg-hint{font:400 12px var(--body)}
-.maptog{background:var(--sunk);color:var(--fg);border:0;border-radius:99px;padding:6px 12px;font-size:13px;font-weight:600}
+.maptools{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-2);padding:var(--sp-2) var(--sp-3) var(--sp-2) var(--sp-4)}
+.legend{display:flex;flex-wrap:wrap;min-width:0;gap:var(--sp-3);row-gap:var(--sp-1);align-items:center;font:600 var(--fs-xs) var(--mono);color:var(--muted)}
+.legend span{display:inline-flex;gap:var(--sp-1);align-items:center}
+.legend i{width:16px;height:4px;border-radius:var(--r-xs);background:var(--c)}
+.legend .lg-hint{font:400 var(--fs-sm) var(--body)}
+.maptog{background:var(--sunk);color:var(--fg);border:0;border-radius:var(--r-full);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-sm);font-weight:600}
 .mapbox{position:relative;background:var(--land)}
 .mapbox svg{touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
-.zoom{position:absolute;right:10px;top:10px;z-index:3;display:grid;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.zoom{position:absolute;right:10px;top:10px;z-index:3;display:grid;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow);overflow:hidden}
 .zoom button{border:0;background:none;width:40px;height:38px;font-size:20px;line-height:1;font-weight:500}
 .zoom button + button{border-top:1px solid var(--line)}
-.zoom #zfit{font-size:17px}
+.zoom #zfit{font-size:var(--fs-lg)}
 .mapwrap svg.map{display:block;width:100%;height:min(50vh,360px)}
 .mapwrap.collapsed .mapbox,.mapwrap.collapsed .offmap{display:none!important}
-.offmap{display:flex;gap:6px;overflow-x:auto;padding:8px 16px 10px;scrollbar-width:none;align-items:center;border-top:1px solid var(--line)}
+.offmap{display:flex;gap:var(--sp-2);overflow-x:auto;padding:var(--sp-2) var(--sp-4) var(--sp-3);scrollbar-width:none;align-items:center;border-top:1px solid var(--line)}
 .offmap::-webkit-scrollbar{display:none}
-.offmap > span{flex:none;font-size:12.5px;color:var(--muted)}
-.offmap button{flex:none;white-space:nowrap;border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:6px 11px;font-size:13px;font-weight:600}
+.offmap > span{flex:none;font-size:var(--fs-sm);color:var(--muted)}
+.offmap button{flex:none;white-space:nowrap;border:1px solid var(--line);background:var(--bg);border-radius:var(--r-full);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-sm);font-weight:600}
 .offmap button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
 .pin{cursor:pointer}
 .pin circle.dot{stroke:var(--pin-ring)}
 .pin text{font-weight:700;font-family:var(--body);fill:var(--pin-text);text-anchor:middle;dominant-baseline:central;pointer-events:none}
 .pin.sel circle.dot{stroke:var(--fg)}
-.bubble{position:absolute;left:10px;right:10px;bottom:10px;z-index:4;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:12px 12px 12px 14px;display:grid;gap:8px;max-height:70%;overflow:auto}
-.bubble .bh{display:flex;justify-content:space-between;gap:8px;align-items:start}
-.bubble b{font:600 16.5px/1.25 var(--display)}
-.bubble .meta{font-size:12.5px;color:var(--muted)}
-.bubble .x{border:0;background:var(--sunk);border-radius:50%;width:30px;height:30px;flex:none;font-size:17px;line-height:1}
-.bubble .row{display:flex;gap:8px;flex-wrap:wrap}
-.bubble .blist{display:grid;gap:6px}
-.bubble .blist button{text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:9px 11px;font-size:14px;font-weight:600}
-.bubble .blist small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.bubble{position:absolute;left:10px;right:10px;bottom:10px;z-index:4;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:var(--sp-3) var(--sp-3) var(--sp-3) var(--sp-4);display:grid;gap:var(--sp-2);max-height:70%;overflow:auto}
+.bubble .bh{display:flex;justify-content:space-between;gap:var(--sp-2);align-items:start}
+.bubble b{font:600 var(--fs-md)/1.25 var(--display)}
+.bubble .meta{font-size:var(--fs-sm);color:var(--muted)}
+.bubble .x{border:0;background:var(--sunk);border-radius:50%;width:30px;height:30px;flex:none;font-size:var(--fs-lg);line-height:1}
+.bubble .row{display:flex;gap:var(--sp-2);flex-wrap:wrap}
+.bubble .blist{display:grid;gap:var(--sp-2)}
+.bubble .blist button{text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:var(--r-md);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-md);font-weight:600}
+.bubble .blist small{display:block;font-weight:400;color:var(--muted);font-size:var(--fs-sm)}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:12px;padding:10px 13px;font-size:14px;font-weight:600;text-decoration:none;line-height:1.2}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-3);font-size:var(--fs-md);font-weight:600;text-decoration:none;line-height:1.2}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .btn svg{width:17px;height:17px;flex:none}
 
-.list{padding:14px 16px 8px;display:grid;gap:20px}
-.group-h{scroll-margin-top:78px;display:flex;align-items:center;gap:8px;margin:0 2px 8px}
+.list{padding:var(--sp-4) var(--sp-4) var(--sp-2);display:grid;gap:var(--sp-5)}
+.group-h{scroll-margin-top:78px;display:flex;align-items:center;gap:var(--sp-2);margin:0 2px var(--sp-2)}
 .group-h i{width:10px;height:10px;border-radius:50%;background:var(--c)}
-.group-h h2{margin:0;font:600 18px/1.2 var(--display)}
-.group-h span{margin-left:auto;font:500 12px var(--mono);color:var(--muted)}
-.cards{display:grid;gap:10px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;gap:6px;text-align:left;width:100%;position:relative}
+.group-h h2{margin:0;font:600 var(--fs-lg)/1.2 var(--display)}
+.group-h span{margin-left:auto;font:500 var(--fs-sm) var(--mono);color:var(--muted)}
+.cards{display:grid;gap:var(--sp-3)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-3) var(--sp-4);display:grid;gap:var(--sp-2);text-align:left;width:100%;position:relative}
 .card.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
-.card .h{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
-.num{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:var(--pin-text);font:700 12.5px var(--body);margin-top:1px}
-.card h3{margin:0;font:600 17px/1.25 var(--display)}
-.card .org{font-size:13px;color:var(--muted);line-height:1.35;margin-top:1px}
-.card .where{margin-left:auto;align-self:center;font:500 11.5px var(--mono);color:var(--muted);white-space:nowrap;max-width:45%;overflow:hidden;text-overflow:ellipsis}
-.tags{display:flex;flex-wrap:wrap;gap:5px}
-.tag{font:600 10.5px var(--mono);text-transform:uppercase;letter-spacing:.04em;border:1px solid currentColor;border-radius:5px;padding:1px 6px;color:var(--c)}
-.prive,.verify{font:600 10.5px var(--mono);text-transform:uppercase;border-radius:5px;padding:2px 6px}
+.card .h{display:grid;grid-template-columns:auto 1fr;gap:var(--sp-3);align-items:start}
+.num{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:var(--pin-text);font:700 var(--fs-sm) var(--body);margin-top:1px}
+.card h3{margin:0;font:600 var(--fs-lg)/1.25 var(--display)}
+.card .org{font-size:var(--fs-sm);color:var(--muted);line-height:1.35;margin-top:1px}
+.card .where{margin-left:auto;align-self:center;font:500 var(--fs-xs) var(--mono);color:var(--muted);white-space:nowrap;max-width:45%;overflow:hidden;text-overflow:ellipsis}
+.tags{display:flex;flex-wrap:wrap;gap:var(--sp-1)}
+.tag{font:600 var(--fs-xs) var(--mono);text-transform:uppercase;letter-spacing:.04em;border:1px solid currentColor;border-radius:var(--r-xs);padding:1px var(--sp-2);color:var(--c)}
+.prive,.verify{font:600 var(--fs-xs) var(--mono);text-transform:uppercase;border-radius:var(--r-xs);padding:2px var(--sp-2)}
 .prive{background:var(--sunk);color:var(--muted)}
 .verify{background:var(--warn-soft);color:var(--warn)}
-.fact{font-size:13.6px;color:var(--fg);line-height:1.4}
-.transit{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12.8px;color:var(--muted)}
-.transit .line{display:inline-flex;gap:5px;align-items:center}
-.transit i{font:700 10.5px var(--body);font-style:normal;color:#fff;border-radius:9px;padding:1px 7px;background:var(--bus)}
+.fact{font-size:var(--fs-sm);color:var(--fg);line-height:1.4}
+.transit{display:flex;flex-wrap:wrap;gap:var(--sp-1) var(--sp-3);font-size:var(--fs-sm);color:var(--muted)}
+.transit .line{display:inline-flex;gap:var(--sp-1);align-items:center}
+.transit i{font:700 var(--fs-xs) var(--body);font-style:normal;color:#fff;border-radius:var(--r-sm);padding:1px var(--sp-2);background:var(--bus)}
 .transit i.M1{background:var(--m1)}.transit i.M2{background:var(--m2)}.transit i.T1{background:var(--t1);color:#fff}.transit i.T2{background:var(--t2);color:#1b2a35}.transit i.T3{background:var(--t3);color:#1b2a35}
 .transit em{font-style:normal;color:var(--muted)}
 .transit .line i+i{margin-left:-2px}
 .legend i.dash{background:repeating-linear-gradient(90deg,var(--c) 0 4px,transparent 4px 7px)}
-.badges{display:flex;flex-wrap:wrap;gap:5px}
-.b{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--sunk);color:var(--muted)}
+.badges{display:flex;flex-wrap:wrap;gap:var(--sp-1)}
+.b{font-size:var(--fs-xs);font-weight:600;padding:2px var(--sp-2);border-radius:var(--r-full);background:var(--sunk);color:var(--muted)}
 .b.mention,.b.confirmee{background:var(--good-soft);color:var(--good)}
 .b.conditions{background:var(--warn-soft);color:var(--warn)}
 .b.non{background:var(--bad-soft);color:var(--bad)}
 .b.form{background:var(--accent-soft);color:var(--accent)}
-.card .go{position:absolute;right:12px;bottom:10px;font-size:13px;font-weight:600;color:var(--accent)}
-.empty{margin:4px 16px;background:var(--surface);border:1px dashed var(--line);border-radius:16px;padding:16px;color:var(--muted);font-size:14.5px}
-.foot{padding:16px 16px 40px;display:grid;gap:12px;font-size:13px;color:var(--muted)}
+.card .go{position:absolute;right:12px;bottom:10px;font-size:var(--fs-sm);font-weight:600;color:var(--accent)}
+.empty{margin:var(--sp-1) var(--sp-4);background:var(--surface);border:1px dashed var(--line);border-radius:var(--r-lg);padding:var(--sp-4);color:var(--muted);font-size:var(--fs-md)}
+.foot{padding:var(--sp-4) var(--sp-4) 40px;display:grid;gap:var(--sp-3);font-size:var(--fs-sm);color:var(--muted)}
 .foot .arca{margin:0}
-.mailbar{display:grid;gap:6px}
-.mailbar input{border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 12px;font-size:15px;width:100%}
-.sign{font:italic 500 14px var(--display);text-align:center;color:var(--muted);padding-top:4px}
+.mailbar{display:grid;gap:var(--sp-2)}
+.mailbar input{border:1.5px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-3);font-size:var(--fs-md);width:100%}
+.sign{font:italic 500 var(--fs-md) var(--display);text-align:center;color:var(--muted);padding-top:var(--sp-1)}
 
 @media (min-width:900px){
   .res-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);max-width:1240px;margin:0 auto;align-items:start}
-  .res-map{position:sticky;top:58px;padding:14px 0 14px 16px}
-  .mapwrap{border:1px solid var(--line);border-radius:18px}
+  .res-map{position:sticky;top:58px;padding:var(--sp-4) 0 var(--sp-4) var(--sp-4)}
+  .mapwrap{border:1px solid var(--line);border-radius:var(--r-lg)}
   .mapwrap svg.map{height:calc(100vh - 230px);max-height:720px;min-height:380px}
   .res-right{min-width:0}
   .rtop .col,.chips-in{max-width:1240px}
 }
 
 /* ---------- Fiche ---------- */
-.fiche:focus{outline:none}
+.fiche:focus:not(:focus-visible){outline:none}
 .fiche{position:fixed;inset:0;z-index:20;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-.fh{background:linear-gradient(180deg,#0d5a88,#0b4a70);color:#fff;position:relative;padding:8px 0 38px}
-.fh .col{display:grid;gap:6px}
-.fh h2{font:600 clamp(24px,6.6vw,30px)/1.15 var(--display);margin:4px 0 0}
-.fh .org{opacity:.85;font-size:14px}
+.fh{background:linear-gradient(180deg,#0d5a88,#0b4a70);color:#fff;position:relative;padding:var(--sp-2) 0 38px}
+.fh .col{display:grid;gap:var(--sp-2)}
+.fh h2{font:600 clamp(24px,6.6vw,30px)/1.15 var(--display);margin:var(--sp-1) 0 0}
+.fh .org{opacity:.85;font-size:var(--fs-md)}
 .fh .tags .tag{color:#fff;border-color:rgba(255,255,255,.6)}
 .fh .transit{color:rgba(255,255,255,.88)}
 .fh .prive{background:rgba(255,255,255,.16);color:#fff}
-.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(66px,1fr));gap:8px;margin-top:-22px;position:relative;z-index:1}
-.big a,.big button{display:grid;justify-items:center;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 6px 10px;font-size:13.5px;font-weight:600;color:var(--fg);text-decoration:none;box-shadow:var(--shadow)}
+.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(66px,1fr));gap:var(--sp-2);margin-top:calc(-1 * var(--sp-6));position:relative;z-index:1}
+.big a,.big button{display:grid;justify-items:center;gap:var(--sp-1);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-3) var(--sp-2) var(--sp-3);font-size:var(--fs-sm);font-weight:600;color:var(--fg);text-decoration:none;box-shadow:var(--shadow)}
 .big .p{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .big svg{width:24px;height:24px}
-.big small{font:500 11px var(--mono);color:inherit;opacity:.8;font-weight:400}
-.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.big small{font:500 var(--fs-xs) var(--mono);color:inherit;opacity:.8;font-weight:400}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-2);margin-top:var(--sp-3)}
 .links .btn{justify-content:center;width:100%;min-width:0}
 .links .btn:last-child:nth-child(odd){grid-column:1/-1}
-.minimap{display:block;margin-top:12px;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--land);position:relative;text-decoration:none}
+.minimap{display:block;margin-top:var(--sp-3);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:var(--land);position:relative;text-decoration:none}
 .minimap>.mmsvg svg{display:block;width:100%;height:200px}
 .mmsvg{display:block}
 .mmreal{position:absolute;inset:0;z-index:1;background:var(--land);touch-action:none}
 .minimap:not(.real) .mmreal{pointer-events:none;opacity:0}
-.mmreal .leaflet-control-zoom a{width:32px;height:32px;line-height:30px;font-size:18px}
+.mmreal .leaflet-control-zoom a{width:32px;height:32px;line-height:30px;font-size:var(--fs-lg)}
 .minimap.real>.mmsvg{visibility:hidden}
 .minimap>.mmlink{z-index:500}
 .mmreal .leaflet-tile-pane{filter:saturate(.55) brightness(1.03)}
 .mmreal.dark .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(.9) saturate(.5)}
-.mmreal .leaflet-control-attribution{font-size:9px!important}
+.mmreal .leaflet-control-attribution{font-size:var(--fs-xs)!important}
 .lpin.mm{width:22px;height:22px}
-.stlab{display:inline-flex;align-items:center;gap:3px;white-space:nowrap;background:var(--surface);color:var(--fg);border-radius:8px;padding:2px 6px 2px 3px;font:600 11.5px var(--body);box-shadow:0 1px 4px rgba(0,0,0,.25)}
-.stlab i{display:inline-block;font:700 9.5px/1 var(--body);font-style:normal;color:#fff;border-radius:4px;padding:2px 3px}
+.stlab{display:inline-flex;align-items:center;gap:3px;white-space:nowrap;background:var(--surface);color:var(--fg);border-radius:var(--r-sm);padding:2px var(--sp-2) 2px 3px;font:600 var(--fs-xs) var(--body);box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.stlab i{display:inline-block;font:700 var(--fs-xs)/1 var(--body);font-style:normal;color:#fff;border-radius:var(--r-xs);padding:2px 3px}
 .stlab i.M1{background:var(--m1)}.stlab i.M2{background:var(--m2)}.stlab i.T1{background:var(--t1)}.stlab i.T2{background:var(--t2);color:#222}.stlab i.T3{background:var(--t3)}
-.minimap>.mmlink{position:absolute;right:8px;bottom:22px;text-decoration:none;background:var(--surface);color:var(--fg);border-radius:99px;padding:5px 10px;font-size:12.5px;font-weight:600;box-shadow:var(--shadow)}
-.sec{margin-top:20px}
-.sec h3{margin:0 0 8px;font:600 11.5px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
-.sec p{margin:0 0 8px;font-size:15px}
-.ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:15px}
+.minimap>.mmlink{position:absolute;right:8px;bottom:22px;text-decoration:none;background:var(--surface);color:var(--fg);border-radius:var(--r-full);padding:var(--sp-1) var(--sp-3);font-size:var(--fs-sm);font-weight:600;box-shadow:var(--shadow)}
+.sec{margin-top:var(--sp-5)}
+.sec h3{margin:0 0 var(--sp-2);font:600 var(--fs-xs) var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.sec p{margin:0 0 var(--sp-2);font-size:var(--fs-md)}
+.ul{margin:0;padding-left:var(--sp-5);display:grid;gap:var(--sp-1);font-size:var(--fs-md)}
 .ul li::marker{color:var(--muted)}
-.act{display:flex;flex-wrap:wrap;gap:6px}
-.act span{background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:5px 11px;font-size:13.5px}
-.box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;gap:8px;font-size:14px}
-.has-lvl{font:600 17px var(--display)}
-.warnbox{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:8px 10px}
-.hbar{display:grid;grid-template-columns:118px 1fr 28px;gap:8px;align-items:center;font-size:13px}
-.hbar .tr{height:7px;border-radius:4px;background:var(--sunk);overflow:hidden}
+.act{display:flex;flex-wrap:wrap;gap:var(--sp-2)}
+.act span{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-full);padding:var(--sp-1) var(--sp-3);font-size:var(--fs-sm)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-3) var(--sp-4);display:grid;gap:var(--sp-2);font-size:var(--fs-md)}
+.has-lvl{font:600 var(--fs-lg) var(--display)}
+.warnbox{background:var(--warn-soft);color:var(--warn);border-radius:var(--r-md);padding:var(--sp-2) var(--sp-3)}
+.hbar{display:grid;grid-template-columns:118px 1fr 28px;gap:var(--sp-2);align-items:center;font-size:var(--fs-sm)}
+.hbar .tr{height:7px;border-radius:var(--r-xs);background:var(--sunk);overflow:hidden}
 .hbar .fl{height:100%;background:var(--good)}
-.hbar .n{font:600 12.5px var(--mono);text-align:right}
-.box small{color:var(--muted);font-size:12.5px}
-.doc{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.doc + .doc{border-top:1px solid var(--line);padding-top:8px}
-.doc small{display:block;color:var(--muted);font-size:12.3px}
-.crow{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.crow + .crow{border-top:1px solid var(--line);padding-top:8px}
-.crow .l{display:block;font-size:12.3px;color:var(--muted)}
-.crow .v{font:500 14.5px var(--mono);word-break:break-word}
-.crow .acts{display:flex;gap:6px;flex:none}
-.copy{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:7px 10px;font-size:13px;font-weight:600}
-.note{font-size:13px;color:var(--muted)}
-.mailbox input{width:100%;border:1.5px solid var(--line);background:var(--bg);border-radius:12px;padding:11px 12px;font-size:15.5px}
-.mailbox textarea{width:100%;min-height:150px;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:10px;font:12.5px/1.45 var(--mono);resize:vertical}
+.hbar .n{font:600 var(--fs-sm) var(--mono);text-align:right}
+.box small{color:var(--muted);font-size:var(--fs-sm)}
+.doc{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-3)}
+.doc + .doc{border-top:1px solid var(--line);padding-top:var(--sp-2)}
+.doc small{display:block;color:var(--muted);font-size:var(--fs-sm)}
+.crow{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-3)}
+.crow + .crow{border-top:1px solid var(--line);padding-top:var(--sp-2)}
+.crow .l{display:block;font-size:var(--fs-sm);color:var(--muted)}
+.crow .v{font:500 var(--fs-md) var(--mono);word-break:break-word}
+.crow .acts{display:flex;gap:var(--sp-2);flex:none}
+.copy{border:1px solid var(--line);background:var(--bg);border-radius:var(--r-md);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-sm);font-weight:600}
+.note{font-size:var(--fs-sm);color:var(--muted)}
+.mailbox input{width:100%;border:1.5px solid var(--line);background:var(--bg);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-3);font-size:var(--fs-md)}
+.mailbox textarea{width:100%;min-height:150px;border:1px solid var(--line);background:var(--bg);border-radius:var(--r-md);padding:var(--sp-3);font:var(--fs-sm)/1.45 var(--mono);resize:vertical}
 .fpad{padding-bottom:110px}
 
 :root{--display:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -391,53 +395,53 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .newsbtn{border-color:var(--band-line);background:var(--band-2);color:#fff}
 .wave path{fill:var(--bg)}
 /* catégories : pavés */
-.opts{grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
-.opts .op{--tile:color-mix(in srgb,var(--c) var(--tile-mix),var(--tile-base));display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr;column-gap:6px;row-gap:5px;align-content:start;border:0;background:var(--tile);color:#fff;padding:10px 11px 11px;border-radius:14px;min-height:82px;box-shadow:0 2px 6px -2px rgba(10,30,45,.35);transition:transform .1s,box-shadow .15s}
+.opts{grid-template-columns:1fr 1fr;gap:var(--sp-2);margin-top:var(--sp-1)}
+.opts .op{--tile:color-mix(in srgb,var(--c) var(--tile-mix),var(--tile-base));display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr;column-gap:var(--sp-2);row-gap:var(--sp-1);align-content:start;border:0;background:var(--tile);color:#fff;padding:var(--sp-3) var(--sp-3) var(--sp-3);border-radius:var(--r-lg);min-height:82px;box-shadow:0 2px 6px -2px rgba(10,30,45,.35);transition:transform .1s,box-shadow .15s}
 .opts .op:active{transform:scale(.98)}
 .opts .op .ic{grid-column:1;grid-row:1;width:auto;height:auto;margin:0;display:flex!important;flex-direction:row!important;justify-content:flex-start!important;align-items:center;background:none!important;color:#fff!important;padding:0}
 .opts .op .tx{grid-column:1/-1;grid-row:2}
-.opts .op em{grid-column:2;grid-row:1;align-self:center;justify-self:end;font:700 13px/1 var(--mono);color:#fff;opacity:.92}
+.opts .op em{grid-column:2;grid-row:1;align-self:center;justify-self:end;font:700 var(--fs-sm)/1 var(--mono);color:#fff;opacity:.92}
 .opts .op .ic svg{width:20px;height:20px}
 
-.opts .op b{color:#fff;font:700 15px/1.2 var(--body)}
-.opts .op .ds{color:rgba(255,255,255,.82);font-size:12px}
+.opts .op b{color:#fff;font:700 var(--fs-md)/1.2 var(--body)}
+.opts .op .ds{color:rgba(255,255,255,.82);font-size:var(--fs-sm)}
 .opts .op[aria-pressed="true"]{outline:3px solid var(--fg);outline-offset:2px}
-.opts .op[aria-pressed="true"] em{background:#fff;color:var(--tile);opacity:1;border-radius:99px;padding:4px 7px}
+.opts .op[aria-pressed="true"] em{background:#fff;color:var(--tile);opacity:1;border-radius:var(--r-full);padding:var(--sp-1) var(--sp-2)}
 .opts .op[aria-pressed="true"] em::before{content:"✓ "}
 .alllink{font-weight:600}
 .installbtn{border:0;background:var(--cta);color:#fff}
 .installbtn svg{color:#fff}
 /* page psy : mêmes pavés que l'accueil */
-.howgrid{gap:8px}
-#p-how .op{--tile:color-mix(in srgb,var(--c) var(--tile-mix),var(--tile-base));display:grid;grid-template-columns:1fr;align-content:start;row-gap:4px;border:0;background:var(--tile);color:#fff;padding:10px 11px 12px;border-radius:14px;min-height:96px;box-shadow:0 2px 6px -2px rgba(10,30,45,.35);text-align:left}
+.howgrid{gap:var(--sp-2)}
+#p-how .op{--tile:color-mix(in srgb,var(--c) var(--tile-mix),var(--tile-base));display:grid;grid-template-columns:1fr;align-content:start;row-gap:var(--sp-1);border:0;background:var(--tile);color:#fff;padding:var(--sp-3) var(--sp-3) var(--sp-3);border-radius:var(--r-lg);min-height:96px;box-shadow:0 2px 6px -2px rgba(10,30,45,.35);text-align:left}
 #p-how .op .ic{width:auto;height:auto;margin:0 0 2px;background:none!important;color:#fff!important;display:flex;justify-content:flex-start;padding:0}
 #p-how .op .ic svg{width:20px;height:20px}
-#p-how .op b{color:#fff;font:700 15px/1.2 var(--body)}
-#p-how .op span:not(.ic):not(.tick){color:rgba(255,255,255,.82);font-size:12px;line-height:1.3}
+#p-how .op b{color:#fff;font:700 var(--fs-md)/1.2 var(--body)}
+#p-how .op span:not(.ic):not(.tick){color:rgba(255,255,255,.82);font-size:var(--fs-sm);line-height:1.3}
 #p-how .op .tick{display:none}
 #p-how .op[aria-pressed="true"]{outline:3px solid var(--fg);outline-offset:2px}
-#p-how .op[aria-pressed="true"]::after{content:"✓";position:absolute;top:9px;right:10px;width:20px;height:20px;border-radius:50%;background:#fff;color:var(--tile);font-size:12px;font-weight:800;display:grid;place-items:center}
-.mobbtn{--tile:color-mix(in srgb,var(--t-mob) var(--tile-mix),var(--tile-base));background:var(--tile);border:0;color:#fff;border-radius:14px;box-shadow:0 2px 6px -2px rgba(10,30,45,.35)}
+#p-how .op[aria-pressed="true"]::after{content:"✓";position:absolute;top:9px;right:10px;width:20px;height:20px;border-radius:50%;background:#fff;color:var(--tile);font-size:var(--fs-sm);font-weight:700;display:grid;place-items:center}
+.mobbtn{--tile:color-mix(in srgb,var(--t-mob) var(--tile-mix),var(--tile-base));background:var(--tile);border:0;color:#fff;border-radius:var(--r-lg);box-shadow:0 2px 6px -2px rgba(10,30,45,.35)}
 .mobbtn .ic{background:rgba(255,255,255,.18);color:#fff}
 .mobbtn b{color:#fff;font-weight:700}
 .mobbtn small{color:rgba(255,255,255,.82)}
-.qcard,.presult,.arca{border-radius:14px}
-.urgbar a,.urglist a{border-radius:12px}
+.qcard,.presult,.arca{border-radius:var(--r-lg)}
+.urgbar a,.urglist a{border-radius:var(--r-md)}
 /* résultats */
 .rtop{background:var(--band)}
 .stop{background:var(--band)}
 .group-h h2{font:700 16px/1.2 var(--body);letter-spacing:-.01em}
-.card,.scard{border:0;border-left:5px solid var(--c,var(--line));border-radius:12px;box-shadow:0 2px 6px -2px rgba(10,30,45,.18)}
+.card,.scard{border:0;border-left:5px solid var(--c,var(--line));border-radius:var(--r-md);box-shadow:0 2px 6px -2px rgba(10,30,45,.18)}
 .card h3,.scard h3{font-family:var(--body);font-weight:700;letter-spacing:-.01em}
 .cta,.btn.primary{background:var(--cta);border-color:var(--cta);color:#fff}
 .qh{font-family:var(--body);font-weight:700;letter-spacing:-.01em}
 /* fiche : boutons d'action compacts */
-.big{display:flex;gap:8px;margin-top:-18px}
+.big{display:flex;gap:var(--sp-2);margin-top:calc(-1 * var(--sp-5))}
 .big>*{flex:0 0 auto}
 .big>a:not(.ico){flex:1 1 auto;min-width:0}
-.big .ico{width:46px;padding:9px 0}
-.big .telnum{font:600 15px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.big a,.big button{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 6px;border-radius:12px;font-size:13.5px;line-height:1.1}
+.big .ico{width:46px;padding:var(--sp-2) 0}
+.big .telnum{font:600 var(--fs-md) var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.big a,.big button{display:flex;align-items:center;justify-content:center;gap:var(--sp-2);padding:var(--sp-2) var(--sp-2);border-radius:var(--r-md);font-size:var(--fs-sm);line-height:1.1}
 .big svg{width:18px;height:18px;flex:none}
 .big small{display:none}
 .fh .backlink{color:#fff}
@@ -445,90 +449,90 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .isheet h2{font-family:var(--body);font-weight:700}
 
 /* ---- vérification, signalement ---- */
-.chk{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px;padding:10px 12px;border:1px dashed var(--line);border-radius:12px;font:500 12.5px var(--mono);color:var(--muted)}
-.chk a{color:var(--accent);font-weight:600;text-decoration:none;font-family:var(--body,inherit);font-size:13.5px}
+.chk{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-3);flex-wrap:wrap;margin-top:var(--sp-5);padding:var(--sp-3) var(--sp-3);border:1px dashed var(--line);border-radius:var(--r-md);font:500 var(--fs-sm) var(--mono);color:var(--muted)}
+.chk a{color:var(--accent);font-weight:600;text-decoration:none;font-family:var(--body,inherit);font-size:var(--fs-sm)}
 .printonly{display:none}
 /* ---- urgences en bandeau (psy) ---- */
-.urgbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:4px 0 2px}
-.urglist{display:grid;gap:6px}
-.urglist a{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:9px 12px;color:var(--fg);font-size:13.5px;line-height:1.25;min-width:0}
+.urgbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-2);margin:var(--sp-1) 0 2px}
+.urglist{display:grid;gap:var(--sp-2)}
+.urglist a{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-3);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-md);padding:var(--sp-2) var(--sp-3);color:var(--fg);font-size:var(--fs-sm);line-height:1.25;min-width:0}
 .urglist a span{min-width:0}
-.urglist a em{font:600 14.5px var(--mono);font-style:normal;white-space:nowrap;color:var(--t-urg)}
-.urgbar a{display:grid;justify-items:center;gap:1px;text-decoration:none;background:var(--surface);border:1px solid color-mix(in srgb,var(--t-urg) 35%,var(--line));border-radius:12px;padding:7px 4px;color:var(--fg);min-width:0}
-.urgbar b{font:700 17px/1.1 var(--mono);color:var(--t-urg)}
-.urgbar small{font-size:10.5px;color:var(--muted);line-height:1.15;text-align:center;overflow-wrap:anywhere}
+.urglist a em{font:600 var(--fs-md) var(--mono);font-style:normal;white-space:nowrap;color:var(--t-urg)}
+.urgbar a{display:grid;justify-items:center;gap:1px;text-decoration:none;background:var(--surface);border:1px solid color-mix(in srgb,var(--t-urg) 35%,var(--line));border-radius:var(--r-md);padding:var(--sp-2) var(--sp-1);color:var(--fg);min-width:0}
+.urgbar b{font:700 var(--fs-lg)/1.1 var(--mono);color:var(--t-urg)}
+.urgbar small{font-size:var(--fs-xs);color:var(--muted);line-height:1.15;text-align:center;overflow-wrap:anywhere}
 /* ---- message (signalement, proposition) ---- */
 #msgsheet{z-index:46}
-.msgmeta{display:grid;grid-template-columns:52px 1fr auto;gap:8px;align-items:center;font-size:14px}
-.msgmeta span{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.msgmeta{display:grid;grid-template-columns:52px 1fr auto;gap:var(--sp-2);align-items:center;font-size:var(--fs-md)}
+.msgmeta span{font:600 var(--fs-xs) var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .msgmeta b{font-weight:600;overflow-wrap:anywhere;min-width:0}
-.msgbody{width:100%;min-height:180px;resize:vertical;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--fg);padding:10px 12px;font:14px/1.45 var(--body)}
-.linkbtn{border:0;background:none;padding:0;color:var(--accent);font-weight:600;font-size:13.5px;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.msgbody{width:100%;min-height:180px;resize:vertical;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);color:var(--fg);padding:var(--sp-3) var(--sp-3);font:var(--fs-md)/1.45 var(--body)}
+.linkbtn{border:0;background:none;padding:0;color:var(--accent);font-weight:600;font-size:var(--fs-sm);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
 .chk .linkbtn{text-decoration:none}
-#v-p1 .qtitle{font-size:22px;letter-spacing:-.02em}
+#v-p1 .qtitle{font-size:var(--fs-xl);letter-spacing:-.02em}
 /* ---- menu de choix (consultations spécialisées, hospitalisation) ---- */
 #subsheet{z-index:44}
-.sublist{display:grid;gap:6px}
-.sublist button{display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);border-left:5px solid var(--c);background:var(--surface);color:var(--fg);border-radius:12px;padding:12px 14px;font-size:15px;font-weight:600;line-height:1.25}
-.sublist button em{font:600 13px var(--mono);font-style:normal;color:var(--muted)}
+.sublist{display:grid;gap:var(--sp-2)}
+.sublist button{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-3);text-align:left;border:1px solid var(--line);border-left:5px solid var(--c);background:var(--surface);color:var(--fg);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-4);font-size:var(--fs-md);font-weight:600;line-height:1.25}
+.sublist button em{font:600 var(--fs-sm) var(--mono);font-style:normal;color:var(--muted)}
 .sublist .suball{border-left-color:var(--line);background:var(--sunk)}
-.arrgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
-.arrgrid button{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:10px;padding:10px 4px;font-size:14px;font-weight:600;min-width:0;overflow-wrap:anywhere;line-height:1.15}
+.arrgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--sp-2)}
+.arrgrid button{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-1);font-size:var(--fs-md);font-weight:600;min-width:0;overflow-wrap:anywhere;line-height:1.15}
 .arrgrid button:nth-child(n+17){grid-column:span 2}
-.hsdf{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:10px 12px}
-.hsdf summary{font-weight:600;font-size:14.5px;cursor:pointer}
-.hsdfrow{display:flex;gap:8px;margin-top:10px}
-.hsdfrow select{flex:1;min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);padding:9px 8px;font-size:15px}
-.subpick{flex:none;display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--c);border-radius:99px;padding:2px 4px 2px 11px;background:var(--surface);max-width:80vw}
+.hsdf{border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);padding:var(--sp-3) var(--sp-3)}
+.hsdf summary{font-weight:600;font-size:var(--fs-md);cursor:pointer}
+.hsdfrow{display:flex;gap:var(--sp-2);margin-top:var(--sp-3)}
+.hsdfrow select{flex:1;min-width:0;border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg);color:var(--fg);padding:var(--sp-2) var(--sp-2);font-size:var(--fs-md)}
+.subpick{flex:none;display:inline-flex;align-items:center;gap:var(--sp-2);border:1.5px solid var(--c);border-radius:var(--r-full);padding:2px var(--sp-1) 2px var(--sp-3);background:var(--surface);max-width:80vw}
 .subpick i{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}
-.subpick select{border:0;background:transparent;color:var(--fg);font-size:13px;font-weight:600;padding:5px 2px;max-width:70vw;text-overflow:ellipsis}
-.subdiv{display:flex;align-items:center;gap:10px;margin:6px 2px 2px;font:600 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.subpick select{border:0;background:transparent;color:var(--fg);font-size:var(--fs-sm);font-weight:600;padding:var(--sp-1) 2px;max-width:70vw;text-overflow:ellipsis}
+.subdiv{display:flex;align-items:center;gap:var(--sp-3);margin:var(--sp-2) 2px 2px;font:600 var(--fs-xs) var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .subdiv::after{content:"";flex:1;height:1px;background:var(--line)}
-.subdiv.out{margin-top:16px;color:var(--fg)}
+.subdiv.out{margin-top:var(--sp-4);color:var(--fg)}
 .subdiv.out::before{content:"";width:10px;height:10px;border-radius:50%;border:2px solid var(--muted);flex:none}
 /* ---- horaires ---- */
-.open{display:inline-flex;align-items:center;gap:5px;font:600 11.5px var(--body);border-radius:99px;padding:2px 8px;line-height:1.4}
+.open{display:inline-flex;align-items:center;gap:var(--sp-1);font:600 var(--fs-xs) var(--body);border-radius:var(--r-full);padding:2px var(--sp-2);line-height:1.4}
 .open::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
 .open.y{color:var(--good);background:var(--good-soft)}
 .open.n{color:var(--muted);background:var(--sunk)}
-.hours{display:grid;gap:2px;margin-top:8px}
-.hdet summary{list-style:none;display:flex;align-items:center;gap:10px;cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 12px}
+.hours{display:grid;gap:2px;margin-top:var(--sp-2)}
+.hdet summary{list-style:none;display:flex;align-items:center;gap:var(--sp-3);cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-3)}
 .hdet summary::-webkit-details-marker{display:none}
-.hsum{font:600 11.5px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.hsum{font:600 var(--fs-xs) var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
 .hdet .chev{margin-left:auto;color:var(--muted);transition:transform .15s}
 .hdet[open] .chev{transform:rotate(180deg)}
-.hrow{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:3px 0;border-bottom:1px dashed var(--line)}
+.hrow{display:flex;justify-content:space-between;gap:var(--sp-3);font-size:var(--fs-md);padding:3px 0;border-bottom:1px dashed var(--line)}
 .hrow span:first-child{text-transform:capitalize;color:var(--muted)}
 .hrow span:last-child{text-align:right;font-variant-numeric:tabular-nums}
 .hrow.today span{color:var(--fg);font-weight:700}
 /* ---- vraie carte (Leaflet) ---- */
 .lmap{display:block;width:100%;height:min(50vh,360px);background:var(--land);z-index:0}
 @media (min-width:900px){.lmap{height:calc(100vh - 230px);max-height:720px;min-height:380px}}
-.lpin{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--c);color:var(--pin-text);font:700 12px/1 var(--body);border:2.5px solid var(--pin-ring);box-shadow:0 1px 4px rgba(0,0,0,.35);transition:transform .12s}
+.lpin{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--c);color:var(--pin-text);font:700 var(--fs-sm)/1 var(--body);border:2.5px solid var(--pin-ring);box-shadow:0 1px 4px rgba(0,0,0,.35);transition:transform .12s}
 .lpin.sel{transform:scale(1.3);box-shadow:0 0 0 3px var(--c),0 2px 8px rgba(0,0,0,.4)}
 .mapbox.real .zoom{z-index:500}
 .mapbox.real .bubble{z-index:600}
 .leaflet-container{font:inherit;background:var(--land)}
 .lmap .leaflet-tile-pane{filter:saturate(.55) brightness(1.03)}
 .lmap.dark .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(.9) saturate(.5)}
-.leaflet-control-attribution{font-size:10px!important;background:color-mix(in srgb,var(--surface) 85%,transparent)!important;color:var(--muted)!important}
+.leaflet-control-attribution{font-size:var(--fs-xs)!important;background:color-mix(in srgb,var(--surface) 85%,transparent)!important;color:var(--muted)!important}
 .leaflet-control-attribution a{color:var(--muted)!important}
 /* ---- partage ---- */
 .isheet-scrim#sharesheet{z-index:45}
-.shpre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.45 var(--body);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;max-height:30vh;overflow:auto}
-.shgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.shpre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:var(--fs-sm)/1.45 var(--body);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-3);max-height:30vh;overflow:auto}
+.shgrid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2)}
 .shgrid:has(>[hidden]){grid-template-columns:1fr}
 .msgmeta:has(b:empty){display:none}
-.shgrid .btn{padding:13px 8px;font-size:15px}
+.shgrid .btn{padding:var(--sp-3) var(--sp-2);font-size:var(--fs-md)}
 /* ---- nouveautés ---- */
-.themebtn{margin-left:auto;padding:3px 7px;font-size:12px;letter-spacing:0}
-.themebtn+.newsbtn{margin-left:6px}
-.newsbtn{margin-left:auto;display:inline-flex;align-items:center;gap:5px;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);color:inherit;border-radius:99px;padding:3px 9px;font:600 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;position:relative}
+.themebtn{margin-left:auto;padding:3px var(--sp-2);font-size:var(--fs-sm);letter-spacing:0}
+.themebtn+.newsbtn{margin-left:var(--sp-2)}
+.newsbtn{margin-left:auto;display:inline-flex;align-items:center;gap:var(--sp-1);border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);color:inherit;border-radius:var(--r-full);padding:3px var(--sp-2);font:600 var(--fs-xs) var(--mono);letter-spacing:.06em;text-transform:uppercase;position:relative}
 .newsbtn[data-new="1"]::after{content:"";width:8px;height:8px;border-radius:50%;background:#ffd166;box-shadow:0 0 0 2px var(--accent);position:absolute;top:-2px;right:-2px}
-.news{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-.news>li{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
-.news>li b{display:block;font:600 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
-.news li ul{margin:0;padding-left:18px;font-size:14px;line-height:1.35;display:grid;gap:3px}
+.news{margin:0;padding:0;list-style:none;display:grid;gap:var(--sp-3)}
+.news>li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-3) var(--sp-3)}
+.news>li b{display:block;font:600 var(--fs-xs) var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:var(--sp-2)}
+.news li ul{margin:0;padding-left:var(--sp-5);font-size:var(--fs-md);line-height:1.35;display:grid;gap:3px}
 .news li ul li{list-style:disc}
 /* ---- impression d'une fiche ---- */
 #printsheet{position:fixed;left:-10000px;top:0;width:186mm;background:#fff;color:#000}
@@ -550,6 +554,11 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 #ps-map .minimap{margin:4pt 0 0;border:1px solid #999;border-radius:4pt;max-width:95mm}
 #ps-map .mmlink,#ps-map .leaflet-control-zoom{display:none!important}
 #ps-map .leaflet-tile-pane{filter:none!important}
+.ps-notes{margin-top:9pt;border:1.2pt solid #333;border-radius:4pt;padding:5pt 8pt 7pt;break-inside:avoid}
+.ps-nt{font:700 8pt var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#333;margin-bottom:8pt}
+.ps-nr{display:flex;align-items:flex-end;gap:5pt;font-size:10pt}
+.ps-nr i{flex:1;border-bottom:1px solid #777;height:12pt}.ps-nr i.s{flex:.45}
+.ps-nf{height:24mm;margin-top:6pt;background:repeating-linear-gradient(to bottom,transparent 0,transparent 7.6mm,#bbb 7.6mm,#bbb calc(7.6mm + 1px))}
 .ps-foot{margin-top:8pt;padding-top:4pt;border-top:1px solid #999;font:7.5pt var(--mono);color:#444}
 #printsheet *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 #printsheet.capture{position:fixed;left:0;top:0;z-index:-5;width:186mm;padding:6mm;font:9.5pt/1.35 var(--body)}
@@ -560,28 +569,28 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
   body:not(.printing)>*{display:none!important}
   #printsheet{position:static!important;left:auto;width:auto;font:9.5pt/1.35 var(--body);color:#000}
 }
-.sublist button small{display:block;font-weight:400;font-size:12.5px;opacity:.78;line-height:1.3;margin-top:2px}
+.sublist button small{display:block;font-weight:400;font-size:var(--fs-sm);opacity:.78;line-height:1.3;margin-top:2px}
 #v-q1 .arca:not(.urgblock){justify-items:center;text-align:center}
-.eyebrow .brand{flex:1 1 auto;width:0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em;font-size:10px}
+.eyebrow .brand{flex:1 1 auto;width:0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em;font-size:var(--fs-xs)}
 .eyebrow .themebtn{margin-left:0;flex:none}
-@media (max-width:350px){.eyebrow .brand{font:600 10.8px var(--body);text-transform:none;letter-spacing:-.01em}.eyebrow{gap:6px}}
-.infobtn{flex:none;width:26px;height:26px;padding:0!important;justify-content:center;font:700 14px/1 Georgia,"Times New Roman",serif!important;letter-spacing:0!important;text-transform:none!important;position:relative}
-.infosheet .ab{font-size:14px;line-height:1.5;color:var(--fg);display:grid;gap:8px}
+@media (max-width:350px){.eyebrow .brand{font:600 var(--fs-xs) var(--body);text-transform:none;letter-spacing:-.01em}.eyebrow{gap:var(--sp-2)}}
+.infobtn{flex:none;width:26px;height:26px;padding:0!important;justify-content:center;font:700 var(--fs-md)/1 Georgia,"Times New Roman",serif!important;letter-spacing:0!important;text-transform:none!important;position:relative}
+.infosheet .ab{font-size:var(--fs-md);line-height:1.5;color:var(--fg);display:grid;gap:var(--sp-2)}
 .infosheet .ab p{margin:0}
-.infosheet .ab .stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.infosheet .ab .stats3 div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center;font-size:12px;color:var(--muted)}
-.infosheet .ab .stats3 b{display:block;font-size:19px;color:var(--fg)}
+.infosheet .ab .stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2)}
+.infosheet .ab .stats3 div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:var(--sp-2);text-align:center;font-size:var(--fs-sm);color:var(--muted)}
+.infosheet .ab .stats3 b{display:block;font-size:var(--fs-lg);color:var(--fg)}
 .infosheet .backi{justify-self:start}
-#v-q1 .eyebrow,#v-p1 .eyebrow{margin-bottom:14px}
+#v-q1 .eyebrow,#v-p1 .eyebrow{margin-bottom:var(--sp-4)}
 .leaflet-container,.mapbox{isolation:isolate}
-.srcdet{margin-top:10px}
-.srcdet summary{cursor:pointer;list-style:none;font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px}
+.srcdet{margin-top:var(--sp-3)}
+.srcdet summary{cursor:pointer;list-style:none;font:600 var(--fs-xs) var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:var(--sp-2)}
 .srcdet summary::-webkit-details-marker{display:none}
 .srcdet[open] .chev{transform:rotate(180deg)}
-.srcdet ul{margin:6px 0 0;padding-left:18px;font-size:13px;color:var(--muted)}
+.srcdet ul{margin:var(--sp-2) 0 0;padding-left:var(--sp-5);font-size:var(--fs-sm);color:var(--muted)}
 .srcdet a{color:var(--accent);word-break:break-all}
 .doc .btn{flex:none;white-space:nowrap}
-.doc small .pdf{display:inline-block;font:700 9.5px var(--mono);letter-spacing:.06em;padding:1px 5px;border-radius:5px;background:var(--accent-soft);color:var(--accent);vertical-align:1px}
+.doc small .pdf{display:inline-block;font:700 var(--fs-xs) var(--mono);letter-spacing:.06em;padding:1px var(--sp-1);border-radius:var(--r-xs);background:var(--accent-soft);color:var(--accent);vertical-align:1px}
 #printsheet .ps-head{position:relative;padding-right:24mm}
 #printsheet .ps-qr{position:absolute;right:0;top:0;width:21mm;text-align:center;font:7pt var(--body);color:#444}
 #printsheet .ps-qr img{width:20mm;height:20mm;display:block;image-rendering:pixelated}
@@ -1254,6 +1263,55 @@ svg.leaflet-image-layer.leaflet-interactive path {
 		}
 	}
 
+
+/* 18/11 : regroupement des lieux sur la carte, bouton Urgence 15, pas de bouton Retour flottant */
+.lclu{display:grid;place-items:center;border-radius:50%;background:var(--accent);color:var(--on-accent);font:700 var(--fs-md)/1 var(--body);border:3px solid var(--pin-ring);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 28%,transparent),0 2px 6px rgba(0,0,0,.35);font-variant-numeric:tabular-nums}
+.fab-back{display:none!important}
+.bb-arca.bb-urg{display:flex;align-items:center;gap:var(--sp-2);min-height:48px;padding:0 var(--sp-4) 0 var(--sp-3);border-radius:var(--r-lg);background:#c62828;color:#fff;font:600 var(--fs-md)/1 var(--body)}
+.bb-arca.bb-urg b{display:inline;color:#fff;font:700 var(--fs-lg)/1 var(--mono)}
+.bb-arca.bb-urg svg{width:20px;height:20px}
+
+/* 18/11 : palette « cartes blanches » : la couleur du type reste sur l'icône ; les choix CMP en prune */
+:root{--psyfam:#7a3a6e;--psymob:#5a2b52}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--psyfam:#c98fbe;--psymob:#4a3346}}
+:root[data-theme="dark"]{--psyfam:#c98fbe;--psymob:#4a3346}
+.opts .op:not(.howgrid .op){background:var(--surface)!important;color:var(--fg)!important;border:1.5px solid var(--line)!important}
+.opts .op:not(.howgrid .op) *{color:inherit}
+.opts .op:not(.howgrid .op) b{color:var(--fg)!important}
+.opts .op:not(.howgrid .op) .ds{color:var(--muted)!important;opacity:1!important}
+.opts .op:not(.howgrid .op) em{color:var(--muted)!important;opacity:1!important}
+.opts .op:not(.howgrid .op) .ic{background:color-mix(in srgb,var(--c) 15%,transparent)!important;color:var(--c)!important;width:34px!important;height:34px!important;border-radius:var(--r-md)!important;justify-content:center!important;justify-self:start;padding:0!important}
+.opts .op:not(.howgrid .op)[aria-pressed="true"]{border-color:var(--c)!important;box-shadow:inset 0 0 0 1px var(--c)}
+.howgrid .op{--c:var(--psyfam)!important}
+#p-mob{background:var(--psymob)!important;border-color:transparent!important}
+
+/* 18/11 : focus clavier visible, animations réduites, zones tactiles d'au moins 44 px */
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:2.5px solid var(--focus);outline-offset:2px;border-radius:var(--r-sm)}
+.sfield:focus-within{outline:2.5px solid var(--focus);outline-offset:2px}
+.hero :where(a,button):focus-visible,.stop :where(a,button):focus-visible{outline-color:#fff}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+.newsbtn{position:relative}.newsbtn::after{content:"";position:absolute;inset:-10px -8px}
+.chip,.pill{position:relative}.chip::after,.pill::after{content:"";position:absolute;inset:-5px 0}
+.seg button,.modes button,[role=tablist] button{min-height:44px}
+
+/* 18/11 : feuille pour la personne, multilingue */
+.ps-pat .ps-intro{font-size:11pt;font-weight:600;margin:6pt 0 2pt;padding:5pt 8pt;border-left:3pt solid #333;background:#f2f2f2}
+[dir="rtl"].ps-pat .ps-intro{border-left:0;border-right:3pt solid #333}
+.ps-pat{font-size:10.5pt}
+.ps-pat h2 small.ps-fr{font:400 7pt var(--mono);letter-spacing:0;text-transform:none;color:#666;margin-inline-start:6pt}
+.ps-pat .ps-big{font-size:12pt;font-weight:700}
+.ps-pat .ps-urg{margin-top:8pt;padding:4pt 8pt;border:1.2pt solid #b3261e;border-radius:4pt;font-weight:600;color:#b3261e}
+#printsheet .ps-pat .ps-head{min-height:23mm}
+#printsheet .ps-pat[dir="rtl"] .ps-qr{right:auto;left:0}#printsheet .ps-pat[dir="rtl"] .ps-head{padding-right:0;padding-left:24mm}
+#printsheet .ps-pat h2{font:700 10pt var(--body);letter-spacing:0;text-transform:none;color:#222}
+#printsheet .ps-pat[lang="ar"] h2,#printsheet .ps-pat[lang="ar"]{font-family:"Noto Sans Arabic","Noto Naskh Arabic","Segoe UI",Tahoma,"Geeza Pro",sans-serif}
+#printsheet .ps-pat[lang="ka"] h2{font-family:"Noto Sans Georgian","BPG Arial","Sylfaen",var(--body),sans-serif}
+#printsheet .ps-pat .ps-h td:first-child{width:32%!important}
+#printsheet .ps-pat .ps-nt{font:700 10pt var(--body);letter-spacing:0;text-transform:none}
+#printsheet .ps-pat small.ps-fr{font:400 7pt var(--mono);margin-inline-start:6pt;color:#666}
+.ps-pat[dir="rtl"] ul{padding-left:0;padding-right:12pt}
+.ps-pat[lang="ar"]{font-family:"Noto Sans Arabic","Noto Naskh Arabic","Segoe UI",Tahoma,"Geeza Pro",sans-serif}
+.ps-pat[lang="ka"]{font-family:"Noto Sans Georgian","BPG Arial","Sylfaen",var(--body),sans-serif}
 </style>
 </head>
 <body>
@@ -1349,7 +1407,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     </div>
   </main>
   <div class="bottombar"><div class="col">
-    <a class="bb-arca" href="tel:15">Urgence<b>15</b></a>
+    <a class="bb-arca bb-urg" href="tel:15" aria-label="Urgence : appeler le 15"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Urgence <b>15</b></a>
     <button class="cta" type="button" id="pnext">Voir sur la carte →</button>
   </div></div>
 </div>
@@ -1494,6 +1552,26 @@ svg.leaflet-image-layer.leaflet-interactive path {
   </div>
 </div>
 
+<div class="isheet-scrim" id="plangsheet" hidden>
+  <div class="isheet" role="dialog" aria-modal="true" aria-labelledby="pl-title">
+    <div class="grab"></div>
+    <h2 id="pl-title">Imprimer la fiche</h2>
+    <button type="button" class="btn primary" data-plang="pro">Fiche complète, pour un soignant</button>
+    <p class="hint" style="margin:0">Feuille simplifiée à remettre à la personne : adresse, accès, horaires, contacts, rendez-vous. Choisir la langue :</p>
+    <div class="shgrid">
+      <button type="button" class="btn" data-plang="fr">Français</button>
+      <button type="button" class="btn" data-plang="en">English</button>
+      <button type="button" class="btn" data-plang="ar" lang="ar">العربية</button>
+      <button type="button" class="btn" data-plang="ary" lang="ar">الدارجة (darija)</button>
+      <button type="button" class="btn" data-plang="ary-lat">Darija (lettres latines)</button>
+      <button type="button" class="btn" data-plang="es">Español</button>
+      <button type="button" class="btn" data-plang="it">Italiano</button>
+      <button type="button" class="btn" data-plang="ka" lang="ka">ქართული (géorgien)</button>
+    </div>
+    <p class="note" style="margin:0">Pour un PDF : choisir « Enregistrer en PDF » comme imprimante. Traductions à faire relire, en particulier le géorgien et la darija.</p>
+    <button type="button" class="btn" data-closeplang style="width:100%">Fermer</button>
+  </div>
+</div>
 <div class="isheet-scrim" id="sharesheet" hidden>
   <div class="isheet" role="dialog" aria-modal="true" aria-labelledby="sh-title">
     <div class="grab"></div>
@@ -4383,8 +4461,8 @@ D.push(...MOB);
 Object.assign(GEO,{"mob-marss":[43.28847,5.38159],"mob-emlpp":[43.38108,5.3596]});
 
 /* ---------- Version, nouveautés, signalement ---------- */
-const VERSION="2026-11-16";
-const REPORT_TO="julienaron@gmail.com";
+const VERSION="2026-11-18";
+const REPORT_TO="mapannuaire@gmail.com";
 /* Dernière vérification par défaut (mois du relevé) ; une fiche peut préciser d.chk="AAAA-MM-JJ" */
 const CHK_DEFAULT="2026-10";
 const CHANGELOG=[
@@ -4711,6 +4789,47 @@ D.forEach(d=>{const p=PATCH[d.id];if(!p)return;const {addF,addC,addDocs,...rest}
  CHANGELOG.unshift(["2026-11-16",["Vérification des structures de Marseille : ajout de REPÈRE, lieu temporaire de réduction des risques près de la gare Saint-Charles (relais du Sleep In, toujours fermé, réouverture annoncée début 2027)","MDPH 13 : accueil d'Arenc fermé le vendredi à partir du 20 novembre","Clinique des Trois Lucs : numéro direct et horaires d'accueil ; Clinique L'Émeraude : numéro du site officiel","Dr Vermersch et Fraternité de Moreuil : avertissement, à vérifier avant d'orienter"]]);
 }
 
+/* ---------- Ajout du 17 novembre 2026 : CUMP 13 ---------- */
+if(!D.some(d=>d.id==="cump13")){D.push({id:"cump13",t:["specialise"],sub:"trauma",pub:1,mrs:1,chk:"2026-11-17",p:"Marseille 5ᵉ",n:"CUMP 13, cellule d'urgence médico-psychologique (psychotraumatisme récent)",o:"AP-HM, SAMU 13 et pôle de psychiatrie Centre · public",
+ a:"Hôpital de la Conception, 147 boulevard Baille, 13005 Marseille",
+ f:["Personnes exposées à un événement potentiellement traumatique récent (attentat, accident collectif, catastrophe, agression, mort violente…)","Interventions sur le terrain, immédiates et dans les jours qui suivent, déclenchées par le SAMU","Consultations différées, individuelles ou en groupe, dans le mois qui suit l'événement","Équipe permanente : psychiatres, psychologues, infirmiers ; environ 170 volontaires en renfort","Au-delà d'un mois, relais vers le Centre régional du psychotraumatisme (CRP 13), sur le même site"],
+ c:[["Secrétariat","04 91 43 50 47"],["E-mail","cump13@ap-hm.fr"],["Urgence","15"]],
+ send:"En urgence : appeler le 15, le médecin régulateur du SAMU déclenche la CUMP. Pour une consultation dans le mois qui suit un événement : contacter le secrétariat par téléphone ou par e-mail.",
+ v:1,note:"Horaires de consultation non publiés ; coordonnées issues d'une présentation de l'équipe (mai 2024), à confirmer par téléphone. Sources : https://www.sometrav-paca.org/structure/cump-samu-13, https://www.santementale.fr/2020/03/a-marseille-la-cump-precise-son-action-dans-la-crise-du-covid-19/"});
+ const g0=GEO["ss-centre-regional-du-psychotraumatisme-pac"];if(g0)GEO["cump13"]=g0.slice();
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Ajout de la CUMP 13 (cellule d'urgence médico-psychologique, Conception) dans Consultations spécialisées, psychotraumatisme");}
+
+/* ---------- Ajout du 17 novembre 2026 (b) : lignes nationales, UHSA, PAEJ ---------- */
+if(!D.some(d=>d.id==="uhsa-marseille")){
+ [{id:"ligne-drogues-info",t:["entraide"],pub:1,mrs:1,chk:"2026-11-17",p:"National",n:"Drogues Info Service",o:"Santé publique France · service public",a:"",f:["Drogues, cannabis, médicaments détournés : information, écoute, orientation","Pour la personne qui consomme ou son entourage","Annuaire national des structures et chat en ligne","Horaires : 7j/7, 8h–2h"],c:[["Téléphone","0 800 23 13 13 (gratuit)"],["Chat","https://www.drogues-info-service.fr/"]],send:"Libre, anonyme : la personne ou son entourage appelle directement. Utile aussi pour un professionnel qui cherche une orientation.",site:"https://www.drogues-info-service.fr/",note:"Source : dépliant Santé publique France (https://jeunes.alcool-info-service.fr) et sites officiels"},{id:"ligne-alcool-info",t:["entraide"],pub:1,mrs:1,chk:"2026-11-17",p:"National",n:"Alcool Info Service",o:"Santé publique France · service public",a:"",f:["Alcool : information, écoute, orientation","Pour la personne qui boit ou son entourage","Chat et forums en ligne","Horaires : 7j/7, 8h–2h"],c:[["Téléphone","0 980 980 930 (appel non surtaxé)"],["Chat","https://www.alcool-info-service.fr/"]],send:"Libre, anonyme : la personne ou son entourage appelle directement. Utile aussi pour un professionnel qui cherche une orientation.",site:"https://www.alcool-info-service.fr/",note:"Source : dépliant Santé publique France (https://jeunes.alcool-info-service.fr) et sites officiels"},{id:"ligne-ecoute-cannabis",t:["entraide"],pub:1,mrs:1,chk:"2026-11-17",p:"National",n:"Écoute Cannabis",o:"Santé publique France · service public",a:"",f:["Cannabis : écoute et orientation, notamment pour les jeunes et les parents","Horaires : 7j/7, 8h–2h"],c:[["Téléphone","0 980 980 940 (appel non surtaxé)"],["Chat","https://www.drogues-info-service.fr/"]],send:"Libre, anonyme : la personne ou son entourage appelle directement. Utile aussi pour un professionnel qui cherche une orientation.",site:"https://www.drogues-info-service.fr/",note:"Source : dépliant Santé publique France (https://jeunes.alcool-info-service.fr) et sites officiels"},{id:"ligne-joueurs-info",t:["entraide"],pub:1,mrs:1,chk:"2026-11-17",p:"National",n:"Joueurs Info Service",o:"Santé publique France · service public",a:"",f:["Jeux d'argent et de hasard : écoute, orientation, aide à l'interdiction de jeux","Pour la personne qui joue ou son entourage","Horaires : 7j/7, 8h–2h"],c:[["Téléphone","09 74 75 13 13 (appel non surtaxé)"],["Chat","https://www.joueurs-info-service.fr/"]],send:"Libre, anonyme : la personne ou son entourage appelle directement. Utile aussi pour un professionnel qui cherche une orientation.",site:"https://www.joueurs-info-service.fr/",note:"Source : dépliant Santé publique France (https://jeunes.alcool-info-service.fr) et sites officiels"},{id:"ligne-tabac-info",t:["entraide"],pub:1,mrs:1,chk:"2026-11-17",p:"National",n:"Tabac Info Service",o:"Santé publique France · service public",a:"",f:["Arrêt du tabac : suivi gratuit par un tabacologue, par téléphone","Application d'accompagnement à l'arrêt","Horaires : lundi–samedi 8h–20h"],c:[["Téléphone","39 89 (prix d'un appel normal)"],["Chat","https://www.tabac-info-service.fr/"]],send:"Libre, anonyme : la personne ou son entourage appelle directement. Utile aussi pour un professionnel qui cherche une orientation.",site:"https://www.tabac-info-service.fr/",note:"Source : dépliant Santé publique France (https://jeunes.alcool-info-service.fr) et sites officiels"}].forEach(x=>D.push(x));
+ D.push({id:"uhsa-marseille",t:["hospit"],pub:1,mrs:1,chk:"2026-11-17",p:"Marseille 15ᵉ",n:"UHSA de Marseille (unité hospitalière spécialement aménagée)",o:"AP-HM, pôle psychiatrie, médecine et addictologie en détention · public",
+  a:"50 boulevard Pierre Dramard, 13015 Marseille",
+  f:["Hospitalisation psychiatrique des personnes détenues (avec ou sans consentement)","60 lits, pour les 16 établissements pénitentiaires de PACA et de Corse","Pas d'admission directe : demande faite par le médecin de l'unité sanitaire (USMP) de l'établissement","Réunion d'admission quotidienne ; transfert assuré par l'administration pénitentiaire, avec une fiche de liaison"],
+  c:[["Secrétariat","04 91 38 30 00"]],
+  send:"Uniquement sur demande du médecin de l'USMP de l'établissement pénitentiaire, qui contacte l'UHSA.",
+  v:1,note:"Le numéro de secrétariat est celui de sante.fr (juin 2026), à confirmer. Point sur la carte approximatif (15ᵉ). Sources : https://www.sante.fr/node/1180261, rapport CGLPL 2019, https://www.santementale.fr (2018)"});
+ GEO["uhsa-marseille"]=[43.3640,5.3640];
+ const im=D.find(d=>d.id==="imaje");if(im){im.n="IMAJE Santé, espace santé jeunes · PAEJ";im.f.unshift("Point accueil écoute jeunes (PAEJ) du centre-ville");}
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Ajout des lignes nationales Drogues, Alcool, Cannabis, Joueurs et Tabac Info Service (Addictologie › Entraide), de l'UHSA de Marseille (Hospitalisation) et de la mention PAEJ sur IMAJE Santé");}
+
+/* ---------- Mise à jour du 17 novembre 2026 (c) : Les Collines du Revest ---------- */
+{const d=D.find(x=>x.id==="ah-centre-de-soins-les-collines-du-revest-s");if(d&&!d.site){
+ d.t=["cure","postcure"];d.chk="2026-11-17";
+ d.n="Clinique Les Collines du Revest (sevrage, SMR addictologie, hôpital de jour)";
+ d.o="emeis (ex-Clinéa) · clinique privée conventionnée, psychiatrie et addictologie";
+ d.f=["Sevrage hospitalier possible sur place, en hospitalisation complète (le site ne précise ni les produits ni la durée : à demander)","SMR addictologie : 44 lits, projet de soins de 6 semaines, prolongeable ; toutes addictions avec ou sans produit (alcool, tabac, cannabis, opiacés, médicaments, jeu, achats, cyberaddiction…)","Hôpital de jour addictologie (20 places), du lundi au vendredi 9h–17h","La clinique a aussi un service de psychiatrie générale (107 lits, hôpital de jour et de nuit), à 10 km de Toulon, cadre rural","Équipe : addictologue, psychiatre, psychologue, infirmiers, assistant social, art-thérapeute, éducateur sportif, diététicien, psychomotricien"];
+ d.send="Demande faite par le médecin (traitant ou du service) : formulaire de préadmission envoyé par e-mail, fax ou ViaTrajectoire. Avis de la commission médicale des admissions ; entrées du lundi au vendredi. À l'entrée : carte Vitale, pièce d'identité, mutuelle, chèque de caution.";
+ d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
+ d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
+ d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Nouvelle adresse : mapannuaire.github.io/map ; les messages arrivent à mapannuaire@gmail.com");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Imprimer : au choix la fiche complète pour un soignant, ou une feuille simplifiée à remettre à la personne en français, anglais, arabe, darija (en lettres arabes ou latines), espagnol, italien ou géorgien");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Fiche imprimée ou en PDF : un cadre « Rendez-vous et notes » en bas, à remplir à la main");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Accessibilité : contour visible pour la navigation au clavier, animations réduites si le téléphone le demande, boutons plus faciles à toucher ; tailles de texte harmonisées");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Accueil plus sobre : vignettes blanches, la couleur du type reste sur l'icône");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Carte : les lieux proches sont regroupés en un rond numéroté, qui zoome quand on le touche ; bouton Urgence 15 plus visible");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Les Collines du Revest : sevrage hospitalier ajouté (Sevrage › Cure), nouveau site internet et formulaire d'admission 2026");}}
+
 
 /* Documents téléchargeables (dossiers d'admission, plaquettes), vérifiés en octobre 2026 ; généré par mkdocs.py */
 const DOCS={"ah-consultation-avancee-du-csapa-l-entre-te": {"docs": [["Plaquette du CSAPA L'Entre-Temps (Martigues)", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_c64a6e735bc341498cb0538eed90ad93.pdf", "non datée ; cite les permanences de proximité", ""]], "dead": []}, "semaphore": {"docs": [["Plaquette du CSAPA Le Sémaphore", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_7fb219ed43df4871b1727152b6328c48.pdf", "non datée", ""]], "dead": []}, "jam": {"docs": [["Plaquette JAM (jeunes consommateurs 11-25 ans)", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_be23826c6f1b46f6a3296c0555ceec53.pdf", "non datée", ""], ["Flyer « Café des parents »", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_3d456c442fd84d36b9dc78fa31a29f39.pdf", "lien vu sur la page JAM, non ouvert", ""]], "dead": []}, "filrouge": {"docs": [["Plaquette Le Fil Rouge – professionnels", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_2be9ce9802f046ca9b81e2f6967514b5.pdf", "non datée ; équipe mobile parentalités addictions", ""], ["Plaquette Le Fil Rouge – familles", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_5b3d5767ad61471f8119214f6ef0546d.pdf", "lien vu sur la page, non ouvert", ""], ["Plaquette consultations de tabacologie (Fil Rouge)", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_141d0a02a58b454691efd95c3d49d095.pdf", "lien vu sur la page, non ouvert", ""]], "dead": []}, "tremplin": {"docs": [["Plaquette du CSAPA Tremplin", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_77fcb76909ca4f21a2f2c40d36662e98.pdf", "non datée, toujours en ligne", ""], ["Procédure d'admission en appartements thérapeutiques Tremplin (page web)", "https://www.addiction-mediterranee.fr/appartement-therapeutique-tremplin", "lettre de motivation au chef de service puis dossier de candidature envoyé par le centre, entretiens de pré-admission", "form"]], "dead": []}, "entretemps": {"docs": [["Plaquette du CSAPA L'Entre-Temps (Martigues)", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_c64a6e735bc341498cb0538eed90ad93.pdf", "non datée ; cite les permanences de proximité", ""]], "dead": []}, "lesept": {"docs": [["Plaquette du CSAPA Le Sept (Aubagne)", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_df82d16acad14b3c97e0c3c39e7d4d3f.pdf", "non datée", ""], ["Livret d'accueil du CSAPA Le Sept", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_ed347f3e58ae4f9286b862ce69156899.pdf", "non daté ; droits, équipe, horaires", ""]], "dead": []}, "baita": {"docs": [["Plaquette Baïta (conditions d'admission)", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_0ddd1bf76f4640c6b8e59ad453456481.pdf", "non datée ; critères (majeur, seul, papiers, ressources), séjour ≤ 20 mois, contenu de la lettre de motivation", ""], ["Livret d'accueil Baïta", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_0def8bf33d2e4405b49608529573343f.pdf", "2022, rédigé avec les usagers ; décrit le parcours d'admission", ""], ["Livret de sortie Baïta", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_7465234a3b404407913c63e1d75f5f2a.pdf", "lien vu sur la page, non ouvert", ""]], "dead": []}, "am-approches-prevention-service-de-preventi": {"docs": [["Plaquette Approches prévention et formation", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_4c6390d6c1b249049a3e45e40effefd6.pdf", "non datée", ""]], "dead": []}, "ah-consultation-avancee-du-csapa-l-entre-tex": {"docs": [["Plaquette du CSAPA L'Entre-Temps (Martigues)", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_c64a6e735bc341498cb0538eed90ad93.pdf", "non datée ; cite les permanences de proximité", ""]], "dead": []}, "ah-consultation-avancee-du-csapa-l-entre-texx": {"docs": [["Plaquette du CSAPA L'Entre-Temps (Martigues)", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_c64a6e735bc341498cb0538eed90ad93.pdf", "non datée ; cite les permanences de proximité", ""]], "dead": []}, "ah-consultation-avancee-du-csapa-l-entre-texxx": {"docs": [["Plaquette du CSAPA L'Entre-Temps (Martigues)", "https://www.addiction-mediterranee.fr/_files/ugd/b5dda5_c64a6e735bc341498cb0538eed90ad93.pdf", "non datée ; cite les permanences de proximité", ""]], "dead": []}, "se-aftc-13-association-des-familles-de-trau": {"docs": [["Projet de dispositif inclusion personnes TC-CL (SAMSAH)", "https://aftc13.com/wp-content/uploads/2025/07/Projet-SAMSAH-TC-CL-13-Dispositif-inclusion-personnes-TC-CL-V1.pdf", "V1, juillet 2025, lien vu sur l'accueil, non ouvert", ""]], "dead": []}, "am-service-de-sante-etudiante-sse-d-aix-mar": {"docs": [["Guide des services AMU « amU à ton service » (SSE p. 6-7)", "https://allsh.univ-amu.fr/sites/default/files/media-ressource/AMU-GUIDESERVICES-2025-OK.pdf", "2025 ; sites, téléphones, consultations psy", ""]], "dead": []}, "aphm": {"docs": [["Livret d'accueil patients AP-HM", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "générique AP-HM, réf. APL 006", ""]], "dead": []}, "ss-hospitalisation-temps-plein-pole-psychia": {"docs": [["Guide d'hospitalisation Hôpital de la Conception", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/guides/conception/guide-hospitalisation-conception-informations-pratiques-sejour.pdf", "« Suivez le guide ! », réf. APL150, mentionne la psychiatrie (bât. E)", ""], ["Livret d'accueil patients AP-HM", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "générique AP-HM, réf. APL 006", ""]], "dead": []}, "ss-hospitalisation-temps-plein-pole-psychiax": {"docs": [["Livret d'accueil patients AP-HM", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "générique AP-HM, réf. APL 006", ""]], "dead": []}, "urg-cap48": {"docs": [["Présentation du pôle Urgences psychiatriques (Calaméo)", "https://www.calameo.com/aphm/books/006242955b5b07eaedbb9", "janvier 2024, 21 p., décrit CAP 48 (10 lits), consultation en ligne", ""]], "dead": []}, "ss-electroconvulsivotherapie-sismotherapie-": {"docs": [["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""], ["Guide « Suivez le guide ! » Hôpital de la Conception (plan, pôle psychiatrie bât. E)", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/guides/conception/guide-hospitalisation-conception-informations-pratiques-sejour.pdf", "PDF réf. APL150, non daté", ""], ["Page service psychiatrie secteur 3 (mentionne la sismothérapie)", "https://fr.ap-hm.fr/service/psychiatrie-secteur-3-hopital-conception", "page web, secrétariat 04 91 43 51 03", ""]], "dead": []}, "ss-centre-regional-de-pathologies-professio": {"docs": [["Page CRPPE : modalités de demande (courrier du médecin adresseur au secrétariat)", "https://fr.ap-hm.fr/service/centre-regional-pathologies-professionnelles-environnementales-paca", "page web ; pas de formulaire, courrier médical requis", "form"], ["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""]], "dead": []}, "ss-centre-ressources-autisme-paca-unite-d-e": {"docs": [["Flyer CRA PACA", "https://annuaire.autismeinfoservice.fr:443/files/uploads/fiche/dyn/cra-flyer-2025-paca.pdf", "daté oct. 2024, toujours en ligne ; contact adultes 04 91 74 55 23, cra.adultes@ap-hm.fr", ""]], "dead": []}, "cmp-13g02": {"docs": [["Page « Le secteur Centre » (sectorisation, SDF par mois de naissance, admissions)", "https://fr.ap-hm.fr/site/psychiatrie/secteur-centre", "page web, pas de PDF", ""], ["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""]], "dead": []}, "cmp-13g03": {"docs": [["Page « Le secteur Centre » (sectorisation, SDF par mois de naissance, admissions)", "https://fr.ap-hm.fr/site/psychiatrie/secteur-centre", "page web, pas de PDF", ""], ["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""]], "dead": []}, "cmp-13g04": {"docs": [["Page « Le secteur Centre » (sectorisation, SDF par mois de naissance, admissions)", "https://fr.ap-hm.fr/site/psychiatrie/secteur-centre", "page web, pas de PDF", ""], ["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""]], "dead": []}, "cmp-13g01": {"docs": [["Page service psychiatrie secteurs 1 et 5", "https://fr.ap-hm.fr/service/psychiatrie-secteur-un-cinq-huitieme-dixieme-arrondissements-marseille", "page web, secrétariat consultations 04 91 74 67 30, aucun PDF", ""], ["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""]], "dead": []}, "cmp-13g05": {"docs": [["Page service psychiatrie secteurs 1 et 5", "https://fr.ap-hm.fr/service/psychiatrie-secteur-un-cinq-huitieme-dixieme-arrondissements-marseille", "page web, secrétariat consultations 04 91 74 67 30, aucun PDF", ""], ["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""]], "dead": []}, "cmp-13g06": {"docs": [["Page Consultations secteur 6 (contacts par activité, dont sexologie/trans tig-marseille@ap-hm.fr)", "https://fr.ap-hm.fr/site/psychiatrie-secteur-6-marseille/prendre-rendez-vous/consultations-annulation", "page web, aucun formulaire", ""], ["Page Hospitalisation secteur 6 (unité Orion, secrétariat)", "https://fr.ap-hm.fr/site/psychiatrie-secteur-6-marseille/prendre-rendez-vous/hospitalisation", "page web, aucun formulaire", ""], ["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""]], "dead": []}, "ss-hopital-de-jour-et-cattp-lafon-pole-psyc": {"docs": [["Page « Le secteur Centre » (sectorisation, SDF par mois de naissance, admissions)", "https://fr.ap-hm.fr/site/psychiatrie/secteur-centre", "page web, pas de PDF", ""], ["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""]], "dead": []}, "ss-hopital-de-jour-intersectoriel-et-atelie": {"docs": [["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""], ["Guide « Suivez le guide ! » Hôpital de la Conception (plan, pôle psychiatrie bât. E)", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/guides/conception/guide-hospitalisation-conception-informations-pratiques-sejour.pdf", "PDF réf. APL150, non daté", ""]], "dead": []}, "ss-prise-en-charge-des-troubles-du-comporte": {"docs": [["Page TCA anorexie mentale secteur 2", "https://fr.ap-hm.fr/service/psychiatrie-secteur-2-hopital-conception/tca-anorexie-mentale", "page web, secrétariat 04 91 43 51 02, pas de PDF", ""], ["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""], ["Guide « Suivez le guide ! » Hôpital de la Conception (plan, pôle psychiatrie bât. E)", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/guides/conception/guide-hospitalisation-conception-informations-pratiques-sejour.pdf", "PDF réf. APL150, non daté", ""]], "dead": []}, "ss-hopital-de-jour-et-cattp-de-sainte-margu": {"docs": [["Page service psychiatrie secteurs 1 et 5", "https://fr.ap-hm.fr/service/psychiatrie-secteur-un-cinq-huitieme-dixieme-arrondissements-marseille", "page web, secrétariat consultations 04 91 74 67 30, aucun PDF", ""], ["Page Hospitalisation secteur 6 (unité Orion, secrétariat)", "https://fr.ap-hm.fr/site/psychiatrie-secteur-6-marseille/prendre-rendez-vous/hospitalisation", "page web, aucun formulaire", ""], ["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""]], "dead": []}, "conception": {"docs": [["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""], ["Guide « Suivez le guide ! » Hôpital de la Conception (plan, pôle psychiatrie bât. E)", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/guides/conception/guide-hospitalisation-conception-informations-pratiques-sejour.pdf", "PDF réf. APL150, non daté", ""], ["Page pôle Psychiatrie, Pédopsychiatrie et Addictologie (liste des services)", "https://fr.ap-hm.fr/pole-001-psychiatrie-pedopsychiatrie-addictologie", "vue en résultat de recherche, non ouverte", ""]], "dead": []}, "ss-rehab-marseille-centre-de-rehabilitation": {"docs": [["Plaquette REHAB Marseille", "https://centre-ressource-rehabilitation.org/IMG/pdf/plaquette_rehab-marseille_service_du_pr_lancon_ap-hm.pdf", "non datée ; contacts et demande de 1re consultation (patient, proche ou médecin, par mail/tél.)", ""]], "dead": []}, "ss-parcours-transidentite-et-consultation-d": {"docs": [["Page Consultations secteur 6 (contacts par activité, dont sexologie/trans tig-marseille@ap-hm.fr)", "https://fr.ap-hm.fr/site/psychiatrie-secteur-6-marseille/prendre-rendez-vous/consultations-annulation", "page web, aucun formulaire", ""], ["Livret d'accueil patients AP-HM « Bienvenue à l'AP-HM »", "https://fr.ap-hm.fr/sites/default/files/files/patients/public/informations-pratiques/livret-accueil/pdf/livret-accueil-aphm.pdf", "PDF 51 p., réf. APL 006, non daté ; lien de la page officielle « Livret d'accueil »", ""]], "dead": []}, "am-arca-sud-delegation-des-bouches-du-rhone": {"docs": [["Dépliant ARCA-Sud", "https://www.paca.ars.sante.fr/media/118923/download?inline", "non daté ; hébergé par l'ARS PACA ; missions, tél. 04 88 926 888", ""]], "dead": []}, "se-pass-adultes-de-l-ap-hm-timone-et-reseau": {"docs": [["Liste des PASS de PACA (page ARS)", "https://www.paca.ars.sante.fr/les-permanences-dacces-aux-soins-de-sante-en-etablissements-de-sante-pass-ch-en-provence-alpes-cote", "page web mise à jour janv. 2026 ; cite PASS adultes et PASS mères-enfants AP-HM", ""], ["Cahier des charges national des PASS", "https://www.paca.ars.sante.fr/media/150269/download?inline", "PDF national, lié depuis la page ARS (2026)", ""]], "dead": []}, "se-autisme-13": {"docs": [["Plaquette Autisme 13 (siège et antenne de Gardanne)", "https://annuaire.autismeinfoservice.fr:443/files/uploads/fiche/dyn/plaquette-2024-siege-et-antenne.pdf", "2024 ; remplace la plaquette précédente (lien « site »)", ""]], "dead": []}, "ss-avad-france-victimes-13-marseille-aide-a": {"docs": [["Fiche contacts victimes de violences conjugales – Bouches-du-Rhône", "https://masecurite.interieur.gouv.fr/media/1051/download/VICTIME%20DE%20VIOLENCES%20CONJUGALES-BOUCHES-DU-RH%C3%94NE-13.pdf", "ministère de l'Intérieur, non datée ; mentionne France Victimes Marseille (04 96 11 68 80)", ""]], "dead": []}, "co-communaute-emmaus-nimes-marguerittes": {"docs": [["Page Communauté Emmaüs Arles (Emmaüs France)", "https://emmaus-france.org/groupe/communaute-emmaus-arles/", "page fédération, sans contact détaillé ; site emmaus-arles.com « en reconstruction »", ""], ["Fiche boutique Emmaüs Nîmes/Marguerittes", "https://emmaus-france.org/boutique/emmaus-nimes-marguerittes-communaute-emmaus-arles/", "vue en résultat de recherche, non ouverte", ""]], "dead": []}, "co-communaute-emmaus-ales": {"docs": [["Page Communauté Emmaüs Arles (Emmaüs France)", "https://emmaus-france.org/groupe/communaute-emmaus-arles/", "page fédération, sans contact détaillé ; site emmaus-arles.com « en reconstruction »", ""], ["Fiche boutique Emmaüs Alès", "https://emmaus-france.org/boutique/emmaus-ales-communaute-emmaus-arles/", "vue en résultat de recherche, non ouverte", ""]], "dead": []}, "co-communaute-emmaus-cabries": {"docs": [["Page Communauté Emmaüs de Cabriès (Emmaüs France)", "https://emmaus-france.org/groupe/communaute-emmaus-de-cabries/", "page fédération, sans contact local ni PDF", ""], ["Page « Communautés Emmaüs » (accueil inconditionnel, statut OACAS)", "https://emmaus-france.org/nos-actions/communautes-emmaus", "page générale fédération", ""]], "dead": []}, "co-communaute-emmaus-cote-d-azur-saint-andr": {"docs": [["Page « Les compagnons d'Emmaüs » (conditions d'accueil, contact)", "https://emmaus06.fr/les-compagnons/", "page officielle emmaus06.fr ; adultes H/F, 04 93 54 88 69", "form"], ["Charte du Compagnon", "https://www.emmaus44.fr/nantes/documents/Charte_du_Compagnon.pdf", "PDF lié depuis emmaus06.fr (hébergé Emmaüs Nantes), non ouvert", ""], ["Manifeste universel Emmaüs", "https://emmaus-international.org/images/stories/01_qui/05_texte_ref/manifeste_fr.pdf", "PDF lié depuis emmaus06.fr, non ouvert", ""]], "dead": []}, "co-communaute-emmaus-vaucluse-courthezon": {"docs": [["Page « Qui sommes-nous » (accueil des compagnons, séjours court/long)", "https://www.emmaus84.com/sommes-nous.php", "page officielle, pas de PDF ; 09 74 56 27 73", ""]], "dead": []}, "co-communaute-emmaus-montpellier-saint-aune": {"docs": [["Page « Notre communauté » (accueil sans condition de durée)", "https://www.emmaus-montpellier.fr/notre-communaute/", "page officielle, pas de PDF ; 04 99 77 23 60", ""]], "dead": []}, "co-communaute-emmaus-marseille-pointe-rouge": {"docs": [["Communautés Emmaüs : principe d'accueil inconditionnel", "https://emmaus-france.org/nos-actions/communautes-emmaus/", "page web Emmaüs France ; pas de dossier d'admission (contact direct de la communauté)", ""], ["Guide habitat des communautés (résidences OACAS)", "https://emmaus-france.org/wp-content/uploads/2023/03/guide-habitat-des-compagnons-2022.pdf", "Emmaüs France, édition 2022, national, non ouvert", ""]], "dead": []}, "co-communaute-emmaus-marseille-saint-marcel": {"docs": [["Communautés Emmaüs : principe d'accueil inconditionnel", "https://emmaus-france.org/nos-actions/communautes-emmaus/", "page web Emmaüs France ; pas de dossier d'admission", ""]], "dead": []}, "co-communaute-emmaus-la-seyne-sur-mer-emmau": {"docs": [["Communautés Emmaüs : principe d'accueil inconditionnel", "https://emmaus-france.org/nos-actions/communautes-emmaus/", "page web Emmaüs France ; pas de dossier d'admission", ""]], "dead": []}, "se-esper-pro-plateforme-regionale-de-mediat": {"docs": [["Présentation ESPER Pro (diaporama)", "https://paca.france-assos-sante.org/wp-content/uploads/sites/20/2022/06/Diapo-ESPER-PRO-1.pdf", "France Assos Santé PACA, 2022, non ouvert", ""], ["Guide pratique santé mentale 04 (édité par ESPER Pro)", "https://www.paca.ars.sante.fr/system/files/2025-11/Esper%20Pro%20Guide%20ok.pdf", "ARS PACA, édition 2025/2026, Alpes-de-Haute-Provence", ""], ["Adhésion 2026 (HelloAsso)", "https://www.helloasso.com/associations/esper-pro/adhesions/cotisation", "page d'adhésion", ""]], "dead": []}, "se-lieu-de-repit-de-marseille": {"docs": [["Boîte à outils Lieu de répit (JUST) : modèle, protocole d'admission, évaluation", "https://www.cnsa.fr/sites/default/files/2026-02/RESULT_ACT_INN_JUST_Boite-a-outil-LDR.pdf", "CNSA, document 2022 mis en ligne 2026 ; décrit le circuit d'admission (fiche contact, entretiens) mais formulaires non inclus", ""]], "dead": []}, "us-association-anorexie-boulimie-13-aab13": {"docs": [["Page HelloAsso AAB13 (adhésion, dons)", "https://www.helloasso.com/associations/association-anorexie-boulimie-13", "page association ; campagne d'adhésion la plus récente vue : 2024", ""]], "dead": []}, "us-renaitre-apres-l-inceste-agir-avec-les-b": {"docs": [["Adhésion à Renaître après l'inceste (15 €)", "https://www.helloasso.com/associations/renaitre-apres-l-inceste-agir-avec-les-bonnes-meres/adhesions/adhesion-renaitre-apres-l-inceste", "HelloAsso, page d'adhésion", ""]], "dead": []}, "co-communaute-therapeutique-les-portes-de-l": {"docs": [["Dossier médical d'admission (Word)", "https://www.centre-rimbaud.fr/wp-content/uploads/2026/09/rimbaud-communaute-therapeutique-dossier-medical.docx", "septembre 2026, à remplir par le médecin", "form"], ["Procédure d'admission (PDF)", "https://www.centre-rimbaud.fr/wp-content/uploads/2022/06/informations-sur-la-procedure-dadmission.pdf", "juin 2022", "form"], ["Règlement de fonctionnement", "https://www.centre-rimbaud.fr/wp-content/uploads/2022/04/reglement-de-fonctionnement-de-la-communaute-therapeutique-mars-2022.pdf", "mars 2022", ""], ["Livret d'accueil", "https://www.centre-rimbaud.fr/wp-content/uploads/2015/09/livret-daccueil-de-la-communaute-therapeutique.pdf", "mis en ligne 2015", ""]], "dead": []}, "se-solidarite-rehabilitation-sre": {"docs": [["Page HelloAsso Solidarité Réhabilitation", "https://www.helloasso.com/associations/association-solidarite-rehabilitation", "vue en recherche, non ouverte (erreur)", ""]], "dead": []}, "se-mon-soutien-psy": {"docs": [["Mon soutien psy : fiche ameli médecin (orientation, courriers, échelles)", "https://www.ameli.fr/medecin/exercice-liberal/prise-charge-situation-type-soin/accompagnement-psychologue-conventionne-mon-soutien-psy", "page web ameli ; modèles de courrier d'adressage mentionnés sans lien direct", "form"], ["Mon soutien psy : page assuré", "https://www.ameli.fr/assure/remboursements/rembourse/remboursement-seance-psychologue-mon-soutien-psy", "page web ameli", ""], ["Mon soutien psy : l'essentiel (flyer psychologues)", "https://www.ameli.fr/sites/default/files/Documents/CNAM_mon%20soutien%20psy-Flyer-pages-ameli_assurance-maladie.pdf", "CNAM, non ouvert, date inconnue", ""], ["Dossier de presse Mon soutien psy", "https://www.assurance-maladie.ameli.fr/presse/2026-01-16-dp-dispositif-mon-soutien-psy", "Assurance maladie, 16/01/2026, non ouvert", ""]], "dead": []}, "ah-clinique-le-calme-centre-de-cure-alcoolo": {"docs": [["Dossier de pré-admission, hospitalisation complète (PDF)", "https://www.calme.fr/medias/dossiers/dossier-cabris-hospitalisation-complete.pdf", "ADM DF 01 V16, avril 2026 ; volet administratif + médical, pièces à joindre", "form"], ["Dossier de pré-admission, hôpital de jour (PDF)", "https://www.calme.fr/medias/dossiers/dossier-cabris-hospitalisation-jour.pdf", "ADM DF 01 V16, avril 2026", "form"], ["Livret d'accueil, hospitalisation complète", "https://www.calme.fr/medias/dossiers/livret-accueil-cabris.pdf", "DIU DF 01, février 2026", ""], ["Livret d'accueil, hôpital de jour", "https://www.calme.fr/medias/dossiers/livret-accueil-cabris-hdj.pdf", "HDJ DF 03, février 2026", ""]], "dead": []}, "co-communaute-therapeutique-du-fleuve": {"docs": [["Fiche d'admission Plateforme hébergement thérapeutique CEID (PDF)", "https://ceid-addiction.com/wp-content/uploads/2023/06/DEMANDE-ADMISSION-2023.pdf", "2023 ; volet administratif/social + dossier médical à remplir par le médecin + fiche état psychologique", "form"]], "dead": []}, "ah-centre-d-addictologie-d-arzeliers-cure-r": {"docs": [["Dossier d'admission addictologie 2026 (PDF)", "https://www.chbd-laragne.fr/sites/default/files/chbd_laragne_fr/files/2026/2026-01/144.004_dossier-admission-addictologie-_-2026.pdf", "réf. 144.004, janvier 2026 ; lié depuis la page officielle (PDF non ouvert, accès bloqué)", "form"], ["Plaquette de présentation 2025", "https://www.chbd-laragne.fr/sites/default/files/chbd_laragne_fr/files/2025/2025-01/plaquette-2025_addictologie.pdf", "2025 ; lié depuis la page officielle", ""]], "dead": []}, "ah-unite-d-addictologie-et-hopital-de-jour-": {"docs": [["Livret d'accueil du CH de Digne-les-Bains", "https://www.ght04.fr/app/uploads/2024/01/livret_d_accueil_ch_digne.pdf", "livret général de l'hôpital, 2024 (non ouvert)", ""]], "dead": []}, "ah-csapa-de-draguignan-avec-unite-methadone": {"docs": [["Livret d'accueil du CSAPA", "https://www.ch-dracenie.fr/wp-content/uploads/2020/08/LIVRET-DACCUEIL-VD-1.pdf", "réf. CSAPA-DIV-14-S43-001, mis en ligne 2020 (non daté)", ""]], "dead": []}, "ah-hopital-de-jour-la-lezardiere-pole-d-add": {"docs": [["Plaquette HDJ La Lézardière", "https://www.ch-pierrefeu.fr/wp-content/uploads/2024/12/w_PEC-ADM-DOC-014_V2_Flyer-HDJ-La-Lezardiere-Pole-Addicto.pdf", "PEC-ADM-DOC-014 V2, déc. 2024 ; lié depuis la page CSAPA du CH", ""]], "dead": []}, "ah-csapa-equinoxe-hyeres-avec-unite-methado": {"docs": [["Livret d'accueil CSAPA Equinoxe", "https://www.ch-pierrefeu.fr/wp-content/uploads/2026/02/w_Livret-CSAPA.pdf", "février 2026", ""], ["Plaquette CSAPA Equinoxe", "https://www.ch-pierrefeu.fr/wp-content/uploads/2024/12/w_PEC-ADM-DOC-030_V1_Flyer-CSAPA-EQUINOXE-Pole-Addicto.pdf", "PEC-ADM-DOC-030 V1, déc. 2024", ""]], "dead": []}, "ah-csapa-equinoxe-brignoles-et-equipe-mobil": {"docs": [["Livret d'accueil CSAPA Equinoxe", "https://www.ch-pierrefeu.fr/wp-content/uploads/2026/02/w_Livret-CSAPA.pdf", "février 2026, commun Hyères/Brignoles", ""], ["Plaquette CSAPA Equinoxe", "https://www.ch-pierrefeu.fr/wp-content/uploads/2024/12/w_PEC-ADM-DOC-030_V1_Flyer-CSAPA-EQUINOXE-Pole-Addicto.pdf", "PEC-ADM-DOC-030 V1, déc. 2024", ""]], "dead": []}, "ah-equipe-de-liaison-en-addictologie-elsa-d": {"docs": [["Livret d'accueil patient CHIAP (v5)", "https://www.ch-aix.fr/wp-content/uploads/2025/05/CHIAP-v5-Livret-Accueil-Patient-07-05-2025.pdf", "mai 2025, version courante sur la page officielle", ""]], "dead": []}, "allauch": {"docs": [["Demande d'admission – service d'addictologie (PDF)", "https://www.ch-allauch.fr/media/bloc_file/Demande_admission_Addictologie_Allauch_V3_04_2023.pdf", "V3 avril 2023, 2 p. ; à remplir et signer par le médecin prescripteur ; envoi à addictologie@ch-allauch.fr ou fax 04 91 10 46 61", "form"], ["Plaquette hospitalisation temps plein", "https://www.ch-allauch.fr/media/bloc_file/Plaquette_pr%C3%A9sentation_ADDICTO_HTP_V09_2020.pdf", "V09 2020 ; toujours indexé, non rouvert (robots)", ""], ["Flyer de présentation", "https://www.ch-allauch.fr/media/bloc_file//Flyer_de_pr%C3%A9sentation_ADDICTO.pdf", "toujours indexé, non rouvert (robots)", ""]], "dead": []}, "ah-equipe-mobile-d-addictologie-ema-du-ch-m": {"docs": [["Plaquette Équipe mobile d'addictologie", "https://www.ch-montperrin.fr/PublishingImages/Pages/Page%20de%20contenu%20publique/POLE-TRANSVERSAL/flyer%20Equipe%20Mob.pdf", "non daté, vérifié ; contact 04 42 16 17 78, equipe_mobile_addicto@ch-montperrin.fr", ""]], "dead": []}, "montperrin": {"docs": [["Plaquette hospitalisation temps plein", "https://www.ch-montperrin.fr/PublishingImages/Pages/Page%20de%20contenu%20publique/POLE-TRANSVERSAL/flyerTP.pdf", "non daté, vérifié", ""], ["Plaquette structure de jour (HDJ/CATTP)", "https://www.ch-montperrin.fr/PublishingImages/Pages/Page%20de%20contenu%20publique/POLE-TRANSVERSAL/flyer%20SDJ.pdf", "non daté, lien présent sur la page du pôle", ""], ["Groupe « Choisir mon projet de soins »", "https://www.ch-montperrin.fr/PublishingImages/Pages/Page%20de%20contenu%20publique/POLE-TRANSVERSAL/flyer%20CPS.pdf", "lien présent sur la page du pôle", ""], ["Livret d'accueil CH Montperrin (mai 2024)", "https://www.ch-montperrin.fr/PublishingImages/Pages/Page%20de%20contenu%20publique/Livret-d-accueil/Livret%20d'Accueil.pdf", "édition mai 2024, vérifié", ""]], "dead": []}, "valvert": {"docs": [["Fiche du service d'addictologie (PDF)", "https://www.ch-valvert.fr/offre-de-soins/psychiatrie-generale/service-addictologie/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""], ["Livret d'accueil du patient 2025 (CH Valvert)", "https://www.ch-valvert.fr/fileadmin/user_upload/2025_LIVRET_ACCUEIL_PATIENT_CHVALVERT.pdf", "édition 2025 ; vu en recherche, site bloque la lecture automatique", ""]], "dead": []}, "salon": {"docs": [["Livret d'accueil patient (V14)", "https://www.ch-salon.fr/wp-content/uploads/2022/03/Livret-Accueil-V14-WEB.pdf", "V14, mars 2022, lié depuis la page officielle /livret/", ""], ["Page Livret d'accueil", "https://www.ch-salon.fr/livret/", "page officielle", ""]], "dead": []}, "martigues": {"docs": [["Plaquette service social du CH de Martigues", "https://www.ch-martigues.fr/fileadmin/PHOTOS/KIOSQUE/Tryptique_ASSISTANCE_SOCIALES.pdf", "non ouvert, date inconnue", ""]], "dead": []}, "ciotat": {"docs": [["Plaquette ELSA CH La Ciotat (V3)", "https://www.ch-laciotat.fr/wp-content/uploads/2022/12/ELSA-brochure-V3-Aout-2022.pdf", "août 2022, liée sur la page ELSA officielle", ""], ["Page ELSA CH La Ciotat", "https://www.ch-laciotat.fr/accueil-2/offre-de-soins/sanitaire/les-consultations-externes/lequipe-de-liaison-et-de-soins-en-addictologie-elsa/", "page officielle", ""], ["Livret d'accueil patient 2024", "https://www.ch-laciotat.fr/wp-content/uploads/2024/01/Livret-daccueil-patient-2024.pdf", "janvier 2024, page officielle, non ouvert", ""]], "dead": []}, "cmp-13g07": {"docs": [["Fiche du CMP Saint-Marcel (PDF)", "https://www.ch-valvert.fr/information-transversale/annuaires-de-batiments-structures/annuaire-des-structures/centre-medico-psychologique-cmp-saint-marcel-299/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""], ["Présentation du secteur 7 (PDF)", "https://www.ch-valvert.fr/offre-de-soins/psychiatrie-generale/secteur-7/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "cmp-13g08": {"docs": [["Présentation du secteur 8 (PDF)", "https://www.ch-valvert.fr/offre-de-soins/psychiatrie-generale/secteur-8/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "cmp-allauch": {"docs": [["Fiche du CMP/CATTG Allauch – Plan-de-Cuques (PDF)", "https://www.ch-valvert.fr/information-transversale/annuaires-de-batiments-structures/annuaire-des-structures/centre-medico-psychologique-cmp-cattp-allauch-plan-de-cuques-298/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "ss-hopital-de-jour-l-escale-secteur-7": {"docs": [["Fiche de l'hôpital de jour L'Escale (PDF)", "https://www.ch-valvert.fr/information-transversale/annuaires-de-batiments-structures/annuaire-des-structures/hopital-de-jour-lescale-301/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""], ["Présentation du secteur 7 (PDF)", "https://www.ch-valvert.fr/offre-de-soins/psychiatrie-generale/secteur-7/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "ss-cattg-le-pre-en-bulle-secteur-7": {"docs": [["Présentation du secteur 7 (PDF)", "https://www.ch-valvert.fr/offre-de-soins/psychiatrie-generale/secteur-7/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "ss-hopital-de-jour-gasquy-secteur-8": {"docs": [["Présentation du secteur 8 (PDF)", "https://www.ch-valvert.fr/offre-de-soins/psychiatrie-generale/secteur-8/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "ss-hopital-de-jour-aubignane-secteur-9": {"docs": [["Présentation du secteur 9 (PDF)", "https://www.ch-valvert.fr/offre-de-soins/psychiatrie-generale/secteur-9/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "ss-service-de-la-rehab-rehabilitation-psych": {"docs": [["Plaquette Réhab' Valvert", "https://centre-ressource-rehabilitation.org/sites/centre-ressource-rehabilitation.org/IMG/pdf/plaquette_rehab_valvert.pdf", "non datée, vérifiée ; 18-40 ans, orientation par la personne, l'équipe de secteur ou la famille", ""], ["Fiche Réhabilitation psychosociale (PDF)", "https://www.ch-valvert.fr/information-transversale/annuaires-de-batiments-structures/annuaire-des-structures/rehabilitation-psychosociale-529/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "ss-la-calanque-unite-de-rehabilitation-et-r": {"docs": [["Fiche La Calanque / Les Bougainvillées (PDF)", "https://www.ch-valvert.fr/offre-de-soins/psychiatrie-generale/la-calanque-service-de-rehabilitation-et-resocialisation/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""], ["Livret d'accueil du patient 2025 (CH Valvert)", "https://www.ch-valvert.fr/fileadmin/user_upload/2025_LIVRET_ACCUEIL_PATIENT_CHVALVERT.pdf", "édition 2025 ; vu en recherche, site bloque la lecture automatique", ""]], "dead": []}, "ss-unite-mobile-autisme-adultes-les-makaras": {"docs": [["Fiche Unité mobile autisme adulte Les Makaras (PDF)", "https://www.ch-valvert.fr/information-transversale/annuaires-de-batiments-structures/annuaire-des-structures/unite-mobile-de-lautisme-adulte-les-makaras-184/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "ss-pole-de-psychiatrie-de-la-personne-agee-": {"docs": [["Demande d'intervention UMPPA (PDF)", "https://www.ch-valvert.fr/fileadmin/user_upload/Demande_d_intervention__UMPPA_V10.pdf", "V10 ; motif de la demande (évaluation psychiatrique/sociale…) ; vu en recherche, non ouvert (site bloque la lecture automatique)", "form"], ["Plaquette de présentation UMPPA (ex-UMGP)", "https://www.ch-valvert.fr/fileadmin/user_upload/Plaquette_de_pr%C3%A9sentation_UMGP_V10_9.pdf", "V10.9 ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""], ["Livret d'accueil du patient 2025 (CH Valvert)", "https://www.ch-valvert.fr/fileadmin/user_upload/2025_LIVRET_ACCUEIL_PATIENT_CHVALVERT.pdf", "édition 2025 ; vu en recherche, site bloque la lecture automatique", ""]], "dead": []}, "ss-unite-mobile-de-psychiatrie-de-la-person": {"docs": [["Demande d'intervention UMPPA (PDF)", "https://www.ch-valvert.fr/fileadmin/user_upload/Demande_d_intervention__UMPPA_V10.pdf", "V10 ; motif de la demande (évaluation psychiatrique/sociale…) ; vu en recherche, non ouvert (site bloque la lecture automatique)", "form"], ["Plaquette de présentation UMPPA (ex-UMGP)", "https://www.ch-valvert.fr/fileadmin/user_upload/Plaquette_de_pr%C3%A9sentation_UMGP_V10_9.pdf", "V10.9 ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "ss-unite-de-therapies-complementaires-utc-t": {"docs": [["Triptyque de présentation UTC", "https://www.ch-valvert.fr/fileadmin/user_upload/Tryptique_UTC_LC_V3.pdf", "V3 ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "urg-cacc": {"docs": [["Fiche CACC (PDF)", "https://www.ch-valvert.fr/offre-de-soins/psychiatrie-generale/cacc-centre-daccueil-de-crise-et-de-consultations/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "urg-upaul": {"docs": [["Fiche UPAUL (PDF)", "https://www.ch-valvert.fr/information-transversale/annuaires-de-batiments-structures/annuaire-des-structures/unite-psychiatrique-daccueil-des-urgences-et-de-liaison-upaul-153/pdf", "version PDF de la page du site ; vu en recherche, non ouvert (site bloque la lecture automatique)", ""]], "dead": []}, "ss-hospitalisation-temps-plein-ch-valvert-l": {"docs": [["Votre admission (page web)", "https://www.ch-valvert.fr/patient-famille-et-entourage/hospitalisation/votre-admission", "page « admission » ; toujours indexée, non rouverte (robots)", ""], ["Modalités de soins psychiatriques (page web)", "https://www.ch-valvert.fr/patient-famille-et-entourage/hospitalisation/les-modalites-de-soins-psychiatriques", "non revérifiée (robots)", ""], ["Livret d'accueil du patient 2025 (CH Valvert)", "https://www.ch-valvert.fr/fileadmin/user_upload/2025_LIVRET_ACCUEIL_PATIENT_CHVALVERT.pdf", "édition 2025 ; vu en recherche, site bloque la lecture automatique", ""]], "dead": []}, "ss-hospitalisation-temps-plein-ch-edouard-t": {"docs": [], "dead": ["https://www.cglpl.fr/wp-content/uploads/2018/11/Suivi-des-recommandations-à-3-ans-Centre-hospitalier-spécialisé-de-Marseille.pdf"]}, "lauranne": {"docs": [["Page du pôle L'Étoile", "https://www.clinique-la-lauranne.fr/pole-de-l-etoile", "page web, non revérifiée (accès bloqué)", ""]], "dead": []}, "ah-clinique-belle-rive-sevrage-hospitalier-": {"docs": [["Dossier de pré-admission (PDF)", "https://www.clinique-bellerive.fr/wp-content/uploads/2026/03/DOC.PEC_.ADM_.52-Dossier-Pre-admission-clinique-mai-25.pdf", "version mai 2025 ; non revérifié (site inaccessible depuis l'outil)", "form"], ["Dossier de demande d'admission (PDF)", "https://www.clinique-bellerive.fr/wp-content/uploads/2025/06/DOC-PEC-ADM-51_Dossier-Demande-admission-MARS-25.pdf", "version mars 2025 ; non revérifié (site inaccessible depuis l'outil)", "form"]], "dead": []}, "se-maison-departementale-des-aidants": {"docs": [["Livret de présentation de la Maison des aidants", "https://www.departement13.fr/uploads/publications/Livret-Maison-des-aidants-partenaires_01.pdf", "Département 13, sans date ; services et permanences partenaires (dont troubles psychiques)", ""]], "dead": []}, "se-mdph-des-bouches-du-rhone": {"docs": [["Formulaire de demande MDPH (Cerfa 15692*01)", "https://www.monparcourshandicap.gouv.fr/sites/default/files/2025-03/Formulaire-demande-MDPH_cerfa_15692-01.pdf", "formulaire national, à remplir par le patient", "form"], ["Certificat médical MDPH (Cerfa 15695*01)", "https://www.monparcourshandicap.gouv.fr/sites/default/files/2025-07/Formulaire_certificat-medical_cerfa_15695-01.pdf", "formulaire national, à remplir par le médecin (moins de 12 mois)", "form"]], "dead": []}, "ss-clinique-mon-repos": {"docs": [["Brochure de la clinique Mon Repos", "https://www.emeis.fr/system/files/medias/documents/270emeis-clinique-psy-repos-brochure-mars2026.pdf", "mars 2026 ; admissions du lundi au jeudi après commission médicale, admission2.monrepos@emeis.com", ""]], "dead": []}, "ss-clinique-l-emeraude-etablissement-de-san": {"docs": [["Brochure de la clinique L'Émeraude", "https://www.emeis.fr/system/files/2026-01/298_emeis-clinique-psy-emeraude-brochure-Juillet2024.pdf", "juillet 2024 ; non vérifiée (introuvable par la recherche, non ouverte)", ""]], "dead": []}, "ah-clinique-la-bastide-de-callian-smr-addic": {"docs": [["Demande d'admission adulte (PDF)", "https://www.emeis.fr/system/files/medias/documents/emeis-formulaire-demande-dadmission-clinique-bastide-callianformulaire-fevrier-2026.pdf", "février 2026 ; volets administratif, social et lettre de motivation (patient), volet médical (médecin adresseur) ; joindre bilan sanguin < 1 mois et ordonnance < 3 mois", "form"]], "dead": []}, "ah-unite-d-addictologie-alcoologie-du-centr": {"docs": [["Demande d'admission Centre médical Chant'Ours 2026 (PDF)", "https://www.fondationseltzer.fr/wp-content/uploads/2026/03/2026_DEMANDE_ADMISSION_CHANTOURS.pdf", "2026 ; non revérifié (site inaccessible depuis l'outil)", "form"], ["Brochure d'accueil 2026 (PDF)", "https://www.fondationseltzer.fr/wp-content/uploads/2026/02/2026_BROCHURE_ACCUEIL_CHOURS.pdf", "2026 ; non revérifiée", ""], ["Demande d'admission hôpital de jour (PDF)", "https://www.fondationseltzer.fr/wp-content/uploads/2025/03/2025_DEMANDE_ADMISSION_HDJ.pdf", "2025 ; non revérifiée", "form"]], "dead": []}, "se-un-chez-soi-d-abord-marseille-housing-fi": {"docs": [["Processus d'orientation (CPO / SIAO 13)", "https://unchezsoimarseille.fr/processus/", "page web : dossier en 2 volets (certificat médical sous pli validé par psychiatre + volet social), commission bimestrielle ; contact commission.1chezsoi@siao13.fr ; pas de PDF", "form"]], "dead": []}, "am-automates-distributeurs-echangeurs-de-se": {"docs": [["Dépliant CAARUD Sleep'In (gestion des automates)", "https://www.groupe-sos.org/wp-content/uploads/2020/12/SLEEPIN_DEPLIANT_V4.pdf", "mentionne la gestion des automates, sans liste des emplacements", ""]], "dead": []}, "corniche": {"docs": [["Dossier de candidature (majeurs)", "https://www.groupe-sos.org/wp-content/uploads/2026/08/Dossier-de-Candidature-CSAPA-La-Corniche-Version-Majeur.pdf", "août 2026 ; à joindre : lettre de motivation manuscrite + synthèse du suivi et infos médicales", "form"], ["Livret d'accueil", "https://www.groupe-sos.org/wp-content/uploads/2026/08/Livret-accueil-version-numerique.pdf", "version numérique, août 2026", ""]], "dead": []}, "sleepin": {"docs": [["Dépliant CAARUD Sleep'In", "https://www.groupe-sos.org/wp-content/uploads/2020/12/SLEEPIN_DEPLIANT_V4.pdf", "version 4 (chiffres 2020) ; horaires, hébergement d'urgence, réservation par téléphone 8h30-9h", ""]], "dead": []}, "ah-ctr-et-appartements-therapeutiques-entr-": {"docs": [["Livret d'accueil CSAPA Entr'acte", "https://www.groupe-sos.org/wp-content/uploads/2020/12/Livret-daccueil-CSAPA-Entracte-2023.pdf", "2023 ; présente collectif (programme 6 semaines) et appartements", ""]], "dead": []}, "am-nar-anon-france-entourage-d-usagers-de-d": {"docs": [["Présentation des Groupes familiaux Nar-Anon", "https://naranonfrance.wordpress.com/que-sont-les-groupes-familiaux-nar-anon/", "page officielle (pas de PDF ; littérature envoyée par courrier sur demande)", ""]], "dead": []}, "am-consultation-d-addictologie-specialisee-": {"docs": [["Livret d'accueil Hôpital Européen", "https://hopital-europeen.fr/sites/default/files/2025-11/HEM-livretaccueil-A5-36P.pdf", "nov. 2025, page « Mon hospitalisation »", ""], ["Fiche de pré-admission Hôpital Européen (hospitalisation)", "https://www.hopital-europeen.fr/sites/default/files/2023-04/PREAD%20HE%202023%20hospit.pdf", "2023, générique hospitalisation (non spécifique à la consultation)", ""]], "dead": []}, "am-consultation-de-tabacologie-hopital-euro": {"docs": [["Livret d'accueil Hôpital Européen", "https://hopital-europeen.fr/sites/default/files/2025-11/HEM-livretaccueil-A5-36P.pdf", "nov. 2025, page « Mon hospitalisation »", ""]], "dead": []}, "am-consultation-de-tabacologie-et-d-addicto": {"docs": [["Livret d'accueil Hôpital Saint-Joseph", "https://www.hopital-saint-joseph.fr/image/16654/26429?size=%21800%2C800&region=full&format=pdf&download=1&crop=centre&realWidth=874&realHeight=1240&force-inline", "PDF 11,8 Mo, page « Nos livrets d'accueil » (MAJ janv. 2023)", ""]], "dead": []}, "se-samsah-service-appuis-specifiques-sas-de": {"docs": [["Plaquette Isatis 2026", "https://www.isatis.org/wp-content/uploads/2026/09/plaquette_ISATIS_2026.pdf", "page Téléchargements officielle, non ouvert", ""], ["Plaquette Prestations d'Appuis Spécifiques", "https://www.isatis.org/wp-content/uploads/2021/10/plaquette_Prestations_Appuis_Specifiques.pdf", "oct. 2021, vu en recherche, non ouvert (PAS = dispositif emploi, à vérifier)", ""], ["Rapport d'activité Isatis 2025", "https://www.isatis.org/wp-content/uploads/2026/09/ISATIS-RA-2025.pdf", "page Téléchargements, non ouvert", ""]], "dead": []}, "am-narcotiques-anonymes-reunions-de-marseil": {"docs": [["Pour le nouveau", "https://www.narcotiquesanonymes.org/wp-content/uploads/2024/08/Pour-le-nouveau.pdf", "page officielle Livrets et dépliants, 2024", ""], ["Qui, quoi, comment et pourquoi", "https://www.narcotiquesanonymes.org/wp-content/uploads/2024/08/Qui-quoi-comment-et-pourquoi.pdf", "2024", ""], ["NA : une ressource près de chez vous", "https://www.narcotiquesanonymes.org/wp-content/uploads/2024/08/Livret-NA-une-ressource-pres-de-chez-vous.pdf", "livret pour professionnels, 2024", ""], ["Informations à propos de NA", "https://www.narcotiquesanonymes.org/wp-content/uploads/2014/03/Info-au-sujet-de-NA.pdf", "2014", ""]], "dead": []}, "barnabe": {"docs": [["Dossier de pré-admission hospitalisation (PDF)", "https://clinique-saint-barnabe.ramsaysante.fr/sites/default/files/biblio/domaines/clinique_saint_barnabe/2026%2010%20Dossier%20pr%C3%A9-admission%20hospitalisation.pdf", "16 p., version sept./oct. 2026 ; partie administrative + volet médical à remplir par le médecin + contrat de soins ; envoi sba.admin.mss@ramsaysante.fr", "form"], ["Page admission", "https://clinique-saint-barnabe.ramsaysante.fr/vous-%C3%AAtes-patient/votre-admission-%C3%A0-la-clinique-saint-barnab%C3%A9", "pièces à fournir, déroulement", "form"]], "dead": ["https://clinique-saint-barnabe.ramsaysante.fr/sites/default/files/biblio/domaines/clinique_saint_barnabe/2026%2009%20Dossier%20pr%C3%A9-admission%20hospitalisation.pdf"]}, "ss-clinique-des-trois-cypres-hospitalisatio": {"docs": [["Dossier de demande d'hospitalisation complète (adultes, jeunes adultes, nuit)", "https://clinique-des-trois-cypres.ramsaysante.fr/sites/default/files/biblio/domaines/clinique_des_trois_cypres/2-%20DOS-FE-17-01%20Dossier%20de%20demande%20d'admission.pdf", "réf. DOS-FE-17-01, 2 p. ; à remplir par le médecin adresseur, à renvoyer par mail", "form"], ["Dossier de demande d'admission Centre Medipsy Marseille (HDJ jeunes adultes)", "https://clinique-des-trois-cypres.ramsaysante.fr/sites/default/files/biblio/domaines/clinique_des_trois_cypres/DOS-FE-15-05%20Dossier%20de%20demande%20d'admission%20-%20Centre%20Medipsy.pdf", "réf. DOS-FE-15-05", "form"], ["Dossier de demande d'admission HDJ adolescents", "https://clinique-des-trois-cypres.ramsaysante.fr/sites/default/files/biblio/domaines/clinique_des_trois_cypres/DOS-FE-22-03%20Dossier%20de%20demande%20d'admission%20-%20HDJ%20ados.pdf", "réf. DOS-FE-22-03", "form"], ["Fiche de désignation de la personne de confiance", "https://clinique-des-trois-cypres.ramsaysante.fr/sites/default/files/biblio/domaines/clinique_des_trois_cypres/DOS-FE-08-04%20Fiche%20de%20d%C3%A9signation%20personne%20de%20confiance.pdf", "à signer, à apporter à l'admission", "form"], ["Page « Votre admission »", "https://clinique-des-trois-cypres.ramsaysante.fr/vous-%C3%AAtes-patient/votre-admission-%C3%A0-la-clinique-des-trois-cypr%C3%A8s", "adresses mail d'envoi des dossiers", "form"]], "dead": ["https://clinique-des-trois-cypres.ramsaysante.fr/sites/default/files/biblio/domaines/clinique_des_trois_cypres/clinique_des_trois_cypres_plaquette_nov2019.pdf.pdf"]}, "ss-clinique-des-quatre-saisons": {"docs": [["Plaquette de présentation générale", "https://clinique-des-quatre-saisons.ramsaysante.fr/sites/default/files/biblio/domaines/clinique_des_quatre_saisons/qsa_plaquette_generale_2021_01_e6129dccb279a81c.pdf", "janvier 2021, toujours liée sur la page de présentation", ""], ["Plaquette hôpital de jour", "https://clinique-des-quatre-saisons.ramsaysante.fr/sites/default/files/biblio/domaines/clinique_des_quatre_saisons/qsa_plaquette_hdj_2021_01_40613ea0ab4faf92.pdf", "janvier 2021", ""], ["Page « Votre admission »", "https://clinique-des-quatre-saisons.ramsaysante.fr/vous-%C3%AAtes-patient/votre-admission-%C3%A0-la-clinique-des-quatre-saisons", "pas de formulaire ; demande validée par le psychiatre de la clinique", "form"]], "dead": []}, "ss-clinique-saint-michel-aubagne": {"docs": [["Page « Votre admission »", "https://clinique-saint-michel.ramsaysante.fr/vous-%C3%AAtes-patient/votre-admission-%C3%A0-la-clinique-saint-michel", "pas de formulaire ; demande par le médecin traitant ou le service adresseur", "form"]], "dead": []}, "floreal": {"docs": [["Flyer hospitalisation temps plein addictologie (CH Montperrin)", "https://www.ch-montperrin.fr/PublishingImages/Pages/Page%20de%20contenu%20publique/POLE-TRANSVERSAL/flyerTP.pdf", "page Pôle transversal, non ouvert ; service hospitalier, pas le CSAPA", ""], ["Flyer Équipe mobile d'addictologie", "https://www.ch-montperrin.fr/PublishingImages/Pages/Page%20de%20contenu%20publique/POLE-TRANSVERSAL/flyer%20Equipe%20Mob.pdf", "page Pôle transversal, non ouvert", ""], ["Livret d'accueil CH Montperrin", "https://www.ch-montperrin.fr/PublishingImages/Pages/Page%20de%20contenu%20publique/Livret-d-accueil/Livret%20d'Accueil.pdf", "édition mai 2024, vu en recherche", ""], ["Page Pôle transversal (addictologie)", "https://www.ch-montperrin.fr/Pages/Page%20de%20contenu%20publique/POLE-TRANSVERSAL.aspx", "page officielle", ""]], "dead": []}, "us-cofor-centre-de-formation-au-retablissem": {"docs": [["Calendrier du CoFoR", "https://www.coforetablissement.fr/calendrier-du-cofor/", "page web, modules sur inscription, réunions d'info", ""], ["Formation au rétablissement personnel", "https://www.coforetablissement.fr/formations/formation-au-retablissement-personnel/", "page web, max 2 modules/trimestre", ""]], "dead": []}, "rdrad": {"docs": [["Flyer RdR à distance (réseau national)", "https://www.rdr-a-distance.info/images/Flyers/Flyer_RDR_a_distance.pdf", "site officiel, non daté ; commande par tél. 01 40 09 04 45 ou contact@safe.asso.fr", ""], ["Flyer SAFE RdRaD national", "https://cdn.paris.fr/paris/2023/06/02/flyer-safe-rdrad-nationale-septembre-2022-vLNz.pdf", "sept. 2022, hébergé par paris.fr, non ouvert", ""]], "dead": []}, "se-samsah-la-racine": {"docs": [["Plaquette SAMSAH La Racine", "https://www.sauvegarde13.org/wp-content/uploads/2025/04/1-PlaquetteSAMSAH_297X210_2025-1.pdf", "2025, page officielle", ""], ["Page SAMSAH La Racine", "https://www.sauvegarde13.org/les-etablissements-et-services/medico-social/filiere-hebergement/samsah-la-racine/", "page officielle : notification CDAPH puis entretien et décision de direction", ""]], "dead": []}, "se-esat-leon-berenger-andre-de-villeneuve-f": {"docs": [["Page Dispositif Travail protégé", "https://www.sauvegarde13.org/les-etablissements-et-services/medico-social/travail-protege/", "page officielle : candidature après notification CDAPH, entretiens puis stage", ""]], "dead": []}, "se-familles-gouvernantes-site-du-ch-edouard": {"docs": [["Plaquette Familles Gouvernantes UDAF 13", "https://www.udaf13.fr/app/uploads/sites/79/2023/11/plaquette-fg.pdf", "nov. 2023, page ressources officielle", ""], ["Page Habitat inclusif / Famille gouvernante", "https://www.udaf13.fr/familles-gouvernantes.html", "page officielle", ""]], "dead": []}, "se-samsah-valmante": {"docs": [["Plaquette / livret SAMSAH Valmante", "https://www.groupe-ugecam.fr/sites/default/files/2022-08/plaquette_samsah_01-2017_bat_web.pdf", "version 01-2017, page Admission et séjour officielle", ""], ["Page Admission et séjour", "https://www.groupe-ugecam.fr/samsah-valmante/admission-et-sejour", "page officielle : orientation CDAPH, réunion d'admission, DIPC, pièces à présenter", "form"]], "dead": []}, "se-unafam-delegation-des-bouches-du-rhone": {"docs": [["Adhérer à l'Unafam (en ligne)", "https://don.adhesion.unafam.org/adhesion", "lien officiel depuis la page délégation", ""], ["Permanences et accueils délégation 13", "https://www.unafam.org/bouches-du-rhone/nos-permanences-et-accueils", "page officielle", ""]], "dead": []}};
@@ -4892,7 +5011,7 @@ const I={
  print:'<path d="M7 9V4h10v5M7 17H4.5A1.5 1.5 0 0 1 3 15.5v-5A1.5 1.5 0 0 1 4.5 9h15a1.5 1.5 0 0 1 1.5 1.5v5a1.5 1.5 0 0 1-1.5 1.5H17"/><rect x="7" y="14" width="10" height="6.5" rx="1"/>'
 };
 const ico=(k,extra="")=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${extra}>${I[k]}</svg>`;
-const OPTS=[["sevrage","Sevrage","Cure, post-cure, communauté"],["hdj","Hôpital de jour","Retour le soir"],["resid","Hébergement","Centre, appartement"],["csapa","CSAPA","Suivi, substitution"],["hosp","Consultation hôpital","Addictologue, ELSA"],["spec","Publics spécifiques","Jeunes, parents"],["amob","Équipe mobile","Aller-vers"],["rdr","Réduction des risques","CAARUD et associations"],["liberal","Médecin libéral","Cabinet, substitution"],["entraide","Entraide","AA, NA, Vie Libre"]];
+const OPTS=[["sevrage","Sevrage","Cure, post-cure, communauté"],["hdj","Hôpital de jour","Retour le soir"],["resid","Hébergement","Centre, appartement"],["csapa","CSAPA","Suivi, substitution"],["hosp","Consultation hôpital","Addictologue, ELSA"],["spec","Publics spécifiques","Jeunes, parents"],["amob","Équipe mobile","Aller-vers"],["rdr","Réduction des risques","CAARUD et associations"],["liberal","Médecin libéral","Cabinet, substitution"],["entraide","Entraide","AA, NA, lignes d'écoute"]];
 
 /* ---------- État et filtres ---------- */
 const S={mode:"addicto",only:"",sub:"",csub:"",hsect:"",hlabel:"",types:[],lg:"oui",hm:"oui",sec:"all",arr:"",q:"",psy:{how:"",arr:"",sub:"",day:"",month:""}};
@@ -5104,6 +5223,7 @@ function bubbleEdge(c){
   b.hidden=false;
 }
 function markSel(){
+  if(REAL.on&&selId&&REAL.items&&REAL.items.some(d=>d.id===selId)&&!document.querySelector('#lmap .lpin[data-id="'+selId+'"]'))realPins();
   const k=document.getElementById("map")._k||1;
   document.querySelectorAll("#map .pin").forEach(g=>{const on=g.dataset.id===selId;g.classList.toggle("sel",on);const c=g.querySelector("circle");c.setAttribute("r",(on?14:11)*k);c.setAttribute("stroke-width",(on?3:2.5)*k);if(on)g.parentNode.appendChild(g);});
   document.querySelectorAll("#lmap .lpin").forEach(p=>{const on=p.dataset.id===selId;p.classList.toggle("sel",on);const m=p.closest(".leaflet-marker-icon");if(m)m.style.zIndex=on?9999:"";});
@@ -5133,7 +5253,7 @@ function realInit(){
   REAL.map=LF.map(el,{zoomControl:false,attributionControl:true,minZoom:6,maxZoom:18,zoomSnap:0.5,tap:true}).setView([43.296,5.381],12);
   REAL.map.attributionControl.setPrefix(false);
   REAL.layer=LF.layerGroup().addTo(REAL.map);
-  REAL.map.on("click",()=>closeBubble());
+  REAL.map.on("click",()=>closeBubble());REAL.map.on("zoomend",realPins);
   /* métro (trait plein) et tram (pointillés) aux couleurs RTM, sous les lieux */
   REAL.lines=LF.layerGroup().addTo(REAL.map);
   return true;
@@ -5157,13 +5277,34 @@ function realTiles(){
 function realDraw(items){
   document.getElementById("map").setAttribute("hidden","");const el=document.getElementById("lmap");el.hidden=false;document.querySelector(".mapbox").classList.add("real");
   REAL.map.invalidateSize();realTiles();
-  REAL.layer.clearLayers();
-  const ll=[];
-  items.slice().sort((a,b)=>numOf[b.id]-numOf[a.id]).forEach(d=>{const g=GEO[d.id];if(!g)return;
-    const m=LF.marker(g,{icon:LF.divIcon({className:"",html:`<span class="lpin${d.id===selId?" sel":""}" data-id="${d.id}" style="--c:var(--t-${kindOf[d.id]})">${numOf[d.id]}</span>`,iconSize:[26,26],iconAnchor:[13,13]}),keyboard:true,title:numOf[d.id]+" · "+d.n,riseOnHover:true});
-    m.on("click",e=>{LF.DomEvent.stopPropagation(e);bubblePin(d.id);});m.addTo(REAL.layer);
-    if(inFrame(g))ll.push(g);});
+  REAL.items=items.filter(d=>GEO[d.id]).sort((a,b)=>numOf[a.id]-numOf[b.id]);
+  const ll=REAL.items.map(d=>GEO[d.id]).filter(inFrame);
+  REAL.busy=true;
   if(ll.length)REAL.map.fitBounds(ll,{padding:[34,34],maxZoom:15});else REAL.map.setView([43.296,5.381],12);
+  REAL.busy=false;realPins();
+}
+/* Regroupement des lieux proches : un rond avec le nombre, qui zoome quand on le touche */
+function realPin(d){
+  const m=LF.marker(GEO[d.id],{icon:LF.divIcon({className:"",html:`<span class="lpin${d.id===selId?" sel":""}" data-id="${d.id}" style="--c:var(--t-${kindOf[d.id]})">${numOf[d.id]}</span>`,iconSize:[26,26],iconAnchor:[13,13]}),keyboard:true,title:numOf[d.id]+" · "+d.n,riseOnHover:true,zIndexOffset:d.id===selId?1000:-numOf[d.id]});
+  m.on("click",e=>{LF.DomEvent.stopPropagation(e);bubblePin(d.id);});m.addTo(REAL.layer);
+}
+function realPins(){
+  if(!REAL.map||!REAL.items||REAL.busy)return;
+  REAL.layer.clearLayers();
+  const z=REAL.map.getZoom(),R=z>=16?0:52,cl=[];
+  REAL.items.forEach(d=>{const p=REAL.map.project(GEO[d.id],z);
+    if(R&&d.id!==selId){const c=cl.find(c=>!c.sel&&Math.abs(c.p.x-p.x)<R&&Math.abs(c.p.y-p.y)<R);if(c){c.m.push(d);return;}}
+    cl.push({p,m:[d],sel:d.id===selId});});
+  cl.forEach(c=>{
+    if(c.m.length===1){realPin(c.m[0]);return;}
+    const ll=c.m.map(d=>GEO[d.id]),n=c.m.length,s=n<10?34:n<50?40:46;
+    const at=[ll.reduce((a,g)=>a+g[0],0)/n,ll.reduce((a,g)=>a+g[1],0)/n];
+    const m=LF.marker(at,{icon:LF.divIcon({className:"",html:`<span class="lclu" style="width:${s}px;height:${s}px">${n}</span>`,iconSize:[s,s],iconAnchor:[s/2,s/2]}),keyboard:true,title:n+" lieux : n° "+c.m.map(d=>numOf[d.id]).join(", ")+" (toucher pour zoomer)",zIndexOffset:500});
+    m.on("click",e=>{LF.DomEvent.stopPropagation(e);closeBubble();
+      const b=LF.latLngBounds(ll);
+      if(b.getNorthEast().distanceTo(b.getSouthWest())<25)REAL.map.setView(at,17);
+      else REAL.map.fitBounds(b,{padding:[50,50],maxZoom:Math.max(16,Math.ceil(z)+2)});});
+    m.addTo(REAL.layer);});
 }
 function realFit(){if(REAL.on&&cur.length)drawMap(cur);}
 /* Petite carte de la fiche : vraie carte OpenStreetMap si possible, sinon le dessin reste visible */
@@ -5317,7 +5458,7 @@ function mailText(d){
   return lines.join("\n");
 }
 /* Lien direct vers une fiche (ouvre l'appli sur cette fiche) */
-const APP_URL="https://julienaron.github.io/annuaire-sante-mentale/";
+const APP_URL="https://mapannuaire.github.io/map/";
 const ficheUrl=d=>APP_URL+"#fiche-"+d.id;
 /* Documents à mettre en avant : dossiers d'admission d'abord, puis une plaquette */
 const keyDocs=(d,n=4)=>{const ds=d.docs||[],f=ds.filter(z=>z[3]==="form"),o=ds.filter(z=>z[3]!=="form");return [...f.slice(0,3),...o.slice(0,1)].slice(0,n);};
@@ -5421,7 +5562,7 @@ const closeFiche=()=>back();
 fEl.addEventListener("click",e=>{
   if(e.target.closest("[data-close]"))return closeFiche();
   if(e.target.closest("[data-tomail]")){document.getElementById("mail-sec").scrollIntoView({behavior:"smooth",block:"start"});return;}
-  if(e.target.closest("[data-print]")){printFiche(D.find(x=>x.id===fEl.dataset.id));return;}
+  if(e.target.closest("[data-print]")){openPlang();return;}
   const fb=e.target.closest("[data-file]");if(fb){sendFiche(D.find(x=>x.id===fEl.dataset.id),fb.dataset.file,fb);return;}
   const sh=e.target.closest("[data-share]");if(sh){const d=D.find(x=>x.id===fEl.dataset.id);shareFiche(d,sh);return;}
   const c=e.target.closest(".copy[data-v]");if(c)return copy(c.dataset.v,c);
@@ -5488,6 +5629,9 @@ function printSheet(d){
     ${hrs?`<h2>Horaires</h2><table class="ps-h">${hrs}</table>`:""}
     ${d.site?`<p class="ps-url">${esc(d.site.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""))}</p>`:""}
   </div></div>
+  <div class="ps-notes"><div class="ps-nt">Rendez-vous et notes</div>
+    <div class="ps-nr"><span>Le</span><i></i><span>à</span><i class="s"></i><span>avec</span><i></i></div>
+    <div class="ps-nf"></div></div>
   <div class="ps-foot">MAP · Marseille Addictologie Psychiatrie · ${chkText(d).toLowerCase()} · imprimé le ${fmtDate(new Date().toISOString().slice(0,10))} · vérifiez les informations avant tout envoi</div>`;
 }
 /* ---------- Fiche en PDF ou en image (avec la carte), pour l'envoyer en pièce jointe ---------- */
@@ -5533,20 +5677,66 @@ async function sendFiche(d,fmt,btn){
 let PR=null;
 function printFiche(d){
   if(!d)return;printDone();
-  const sh=document.createElement("div");sh.id="printsheet";sh.innerHTML=printSheet(d);document.body.appendChild(sh);
+  const sh=document.createElement("div");sh.id="printsheet";sh.innerHTML=PLANG==="pro"?printSheet(d):patientSheet(d,PLANG);document.body.appendChild(sh);
   /* la carte de la fiche est déplacée dans la feuille, à taille fixe, puis remise en place */
   const mm=fEl.querySelector(".minimap");
   if(mm){PR={mm,parent:mm.parentNode,next:mm.nextSibling};const w=mm.offsetWidth,h=mm.offsetHeight;document.getElementById("ps-map").appendChild(mm);mm.style.width=w+"px";mm.style.height=h+"px";}
   document.body.classList.add("printing");
   setTimeout(()=>{try{window.print();}finally{setTimeout(printDone,400);}},350);
 }
+
+/* ---------- 18/11 : feuille à remettre à la personne, en plusieurs langues ---------- */
+let PLANG="pro";
+const PT={
+ fr:{dir:"ltr",intro:"Vous êtes orienté(e) vers ce lieu. Montrez cette feuille à l'accueil.",addr:"Adresse",access:"Comment y aller",walk:"min à pied",contacts:"Contacts",phone:"Téléphone",email:"E-mail",hours:"Horaires",closed:"fermé",days:["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"],bring:"À apporter si vous les avez",list:"carte Vitale, pièce d'identité, ordonnances et médicaments en cours",call:"Appelez avant de venir pour confirmer l'heure.",urg:"Urgence vitale : 15 ou 112 · Idées suicidaires : 3114 (gratuit, 24h/24)",rdv:"Rendez-vous et notes",f:["Date","Heure","Avec"],online:"Fiche en ligne",check:"Les informations peuvent changer : vérifiez par téléphone."},
+ en:{dir:"ltr",intro:"You have been referred to this service. Show this sheet at reception.",addr:"Address",access:"How to get there",walk:"min walk",contacts:"Contacts",phone:"Phone",email:"Email",hours:"Opening hours",closed:"closed",days:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],bring:"Bring if you have them",list:"Carte Vitale (health insurance card), ID, prescriptions and current medicines",call:"Please call before coming to confirm the time.",urg:"Life-threatening emergency: 15 or 112 · Suicidal thoughts: 3114 (free, 24/7)",rdv:"Appointment and notes",f:["Date","Time","With"],online:"Online",check:"Information may change: please check by phone."},
+ es:{dir:"ltr",intro:"Le han orientado a este centro. Muestre esta hoja en la recepción.",addr:"Dirección",access:"Cómo llegar",walk:"min a pie",contacts:"Contacto",phone:"Teléfono",email:"Correo electrónico",hours:"Horario",closed:"cerrado",days:["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"],bring:"Traiga, si los tiene",list:"carte Vitale (tarjeta sanitaria), documento de identidad, recetas y medicamentos actuales",call:"Llame antes de venir para confirmar la hora.",urg:"Urgencia vital: 15 o 112 · Pensamientos suicidas: 3114 (gratuito, 24 h)",rdv:"Cita y notas",f:["Fecha","Hora","Con"],online:"En línea",check:"La información puede cambiar: compruébela por teléfono."},
+ it:{dir:"ltr",intro:"È stato/a indirizzato/a a questo servizio. Mostri questo foglio all'accoglienza.",addr:"Indirizzo",access:"Come arrivare",walk:"min a piedi",contacts:"Contatti",phone:"Telefono",email:"E-mail",hours:"Orari",closed:"chiuso",days:["Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato","Domenica"],bring:"Porti con sé, se li ha",list:"carte Vitale (tessera sanitaria), documento d'identità, ricette e farmaci in corso",call:"Telefoni prima di venire per confermare l'orario.",urg:"Emergenza grave: 15 o 112 · Pensieri suicidari: 3114 (gratuito, 24 ore su 24)",rdv:"Appuntamento e note",f:["Data","Ora","Con"],online:"Online",check:"Le informazioni possono cambiare: verifichi per telefono."},
+ ar:{dir:"rtl",intro:"تمّ توجيهك إلى هذا المكان. يُرجى إظهار هذه الورقة في الاستقبال.",addr:"العنوان",access:"كيفية الوصول",walk:"دقائق سيرًا",contacts:"الاتصال",phone:"الهاتف",email:"البريد الإلكتروني",hours:"أوقات العمل",closed:"مغلق",days:["الإثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت","الأحد"],bring:"أحضِر معك إن وُجدت",list:"بطاقة Vitale (بطاقة التأمين الصحي)، وثيقة الهوية، الوصفات الطبية والأدوية الحالية",call:"يُرجى الاتصال قبل المجيء لتأكيد الموعد.",urg:"حالة طارئة خطيرة: 15 أو 112 · أفكار انتحارية: 3114 (مجاني، على مدار الساعة)",rdv:"الموعد وملاحظات",f:["التاريخ","الساعة","مع"],online:"على الإنترنت",check:"قد تتغيّر المعلومات: يُرجى التأكّد بالهاتف."},
+ ary:{dir:"rtl",intro:"صيفطوك لهاد البلاصة. ورّي هاد الورقة فالاستقبال.",addr:"العنوان",access:"كيفاش توصل",walk:"دقايق على رجليك",contacts:"باش تتاصل",phone:"التيليفون",email:"الإيميل",hours:"الأوقات",closed:"مسدود",days:["الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت","الحد"],bring:"جيب معاك إلا كانو عندك",list:"كارط Vitale، لاكارط ولا الباسبور، الأوردونونص والدوا اللي كتاخد",call:"عيّط قبل ما تجي باش تأكد الوقت.",urg:"إلا كانت حالة خطيرة: 15 ولا 112 · إلا جاوك أفكار ديال الانتحار: 3114 (فابور، ليل ونهار)",rdv:"الموعد والملاحظات",f:["النهار","الساعة","مع"],online:"فالأنترنيت",check:"المعلومات يقدرو يتبدلو: تأكد بالتيليفون."},
+ "ary-lat":{dir:"ltr",intro:"Siftouk l had lblassa. Werri had lwer9a f l'accueil.",addr:"L'adresse",access:"Kifach twsel",walk:"d9aye9 3la rjlik",contacts:"Bach tt3ayet",phone:"Tilifoun",email:"Email",hours:"Lw9at",closed:"msdoud",days:["Letnin","Tlata","Larb3a","Lkhmis","Jjem3a","Ssebt","L7ed"],bring:"Jib m3ak ila kanou 3ndek",list:"Carte Vitale, la carte d'identité wla lpasseport, les ordonnances w ddwa li katakhod",call:"3eyyet 9bel ma tji bach t2ekked lwe9t.",urg:"Ila kanet 7ala khatira: 15 wla 112 · Ila jawek afkar dyal linti7ar: 3114 (fabor, lil w nhar)",rdv:"Lmaw3id w lmola7adat",f:["Nhar","Sa3a","M3a"],online:"F l'internet",check:"Lma3loumat y9edrou ytbeddlou: t2ekked b tilifoun."},
+ ka:{dir:"ltr",intro:"თქვენ გადმოგამისამართეს ამ დაწესებულებაში. აჩვენეთ ეს ფურცელი მიმღებში.",addr:"მისამართი",access:"როგორ მივიდეთ",walk:"წთ ფეხით",contacts:"კონტაქტები",phone:"ტელეფონი",email:"ელ-ფოსტა",hours:"სამუშაო საათები",closed:"დაკეტილია",days:["ორშაბათი","სამშაბათი","ოთხშაბათი","ხუთშაბათი","პარასკევი","შაბათი","კვირა"],bring:"თან იქონიეთ, თუ გაქვთ",list:"Vitale-ს ბარათი (სამედიცინო დაზღვევის ბარათი), პირადობის დამადასტურებელი დოკუმენტი, რეცეპტები და მიმდინარე მედიკამენტები",call:"მოსვლამდე დარეკეთ, რომ დრო დაადასტუროთ.",urg:"სიცოცხლისთვის საშიში მდგომარეობა: 15 ან 112 · სუიციდური აზრები: 3114 (უფასო, 24/7)",rdv:"ვიზიტი და შენიშვნები",f:["თარიღი","დრო","ვისთან"],online:"ონლაინ",check:"ინფორმაცია შეიძლება შეიცვალოს: გადაამოწმეთ ტელეფონით."}};
+function patientSheet(d,lg){
+  const T=PT[lg]||PT.fr,F=PT.fr,bi=(t,f)=>lg==="fr"?t:`${t}<small class="ps-fr" dir="ltr" lang="fr">${f}</small>`;
+  const H=d.hours;
+  const hrs=H&&H.semaine?T.days.map((j,i)=>{const sl=H.semaine[i+1]||[];return `<tr><td>${j}</td><td dir="ltr">${sl.length?sl.map(([a,b])=>fmtH(a)+"–"+fmtH(b)).join(", "):`<span dir="auto">${T.closed}</span>`}</td></tr>`;}).join(""):"";
+  const tr=access(d).map(x=>`<span dir="ltr">${x.lines.join("/")} ${esc(x.txt)}</span>${x.min?` (${x.min} ${T.walk})`:""}`).join(" · ");
+  const ph=d.c.filter(([l,v])=>telHref(v)&&!/fax/i.test(l)).slice(0,3),em=d.c.filter(([l,v])=>/e-?mail|courriel/i.test(l)).slice(0,1);
+  return `<div class="ps-pat" dir="${T.dir}" lang="${lg==="ary"?"ar":lg==="ary-lat"?"ary-Latn":lg}">
+  <div class="ps-head"><div class="ps-qr"><img src="${qrImg(ficheUrl(d),2)}" alt=""><span>${T.online}</span></div>
+    <h1 dir="auto">${esc(d.n)}</h1><div class="ps-org" dir="auto">${esc(d.o||"")}</div></div>
+  <p class="ps-intro">${T.intro}</p>
+  <div class="ps-cols"><div class="ps-left">
+    <h2>${bi(T.addr,F.addr)}</h2><p class="ps-big" dir="ltr">${esc(d.a||"")}</p>
+    ${tr?`<h2>${bi(T.access,F.access)}</h2><p>${tr}</p>`:""}
+    ${ph.length||em.length?`<h2>${bi(T.contacts,F.contacts)}</h2><table>${ph.map(([l,v])=>`<tr><td>${T.phone}</td><td dir="ltr"><b>${esc(v)}</b></td></tr>`).join("")}${em.map(([l,v])=>`<tr><td>${T.email}</td><td dir="ltr"><b>${esc(v)}</b></td></tr>`).join("")}</table>`:""}
+    <h2>${bi(T.bring,F.bring)}</h2><p>${T.list}</p>
+    <p><b>${T.call}</b></p>
+  </div><div class="ps-right">
+    <div id="ps-map"></div>
+    ${hrs?`<h2>${bi(T.hours,F.hours)}</h2><table class="ps-h">${hrs}</table>`:""}
+  </div></div>
+  <p class="ps-urg">${T.urg}</p>
+  <div class="ps-notes"><div class="ps-nt">${bi(T.rdv,F.rdv)}</div>
+    <div class="ps-nr">${T.f.map((x,i)=>`<span>${x}</span><i${i===1?' class="s"':""}></i>`).join("")}</div>
+    <div class="ps-nf"></div></div>
+  <div class="ps-foot" dir="ltr"><span dir="auto">${T.check}</span>${lg==="fr"?"":" · "+F.check} · MAP · Marseille Addictologie Psychiatrie · ${chkText(d).toLowerCase()}</div></div>`;
+}
+const plEl=document.getElementById("plangsheet");
+function openPlang(){plEl.hidden=false;const b=plEl.querySelector("[data-plang]");if(b)b.focus();}
+plEl.addEventListener("click",e=>{
+  if(e.target===plEl||e.target.closest("[data-closeplang]")){plEl.hidden=true;return;}
+  const b=e.target.closest("[data-plang]");if(!b)return;
+  PLANG=b.dataset.plang;plEl.hidden=true;printFiche(D.find(x=>x.id===fEl.dataset.id));});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!plEl.hidden)plEl.hidden=true;});
+window.addEventListener("afterprint",()=>{PLANG="pro";});
 function printDone(){
   if(PR){PR.mm.style.width="";PR.mm.style.height="";PR.parent.insertBefore(PR.mm,PR.next);PR=null;}
   const sh=document.getElementById("printsheet");if(sh)sh.remove();document.body.classList.remove("printing");
 }
 window.addEventListener("afterprint",()=>{if(document.body.classList.contains("printing"))setTimeout(printDone,100);});
 /* impression lancée par le navigateur (menu) sur une fiche ouverte */
-window.addEventListener("beforeprint",()=>{if(!document.body.classList.contains("printing")&&!fEl.hidden&&fEl.dataset.id){const d=D.find(x=>x.id===fEl.dataset.id);if(d){const sh=document.createElement("div");sh.id="printsheet";sh.innerHTML=printSheet(d);document.body.appendChild(sh);const mm=fEl.querySelector(".minimap");if(mm){PR={mm,parent:mm.parentNode,next:mm.nextSibling};const w=mm.offsetWidth,h=mm.offsetHeight;document.getElementById("ps-map").appendChild(mm);mm.style.width=w+"px";mm.style.height=h+"px";}document.body.classList.add("printing");}}});
+window.addEventListener("beforeprint",()=>{if(!document.body.classList.contains("printing")&&!fEl.hidden&&fEl.dataset.id){const d=D.find(x=>x.id===fEl.dataset.id);if(d){const sh=document.createElement("div");sh.id="printsheet";sh.innerHTML=PLANG==="pro"?printSheet(d):patientSheet(d,PLANG);document.body.appendChild(sh);const mm=fEl.querySelector(".minimap");if(mm){PR={mm,parent:mm.parentNode,next:mm.nextSibling};const w=mm.offsetWidth,h=mm.offsetHeight;document.getElementById("ps-map").appendChild(mm);mm.style.width=w+"px";mm.style.height=h+"px";}document.body.classList.add("printing");}}});
 function copy(text,btn,el){
   if(!btn.dataset.label)btn.dataset.label=btn.textContent;
   const label=btn.dataset.label;

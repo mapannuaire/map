@@ -5,6 +5,6 @@ addictologie (cures, post-cures, hôpitaux de jour, CSAPA, hébergement, réduct
 CMP adultes de secteur de Marseille (avec le rattachement par date de naissance pour les personnes sans domicile),
 équipes mobiles et urgences psychiatriques.
 
-Ouvrir : https://julienaron.github.io/annuaire-sante-mentale/
+Ouvrir : https://mapannuaire.github.io/map/
 
 Les informations (numéros, adresses, formulaires) évoluent : vérifier avant tout envoi.

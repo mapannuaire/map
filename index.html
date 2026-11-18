@@ -4862,6 +4862,7 @@ if(!D.some(d=>d.id==="uhsa-marseille")){
  d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
  d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
  d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Les fiches se mettent à jour depuis le tableau Google Sheets MAP-fiches");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Signaler une erreur ou proposer un lieu se fait maintenant directement dans l'appli, sans e-mail (l'e-mail reste possible) ; comptage anonyme des consultations, sans cookie");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Nouvelle adresse : mapannuaire.github.io/map ; les messages arrivent à mapannuaire@gmail.com");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Imprimer : au choix la fiche complète pour un soignant, ou une feuille simplifiée à remettre à la personne en français, anglais, arabe, darija (en lettres arabes ou latines), espagnol, italien ou géorgien");
@@ -4884,7 +4885,7 @@ D.forEach(d=>{const x=DOCS[d.id];if(!x)return;
    prime sur les données de l'appli : une ligne = une fiche, repérée par sa colonne « identifiant ».
    Ligne absente du tableau : la fiche de l'appli reste telle quelle. « afficher » = non : la fiche est masquée.
    Les champs propres à certaines fiches (secteurs des CMP, évaluation HAS…) restent dans le code. */
-const SHEET_CSV="";   /* adresse du CSV publié, à renseigner */
+const SHEET_CSV="https://docs.google.com/spreadsheets/d/1OvMK2Vcqw4762-3AzemTimyZ8yymhf6DgB7W-GE2o_E/gviz/tq?tqx=out:csv&sheet=Fiches";   /* tableau MAP-fiches (compte mapannuaire), lu par lien */
 const SHEET_KEY="map.sheet.csv";
 function parseCSV(t){
   const rows=[];let row=[],f="",q=false;

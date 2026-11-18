@@ -1312,6 +1312,15 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .ps-pat[dir="rtl"] ul{padding-left:0;padding-right:12pt}
 .ps-pat[lang="ar"]{font-family:"Noto Sans Arabic","Noto Naskh Arabic","Segoe UI",Tahoma,"Geeza Pro",sans-serif}
 .ps-pat[lang="ka"]{font-family:"Noto Sans Georgian","BPG Arial","Sylfaen",var(--body),sans-serif}
+
+/* 18/11 : formulaire de signalement */
+.repchips{display:flex;flex-wrap:wrap;gap:var(--sp-2)}
+.repchips button{min-height:40px;padding:0 var(--sp-3);border-radius:var(--r-full);border:1.5px solid var(--line);background:var(--surface);color:var(--fg);font:500 var(--fs-sm)/1 var(--body)}
+.repchips button[aria-checked="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface));color:var(--accent);font-weight:600}
+.replab{font:600 var(--fs-sm)/1.3 var(--body);color:var(--fg)}
+.repinput{width:100%;min-height:44px;padding:0 var(--sp-3);border:1.5px solid var(--line);border-radius:var(--r-md);background:var(--surface);color:var(--fg);font:16px var(--body)}
+.repstatus{margin:0;font-size:var(--fs-sm);color:var(--muted)}.repstatus.err{color:#b3261e}
+.linkbtn{background:none;border:0;color:var(--accent);font:500 var(--fs-sm) var(--body);text-decoration:underline;min-height:40px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -1535,6 +1544,37 @@ svg.leaflet-image-layer.leaflet-interactive path {
   </div>
 </div>
 
+<div class="isheet-scrim" id="repsheet" hidden>
+  <div class="isheet" role="dialog" aria-modal="true" aria-labelledby="rep-title">
+    <div class="grab"></div>
+    <h2 id="rep-title">Signaler une erreur</h2>
+    <div id="rep-form" style="display:grid;gap:12px">
+      <p class="hint" id="rep-fiche" style="margin:-4px 0 0"></p>
+      <div id="rep-motifs" class="repchips" role="radiogroup" aria-label="Ce qui ne va pas">
+        <button type="button" role="radio" aria-checked="false" data-motif="numero">Numéro faux</button>
+        <button type="button" role="radio" aria-checked="false" data-motif="adresse">Adresse</button>
+        <button type="button" role="radio" aria-checked="false" data-motif="horaires">Horaires</button>
+        <button type="button" role="radio" aria-checked="false" data-motif="ferme">Fermé ou déménagé</button>
+        <button type="button" role="radio" aria-checked="false" data-motif="admission">Conditions d'admission</button>
+        <button type="button" role="radio" aria-checked="false" data-motif="autre">Autre</button>
+      </div>
+      <label class="replab" for="rep-text" id="rep-lab">La bonne information (et sa source, si possible)</label>
+      <textarea id="rep-text" class="msgbody" rows="5" maxlength="2000"></textarea>
+      <label class="replab" for="rep-contact">Votre e-mail ou téléphone, si vous souhaitez une réponse <span style="font-weight:400;color:var(--muted)">(facultatif)</span></label>
+      <input id="rep-contact" class="repinput" type="text" maxlength="200" autocomplete="email">
+      <p class="hint" style="margin:0">Envoi anonyme à l'équipe MAP. N'indiquez aucune information sur un patient.</p>
+      <p class="repstatus" id="rep-status" role="status" hidden></p>
+      <button type="button" class="btn primary" id="rep-send" style="width:100%">Envoyer</button>
+      <button type="button" class="linkbtn" id="rep-mail">Préférer l'envoi par e-mail</button>
+    </div>
+    <div id="rep-done" hidden style="text-align:center;padding:12px 0 4px">
+      <div style="font-size:40px;line-height:1">✓</div>
+      <p style="font-weight:600;margin:8px 0 4px">Merci, c'est transmis.</p>
+      <p class="hint" style="margin:0">L'équipe MAP vérifie chaque signalement avant de modifier l'annuaire.</p>
+    </div>
+    <button type="button" class="btn" data-closerep style="width:100%">Fermer</button>
+  </div>
+</div>
 <div class="isheet-scrim" id="msgsheet" hidden>
   <div class="isheet" role="dialog" aria-modal="true" aria-labelledby="msg-title">
     <div class="grab"></div>
@@ -4822,6 +4862,7 @@ if(!D.some(d=>d.id==="uhsa-marseille")){
  d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
  d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
  d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Signaler une erreur ou proposer un lieu se fait maintenant directement dans l'appli, sans e-mail (l'e-mail reste possible) ; comptage anonyme des consultations, sans cookie");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Nouvelle adresse : mapannuaire.github.io/map ; les messages arrivent à mapannuaire@gmail.com");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Imprimer : au choix la fiche complète pour un soignant, ou une feuille simplifiée à remettre à la personne en français, anglais, arabe, darija (en lettres arabes ou latines), espagnol, italien ou géorgien");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Fiche imprimée ou en PDF : un cadre « Rendez-vous et notes » en bas, à remplir à la main");
@@ -5546,6 +5587,7 @@ const fEl=document.getElementById("fiche");let lastFocus=null;
 function openFiche(id){
   const d=D.find(x=>x.id===id);if(!d)return;
   if(!fEl.hidden&&fEl.dataset.id===id)return;
+  if(typeof track==="function")track("fiche",id);
   lastFocus=document.activeElement;
   fEl.innerHTML=fiche(d);fEl.dataset.id=id;fEl.hidden=false;document.body.classList.add("locked");fEl.scrollTop=0;
   miniReal(d);
@@ -5676,7 +5718,7 @@ async function sendFiche(d,fmt,btn){
 }
 let PR=null;
 function printFiche(d){
-  if(!d)return;printDone();
+  if(!d)return;printDone();if(typeof track==="function")track("impression",PLANG+":"+d.id);
   const sh=document.createElement("div");sh.id="printsheet";sh.innerHTML=PLANG==="pro"?printSheet(d):patientSheet(d,PLANG);document.body.appendChild(sh);
   /* la carte de la fiche est déplacée dans la feuille, à taille fixe, puis remise en place */
   const mm=fEl.querySelector(".minimap");
@@ -5996,9 +6038,9 @@ infoEl.addEventListener("click",e=>{
   if(e.target.closest("[data-inews]")){closeInfo();openNews();return;}
   if(e.target.closest("[data-install]")){closeInfo();return;}
   const m=e.target.closest("[data-imsg]");if(m){closeInfo();const k=m.dataset.imsg;
-    if(k==="write")openMsg("Écrire à l'équipe MAP",["[Annuaire] Message",`Version de l'annuaire : ${VERSION}\n\n`]);
-    else if(k==="error")openMsg("Signaler une erreur",["[Annuaire] Signalement",`Version de l'annuaire : ${VERSION}\n\nLieu concerné :\n\nCe qui est faux ou manquant :\n\nLa bonne information (et sa source, si possible) :\n\n`]);
-    else openMsg("Proposer un lieu manquant",suggestMsg());}});
+    if(k==="write")openRep("message");
+    else if(k==="error")openRep("erreur");
+    else openRep("lieu_manquant");}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!infoEl.hidden)closeInfo();});
 /* ---------- Signaler / proposer : panneau de message (marche même quand les liens mailto sont bloqués) ---------- */
 const msgEl=document.getElementById("msgsheet");let msgTo=REPORT_TO;
@@ -6020,8 +6062,8 @@ function openMsg(title,[su,bo],to){
 function closeMsg(){msgEl.hidden=true;}
 document.getElementById("msg-body").addEventListener("input",paintMsgLinks);
 document.addEventListener("click",e=>{
-  const rp=e.target.closest("[data-report]");if(rp){const d=D.find(x=>x.id===rp.dataset.report);if(d)openMsg("Signaler une erreur",reportMsg(d));return;}
-  if(e.target.closest("[data-suggest]")){e.preventDefault();openMsg("Proposer un lieu manquant",suggestMsg());return;}
+  const rp=e.target.closest("[data-report]");if(rp){const d=D.find(x=>x.id===rp.dataset.report);if(d)openRep("erreur",d);return;}
+  if(e.target.closest("[data-suggest]")){e.preventDefault();openRep("lieu_manquant");return;}
 });
 msgEl.addEventListener("click",e=>{
   if(e.target===msgEl||e.target.closest("[data-closemsg]"))return closeMsg();
@@ -6030,6 +6072,69 @@ msgEl.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!msgEl.hidden)closeMsg();});
 
+
+/* ---------- 18/11 : signalements sans e-mail et mesure d'usage (base Supabase de MAP) ---------- */
+const SUPA_URL="https://jnbkxoxcxpwgahzeitid.supabase.co",SUPA_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYmt4b3hjeHB3Z2FoemVpdGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUwMjE4MTcsImV4cCI6MjExMDU5NzgxN30.jnyJuE_2gq6Bnp2Rh45O01pqb8wr3dwFm4Rlblev0Nc";
+const ONLINE_APP=/^https?:$/.test(location.protocol)&&!EMBED;
+function supaPost(table,row,keep){
+  return fetch(SUPA_URL+"/rest/v1/"+table,{method:"POST",keepalive:!!keep,headers:{apikey:SUPA_KEY,Authorization:"Bearer "+SUPA_KEY,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(row)})
+    .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return true;});
+}
+/* Compteurs : aucun cookie, aucun identifiant ; rien n'est envoyé depuis la version de démonstration */
+const STANDALONE=(()=>{try{return matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(_){return false}})();
+function track(ev,cle,mode){
+  if(!ONLINE_APP)return;
+  try{supaPost("map_usage",{evenement:ev,cle:cle?String(cle).slice(0,80):null,mode:mode||(S&&S.mode==="psy"?"psy":"addicto"),installe:STANDALONE,version:VERSION},true).catch(()=>{});}catch(_){}
+}
+try{if(!sessionStorage.getItem("map-open")){sessionStorage.setItem("map-open","1");track("ouverture");}}catch(_){track("ouverture");}
+document.addEventListener("click",e=>{
+  const op=e.target.closest(".op[data-k]");if(op)track("categorie",op.dataset.k);
+  const tel=e.target.closest('a[href^="tel:"]');if(tel)track("appel",(!fEl.hidden&&fEl.dataset.id)||tel.getAttribute("href").slice(4));
+  const sh=e.target.closest("[data-share]");if(sh)track("partage",fEl.dataset.id||"");
+},true);
+{let st=null;document.getElementById("sq").addEventListener("input",()=>{clearTimeout(st);st=setTimeout(()=>{
+  const q=nrm(document.getElementById("sq").value).replace(/[0-9@]/g,"").replace(/\s+/g," ").trim().slice(0,40);
+  if(q.length>=3&&!document.getElementById("sout").children.length)track("recherche_vide",q);},2500);});}
+/* Formulaire de signalement */
+const repEl=document.getElementById("repsheet");let REP={type:"erreur",d:null,motif:null};
+function openRep(type,d){
+  REP={type,d:d||null,motif:null};
+  const t={erreur:"Signaler une erreur",lieu_manquant:"Proposer un lieu manquant",message:"Écrire à l'équipe MAP"}[type];
+  document.getElementById("rep-title").textContent=t;
+  const fi=document.getElementById("rep-fiche");fi.hidden=!d;fi.textContent=d?"Fiche : "+d.n:"";
+  document.getElementById("rep-motifs").hidden=type!=="erreur";
+  repEl.querySelectorAll("[data-motif]").forEach(b=>b.setAttribute("aria-checked","false"));
+  document.getElementById("rep-lab").textContent=type==="erreur"?(d?"La bonne information (et sa source, si possible)":"Le lieu concerné, et la bonne information"):type==="lieu_manquant"?"Nom du lieu, type, adresse, téléphone, public accueilli, source":"Votre message";
+  const ta=document.getElementById("rep-text");ta.value="";document.getElementById("rep-contact").value="";
+  const stt=document.getElementById("rep-status");stt.hidden=true;stt.textContent="";
+  document.getElementById("rep-form").hidden=false;document.getElementById("rep-done").hidden=true;
+  const sb=document.getElementById("rep-send");sb.disabled=false;sb.textContent="Envoyer";
+  repEl.hidden=false;setTimeout(()=>ta.focus(),60);
+}
+function repMail(){
+  const d=REP.d,txt=document.getElementById("rep-text").value,ct=document.getElementById("rep-contact").value;repEl.hidden=true;
+  const extra=(txt?"\n"+txt+"\n":"")+(ct?"\nContact : "+ct+"\n":"");
+  if(REP.type==="erreur"&&d){const [su,bo]=reportMsg(d);openMsg("Signaler une erreur",[su,bo+extra]);}
+  else if(REP.type==="lieu_manquant"){const [su,bo]=suggestMsg();openMsg("Proposer un lieu manquant",[su,bo+extra]);}
+  else openMsg(REP.type==="erreur"?"Signaler une erreur":"Écrire à l'équipe MAP",[REP.type==="erreur"?"[Annuaire] Signalement":"[Annuaire] Message",`Version de l'annuaire : ${VERSION}\n`+extra]);
+}
+repEl.addEventListener("click",e=>{
+  if(e.target===repEl||e.target.closest("[data-closerep]")){repEl.hidden=true;return;}
+  const m=e.target.closest("[data-motif]");if(m){REP.motif=m.dataset.motif;repEl.querySelectorAll("[data-motif]").forEach(b=>b.setAttribute("aria-checked",String(b===m)));return;}
+  if(e.target.closest("#rep-mail")){repMail();return;}
+  if(e.target.closest("#rep-send")){
+    const txt=document.getElementById("rep-text").value.trim(),stt=document.getElementById("rep-status"),sb=document.getElementById("rep-send");
+    if(!txt&&!(REP.type==="erreur"&&REP.motif)){stt.hidden=false;stt.className="repstatus";stt.textContent="Écrivez quelques mots avant d'envoyer.";document.getElementById("rep-text").focus();return;}
+    if(!ONLINE_APP){stt.hidden=false;stt.className="repstatus err";stt.textContent="L'envoi direct ne marche que dans l'appli (mapannuaire.github.io/map). Utilisez l'envoi par e-mail ci-dessous.";return;}
+    sb.disabled=true;sb.textContent="Envoi…";
+    const motifs={numero:"Numéro faux",adresse:"Adresse",horaires:"Horaires",ferme:"Fermé ou déménagé",admission:"Conditions d'admission",autre:"Autre"};
+    supaPost("map_signalements",{type:REP.type,fiche_id:REP.d?REP.d.id:null,fiche_nom:REP.d?REP.d.n.slice(0,200):null,motif:REP.type==="erreur"?REP.motif:null,
+      commentaire:(txt||motifs[REP.motif]||"").slice(0,2000),contact:document.getElementById("rep-contact").value.trim().slice(0,200)||null,version:VERSION})
+      .then(()=>{document.getElementById("rep-form").hidden=true;document.getElementById("rep-done").hidden=false;})
+      .catch(()=>{sb.disabled=false;sb.textContent="Réessayer";stt.hidden=false;stt.className="repstatus err";stt.textContent="L'envoi n'a pas abouti (pas de réseau ?). Réessayez, ou passez par l'e-mail ci-dessous.";});
+  }
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!repEl.hidden)repEl.hidden=true;});
 /* ---------- Thème : automatique (suit le téléphone), clair ou sombre ---------- */
 const THEMES=["auto","light","dark"],THEML={auto:"◐ Auto",light:"☀ Clair",dark:"☾ Sombre"};
 function applyTheme(t){

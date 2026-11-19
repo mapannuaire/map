@@ -1336,6 +1336,15 @@ select.repinput{appearance:auto}
 .eyebrow .brand,.eyebrow .brand *{font-family:var(--body)!important;text-transform:none!important;letter-spacing:-.01em!important}
 .eyebrow .brand{font-size:15px!important;font-weight:500!important;color:#fff}
 .eyebrow .brand b{font-weight:800!important;letter-spacing:.01em!important}
+
+/* 19/11 : en-tête « soleil couchant » sans soleil : nuit → violet → prune */
+:root{--bandgrad:linear-gradient(160deg,#0f2940 0%,#4b2c5e 48%,#8a3c70 100%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bandgrad:linear-gradient(160deg,#0b1d2e 0%,#36214a 48%,#64294f 100%)}}
+:root[data-theme="dark"]{--bandgrad:linear-gradient(160deg,#0b1d2e 0%,#36214a 48%,#64294f 100%)}
+.hero,.fh{background:var(--bandgrad)!important}
+.hero .searchopen{background:rgba(255,255,255,.14)!important;border-color:rgba(255,255,255,.22)!important}
+.hero .modetabs{background:rgba(255,255,255,.14)!important;border-color:rgba(255,255,255,.18)!important}
+.fh .transit em{color:rgba(255,255,255,.72)!important}
 </style>
 </head>
 <body>
@@ -4895,6 +4904,7 @@ if(!D.some(d=>d.id==="uhsa-marseille")){
  d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
  d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
  d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("En-tête aux couleurs du logo : du bleu nuit au prune");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Nouveau logo et nouveau nom : MAP · Marseille AddictoPsy");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("« Signaler une erreur » devient « Commentaires »");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Proposer un nouveau lieu : formulaire détaillé, accessible depuis l'accueil ; possibilité de joindre une plaquette ou un dossier (PDF ou image)");

@@ -1351,7 +1351,7 @@ select.repinput{appearance:auto}
 @keyframes mapUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes mapSheet{from{transform:translateY(100%)}to{transform:none}}
 @keyframes mapSlide{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
-.view:not([hidden]) main{animation:mapFade .35s ease-out both}
+html:not([data-loaded]) .view:not([hidden]) main{animation:mapFade .35s ease-out both}
 .opts .op{animation-duration:.42s!important}
 
 .opts .op{animation:mapUp .34s cubic-bezier(.2,.8,.2,1) both}
@@ -1366,6 +1366,24 @@ select.repinput{appearance:auto}
 .op:active,.card:active,.btn:active,.mobbtn:active,.searchopen:active{transform:scale(.97)}
 .modetabs button:active{transform:scale(.96)}
 @media (hover:hover){.op:hover,.card:hover{box-shadow:0 6px 18px -10px rgba(15,41,64,.35)}}
+
+/* 19/11 : passage Addictologie ⇄ Psychiatrie : le contenu glisse dans le sens de l'onglet, la pastille blanche coulisse */
+@keyframes mapFromR{from{opacity:0;transform:translateX(64px)}to{opacity:1;transform:none}}
+@keyframes mapFromL{from{opacity:0;transform:translateX(-64px)}to{opacity:1;transform:none}}
+html[data-sw="r"] .view:not([hidden]) main{animation:mapFromR .4s cubic-bezier(.2,.8,.2,1) both}
+html[data-sw="l"] .view:not([hidden]) main{animation:mapFromL .4s cubic-bezier(.2,.8,.2,1) both}
+html[data-loaded] .opts .op{animation:none!important}
+@supports selector(:has(*)){
+  .modetabs{position:relative}
+  .modetabs::before{content:"";position:absolute;top:var(--sp-1);bottom:var(--sp-1);left:var(--sp-1);width:calc((100% - var(--sp-1)*3)/2);border-radius:var(--r-md);background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+  .modetabs:has([data-mode="psy"][aria-selected="true"])::before{transform:translateX(calc(100% + var(--sp-1)))}
+  .modetabs button{position:relative;z-index:1}
+  .modetabs button[aria-selected="true"]{background:transparent!important;box-shadow:none!important}
+  @keyframes pillR{from{transform:none}to{transform:translateX(calc(100% + var(--sp-1)))}}
+  @keyframes pillL{from{transform:translateX(calc(100% + var(--sp-1)))}to{transform:none}}
+  html[data-sw="r"] .modetabs::before{animation:pillR .4s cubic-bezier(.2,.8,.2,1) both}
+  html[data-sw="l"] .modetabs::before{animation:pillL .4s cubic-bezier(.2,.8,.2,1) both}
+}
 </style>
 </head>
 <body>
@@ -5861,6 +5879,11 @@ function patientText(d,lg){
   return L.join("\n");
 }
 let MLANG="pro";
+
+setTimeout(()=>{document.documentElement.dataset.loaded="1";},1400);
+/* Sens du glissement quand on change de domaine */
+{let swT=null;document.addEventListener("click",e=>{const b=e.target.closest(".modetabs [data-mode]");if(!b||b.getAttribute("aria-selected")==="true")return;
+  const h=document.documentElement;h.dataset.sw=b.dataset.mode==="psy"?"r":"l";clearTimeout(swT);swT=setTimeout(()=>{delete h.dataset.sw;},480);},true);}
 function printDone(){
   if(PR){PR.mm.style.width="";PR.mm.style.height="";PR.parent.insertBefore(PR.mm,PR.next);PR=null;}
   const sh=document.getElementById("printsheet");if(sh)sh.remove();document.body.classList.remove("printing");

@@ -1324,6 +1324,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 .mlang{display:flex;align-items:center;gap:var(--sp-2);font:600 var(--fs-sm)/1.2 var(--body);color:var(--fg)}
 .mlang select{flex:1;min-height:44px;padding:0 var(--sp-3);border:1.5px solid var(--line);border-radius:var(--r-md);background:var(--surface);color:var(--fg);font:500 15px var(--body)}
+
+.repfile input[type=file]{width:100%;font:500 15px var(--body);color:var(--fg);padding:var(--sp-2) 0}
+.repfile input[type=file]::file-selector-button{min-height:40px;margin-right:var(--sp-3);padding:0 var(--sp-3);border-radius:var(--r-full);border:1.5px solid var(--line);background:var(--surface);color:var(--fg);font:600 var(--fs-sm) var(--body)}
+select.repinput{appearance:auto}
 </style>
 </head>
 <body>
@@ -1346,6 +1350,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <div class="prog" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
     <div class="opts" id="opts"></div>
     <button class="alllink" type="button" id="seeall">Tout voir, sans filtre →</button>
+    <button class="alllink" type="button" data-suggest style="margin-top:-6px">＋ Proposer un nouveau lieu</button>
     <button class="installbtn" type="button" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M12 7.5v7M9 11.5l3 3 3-3"/></svg>Installer sur mon téléphone</button>
     <div class="arca">
       <b>Un doute sur l'orientation ? ARCA-Sud</b>
@@ -1542,7 +1547,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <h2 id="news-title">Nouveautés</h2>
     <p class="hint" id="news-sub"></p>
     <ul class="news" id="news-list"></ul>
-    <p class="hint">Une information fausse ou périmée ? Chaque fiche a un bouton « Signaler une erreur ». Un lieu absent ? <button type="button" class="linkbtn" id="suggest2" data-suggest>Proposez-le</button>. Les messages sont relus régulièrement.</p>
+    <p class="hint">Une remarque, une information à corriger ou à compléter ? Chaque fiche a un bouton « Commentaires ». Un lieu absent ? <button type="button" class="linkbtn" id="suggest2" data-suggest>Proposez-le</button>. Les messages sont relus régulièrement.</p>
     <button type="button" class="btn" data-closenews style="width:100%">Fermer</button>
   </div>
 </div>
@@ -1550,10 +1555,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 <div class="isheet-scrim" id="repsheet" hidden>
   <div class="isheet" role="dialog" aria-modal="true" aria-labelledby="rep-title">
     <div class="grab"></div>
-    <h2 id="rep-title">Signaler une erreur</h2>
+    <h2 id="rep-title">Commentaires</h2>
     <div id="rep-form" style="display:grid;gap:12px">
       <p class="hint" id="rep-fiche" style="margin:-4px 0 0"></p>
-      <div id="rep-motifs" class="repchips" role="radiogroup" aria-label="Ce qui ne va pas">
+      <div id="rep-motifs" class="repchips" role="radiogroup" aria-label="Sujet du commentaire">
         <button type="button" role="radio" aria-checked="false" data-motif="numero">Numéro faux</button>
         <button type="button" role="radio" aria-checked="false" data-motif="adresse">Adresse</button>
         <button type="button" role="radio" aria-checked="false" data-motif="horaires">Horaires</button>
@@ -1561,8 +1566,25 @@ svg.leaflet-image-layer.leaflet-interactive path {
         <button type="button" role="radio" aria-checked="false" data-motif="admission">Conditions d'admission</button>
         <button type="button" role="radio" aria-checked="false" data-motif="autre">Autre</button>
       </div>
-      <label class="replab" for="rep-text" id="rep-lab">La bonne information (et sa source, si possible)</label>
+      <div id="rep-lieu" style="display:grid;gap:10px" hidden>
+        <label class="replab" for="rl-nom">Nom du lieu <span style="color:#b3261e">*</span></label>
+        <input id="rl-nom" class="repinput" type="text" maxlength="160" autocomplete="off">
+        <label class="replab" for="rl-type">Type de lieu</label>
+        <select id="rl-type" class="repinput"><option value="">Choisir…</option></select>
+        <label class="replab" for="rl-adr">Adresse ou ville</label>
+        <input id="rl-adr" class="repinput" type="text" maxlength="200" autocomplete="off">
+        <label class="replab" for="rl-tel">Téléphone</label>
+        <input id="rl-tel" class="repinput" type="tel" maxlength="40" autocomplete="off">
+        <label class="replab" for="rl-site">Site internet</label>
+        <input id="rl-site" class="repinput" type="url" maxlength="200" placeholder="https://" autocomplete="off">
+      </div>
+      <label class="replab" for="rep-text" id="rep-lab">Votre commentaire (et sa source, si possible)</label>
       <textarea id="rep-text" class="msgbody" rows="5" maxlength="2000"></textarea>
+      <div class="repfile">
+        <label class="replab" for="rep-file">Joindre un fichier <span style="font-weight:400;color:var(--muted)">(facultatif)</span></label>
+        <input id="rep-file" type="file" accept="application/pdf,image/*" multiple>
+        <p class="hint" style="margin:0">Plaquette, dossier d'admission, photo d'une affiche… PDF ou image, 3 fichiers au plus, 10 Mo chacun.</p>
+      </div>
       <label class="replab" for="rep-contact">Votre e-mail ou téléphone, si vous souhaitez une réponse <span style="font-weight:400;color:var(--muted)">(facultatif)</span></label>
       <input id="rep-contact" class="repinput" type="text" maxlength="200" autocomplete="email">
       <p class="hint" style="margin:0">Envoi anonyme à l'équipe MAP. N'indiquez aucune information sur un patient.</p>
@@ -1581,7 +1603,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 <div class="isheet-scrim" id="msgsheet" hidden>
   <div class="isheet" role="dialog" aria-modal="true" aria-labelledby="msg-title">
     <div class="grab"></div>
-    <h2 id="msg-title">Signaler une erreur</h2>
+    <h2 id="msg-title">Commentaires</h2>
     <div class="msgmeta"><span>À</span><b id="msg-to"></b><button type="button" class="copy" id="msg-copyto">Copier</button></div>
     <div class="msgmeta"><span>Objet</span><b id="msg-sub"></b></div>
     <textarea id="msg-body" class="msgbody" aria-label="Votre message" rows="9"></textarea>
@@ -4865,6 +4887,8 @@ if(!D.some(d=>d.id==="uhsa-marseille")){
  d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
  d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
  d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("« Signaler une erreur » devient « Commentaires »");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Proposer un nouveau lieu : formulaire détaillé, accessible depuis l'accueil ; possibilité de joindre une plaquette ou un dossier (PDF ou image)");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Formulations inclusives dans les menus (équipe de soin, personnes concernées)");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Envoi d'une fiche (texte, PDF, image) : au choix pour l'équipe de soin ou pour la personne, dans sa langue");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Les fiches se mettent à jour depuis le tableau Google Sheets MAP-fiches");
@@ -5575,7 +5599,7 @@ function fiche(d){
       ${idocs.length?`<section class="sec"><h3>Documents</h3><div class="box">${idocs.map(docRow).join("")}</div></section>`:""}
       ${d.c.length?`<section class="sec"><h3>Contacts</h3><div class="box">${d.c.map(([l,v])=>{const t=telHref(v);return `<div class="crow"><div style="min-width:0"><span class="l">${esc(l)}</span><span class="v">${esc(v)}</span></div><div class="acts">${t&&!/fax/i.test(l)?`<a class="copy" href="${t}" style="text-decoration:none;color:inherit">Appeler</a>`:""}<button class="copy" type="button" data-v="${esc(v)}">Copier</button></div></div>`;}).join("")}</div>${noteOf(d)?`<p class="note" style="margin-top:8px">${esc(noteOf(d))}</p>`:""}</section>`:""}
       ${srcHtml(d)}
-      <div class="chk"><span>${chkText(d)}</span><button type="button" class="linkbtn" data-report="${d.id}">Signaler une erreur</button></div>
+      <div class="chk"><span>${chkText(d)}</span><button type="button" class="linkbtn" data-report="${d.id}">Commentaires</button></div>
       <button class="fab-back" type="button" data-close>← Retour</button>
       <section class="sec" id="mail-sec"><h3>Envoyer cette fiche par e-mail</h3>
         <div class="box mailbox">
@@ -6046,7 +6070,7 @@ function infoPage(pg){const box=document.getElementById("info-body");
     <button type="button" class="btn backi" data-ipage="menu">← Retour</button>`;}
   else if(pg==="contact"){box.innerHTML=`<p class="hint" style="margin:0">Une erreur, un lieu qui manque, une idée : les messages arrivent à l'équipe de MAP.</p><div class="sublist">
     <button type="button" data-imsg="write" style="--c:var(--accent)"><span><b>Écrire à l'équipe</b><br><small>${esc(REPORT_TO)}</small></span><em>›</em></button>
-    <button type="button" data-imsg="error" style="--c:var(--accent)"><span><b>Signaler une erreur</b><br><small>Sur une fiche, un numéro, une adresse</small></span><em>›</em></button>
+    <button type="button" data-imsg="error" style="--c:var(--accent)"><span><b>Commentaires</b><br><small>Sur une fiche, un numéro, une adresse</small></span><em>›</em></button>
     <button type="button" data-imsg="suggest" style="--c:var(--accent)"><span><b>Proposer un lieu manquant</b></span><em>›</em></button></div>
     <div class="arca" style="margin:0"><b>Pour un avis sur une orientation : ARCA-Sud</b><a class="arcanum" href="tel:+33488926888">04 88 92 68 88</a><span class="mono" style="font-size:12.5px">contact@arca-sud.fr</span></div>
     <button type="button" class="btn backi" data-ipage="menu">← Retour</button>`;}
@@ -6122,12 +6146,17 @@ document.addEventListener("click",e=>{
 const repEl=document.getElementById("repsheet");let REP={type:"erreur",d:null,motif:null};
 function openRep(type,d){
   REP={type,d:d||null,motif:null};
-  const t={erreur:"Signaler une erreur",lieu_manquant:"Proposer un lieu manquant",message:"Écrire à l'équipe MAP"}[type];
+  const t={erreur:"Commentaires sur la fiche",lieu_manquant:"Proposer un nouveau lieu",message:"Écrire à l'équipe MAP"}[type];
   document.getElementById("rep-title").textContent=t;
   const fi=document.getElementById("rep-fiche");fi.hidden=!d;fi.textContent=d?"Fiche : "+d.n:"";
   document.getElementById("rep-motifs").hidden=type!=="erreur";
+  document.getElementById("rep-lieu").hidden=type!=="lieu_manquant";
+  ["rl-nom","rl-adr","rl-tel","rl-site"].forEach(i=>document.getElementById(i).value="");
+  {const sel=document.getElementById("rl-type");if(sel.options.length<2){const lab=k=>{const o=document.querySelector(`.op[data-k="${k}"] b`);return o?o.textContent:k;};
+    [...new Set(ORDER_ALL)].forEach(k=>{const o=document.createElement("option");o.value=k;o.textContent=(PSYT.includes(k)?"Psychiatrie · ":"Addictologie · ")+(GROUPS[k]||L[k]||lab(k));sel.appendChild(o);});}sel.value="";}
+  document.getElementById("rep-file").value="";
   repEl.querySelectorAll("[data-motif]").forEach(b=>b.setAttribute("aria-checked","false"));
-  document.getElementById("rep-lab").textContent=type==="erreur"?(d?"La bonne information (et sa source, si possible)":"Le lieu concerné, et la bonne information"):type==="lieu_manquant"?"Nom du lieu, type, adresse, téléphone, public accueilli, source":"Votre message";
+  document.getElementById("rep-lab").textContent=type==="erreur"?(d?"Votre commentaire (et sa source, si possible)":"Le lieu concerné, et votre commentaire"):type==="lieu_manquant"?"Public accueilli, conditions d'admission, source de l'information":"Votre message";
   const ta=document.getElementById("rep-text");ta.value="";document.getElementById("rep-contact").value="";
   const stt=document.getElementById("rep-status");stt.hidden=true;stt.textContent="";
   document.getElementById("rep-form").hidden=false;document.getElementById("rep-done").hidden=true;
@@ -6136,23 +6165,37 @@ function openRep(type,d){
 }
 function repMail(){
   const d=REP.d,txt=document.getElementById("rep-text").value,ct=document.getElementById("rep-contact").value;repEl.hidden=true;
-  const extra=(txt?"\n"+txt+"\n":"")+(ct?"\nContact : "+ct+"\n":"");
-  if(REP.type==="erreur"&&d){const [su,bo]=reportMsg(d);openMsg("Signaler une erreur",[su,bo+extra]);}
+  const lv=i=>{const e=document.getElementById(i);return e?e.value.trim():"";};
+  const lieu=REP.type==="lieu_manquant"?["Nom : "+lv("rl-nom"),lv("rl-adr")&&"Adresse : "+lv("rl-adr"),lv("rl-tel")&&"Téléphone : "+lv("rl-tel"),lv("rl-site")&&"Site : "+lv("rl-site")].filter(Boolean).join("\n")+"\n":"";
+  const nf=document.getElementById("rep-file").files.length;
+  const extra=(lieu?"\n"+lieu:"")+(txt?"\n"+txt+"\n":"")+(ct?"\nContact : "+ct+"\n":"")+(nf?"\n(Pensez à joindre le fichier à ce mail.)\n":"");
+  if(REP.type==="erreur"&&d){const [su,bo]=reportMsg(d);openMsg("Commentaires",[su,bo+extra]);}
   else if(REP.type==="lieu_manquant"){const [su,bo]=suggestMsg();openMsg("Proposer un lieu manquant",[su,bo+extra]);}
-  else openMsg(REP.type==="erreur"?"Signaler une erreur":"Écrire à l'équipe MAP",[REP.type==="erreur"?"[Annuaire] Signalement":"[Annuaire] Message",`Version de l'annuaire : ${VERSION}\n`+extra]);
+  else openMsg(REP.type==="erreur"?"Commentaires":"Écrire à l'équipe MAP",[REP.type==="erreur"?"[Annuaire] Signalement":"[Annuaire] Message",`Version de l'annuaire : ${VERSION}\n`+extra]);
 }
 repEl.addEventListener("click",e=>{
   if(e.target===repEl||e.target.closest("[data-closerep]")){repEl.hidden=true;return;}
   const m=e.target.closest("[data-motif]");if(m){REP.motif=m.dataset.motif;repEl.querySelectorAll("[data-motif]").forEach(b=>b.setAttribute("aria-checked",String(b===m)));return;}
   if(e.target.closest("#rep-mail")){repMail();return;}
   if(e.target.closest("#rep-send")){
-    const txt=document.getElementById("rep-text").value.trim(),stt=document.getElementById("rep-status"),sb=document.getElementById("rep-send");
-    if(!txt&&!(REP.type==="erreur"&&REP.motif)){stt.hidden=false;stt.className="repstatus";stt.textContent="Écrivez quelques mots avant d'envoyer.";document.getElementById("rep-text").focus();return;}
+    let txt=document.getElementById("rep-text").value.trim();const stt=document.getElementById("rep-status"),sb=document.getElementById("rep-send");
+    const files=[...document.getElementById("rep-file").files];
+    if(REP.type==="lieu_manquant"){const v=i=>document.getElementById(i).value.trim();
+      if(!v("rl-nom")){stt.hidden=false;stt.className="repstatus err";stt.textContent="Indiquez au moins le nom du lieu.";document.getElementById("rl-nom").focus();return;}
+      const ty=document.getElementById("rl-type");
+      txt=["Nom : "+v("rl-nom"),ty.value?"Type : "+ty.options[ty.selectedIndex].text:"",v("rl-adr")?"Adresse : "+v("rl-adr"):"",v("rl-tel")?"Téléphone : "+v("rl-tel"):"",v("rl-site")?"Site : "+v("rl-site"):"",txt?"\n"+txt:""].filter(Boolean).join("\n");}
+    if(files.length>3||files.some(f=>f.size>10485760)){stt.hidden=false;stt.className="repstatus err";stt.textContent="3 fichiers au plus, de 10 Mo maximum chacun.";return;}
+    if(files.some(f=>!/^(application\/pdf|image\/)/.test(f.type))){stt.hidden=false;stt.className="repstatus err";stt.textContent="Seuls les PDF et les images sont acceptés.";return;}
+    if(!txt&&!files.length&&!(REP.type==="erreur"&&REP.motif)){stt.hidden=false;stt.className="repstatus";stt.textContent="Écrivez quelques mots avant d'envoyer.";document.getElementById("rep-text").focus();return;}
     if(!ONLINE_APP){stt.hidden=false;stt.className="repstatus err";stt.textContent="L'envoi direct ne marche que dans l'appli (mapannuaire.github.io/map). Utilisez l'envoi par e-mail ci-dessous.";return;}
     sb.disabled=true;sb.textContent="Envoi…";
     const motifs={numero:"Numéro faux",adresse:"Adresse",horaires:"Horaires",ferme:"Fermé ou déménagé",admission:"Conditions d'admission",autre:"Autre"};
-    supaPost("map_signalements",{type:REP.type,fiche_id:REP.d?REP.d.id:null,fiche_nom:REP.d?REP.d.n.slice(0,200):null,motif:REP.type==="erreur"?REP.motif:null,
-      commentaire:(txt||motifs[REP.motif]||"").slice(0,2000),contact:document.getElementById("rep-contact").value.trim().slice(0,200)||null,version:VERSION})
+    const up=f=>{const nm="depots/"+new Date().toISOString().slice(0,10)+"-"+Math.random().toString(36).slice(2,10)+"-"+nrm(f.name).replace(/[^a-z0-9.]+/g,"-").slice(-60);
+      return fetch(SUPA_URL+"/storage/v1/object/map-fichiers/"+nm,{method:"POST",headers:{apikey:SUPA_KEY,Authorization:"Bearer "+SUPA_KEY,"Content-Type":f.type||"application/octet-stream","x-upsert":"false"},body:f}).then(r=>{if(!r.ok)throw new Error("fichier "+r.status);return nm;});};
+    if(files.length)sb.textContent="Envoi des fichiers…";
+    Promise.all(files.map(up)).then(paths=>
+    supaPost("map_signalements",{type:REP.type,fichiers:paths.length?paths:null,fiche_id:REP.d?REP.d.id:null,fiche_nom:REP.d?REP.d.n.slice(0,200):null,motif:REP.type==="erreur"?REP.motif:null,
+      commentaire:(txt||motifs[REP.motif]||(files.length?"Fichier joint":"")).slice(0,2000),contact:document.getElementById("rep-contact").value.trim().slice(0,200)||null,version:VERSION}))
       .then(()=>{document.getElementById("rep-form").hidden=true;document.getElementById("rep-done").hidden=false;})
       .catch(()=>{sb.disabled=false;sb.textContent="Réessayer";stt.hidden=false;stt.className="repstatus err";stt.textContent="L'envoi n'a pas abouti (pas de réseau ?). Réessayez, ou passez par l'e-mail ci-dessous.";});
   }

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title>MAP · Marseille Addictologie Psychiatrie</title>
+<title>MAP · Marseille AddictoPsy</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -1328,6 +1328,14 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .repfile input[type=file]{width:100%;font:500 15px var(--body);color:var(--fg);padding:var(--sp-2) 0}
 .repfile input[type=file]::file-selector-button{min-height:40px;margin-right:var(--sp-3);padding:0 var(--sp-3);border-radius:var(--r-full);border:1.5px solid var(--line);background:var(--surface);color:var(--fg);font:600 var(--fs-sm) var(--body)}
 select.repinput{appearance:auto}
+
+/* 19/11 : logo MAP dans l'en-tête */
+.brand{display:flex;align-items:center;gap:8px;font-size:var(--fs-sm)!important}
+.brand b{font-weight:800;letter-spacing:.02em}
+.brandmark{flex:0 0 auto;width:30px;height:33px}
+.eyebrow .brand,.eyebrow .brand *{font-family:var(--body)!important;text-transform:none!important;letter-spacing:-.01em!important}
+.eyebrow .brand{font-size:15px!important;font-weight:500!important;color:#fff}
+.eyebrow .brand b{font-weight:800!important;letter-spacing:.01em!important}
 </style>
 </head>
 <body>
@@ -1337,7 +1345,7 @@ select.repinput{appearance:auto}
   <header class="hero">
     <div class="col">
       <button class="backlink" type="button" data-back data-ifhist hidden>← Retour</button>
-      <div class="eyebrow"><span class="brand">MAP : Marseille Addictologie Psychiatrie</span><button type="button" class="newsbtn themebtn" data-theme-toggle aria-label="Thème">Auto</button><button type="button" class="newsbtn infobtn" data-info aria-label="Informations, nouveautés et contact">i</button></div>
+      <div class="eyebrow"><span class="brand"><svg class="brandmark" viewBox="70 38 462 512" aria-hidden="true"><circle cx="356" cy="153" r="65" fill="#f5b91d"/><path d="M80 292 Q155 235 211 229 L244 197 L264 197 L264 170 L281 156 L299 171 L299 201 L331 196 L331 135 Q331 126 340 126 L340 94 Q340 83 347 76 Q354 70 347 63 Q340 55 349 49 Q361 45 365 58 Q369 66 361 73 Q370 86 370 96 L370 126 Q379 127 379 136 L379 195 L406 198 Q421 211 430 225 Q475 236 522 274 L522 332 Q415 308 316 336 Q200 291 80 355Z" fill="#f5f5f7"/><path d="M80 365 Q170 321 261 350 L317 412 Q208 387 121 461 Q94 437 80 412Z" fill="#1e6fb8"/><path d="M129 473 Q227 401 317 429 Q419 361 522 353 L522 459 Q469 511 374 512 L178 512Z" fill="#7a3a6e"/><path d="M316 315 C265 315 228 353 228 403 C228 447 283 503 316 543 C349 503 404 447 404 403 C404 353 367 315 316 315Z" fill="#7a3a6e" stroke="white" stroke-width="17" stroke-linejoin="round"/><circle cx="316" cy="399" r="36" fill="white"/></svg><span style="overflow:hidden;text-overflow:ellipsis"><b>MAP</b> · Marseille AddictoPsy</span></span><button type="button" class="newsbtn themebtn" data-theme-toggle aria-label="Thème">Auto</button><button type="button" class="newsbtn infobtn" data-info aria-label="Informations, nouveautés et contact">i</button></div>
       <button class="searchopen" type="button" data-search><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>Rechercher un lieu, un nom…</button>
       <div class="modetabs" role="tablist" aria-label="Domaine">
         <button type="button" role="tab" data-mode="addicto">Addictologie</button>
@@ -1369,7 +1377,7 @@ select.repinput{appearance:auto}
   <header class="hero">
     <div class="col">
       <button class="backlink" type="button" data-back data-ifhist hidden>← Retour</button>
-      <div class="eyebrow"><span class="brand">MAP : Marseille Addictologie Psychiatrie</span><button type="button" class="newsbtn themebtn" data-theme-toggle aria-label="Thème">Auto</button><button type="button" class="newsbtn infobtn" data-info aria-label="Informations, nouveautés et contact">i</button></div>
+      <div class="eyebrow"><span class="brand"><svg class="brandmark" viewBox="70 38 462 512" aria-hidden="true"><circle cx="356" cy="153" r="65" fill="#f5b91d"/><path d="M80 292 Q155 235 211 229 L244 197 L264 197 L264 170 L281 156 L299 171 L299 201 L331 196 L331 135 Q331 126 340 126 L340 94 Q340 83 347 76 Q354 70 347 63 Q340 55 349 49 Q361 45 365 58 Q369 66 361 73 Q370 86 370 96 L370 126 Q379 127 379 136 L379 195 L406 198 Q421 211 430 225 Q475 236 522 274 L522 332 Q415 308 316 336 Q200 291 80 355Z" fill="#f5f5f7"/><path d="M80 365 Q170 321 261 350 L317 412 Q208 387 121 461 Q94 437 80 412Z" fill="#1e6fb8"/><path d="M129 473 Q227 401 317 429 Q419 361 522 353 L522 459 Q469 511 374 512 L178 512Z" fill="#7a3a6e"/><path d="M316 315 C265 315 228 353 228 403 C228 447 283 503 316 543 C349 503 404 447 404 403 C404 353 367 315 316 315Z" fill="#7a3a6e" stroke="white" stroke-width="17" stroke-linejoin="round"/><circle cx="316" cy="399" r="36" fill="white"/></svg><span style="overflow:hidden;text-overflow:ellipsis"><b>MAP</b> · Marseille AddictoPsy</span></span><button type="button" class="newsbtn themebtn" data-theme-toggle aria-label="Thème">Auto</button><button type="button" class="newsbtn infobtn" data-info aria-label="Informations, nouveautés et contact">i</button></div>
       <button class="searchopen" type="button" data-search><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>Rechercher un lieu, un nom…</button>
       <div class="modetabs" role="tablist" aria-label="Domaine">
         <button type="button" role="tab" data-mode="addicto">Addictologie</button>
@@ -4887,6 +4895,7 @@ if(!D.some(d=>d.id==="uhsa-marseille")){
  d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
  d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
  d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Nouveau logo et nouveau nom : MAP · Marseille AddictoPsy");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("« Signaler une erreur » devient « Commentaires »");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Proposer un nouveau lieu : formulaire détaillé, accessible depuis l'accueil ; possibilité de joindre une plaquette ou un dossier (PDF ou image)");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Formulations inclusives dans les menus (équipe de soin, personnes concernées)");
@@ -5572,7 +5581,7 @@ function fiche(d){
       <button class="backlink" type="button" data-close>← Résultats</button>
       <div class="tags">${tagsHtml(d)}${d.v?`<span class="verify">À confirmer</span>`:""}${d.pub?"":`<span class="prive">Privé</span>`}${d.sec?`<span class="prive">${SECL[d.sec]}</span>`:""}</div>
       <h2 id="fh-title">${esc(d.n)}</h2>
-      <div class="printonly">MAP · Marseille Addictologie Psychiatrie · ${chkText(d).toLowerCase()} · ${esc(d.a)}</div>
+      <div class="printonly">MAP · Marseille AddictoPsy · ${chkText(d).toLowerCase()} · ${esc(d.a)}</div>
       <div class="org">${esc(d.o)} · ${esc(d.p)}</div>
       ${transit(d)}
     </div><svg class="wave" viewBox="0 0 390 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 16 C55 4 110 24 190 13 S320 3 390 15 V26 H0Z"/></svg></header>
@@ -5708,7 +5717,7 @@ function printSheet(d){
   <div class="ps-notes"><div class="ps-nt">Rendez-vous et notes</div>
     <div class="ps-nr"><span>Le</span><i></i><span>à</span><i class="s"></i><span>avec</span><i></i></div>
     <div class="ps-nf"></div></div>
-  <div class="ps-foot">MAP · Marseille Addictologie Psychiatrie · ${chkText(d).toLowerCase()} · imprimé le ${fmtDate(new Date().toISOString().slice(0,10))} · vérifiez les informations avant tout envoi</div>`;
+  <div class="ps-foot">MAP · Marseille AddictoPsy · ${chkText(d).toLowerCase()} · imprimé le ${fmtDate(new Date().toISOString().slice(0,10))} · vérifiez les informations avant tout envoi</div>`;
 }
 /* ---------- Fiche en PDF ou en image (avec la carte), pour l'envoyer en pièce jointe ---------- */
 const loadJS=(local,cdn)=>new Promise((res,rej)=>{const t=(src,next)=>{const s=document.createElement("script");s.src=src;s.onload=res;s.onerror=()=>{s.remove();next?t(next,null):rej(new Error("script"));};document.head.appendChild(s);};t(local,cdn);});
@@ -5796,7 +5805,7 @@ function patientSheet(d,lg){
   <div class="ps-notes"><div class="ps-nt">${bi(T.rdv,F.rdv)}</div>
     <div class="ps-nr">${T.f.map((x,i)=>`<span>${x}</span><i${i===1?' class="s"':""}></i>`).join("")}</div>
     <div class="ps-nf"></div></div>
-  <div class="ps-foot" dir="ltr"><span dir="auto">${T.check}</span>${lg==="fr"?"":" · "+F.check} · MAP · Marseille Addictologie Psychiatrie · ${chkText(d).toLowerCase()}</div></div>`;
+  <div class="ps-foot" dir="ltr"><span dir="auto">${T.check}</span>${lg==="fr"?"":" · "+F.check} · MAP · Marseille AddictoPsy · ${chkText(d).toLowerCase()}</div></div>`;
 }
 const plEl=document.getElementById("plangsheet");
 function openPlang(){plEl.hidden=false;const b=plEl.querySelector("[data-plang]");if(b)b.focus();}
@@ -6062,7 +6071,7 @@ const infoMenu=()=>`<div class="sublist">
   <button type="button" data-ipage="contact" style="--c:var(--accent)"><span><b>Contact</b><br><small>Écrire, signaler une erreur, proposer un lieu</small></span><em>›</em></button></div>`;
 function infoPage(pg){const box=document.getElementById("info-body");
   if(pg==="about"){const nA=D.filter(d=>!d.t.some(t=>PSYT.includes(t))).length,nP=D.length-nA;
-    box.innerHTML=`<div class="ab"><p><b>MAP</b> (Marseille Addictologie Psychiatrie) est un annuaire d'orientation pour les équipes du soin et du social : cures, post-cures, communautés, CSAPA, réduction des risques, CMP de secteur, urgences, équipes mobiles, entraide et associations d'usagers.</p>
+    box.innerHTML=`<div class="ab"><p><b>MAP</b> (Marseille AddictoPsy) est un annuaire d'orientation pour les équipes du soin et du social : cures, post-cures, communautés, CSAPA, réduction des risques, CMP de secteur, urgences, équipes mobiles, entraide et associations d'usagers.</p>
     <div class="stats3"><div><b>${D.length}</b>lieux</div><div><b>${nA}</b>addictologie</div><div><b>${nP}</b>psychiatrie</div></div>
     <p>Les informations viennent des sites des établissements, de l'ARS, d'ARCA-Sud, de Santé publique France, de la Fédération Addiction et de la cartographie collaborative RdR-Addicto. Chaque fiche porte sa date de vérification ; celles marquées « à confirmer » doivent être vérifiées avant d'orienter.</p>
     <p>MAP ne demande et ne garde aucune information personnelle. Gratuit, sans compte, mis à jour automatiquement à chaque ouverture.</p></div>
@@ -6075,7 +6084,7 @@ function infoPage(pg){const box=document.getElementById("info-body");
     <div class="arca" style="margin:0"><b>Pour un avis sur une orientation : ARCA-Sud</b><a class="arcanum" href="tel:+33488926888">04 88 92 68 88</a><span class="mono" style="font-size:12.5px">contact@arca-sud.fr</span></div>
     <button type="button" class="btn backi" data-ipage="menu">← Retour</button>`;}
   else box.innerHTML=infoMenu();}
-function openInfo(){infoEl.innerHTML=`<div class="isheet" role="dialog" aria-modal="true" aria-labelledby="info-title"><div class="grab"></div><h2 id="info-title">MAP</h2><p class="hint" style="margin:-6px 0 0">Marseille Addictologie Psychiatrie</p><div id="info-body" style="display:grid;gap:12px"></div><button type="button" class="btn" data-closeinfo style="width:100%">Fermer</button></div>`;
+function openInfo(){infoEl.innerHTML=`<div class="isheet" role="dialog" aria-modal="true" aria-labelledby="info-title"><div class="grab"></div><h2 id="info-title">MAP</h2><p class="hint" style="margin:-6px 0 0">Marseille AddictoPsy</p><div id="info-body" style="display:grid;gap:12px"></div><button type="button" class="btn" data-closeinfo style="width:100%">Fermer</button></div>`;
   infoPage("menu");infoEl.hidden=false;}
 const closeInfo=()=>{infoEl.hidden=true;};
 document.addEventListener("click",e=>{if(e.target.closest("[data-info]"))openInfo();});

@@ -1345,6 +1345,26 @@ select.repinput{appearance:auto}
 .hero .searchopen{background:rgba(255,255,255,.14)!important;border-color:rgba(255,255,255,.22)!important}
 .hero .modetabs{background:rgba(255,255,255,.14)!important;border-color:rgba(255,255,255,.18)!important}
 .fh .transit em{color:rgba(255,255,255,.72)!important}
+
+/* 19/11 : animations courtes et transitions douces (désactivées si le téléphone demande moins d'animations) */
+@keyframes mapFade{from{opacity:0}to{opacity:1}}
+@keyframes mapUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes mapSheet{from{transform:translateY(100%)}to{transform:none}}
+@keyframes mapSlide{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+.view:not([hidden]){animation:mapFade .22s ease-out both}
+
+.opts .op{animation:mapUp .34s cubic-bezier(.2,.8,.2,1) both}
+.opts .op:nth-child(2){animation-delay:.03s}.opts .op:nth-child(3){animation-delay:.06s}.opts .op:nth-child(4){animation-delay:.09s}
+.opts .op:nth-child(5){animation-delay:.12s}.opts .op:nth-child(6){animation-delay:.15s}.opts .op:nth-child(7){animation-delay:.18s}
+.opts .op:nth-child(8){animation-delay:.21s}.opts .op:nth-child(n+9){animation-delay:.24s}
+.card{animation:mapUp .3s cubic-bezier(.2,.8,.2,1) both}
+.isheet-scrim:not([hidden]){animation:mapFade .2s ease-out both}
+.isheet-scrim:not([hidden]) .isheet{animation:mapSheet .3s cubic-bezier(.2,.8,.2,1) both}
+.fiche:not([hidden]){animation:mapSlide .28s cubic-bezier(.2,.8,.2,1) both}
+.op,.card,.btn,.alllink,.mobbtn,.searchopen,.modetabs button,.repchips button{transition:transform .14s ease,background-color .2s ease,color .2s ease,box-shadow .2s ease,border-color .2s ease}
+.op:active,.card:active,.btn:active,.mobbtn:active,.searchopen:active{transform:scale(.97)}
+.modetabs button:active{transform:scale(.96)}
+@media (hover:hover){.op:hover,.card:hover{box-shadow:0 6px 18px -10px rgba(15,41,64,.35)}}
 </style>
 </head>
 <body>
@@ -1424,6 +1444,7 @@ select.repinput{appearance:auto}
     <h2 class="qh qtitle" style="margin-top:22px">Autres ressources</h2>
     <div class="opts pmore" id="p-more"></div>
     <button class="alllink" type="button" id="p-all">Tout voir : CMP, urgences et autres ressources →</button>
+    <button class="alllink" type="button" data-suggest style="margin-top:-6px">＋ Proposer un nouveau lieu</button>
     <button class="installbtn" type="button" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M12 7.5v7M9 11.5l3 3 3-3"/></svg>Installer sur mon téléphone</button>
     <div class="arca urgblock">
       <b>Urgences, 24h/24</b>
@@ -4904,6 +4925,7 @@ if(!D.some(d=>d.id==="uhsa-marseille")){
  d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
  d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
  d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Animations courtes et transitions douces ; « Proposer un nouveau lieu » aussi en Psychiatrie");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("En-tête aux couleurs du logo : du bleu nuit au prune");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Nouveau logo et nouveau nom : MAP · Marseille AddictoPsy");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("« Signaler une erreur » devient « Commentaires »");

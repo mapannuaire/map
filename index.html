@@ -1384,6 +1384,23 @@ html[data-loaded] .opts .op{animation:none!important}
   html[data-sw="r"] .modetabs::before{animation:pillR .4s cubic-bezier(.2,.8,.2,1) both}
   html[data-sw="l"] .modetabs::before{animation:pillL .4s cubic-bezier(.2,.8,.2,1) both}
 }
+
+/* 19/11 : une ambiance par domaine — Addictologie : nuit → bleu mer ; Psychiatrie : nuit → prune */
+:root{--grad-a:linear-gradient(160deg,#0f2940 0%,#174a7a 50%,#1e6fb8 100%);--grad-p:linear-gradient(160deg,#0f2940 0%,#4b2c5e 48%,#8a3c70 100%);--bg-a:#f1f4f8;--bg-p:#f7f1f4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--grad-a:linear-gradient(160deg,#0b1d2e 0%,#12385c 50%,#17558c 100%);--grad-p:linear-gradient(160deg,#0b1d2e 0%,#36214a 48%,#64294f 100%);--bg-a:#0e1822;--bg-p:#171219}}
+:root[data-theme="dark"]{--grad-a:linear-gradient(160deg,#0b1d2e 0%,#12385c 50%,#17558c 100%);--grad-p:linear-gradient(160deg,#0b1d2e 0%,#36214a 48%,#64294f 100%);--bg-a:#0e1822;--bg-p:#171219}
+html[data-mode="addicto"]{--bandgrad:var(--grad-a);--bg:var(--bg-a)}
+html[data-mode="psy"]{--bandgrad:var(--grad-p);--bg:var(--bg-p)}
+#v-q1 .hero{background:var(--grad-a)!important}
+#v-p1 .hero{background:var(--grad-p)!important}
+body{transition:background-color .45s ease}
+.hero::after{content:"";position:absolute;inset:0;opacity:0;pointer-events:none;z-index:0}
+#v-q1 .hero::after{background:var(--grad-p)}
+#v-p1 .hero::after{background:var(--grad-a)}
+.hero>*:not(.wave){position:relative;z-index:1}
+.hero .wave{z-index:2}
+@keyframes mapOut{from{opacity:1}to{opacity:0}}
+html[data-sw] .hero::after{animation:mapOut .45s ease both}
 </style>
 </head>
 <body>
@@ -4944,6 +4961,7 @@ if(!D.some(d=>d.id==="uhsa-marseille")){
  d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
  d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
  d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Une ambiance par domaine : bleu mer pour l'addictologie, prune pour la psychiatrie, avec un fondu au changement d'onglet");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Animations courtes et transitions douces ; « Proposer un nouveau lieu » aussi en Psychiatrie");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("En-tête aux couleurs du logo : du bleu nuit au prune");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Nouveau logo et nouveau nom : MAP · Marseille AddictoPsy");
@@ -5881,6 +5899,10 @@ function patientText(d,lg){
 let MLANG="pro";
 
 setTimeout(()=>{document.documentElement.dataset.loaded="1";},1400);
+
+/* Domaine courant sur <html> : couleurs du fond et des en-têtes */
+{const h=document.documentElement;const upd=()=>{const b=document.querySelector('.modetabs [data-mode][aria-selected="true"]');if(b)h.dataset.mode=b.dataset.mode;};
+ upd();new MutationObserver(upd).observe(document.body,{subtree:true,attributes:true,attributeFilter:["aria-selected"]});}
 /* Sens du glissement quand on change de domaine */
 {let swT=null;document.addEventListener("click",e=>{const b=e.target.closest(".modetabs [data-mode]");if(!b||b.getAttribute("aria-selected")==="true")return;
   const h=document.documentElement;h.dataset.sw=b.dataset.mode==="psy"?"r":"l";clearTimeout(swT);swT=setTimeout(()=>{delete h.dataset.sw;},480);},true);}

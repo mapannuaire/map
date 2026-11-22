@@ -502,6 +502,7 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .hsum{font:600 var(--fs-xs) var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
 .hdet .chev{margin-left:auto;color:var(--muted);transition:transform var(--dur-1)}
 .hdet[open] .chev{transform:rotate(180deg)}
+.hdet.fold>summary~*{margin-top:var(--sp-2)}
 .hrow{display:flex;justify-content:space-between;gap:var(--sp-3);font-size:var(--fs-md);padding:3px 0;border-bottom:1px dashed var(--line)}
 .hrow span:first-child{text-transform:capitalize;color:var(--muted)}
 .hrow span:last-child{text-align:right;font-variant-numeric:tabular-nums}
@@ -4956,7 +4957,8 @@ if(!D.some(d=>d.id==="uhsa-marseille")){
  d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
  d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
  d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
- CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Une ambiance par domaine : bleu mer pour l'addictologie, prune pour la psychiatrie, avec un fondu au changement d'onglet");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Fiche : les rubriques s'ouvrent repliées, sauf En bref, Contacts et l'envoi par e-mail ; un toucher les déplie");
+CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Une ambiance par domaine : bleu mer pour l'addictologie, prune pour la psychiatrie, avec un fondu au changement d'onglet");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Animations courtes et transitions douces ; « Proposer un nouveau lieu » aussi en Psychiatrie");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("En-tête aux couleurs du logo : du bleu nuit au prune");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Nouveau logo et nouveau nom : MAP · Marseille AddictoPsy");
@@ -5696,7 +5698,7 @@ function openFiche(id){
   if(typeof track==="function")track("fiche",id);
   lastFocus=document.activeElement;
   fEl.innerHTML=fiche(d);fEl.dataset.id=id;fEl.hidden=false;document.body.classList.add("locked");fEl.scrollTop=0;
-  miniReal(d);
+  miniReal(d);foldSecs();
   const to=document.getElementById("to-"+id),send=document.getElementById("send-"+id);
   const gsend=document.getElementById("gsend-"+id)||{};
   const ml=document.getElementById("mlang-"+id),bt=document.getElementById("body-"+id);
@@ -5706,6 +5708,12 @@ function openFiche(id){
   upd();to.addEventListener("input",upd);if(ml)ml.addEventListener("change",upd);
   fEl.focus({preventScroll:true});
 }
+/* 22/11 : à l'ouverture d'une fiche, seules « En bref », « Contacts » et l'envoi par e-mail restent dépliées */
+const FOLD_KEEP=/^(En bref|Contacts|Envoyer cette fiche)/i;
+function foldSecs(){fEl.querySelectorAll("section.sec").forEach(sec=>{const h=sec.querySelector(":scope>h3");if(!h||FOLD_KEEP.test(h.textContent.trim()))return;
+  const dt=document.createElement("details");dt.className="hdet fold";const sm=document.createElement("summary");
+  sm.innerHTML=`<span class="hsum">${esc(h.textContent)}</span><span class="chev" aria-hidden="true">▾</span>`;h.remove();dt.appendChild(sm);
+  [...sec.childNodes].forEach(n=>dt.appendChild(n));sec.appendChild(dt);});}
 function hideFiche(){if(fEl.hidden)return;fEl.hidden=true;fEl.innerHTML="";fEl.dataset.id="";document.body.classList.remove("locked");if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});}
 const closeFiche=()=>back();
 fEl.addEventListener("click",e=>{

@@ -34,7 +34,7 @@
   --accent:#0d5a88; --accent-deep:#0b4a70; --accent-soft:#e6f0f7; --on-accent:#ffffff;
   --good:#2b6a3c; --good-soft:#e2f0e5; --warn:#8a5a00; --warn-soft:#fbf1dc; --bad:#a3322a; --bad-soft:#f8e2df;
   --m1:#0075be; --m2:#e30513; --tram:#96be0d; --t1:#f18e00; --t2:#f5e615; --t3:#96be0d; --bus:#4c5a63;
-  --t-cure:#b2473a; --t-postcure:#2b7a46; --t-sevrage:#b2473a; --t-commu:#5a7a2b; --t-hdj:#a8720c; --t-resid:#7a55a0; --t-csapa:#0d5a88; --t-liberal:#3d7480; --t-rdr:#b85a12; --t-hosp:#4b5fa8; --t-amob:#2f7d6d; --t-spec:#b0367f; --t-cmp:#8a3d6b; --t-urg:#b3261e; --t-mob:#2f7d6d; --t-entraide:#8a6d1f; --t-hdjpsy:#a8720c; --t-rehab:#2b7a46; --t-specialise:#4b5fa8; --t-clinique:#7a55a0; --t-consult:#3d7480; --t-gem:#b0367f; --t-famille:#b85a12; --t-repit:#2f7d6d; --t-logement:#0d5a88; --t-insertion:#5d6b2c; --t-ecoute:#b2473a; --t-droits:#55606b; --t-hospit:#8a3d6b;
+  --t-cure:#b2473a; --t-postcure:#2b7a46; --t-sevrage:#b2473a; --t-commu:#5a7a2b; --t-hdj:#8f6008; --t-resid:#7a55a0; --t-csapa:#0d5a88; --t-liberal:#3d7480; --t-rdr:#b85a12; --t-hosp:#4b5fa8; --t-amob:#2f7d6d; --t-spec:#b0367f; --t-cmp:#8a3d6b; --t-urg:#b3261e; --t-mob:#2f7d6d; --t-entraide:#8a6d1f; --t-hdjpsy:#a8720c; --t-rehab:#2b7a46; --t-specialise:#4b5fa8; --t-clinique:#7a55a0; --t-consult:#3d7480; --t-gem:#b0367f; --t-famille:#b85a12; --t-repit:#2f7d6d; --t-logement:#0d5a88; --t-insertion:#5d6b2c; --t-ecoute:#b2473a; --t-droits:#55606b; --t-hospit:#8a3d6b;
   --sea:#bcd5e3; --sea-ink:#5f8aa6; --land:#ece6dc; --land-ink:#8a8173; --pin-ring:#ffffff; --pin-text:#ffffff;
   --band:#0f2a3f; --band-2:#1c3b53; --band-line:#2b4d66; --tile-mix:100%; --tile-base:#000; --cta:#0f2a3f;
   --shadow:0 8px 24px -12px rgba(20,40,55,.35);
@@ -111,10 +111,19 @@ a{color:var(--accent)}
 
 .qcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-4);display:grid;gap:var(--sp-3);margin-bottom:var(--sp-3)}
 .qcard .lbl{font:600 var(--fs-xs) var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.qcard h3{margin:0;font:600 var(--fs-lg)/1.25 var(--display)}
+.qcard h2,.qcard h3{margin:0;font:600 var(--fs-lg)/1.25 var(--display)}
 .seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:var(--sp-2);background:var(--sunk);border-radius:var(--r-lg);padding:var(--sp-1)}
 .seg button{border:0;background:none;border-radius:var(--r-md);padding:var(--sp-3) var(--sp-2);font-weight:600;font-size:var(--fs-md);color:var(--muted);line-height:1.2}
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,.14)}
+.subq{font-size:var(--fs-md);font-weight:600;color:var(--fg)}
+.subopts{display:grid;gap:var(--sp-2)}
+.subopts button{display:flex;align-items:center;gap:var(--sp-3);text-align:left;min-height:52px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);border-radius:var(--r-md);padding:var(--sp-3);font-size:var(--fs-md);line-height:1.25}
+.subopts button b{display:block;font-weight:600}
+.subopts button small{display:block;color:var(--muted);font-size:var(--fs-sm);margin-top:2px}
+.subopts .dot{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center}
+.subopts button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.subopts button[aria-pressed="true"] .dot{border-color:var(--accent)}
+.subopts button[aria-pressed="true"] .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent)}
 .seg.four{grid-auto-flow:row;grid-template-columns:1fr 1fr}
 .hint{margin:0;font-size:var(--fs-sm);color:var(--muted);line-height:1.4}
 select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:var(--sp-3);font-size:var(--fs-md)}
@@ -233,6 +242,7 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .chip{flex:none;white-space:nowrap;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-full);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-sm);font-weight:600;display:inline-flex;gap:var(--sp-2);align-items:center;color:var(--fg)}
 .chip i{width:9px;height:9px;border-radius:50%;background:var(--c)}
 .chip.cond{background:var(--sunk);border-color:transparent;color:var(--muted)}
+.chip.assumed{border:1px dashed var(--muted);background:transparent}
 .chip.edit{color:var(--accent);border-style:dashed}
 .searchbox{padding:var(--sp-3) var(--sp-4) 0}
 .searchbox input{width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-3);font-size:var(--fs-md)}
@@ -252,6 +262,21 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .zoom #zfit{font-size:var(--fs-lg)}
 .mapwrap svg.map{display:block;width:100%;height:min(50vh,360px)}
 .mapwrap.collapsed .mapbox,.mapwrap.collapsed .offmap{display:none!important}
+.maptog.mapsize{position:absolute;left:8px;bottom:8px;z-index:500;background:var(--surface);box-shadow:var(--shadow);min-height:36px}
+.mapwrap.collapsed #mapsize{display:none}
+.mapwrap.collapsed .legend{display:none}
+.mapwrap.collapsed .maptools{justify-content:flex-start}
+/* Mobile : la liste d'abord. Recherche au-dessus, carte compacte (agrandissable) */
+@media (max-width:899px){
+  .res-grid{display:flex;flex-direction:column}
+  .res-right{display:contents}
+  .res-right .searchbox{order:-1;padding-bottom:var(--sp-3);background:var(--surface)}
+  .res-right .list,.res-right .empty,.res-right .foot{order:1}
+  .mapwrap:not(.mapbig) .lmap,.mapwrap:not(.mapbig) svg.map{height:clamp(150px,24vh,190px)}
+  .mapwrap:not(.mapbig) .zoom{top:6px;right:6px}
+  .mapwrap:not(.mapbig) .zoom #zout{display:none}
+}
+@media (min-width:900px){#mapsize{display:none}}
 .offmap{display:flex;gap:var(--sp-2);overflow-x:auto;padding:var(--sp-2) var(--sp-4) var(--sp-3);scrollbar-width:none;align-items:center;border-top:1px solid var(--line)}
 .offmap::-webkit-scrollbar{display:none}
 .offmap > span{flex:none;font-size:var(--fs-sm);color:var(--muted)}
@@ -383,12 +408,17 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .crow .acts{display:flex;gap:var(--sp-2);flex:none}
 .copy{border:1px solid var(--line);background:var(--bg);border-radius:var(--r-md);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-sm);font-weight:600}
 .note{font-size:var(--fs-sm);color:var(--muted)}
+.mailbox .mailrow{display:grid;gap:var(--sp-2);border-top:1px solid var(--line);padding-top:var(--sp-3)}
+.mailbox .mlabel{font-size:var(--fs-sm);font-weight:600;color:var(--muted)}
+.mailbox details.more{border-top:1px solid var(--line);padding-top:var(--sp-2)}
+.mailbox details.more>.shgrid{margin:var(--sp-2) 0}
+.mailbox details.more>summary{border:0;background:none;padding:var(--sp-2) 0;min-height:44px}
 .mailbox input{width:100%;border:1.5px solid var(--line);background:var(--bg);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-3);font-size:var(--fs-md)}
 .mailbox textarea{width:100%;min-height:150px;border:1px solid var(--line);background:var(--bg);border-radius:var(--r-md);padding:var(--sp-3);font:var(--fs-sm)/1.45 var(--mono);resize:vertical}
 .fpad{padding-bottom:110px}
 
 :root{--display:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
-.qh,.qcard h3,.presult h3,.isheet h2,.scard h3,.rtop h1,.bubble b,.group-h h2,.card h3,.fh h2,.has-lvl{font-weight:700;letter-spacing:-.01em}
+.qh,.qcard h2,.qcard h3,.presult h3,.isheet h2,.scard h3,.rtop h1,.bubble b,.group-h h2,.card h3,.fh h2,.has-lvl{font-weight:700;letter-spacing:-.01em}
 /* ===== Thème « Nuit de rade » : bandeau bleu nuit avec la vague, catégories en pavés de couleur ===== */
 .hero h1,.fh h2{font-family:var(--body);font-weight:700;letter-spacing:-.025em}
 #v-q1 .hero h1,#v-p1 .hero h1{font-size:clamp(23px,6.4vw,28px)}
@@ -527,6 +557,16 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .msgmeta:has(b:empty){display:none}
 .shgrid .btn{padding:var(--sp-3) var(--sp-2);font-size:var(--fs-md)}
 /* ---- nouveautés ---- */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.view h1[tabindex="-1"]:focus:not(:focus-visible),.view h2[tabindex="-1"]:focus:not(:focus-visible){outline:none}
+.themebtn,.infobtn,.maptog{position:relative}
+.themebtn::before,.infobtn::before{content:"";position:absolute;inset:-11px}
+.maptog::before,.offmap button::before{content:"";position:absolute;inset:-5px 0}
+.offmap button{position:relative}
+.zoom button{width:44px;height:44px}
+.iconback{width:44px!important;height:44px!important}
+.alllink,.installbtn{min-height:44px}
+.arca .arcanum{display:inline-block;padding:12px 0;margin:-12px 0}
 .themebtn{margin-left:auto;padding:3px var(--sp-2);font-size:var(--fs-sm);letter-spacing:0}
 .themebtn+.newsbtn{margin-left:var(--sp-2)}
 .newsbtn{margin-left:auto;display:inline-flex;align-items:center;gap:var(--sp-1);border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);color:inherit;border-radius:var(--r-full);padding:3px var(--sp-2);font:600 var(--fs-xs) var(--mono);letter-spacing:.06em;text-transform:uppercase;position:relative}
@@ -1416,6 +1456,7 @@ html[data-sw] .hero::after{animation:mapOut var(--dur-3) var(--ease) both}
     <svg class="wave" viewBox="0 0 390 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 16 C55 4 110 24 190 13 S320 3 390 15 V26 H0Z"/></svg>
   </header>
   <main class="col qpad">
+    <h1 class="sr-only">Orienter en addictologie à Marseille</h1>
     <div class="prog" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
     <div class="opts" id="opts"></div>
     <button class="alllink" type="button" id="seeall">Tout voir, sans filtre →</button>
@@ -1448,6 +1489,7 @@ html[data-sw] .hero::after{animation:mapOut var(--dur-3) var(--ease) both}
     <svg class="wave" viewBox="0 0 390 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 16 C55 4 110 24 190 13 S320 3 390 15 V26 H0Z"/></svg>
   </header>
   <main class="col qpad">
+    <h1 class="sr-only">Orienter en psychiatrie à Marseille : CMP, équipes mobiles, urgences</h1>
     <h2 class="qh qtitle" style="margin-top:8px">CMP</h2>
     <h2 class="qh" style="margin-top:2px;font-size:16px">La personne a-t-elle un domicile ?</h2>
     <p class="qsub">Le CMP dépend du lieu de vie.</p>
@@ -1461,8 +1503,8 @@ html[data-sw] .hero::after{animation:mapOut var(--dur-3) var(--ease) both}
       <h3>Arrondissement ou commune</h3>
       <select id="p-arr" class="arrsel" aria-label="Arrondissement"><option value="">Choisir…</option></select>
       <div id="p-subwrap" hidden style="display:grid;gap:8px">
-        <span class="hint">Cet arrondissement est partagé entre deux secteurs :</span>
-        <div class="seg four" id="p-sub" style="grid-template-columns:1fr"></div>
+        <span class="subq" id="p-subq">Arrondissement partagé entre deux secteurs. Dans quel quartier vit la personne ?</span>
+        <div class="subopts" id="p-sub" role="group" aria-labelledby="p-subq"></div>
       </div>
       <p class="hint">Le secteur dépend de l'adresse exacte. En cas de doute, appelez le CMP : il réoriente si besoin.</p>
     </section>
@@ -1505,6 +1547,7 @@ html[data-sw] .hero::after{animation:mapOut var(--dur-3) var(--ease) both}
     <div class="sfield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg><input id="sq" type="search" placeholder="Nom, ville, quartier, produit…" aria-label="Rechercher dans l'annuaire" autocomplete="off" enterkeyhint="search"><button type="button" id="sqclear" aria-label="Effacer" hidden>×</button></div>
   </div></div>
   <main class="col" style="padding-top:12px;padding-bottom:40px">
+    <h1 class="sr-only">Rechercher dans tout l'annuaire</h1>
     <div id="shint">
       <p class="qsub" style="margin:0 0 10px">Cherche dans tout l'annuaire : addictologie et psychiatrie.</p>
       <div class="sugg" id="sugg"></div>
@@ -1527,25 +1570,25 @@ html[data-sw] .hero::after{animation:mapOut var(--dur-3) var(--ease) both}
     <div class="prog" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></div>
     <section class="qcard" id="q-lg">
       <span class="lbl">Pour la cure</span>
-      <h3>La personne a-t-elle un logement ?</h3>
+      <h2>La personne a-t-elle un logement ?</h2>
       <div class="seg" data-key="lg"><button type="button" data-v="oui">Oui</button><button type="button" data-v="non">Non</button></div>
       <p class="hint">Sans logement, les cliniques privées ne sont pas proposées pour la cure : seuls les hôpitaux publics restent.</p>
     </section>
     <section class="qcard" id="q-hm">
       <span class="lbl" id="hm-lbl">Pour les structures</span>
-      <h3>Afficher les lieux hors de Marseille ?</h3>
+      <h2>Afficher les lieux hors de Marseille ?</h2>
       <div class="seg" data-key="hm"><button type="button" data-v="oui">Oui</button><button type="button" data-v="non">Non</button></div>
       <p class="hint">Non : uniquement Marseille et Allauch (métro M1 jusqu'à La Rose, puis bus).</p>
     </section>
     <section class="qcard" id="q-sec">
       <span class="lbl">Médecins libéraux</span>
-      <h3>Secteur de conventionnement</h3>
+      <h2>Secteur de conventionnement</h2>
       <div class="seg four" data-key="sec"><button type="button" data-v="all">Tous</button><button type="button" data-v="1">Secteur 1</button><button type="button" data-v="2O">Secteur 2 OPTAM</button><button type="button" data-v="2">Secteur 2</button></div>
       <p class="hint">Secteur 1 : sans dépassement. OPTAM : dépassements limités. Secteur 2 : dépassements libres.</p>
     </section>
     <section class="qcard" id="q-arr">
       <span class="lbl">Médecins libéraux</span>
-      <h3>Quartier</h3>
+      <h2>Quartier</h2>
       <select id="arr" class="arrsel" aria-label="Quartier"><option value="">Tous les quartiers</option></select>
       <p class="hint">Le cabinet ou l'un des lieux de consultation du médecin.</p>
     </section>
@@ -1563,17 +1606,18 @@ html[data-sw] .hero::after{animation:mapOut var(--dur-3) var(--ease) both}
     <button class="pill" type="button" id="modify">Modifier ✎</button>
   </div></div>
   <div class="chips" id="chips" aria-label="Filtres actifs"></div>
-  <div class="res-grid">
+  <main class="res-grid">
     <div class="res-map">
       <div class="mapwrap" id="mapwrap">
         <div class="maptools">
           <div class="legend" aria-hidden="true"><span><i style="--c:var(--m1)"></i>M1</span><span><i style="--c:var(--m2)"></i>M2</span><span><i class="dash" style="--c:var(--t1)"></i>T1</span><span><i class="dash" style="--c:var(--t2);outline:1px solid rgba(0,0,0,.15)"></i>T2</span><span><i class="dash" style="--c:var(--t3)"></i>T3</span><span class="lg-hint">Carte schématique</span></div>
-          <button class="maptog" type="button" id="maptog">Réduire</button>
+          <button class="maptog" type="button" id="maptog" aria-controls="mapwrap">Masquer</button>
         </div>
         <div class="mapbox">
           <div class="lmap" id="lmap" hidden aria-label="Carte de Marseille avec les lieux numérotés"></div>
           <svg class="map" id="map" role="img" aria-label="Carte de Marseille avec les lieux numérotés" preserveAspectRatio="xMidYMid meet"></svg>
           <div class="zoom" role="group" aria-label="Zoom"><button type="button" id="zin" aria-label="Zoomer">+</button><button type="button" id="zout" aria-label="Dézoomer">−</button><button type="button" id="zfit" aria-label="Recadrer sur les résultats">⤢</button></div>
+          <button class="maptog mapsize" type="button" id="mapsize">Agrandir</button>
           <div class="bubble" id="bubble" hidden></div>
         </div>
         <div class="offmap" id="offmap" hidden></div>
@@ -1595,7 +1639,7 @@ html[data-sw] .hero::after{animation:mapOut var(--dur-3) var(--ease) both}
         <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" id="suggest" data-suggest>Proposer un lieu manquant</button><button class="btn" type="button" data-news id="footnews">Nouveautés et version</button></div>
       </footer>
     </div>
-  </div>
+  </main>
 </div>
 
 <div class="isheet-scrim" id="install" hidden>
@@ -4596,11 +4640,12 @@ D.push(...MOB);
 Object.assign(GEO,{"mob-marss":[43.28847,5.38159],"mob-emlpp":[43.38108,5.3596]});
 
 /* ---------- Version, nouveautés, signalement ---------- */
-const VERSION="2026-11-18";
+const VERSION="2026-11-24";
 const REPORT_TO="mapannuaire@gmail.com";
 /* Dernière vérification par défaut (mois du relevé) ; une fiche peut préciser d.chk="AAAA-MM-JJ" */
 const CHK_DEFAULT="2026-10";
 const CHANGELOG=[
+  ["2026-11-24",["Sur téléphone, les résultats s'affichent tout de suite : carte compacte (bouton « Agrandir ») et recherche au-dessus","Recherche : synonymes cliniques (Subutex, TSO, méthadone, crack, cocaïne…), pluriels, et résultats partiels quand aucun lieu ne contient tous les mots","Fiche : Appeler, Itinéraire et Donner la fiche en haut ; impression, message, e-mail et PDF regroupés dans « Donner la fiche », avec la langue choisie une seule fois","Accessibilité : focus sur le titre à chaque écran, boutons plus faciles à toucher"]],
   ["2026-10-28",["Partager : le message contient le lien direct vers la fiche dans MAP et les liens des dossiers d'admission","Fiche imprimée et PDF : QR code vers la fiche en ligne et vers chaque document","Les fiches peuvent désormais être modifiées dans un tableau Google Sheets (mise en place en cours)","Ajout du SIDIIS (Groupe SOS) : suivi intensif à domicile pour les personnes souvent hospitalisées en psychiatrie, 8ᵉ, 9ᵉ et 10ᵉ","Logement : seuls les SAMSAH du handicap psychique sont gardés","Mon soutien psy : lien vers la page Ameli et son dépliant","Documents à télécharger vérifiés sur les sites des structures : 117 fiches ont maintenant des documents (210 au total), dont 22 avec un dossier d'admission. Dans chaque fiche, « Admission » regroupe les dossiers à remplir (PDF en premier) et « Documents » les plaquettes et livrets"]],
   ["2026-10-24",["Vérification croisée avec la cartographie RdR-Addicto : ajout du CAARUD Tekno (milieu festif techno) ; Plus Belle la Nuit à sa nouvelle adresse (13001) avec le Chill'In du jeudi ; numéro du Tipi festif ; adresses précisées pour Addictions France La Ciotat et Villa Floréal ; horaires d'accueil de Tremplin corrigés"]],
   ["2026-10-23",["Espace Puget Bis et TEMA 13 mis à jour d'après leurs plaquettes : public 12–25 ans, groupes (boxe, écriture, rap), accueil de l'entourage ; TEMA 13 classée en équipe mobile, joignable du lundi au vendredi 10h–18h"]],
@@ -5162,7 +5207,7 @@ const OPTS=[["sevrage","Sevrage","Cure, post-cure, communauté"],["hdj","Hôpita
 /* ---------- État et filtres ---------- */
 const S={mode:"addicto",only:"",sub:"",csub:"",hsect:"",hlabel:"",types:[],lg:"oui",hm:"oui",sec:"all",arr:"",q:"",psy:{how:"",arr:"",sub:"",day:"",month:""}};
 const base=(d,s)=>{
-  if(s.q&&!JSON.stringify(d).toLowerCase().includes(s.q))return false;
+  if(s.q){const ix=sIndex(d);if(!qWords(s.q).every(x=>qHit(d,ix,x)))return false;}
   const psyT=d.t.some(t=>PSYT.includes(t));
   if(s.mode==="psy"){if(!psyT)return false;if(!s.only)return true;
     if(!d.t.some(t=>famTypes(s.only).includes(t)))return false;
@@ -5229,7 +5274,7 @@ function paintQ2(){
   document.querySelectorAll("#v-q2 .seg").forEach(g=>g.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",S[g.dataset.key]===b.dataset.v)));
   document.getElementById("arr").value=S.arr;
 }
-document.getElementById("v-q2").addEventListener("click",e=>{const b=e.target.closest(".seg button");if(!b)return;S[b.closest(".seg").dataset.key]=b.dataset.v;paintQ2();});
+document.getElementById("v-q2").addEventListener("click",e=>{const b=e.target.closest(".seg button");if(!b)return;const k=b.closest(".seg").dataset.key;S[k]=b.dataset.v;if(k==="lg")S.lgSet=true;paintQ2();});
 document.getElementById("arr").addEventListener("change",e=>{S.arr=e.target.value;});
 document.getElementById("next2").addEventListener("click",()=>go("resultats"));
 
@@ -5482,9 +5527,15 @@ function miniReal(d){
 REAL.on=realInit();
 window.addEventListener("offline",realFallback);
 const mapwrap=document.getElementById("mapwrap"),maptog=document.getElementById("maptog");
-function setMap(open){mapwrap.classList.toggle("collapsed",!open);maptog.textContent=open?"Réduire ▴":"Afficher la carte ▾";maptog.setAttribute("aria-expanded",open);store("addicto13.map",open?"1":"0");if(open&&cur.length)drawMap(cur);}
+const mapsize=document.getElementById("mapsize");
+function setMapSize(big){mapwrap.classList.toggle("mapbig",big);mapsize.textContent=big?"Réduire":"Agrandir";mapsize.setAttribute("aria-pressed",big);store("addicto13.mapbig",big?"1":"0");if(REAL.on&&REAL.map)setTimeout(()=>REAL.map.invalidateSize(),40);}
+mapsize.addEventListener("click",()=>{setMapSize(!mapwrap.classList.contains("mapbig"));if(cur.length)setTimeout(()=>drawMap(cur),60);});
+setMapSize(store("addicto13.mapbig")==="1");
+function setMap(open,keep){mapwrap.classList.toggle("collapsed",!open);maptog.textContent=open?"Masquer":"Afficher la carte";maptog.setAttribute("aria-expanded",open);if(!keep)store("addicto13.map",open?"1":"0");if(open&&cur.length)drawMap(cur);}
 maptog.addEventListener("click",()=>setMap(mapwrap.classList.contains("collapsed")));
-setMap(store("addicto13.map")!=="0");
+/* Par défaut, carte affichée ; repliée sur les très petits écrans (moins de 620 px de haut, iPhone SE…) pour que la liste soit visible tout de suite.
+   Le choix de l'utilisateur (Masquer / Afficher) est ensuite mémorisé. */
+{const sv=store("addicto13.map");setMap(sv?sv!=="0":(innerHeight>=620||innerWidth>=900),true);}
 
 /* ---------- Résultats ---------- */
 /* ---------- Horaires : « ouvert / fermé » à l'heure de Paris ---------- */
@@ -5550,7 +5601,7 @@ function render(){
   const nU=items.filter(d=>d.t.includes("urg")).length,nM=items.filter(d=>d.t.includes("mob")).length,nC=items.filter(d=>d.t.includes("cmp")).length,nO=n-nU-nM-nC;
   document.getElementById("count").textContent=psy?(n?`${n} lieu${n>1?"x":""}`:"Aucun résultat"):(n?`${n} lieu${n>1?"x":""}`:"Aucun lieu");
   const off=items.filter(d=>GEO[d.id]&&!inFrame(GEO[d.id])).length;
-  document.getElementById("countsub").textContent=psy?(S.only?famLabel():[nC&&`${nC} CMP`,nM&&`${nM} équipes mobiles`,nU&&`${nU} urgences`,nO&&`${nO} autres`].filter(Boolean).join(" · ")):off?`dont ${off} hors carte, listés sous la carte`:"Touchez un numéro sur la carte";
+  document.getElementById("countsub").textContent=psy?(S.only?famLabel():[nC&&`${nC} CMP`,nM&&`${nM} équipes mobiles`,nU&&`${nU} urgences`,nO&&`${nO} autres`].filter(Boolean).join(" · ")):off?`dont ${off} hors carte`:"Touchez un numéro sur la carte";
   /* pastilles */
   const ch=[];
   if(psy&&S.only){const F=FAM[S.only];
@@ -5564,7 +5615,7 @@ function render(){
   else{
   if(S.types.length)ORDER.filter(t=>S.types.includes(t)).forEach(t=>ch.push(`<button type="button" class="chip" data-to="q1" style="--c:var(--t-${t})"><i></i>${t==="commu"&&S.csub?esc(comSubLabel(S.csub).split(" · ")[0]):L[t]}</button>`));
   else ch.push(`<button type="button" class="chip" data-to="q1">Tous les types</button>`);
-  if(n0.lg)ch.push(`<button type="button" class="chip cond" data-to="q2">Logement : ${S.lg}</button>`);
+  if(n0.lg)ch.push(`<button type="button" class="chip cond${S.lgSet?"":" assumed"}" data-to="q2"${S.lgSet?"":` aria-label="Logement : ${S.lg}, supposé par défaut. Modifier"`}>Logement : ${S.lg}${S.lgSet?"":" (supposé)"}</button>`);
   if(n0.hm)ch.push(`<button type="button" class="chip cond" data-to="q2">${S.hm==="oui"?"Hors Marseille accepté":"Marseille et Allauch"}</button>`);
   if(n0.lib){ch.push(`<button type="button" class="chip cond" data-to="q2">${S.sec==="all"?"Tous secteurs":SECL[S.sec]}</button>`);if(S.arr)ch.push(`<button type="button" class="chip cond" data-to="q2">${esc(ARRL[S.arr])}</button>`);}
   ch.push(`<button type="button" class="chip edit" data-to="q1">✎ Modifier</button>`);}
@@ -5633,8 +5684,8 @@ function fiche(d){
   const big=[];
   const em=d.c.find(([l,v])=>/@/.test(v));
   if(ph)big.push(`<a href="${telHref(ph[1])}" aria-label="Appeler le ${esc(ph[1])}">${ico("phone")}<span class="telnum">${esc(ph[1])}</span></a>`);
-  big.push(`<button type="button" class="ico" data-share aria-label="Partager la fiche" title="Partager la fiche">${ico("share")}</button>`);
-  if(em)big.push(`<a class="ico" href="mailto:${esc(em[1].trim())}" aria-label="Écrire à ${esc(em[1])}" title="Écrire à ${esc(em[1])}">${ico("mail")}</a>`);
+  big.push(`<a class="ico" href="${dirUrl(d)}" target="_blank" rel="noopener" aria-label="Itinéraire" title="Itinéraire">${ico("route")}</a>`);
+  big.push(`<button type="button" class="ico" data-tomail aria-label="Donner la fiche au patient ou à l'équipe" title="Donner la fiche">${ico("share")}</button>`);
   const hasHtml=h?`<section class="sec"><h3>Évaluation HAS</h3><div class="box">
       <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline"><span class="has-lvl">${LV[h[0]]}</span><span class="b ${h[0]}">Décision du ${esc(h[1])}</span></div>
       ${h[0]==="non"||h[0]==="conditions"?`<div class="warnbox">${esc(h[4])}</div>`:`<div>${esc(h[4])}</div>`}
@@ -5655,10 +5706,8 @@ function fiche(d){
       <div class="big">${big.join("")}</div>
       <div class="links">
         <a class="btn" href="${mapUrl(d)}" target="_blank" rel="noopener">${ico("pin")}Google Maps</a>
-        <a class="btn" href="${dirUrl(d)}" target="_blank" rel="noopener">${ico("route")}Itinéraire</a>
         ${d.site?`<a class="btn" href="${esc(d.site)}" target="_blank" rel="noopener">${ico("web")}Site officiel</a>`:""}
         ${d.photos?`<a class="btn" href="${esc(d.photos)}" target="_blank" rel="noopener">${ico("photo")}Photos</a>`:""}
-        <button class="btn" type="button" data-print>${ico("print")}Imprimer</button>
       </div>
       ${miniMap(d)}
       ${d.cover?`<section class="sec"><h3>Secteur</h3><div class="box sectbox"><div><b>${/^13G/.test(d.sect)?"Secteur "+esc(d.sect):"CH Valvert"}</b> · ${esc(d.o.split(" · ")[0])}</div><div>Couvre : ${esc(d.cover)}</div>${d.sdf?`<div>Personnes sans domicile nées du ${esc(d.sdf)}</div>`:""}</div></section>`:""}
@@ -5676,17 +5725,20 @@ function fiche(d){
       ${srcHtml(d)}
       <div class="chk"><span>${chkText(d)}</span><button type="button" class="linkbtn" data-report="${d.id}">Commentaires</button></div>
       <button class="fab-back" type="button" data-close>← Retour</button>
-      <section class="sec" id="mail-sec"><h3>Envoyer cette fiche par e-mail</h3>
+      <section class="sec" id="mail-sec"><h3>Donner la fiche</h3>
         <div class="box mailbox">
           <label class="mlang"><span>Pour</span><select id="mlang-${d.id}" aria-label="Destinataire et langue de la fiche">
             <option value="pro">l'équipe de soin (fiche complète)</option>
             <optgroup label="la personne, en :"><option value="fr">français</option><option value="en">anglais</option><option value="ar">arabe</option><option value="ary">darija (lettres arabes)</option><option value="ary-lat">darija (lettres latines)</option><option value="es">espagnol</option><option value="it">italien</option><option value="ka">géorgien</option></optgroup>
           </select></label>
-          <input id="to-${d.id}" type="email" value="${esc(def)}" placeholder="adresse@exemple.fr" aria-label="Destinataire">
-          <div class="shgrid"><a class="btn primary" id="send-${d.id}" href="#">${ico("mail")}Envoyer le texte</a>${EMBED?`<a class="btn primary" id="gsend-${d.id}" href="#" target="_blank" rel="noopener">Gmail</a>`:""}</div>
-          <div class="shgrid"><button type="button" class="btn" data-file="pdf">${ico("doc")}Fiche en PDF</button><button type="button" class="btn" data-file="jpg">${ico("photo")}Fiche en image</button></div>
+          <div class="shgrid"><button type="button" class="btn primary" data-print>${ico("print")}Imprimer</button><button type="button" class="btn primary" data-share>${ico("share")}Message</button></div>
+          <div class="mailrow"><label class="mlabel" for="to-${d.id}">Par e-mail</label>
+          <input id="to-${d.id}" type="email" value="${esc(def)}" placeholder="adresse@exemple.fr" autocomplete="email">
+          <div class="shgrid"><a class="btn" id="send-${d.id}" href="#">${ico("mail")}Envoyer le texte</a>${EMBED?`<a class="btn" id="gsend-${d.id}" href="#" target="_blank" rel="noopener">Gmail</a>`:""}</div></div>
+          <details class="hdet more"><summary><span class="hsum">Autres formats</span><span class="chev" aria-hidden="true">▾</span></summary>
+          <div class="shgrid"><button type="button" class="btn" data-file="pdf">${ico("doc")}Fiche en PDF</button><button type="button" class="btn" data-file="jpg">${ico("photo")}Fiche en image</button><button class="btn" type="button" data-copytext="body-${d.id}">Copier le texte</button></div>
+          <span class="note">PDF ou image : la fiche avec la carte, à joindre à un message. Le texte contient les liens, pas les fichiers.</span></details>
           <textarea id="body-${d.id}" hidden aria-hidden="true">${esc(mailText(d))}</textarea>
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn" type="button" data-copytext="body-${d.id}">Copier le texte</button><span class="note">PDF ou image : la fiche avec la carte, à joindre à un message. Le texte contient les liens, pas les fichiers.</span></div>
         </div>
       </section>
     </div>`;
@@ -5708,8 +5760,9 @@ function openFiche(id){
   upd();to.addEventListener("input",upd);if(ml)ml.addEventListener("change",upd);
   fEl.focus({preventScroll:true});
 }
+/* 24/11 : partage, e-mail, impression et fichiers regroupés dans « Donner la fiche » (langue choisie une seule fois) */
 /* 22/11 : à l'ouverture d'une fiche, seules « En bref », « Contacts » et l'envoi par e-mail restent dépliées */
-const FOLD_KEEP=/^(En bref|Contacts|Envoyer cette fiche)/i;
+const FOLD_KEEP=/^(En bref|Contacts|Donner la fiche)/i;
 function foldSecs(){fEl.querySelectorAll("section.sec").forEach(sec=>{const h=sec.querySelector(":scope>h3");if(!h||FOLD_KEEP.test(h.textContent.trim()))return;
   const dt=document.createElement("details");dt.className="hdet fold";const sm=document.createElement("summary");
   sm.innerHTML=`<span class="hsum">${esc(h.textContent)}</span><span class="chev" aria-hidden="true">▾</span>`;h.remove();dt.appendChild(sm);
@@ -5718,8 +5771,8 @@ function hideFiche(){if(fEl.hidden)return;fEl.hidden=true;fEl.innerHTML="";fEl.d
 const closeFiche=()=>back();
 fEl.addEventListener("click",e=>{
   if(e.target.closest("[data-close]"))return closeFiche();
-  if(e.target.closest("[data-tomail]")){document.getElementById("mail-sec").scrollIntoView({behavior:"smooth",block:"start"});return;}
-  if(e.target.closest("[data-print]")){openPlang();return;}
+  if(e.target.closest("[data-tomail]")){const ms=document.getElementById("mail-sec");ms.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});const ml=ms.querySelector("select");if(ml)setTimeout(()=>ml.focus({preventScroll:true}),350);return;}
+  if(e.target.closest("[data-print]")){const ml=document.getElementById("mlang-"+fEl.dataset.id);PLANG=ml?ml.value:"pro";printFiche(D.find(x=>x.id===fEl.dataset.id));return;}
   const fb=e.target.closest("[data-file]");if(fb){const ml=document.getElementById("mlang-"+fEl.dataset.id);MLANG=ml?ml.value:"pro";sendFiche(D.find(x=>x.id===fEl.dataset.id),fb.dataset.file,fb);return;}
   const sh=e.target.closest("[data-share]");if(sh){const d=D.find(x=>x.id===fEl.dataset.id);shareFiche(d,sh);return;}
   const c=e.target.closest(".copy[data-v]");if(c)return copy(c.dataset.v,c);
@@ -5732,7 +5785,8 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!fEl.hidden)closeFi
 const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
 const shEl=document.getElementById("sharesheet");let shText="";
 function shareFiche(d){
-  shText=shareText(d);
+  const ml=document.getElementById("mlang-"+d.id),lg=ml?ml.value:"pro";
+  shText=lg==="pro"?shareText(d):patientText(d,lg);
   document.getElementById("sh-preview").textContent=shText;
   document.getElementById("sh-sms").href="sms:"+(IOS?"&":"?")+"body="+encodeURIComponent(shText);
   document.getElementById("sh-wa").href="https://wa.me/?text="+encodeURIComponent(shText);
@@ -5945,7 +5999,7 @@ function paintP1(){
   document.getElementById("p-sdf").hidden=P.how!=="sdf";
   document.getElementById("p-arr").value=P.arr;document.getElementById("p-day").value=P.day;document.getElementById("p-month").value=P.month;
   const v=ARR_SECT[P.arr],sw=document.getElementById("p-subwrap");
-  if(P.how==="addr"&&v&&typeof v==="object"){sw.hidden=false;document.getElementById("p-sub").innerHTML=["a","b"].map(k=>`<button type="button" data-v="${k}" aria-pressed="${P.sub===k}">${esc(v[k][0])}</button>`).join("");}
+  if(P.how==="addr"&&v&&typeof v==="object"){sw.hidden=false;document.getElementById("p-sub").innerHTML=["a","b"].map(k=>`<button type="button" data-v="${k}" aria-pressed="${P.sub===k}"><span class="dot" aria-hidden="true"></span><span><b>${esc(v[k][0])}</b><small>Secteur ${esc(v[k][1])}</small></span></button>`).join("");}
   else sw.hidden=true;
   const m=psyMatch(),r=document.getElementById("p-result");
   if(m.err){r.hidden=false;r.className="presult err";r.innerHTML=`<span class="lbl">Date</span><div>${esc(m.err)}</div>`;}
@@ -5957,14 +6011,22 @@ function paintP1(){
   else r.hidden=true;
   document.getElementById("pnext").textContent=m.c?"Voir sur la carte →":"Voir tous les CMP →";
 }
+/* Après un choix (arrondissement, quartier, date), amener la question suivante ou le CMP trouvé à l'écran,
+   au-dessus de la barre du bas (sinon la réponse reste cachée) */
+function revealP(){setTimeout(()=>{const r=document.getElementById("p-result"),sw=document.getElementById("p-subwrap");
+  const t=!r.hidden?r:(!sw.hidden?sw:null);if(!t)return;
+  const bb=document.querySelector("#v-p1 .bottombar"),bh=bb?bb.getBoundingClientRect().height:0,rc=t.getBoundingClientRect();
+  if(rc.top>=70&&rc.bottom<=innerHeight-bh-8)return;
+  const y=scrollY+rc.top-Math.max(70,(innerHeight-bh-rc.height)/2);
+  window.scrollTo({top:Math.max(0,y),behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});},40);}
 document.getElementById("v-p1").addEventListener("click",e=>{
   const h=e.target.closest("#p-how .op");if(h){S.psy.how=S.psy.how===h.dataset.how?"":h.dataset.how;paintP1();return;}
-  const sb=e.target.closest("#p-sub button");if(sb){S.psy.sub=sb.dataset.v;paintP1();return;}
+  const sb=e.target.closest("#p-sub button");if(sb){S.psy.sub=sb.dataset.v;paintP1();revealP();return;}
   const o=e.target.closest("[data-open]");if(o){push("fiche:"+o.dataset.open);}
 });
-document.getElementById("p-arr").addEventListener("change",e=>{S.psy.arr=e.target.value;S.psy.sub="";paintP1();});
-document.getElementById("p-day").addEventListener("change",e=>{S.psy.day=e.target.value;paintP1();});
-document.getElementById("p-month").addEventListener("change",e=>{S.psy.month=e.target.value;paintP1();});
+document.getElementById("p-arr").addEventListener("change",e=>{S.psy.arr=e.target.value;S.psy.sub="";paintP1();revealP();});
+document.getElementById("p-day").addEventListener("change",e=>{S.psy.day=e.target.value;paintP1();revealP();});
+document.getElementById("p-month").addEventListener("change",e=>{S.psy.month=e.target.value;paintP1();revealP();});
 document.getElementById("pnext").addEventListener("click",()=>{S.only="";S.sub="";S.hsect="";go("resultats");});
 document.getElementById("p-all").addEventListener("click",()=>{S.only="";S.sub="";S.hsect="";S.psy.how="";paintP1();go("resultats");});
 /* « Urgences » et « Équipes mobiles » : n'affichent que ce type */
@@ -6001,6 +6063,29 @@ subEl.addEventListener("click",e=>{if(e.target===subEl||e.target.closest("[data-
   const cs=e.target.closest("[data-csub]");if(cs){subEl.hidden=true;S.types=["commu"];S.csub=cs.dataset.csub;paintQ1();goQ2();return;}
   const b=e.target.closest("[data-sub]");if(b){if(subEl.dataset.k==="hospit"&&b.dataset.sub==="hospit"){openHospSect();return;}subEl.hidden=true;onlyType(subEl.dataset.k,b.dataset.sub);}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!subEl.hidden)subEl.hidden=true;});
+/* Panneaux (role=dialog) : le focus entre dans le panneau à l'ouverture, y reste (Tab / Maj+Tab),
+   et revient à l'élément d'origine à la fermeture. La fiche suit la même règle pour Tab. */
+const FOCUSABLE='a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]):not([hidden]),summary,[tabindex]:not([tabindex="-1"])';
+const sheetReturn=new WeakMap();
+const visibleIn=el=>[...el.querySelectorAll(FOCUSABLE)].filter(x=>x.offsetParent!==null||x===document.activeElement);
+const watchSheet=sc=>new MutationObserver(()=>{
+  if(!sc.hidden){if(!sheetReturn.has(sc))sheetReturn.set(sc,document.activeElement);
+    setTimeout(()=>{if(sc.hidden||sc.contains(document.activeElement))return;const h=sc.querySelector("[role=dialog] h2");
+      if(h){h.setAttribute("tabindex","-1");h.focus({preventScroll:true});}else{const f=visibleIn(sc)[0];if(f)f.focus({preventScroll:true});}},30);}
+  else{const r=sheetReturn.get(sc);sheetReturn.delete(sc);
+    if(r&&r.isConnected&&r.offsetParent!==null&&(document.activeElement===document.body||sc.contains(document.activeElement)))r.focus({preventScroll:true});}
+}).observe(sc,{attributes:true,attributeFilter:["hidden"]});
+document.querySelectorAll(".isheet-scrim").forEach(watchSheet);
+document.addEventListener("keydown",e=>{
+  if(e.key==="Tab"){const box=[...document.querySelectorAll(".isheet-scrim")].find(x=>!x.hidden)||(!fEl.hidden?fEl:null);if(!box)return;
+    const f=visibleIn(box);if(!f.length)return;const first=f[0],last=f[f.length-1],a=document.activeElement;
+    if(!box.contains(a)){e.preventDefault();first.focus();return;}
+    if(e.shiftKey&&(a===first||a===box||!f.includes(a)&&a.matches("h2,[tabindex='-1']"))){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&a===last){e.preventDefault();first.focus();}
+    return;}
+  /* Échap ferme la recherche globale (si aucun panneau ni fiche n'est ouvert) */
+  if(e.key==="Escape"&&!document.getElementById("v-search").hidden&&fEl.hidden&&![...document.querySelectorAll(".isheet-scrim")].some(x=>!x.hidden))back();
+});
 document.getElementById("p-urg").addEventListener("click",()=>onlyType("urg"));
 document.getElementById("p-mob").addEventListener("click",()=>onlyType("mob"));
 document.getElementById("p-more").addEventListener("click",e=>{const b=e.target.closest("[data-only]");if(!b)return;const k=b.dataset.only;if(FAM[k])openSub(k);else onlyType(k);});
@@ -6016,6 +6101,33 @@ document.querySelectorAll(".modetabs").forEach(t=>t.addEventListener("click",e=>
 /* ---------- Recherche dans tout l'annuaire ---------- */
 const nrm=s=>String(s??"").replace(/ᵉ/g,"e").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const TYPEWORDS={cure:"cure sevrage hospitalisation",postcure:"post-cure postcure ssr smr",hdj:"hopital de jour hdj",resid:"hebergement appartement therapeutique residentiel",csapa:"csapa",hosp:"consultation hopital elsa",spec:"jeunes consommateurs cjc parents",amob:"equipe mobile",rdr:"reduction des risques caarud rdr",liberal:"medecin liberal generaliste",cmp:"cmp centre medico-psychologique psychiatrie secteur",urg:"urgences psychiatriques crise",mob:"equipe mobile rue precarite",entraide:"entraide alcooliques anonymes narcotiques vie libre groupe de parole",hdjpsy:"hopital de jour cattp psychiatrie",rehab:"rehabilitation remediation cognitive retablissement",specialise:"consultation specialisee centre expert psychotrauma tca perinatalite autisme tdah",clinique:"clinique psychiatrique privee",consult:"consultation psychotherapie psychologue",gem:"gem groupe d'entraide mutuelle",famille:"familles usagers unafam",repit:"repit alternative hospitalisation",logement:"logement samsah savs residence accueil chez soi",insertion:"insertion emploi esat",ecoute:"ecoute telephone ligne",droits:"droits mdph clsm",hospit:"hospitalisation temps plein admission soins sans consentement sdt sdre"};
+/* Synonymes cliniques : un mot tapé cherche aussi ses équivalents (sans accents, en minuscules) */
+const SYN=[
+  ["subutex","buprenorphine","bupre","tso","methadone","substitution","opiace","opioide","heroine","morphine"],
+  ["crack","cocaine","coke","freebase","psychostimulant","stimulant"],
+  ["alcool","alcoolique","alcoolisme"],
+  ["cannabis","shit","beuh"],
+  ["tabac","nicotine","cigarette","tabacologie"],
+  ["jeu","jeux","gambling"],
+  ["ecran","ecrans","internet","numerique"],
+  ["chemsex","ghb","cathinone"],
+  ["jeune","adolescent","cjc","mineur"],
+  ["sdf","sans domicile","sans abri","precarite","errance"],
+  ["femme","femmes","perinatalite","grossesse"],
+  ["rdr","reduction des risques","caarud","seringue"],
+  ["sevrage","cure","detox"],
+];
+const SYNMAP=new Map();SYN.forEach(g=>g.forEach(w=>SYNMAP.set(w,g)));
+/* Produits et conduites : les structures qui les prennent en charge, même si leur fiche ne cite pas le mot
+   (un CSAPA accueille tous les produits ; les CAARUD, les usagers de drogues) */
+const PRODTYPES={subutex:["csapa","rdr","hosp"],crack:["csapa","rdr","hosp"],alcool:["csapa","hosp","cure","postcure"],cannabis:["csapa","spec","hosp"],jeu:["csapa","hosp"],ecran:["csapa","spec"],chemsex:["csapa","rdr","hosp"]};
+/* Un mot de la requête : ses variantes (pluriel retiré, synonymes) */
+const qAlts=w=>{const st=w.length>3?w.replace(/(aux|s|x)$/,m=>m==="aux"?"al":""):w;const set=new Set([w,st]);[w,st].forEach(x=>(SYNMAP.get(x)||[]).forEach(y=>set.add(y)));return[...set].filter(x=>x.length>=2);};
+/* Mots courts (≤ 4 lettres) : mot entier, pour que « jeu » ne trouve pas « jeudi » */
+const RXC=new Map();
+const hasAlt=(txt,a)=>{if(a.length>4||a.includes(" "))return txt.includes(a);let r=RXC.get(a);if(!r){r=new RegExp("(^|[^a-z0-9])"+a.replace(/[^a-z0-9]/g,"")+"[sx]?(?![a-z0-9])");RXC.set(a,r);}return r.test(txt);};
+const qWords=q=>nrm(q).trim().split(/\s+/).filter(Boolean).map(w=>{const alts=qAlts(w),g=alts.map(a=>SYNMAP.get(a)).find(Boolean);return{w,alts,types:g?PRODTYPES[g[0]]||null:null};});
+const qHit=(d,ix,{alts,types})=>alts.some(a=>hasAlt(ix.all,a))||!!(types&&d.t.some(t=>types.includes(t)));
 const SEARCHIDX=new Map();
 const sIndex=d=>{if(!SEARCHIDX.has(d.id))SEARCHIDX.set(d.id,{name:nrm(d.n+" "+(d.o||"")),all:nrm([d.n,d.o,d.a,d.p,(d.f||[]).join(" "),(d.act||[]).join(" "),(d.der||[]).join(" "),d.cover||"",d.sect||"",(d.c||[]).map(c=>c.join(" ")).join(" "),d.t.map(t=>TYPEWORDS[t]||"").join(" "),(d.tr||[]).map(x=>x.join(" ")).join(" "),accessText(d)].join(" "))});return SEARCHIDX.get(d.id);};
 const hl=(s,words)=>{let h=esc(s);words.forEach(w=>{if(w.length<2)return;const src=nrm(s);let out="",i=0,j;const plain=String(s);let k=0;let res="";let idx=src.indexOf(w);if(idx<0)return;
@@ -6027,13 +6139,21 @@ function paintSearch(focus){
   const out=document.getElementById("sout"),cnt=document.getElementById("scount");
   if(!q){out.innerHTML="";cnt.hidden=true;}
   else{
-    const hits=D.map(d=>{const ix=sIndex(d);if(!words.every(w=>ix.all.includes(w)))return null;let sc=0;words.forEach(w=>{if(ix.name.includes(w))sc+=10;if(ix.name.split(/\s+/).some(x=>x.startsWith(w)))sc+=5;});return{d,sc};}).filter(Boolean).sort((a,b)=>b.sc-a.sc||a.d.n.localeCompare(b.d.n,"fr"));
-    cnt.hidden=false;cnt.textContent=hits.length?`${hits.length} résultat${hits.length>1?"s":""}`:"Aucun résultat. Essayez un autre mot : un nom, un quartier, « méthadone », « jeunes »…";
-    out.innerHTML=(hits.length?"":`<button type="button" class="btn" data-suggest style="margin:4px 0 10px">Proposer un lieu manquant</button>`)+hits.slice(0,60).map(({d})=>`<button type="button" class="scard" data-open="${d.id}"><div class="tags">${tagsHtml(d)}${d.warn?`<span class="verify">${esc(d.warn)}</span>`:""}</div><h3>${hl(d.n,words)}</h3><div class="org">${hl(d.o||"",words)}</div><div class="where">${esc(d.p)}${d.cover?" · secteur "+esc(d.sect):""}</div>${transit(d)}</button>`).join("");
+    const QW=qWords(inp.value);
+    const score=(d,need)=>{const ix=sIndex(d);let m=0,sc=0;QW.forEach(x=>{const{w,alts}=x;if(!qHit(d,ix,x))return;m++;if(alts.some(a=>hasAlt(ix.all,a)))sc+=x.types?1:3;if(alts.some(a=>hasAlt(ix.name,a)))sc+=10;if(ix.name.split(/\s+/).some(x=>x.startsWith(w)))sc+=5;});if(/^Marseille|Allauch/.test(d.p||""))sc+=4;return m>=need?{d,sc:sc+m*20,m}:null;};
+    const byScore=(a,b)=>b.sc-a.sc||a.d.n.localeCompare(b.d.n,"fr");
+    let hits=D.map(d=>score(d,QW.length)).filter(Boolean).sort(byScore),partial=false;
+    if(!hits.length&&QW.length>1){hits=D.map(d=>score(d,1)).filter(Boolean).sort(byScore);partial=hits.length>0;}
+    const hw=[...new Set(QW.flatMap(x=>x.alts))];
+    const pt=[...new Set(QW.flatMap(x=>x.types||[]))];
+    const ptLine=pt.length&&hits.length?`<p class="qsub ptypes">Structures qui prennent en charge ${QW.filter(x=>x.types).map(x=>"« "+esc(x.w)+" »").join(", ")} : ${pt.map(t=>`${esc(GROUPS[t])} (${D.filter(d=>d.t.includes(t)).length})`).join(" · ")}. ARCA-Sud (<a href="tel:+33488926888">04 88 92 68 88</a>) aide à choisir.</p>`:"";
+    cnt.hidden=false;cnt.textContent=hits.length?(partial?`Aucun lieu ne contient tous ces mots. ${hits.length} lieu${hits.length>1?"x":""} pour une partie de la recherche :`:`${hits.length} résultat${hits.length>1?"s":""}`):"Aucun résultat. Essayez un mot plus simple, ou une de ces recherches :";
+    out.innerHTML=ptLine+(hits.length?"":`<div class="sugg" style="margin:0 0 12px">${SEARCH_SUGG.map(x=>`<button type="button" data-q="${esc(x)}">${esc(x)}</button>`).join("")}</div><p class="qsub" style="margin:0 0 8px">Un lieu manque ? ARCA-Sud (<a href="tel:+33488926888">04 88 92 68 88</a>) aide aussi à orienter.</p><button type="button" class="btn" data-suggest style="margin:4px 0 10px">Proposer un lieu manquant</button>`)+hits.slice(0,60).map(({d})=>`<button type="button" class="scard" data-open="${d.id}"><div class="tags">${tagsHtml(d)}${d.warn?`<span class="verify">${esc(d.warn)}</span>`:""}</div><h3>${hl(d.n,hw)}</h3><div class="org">${hl(d.o||"",hw)}</div><div class="where">${esc(d.p)}${d.cover?" · secteur "+esc(d.sect):""}</div>${transit(d)}</button>`).join("");
   }
   if(focus)setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(_){}},60);
 }
-(()=>{const s=["Méthadone","Jeunes","CMP 13ᵉ","Allauch","Castellane","Urgences","Sans rendez-vous","Alcool"];
+const SEARCH_SUGG=["Méthadone","Jeunes","CMP 13ᵉ","Allauch","Castellane","Urgences","Sans rendez-vous","Alcool"];
+(()=>{const s=SEARCH_SUGG;
   document.getElementById("sugg").innerHTML=s.map(x=>`<button type="button" data-q="${esc(x)}">${esc(x)}</button>`).join("");})();
 document.getElementById("sq").addEventListener("input",()=>paintSearch(false));
 document.getElementById("sqclear").addEventListener("click",()=>{const i=document.getElementById("sq");i.value="";paintSearch(true);});
@@ -6055,12 +6175,19 @@ function show(v){
   document.querySelectorAll(".modetabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.mode===S.mode));
   if(v==="q1")paintQ1();if(v==="p1")paintP1();if(v==="recherche")paintSearch(true);if(v==="q2")paintQ2();if(v==="resultats")render();
 }
+/* Après un changement de vue, le focus va sur son titre (lecteurs d'écran, clavier) au lieu de retomber sur <body>.
+   Pas sur les accueils (début du parcours) ni la recherche (le champ prend déjà le focus). */
+let VIEWFOCUS=false;window.addEventListener("load",()=>setTimeout(()=>{VIEWFOCUS=true;},0));
+function focusView(e){if(!VIEWFOCUS||e==="q1"||e==="p1"||e==="recherche")return;
+  const h=document.getElementById(VIEWS[e]).querySelector("h1");if(!h)return;
+  if(!h.hasAttribute("tabindex"))h.setAttribute("tabindex","-1");
+  setTimeout(()=>{try{h.focus({preventScroll:true})}catch(_){}},30);}
 function display(e){
   document.querySelectorAll("[data-ifhist]").forEach(b=>b.hidden=stack.length<2);
   document.querySelectorAll(".modetabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.mode===S.mode));
   if(e.startsWith("fiche:")){if(Object.values(VIEWS).every(id=>document.getElementById(id).hidden))show("resultats");openFiche(e.slice(6));return;}
   const wasFiche=!fEl.hidden;hideFiche();
-  if(document.getElementById(VIEWS[e]).hidden){show(e);window.scrollTo(0,0);}
+  if(document.getElementById(VIEWS[e]).hidden){show(e);window.scrollTo(0,0);focusView(e);}
   else if(!wasFiche)window.scrollTo(0,0);
 }
 function push(e){

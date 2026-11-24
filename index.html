@@ -34,7 +34,7 @@
   --accent:#0d5a88; --accent-deep:#0b4a70; --accent-soft:#e6f0f7; --on-accent:#ffffff;
   --good:#2b6a3c; --good-soft:#e2f0e5; --warn:#8a5a00; --warn-soft:#fbf1dc; --bad:#a3322a; --bad-soft:#f8e2df;
   --m1:#0075be; --m2:#e30513; --tram:#96be0d; --t1:#f18e00; --t2:#f5e615; --t3:#96be0d; --bus:#4c5a63;
-  --t-cure:#b2473a; --t-postcure:#2b7a46; --t-sevrage:#b2473a; --t-commu:#5a7a2b; --t-hdj:#a8720c; --t-resid:#7a55a0; --t-csapa:#0d5a88; --t-liberal:#3d7480; --t-rdr:#b85a12; --t-hosp:#4b5fa8; --t-amob:#2f7d6d; --t-spec:#b0367f; --t-cmp:#8a3d6b; --t-urg:#b3261e; --t-mob:#2f7d6d; --t-entraide:#8a6d1f; --t-hdjpsy:#a8720c; --t-rehab:#2b7a46; --t-specialise:#4b5fa8; --t-clinique:#7a55a0; --t-consult:#3d7480; --t-gem:#b0367f; --t-famille:#b85a12; --t-repit:#2f7d6d; --t-logement:#0d5a88; --t-insertion:#5d6b2c; --t-ecoute:#b2473a; --t-droits:#55606b; --t-hospit:#8a3d6b;
+  --t-cure:#b2473a; --t-postcure:#2b7a46; --t-sevrage:#b2473a; --t-commu:#5a7a2b; --t-hdj:#8f6008; --t-resid:#7a55a0; --t-csapa:#0d5a88; --t-liberal:#3d7480; --t-rdr:#b85a12; --t-hosp:#4b5fa8; --t-amob:#2f7d6d; --t-spec:#b0367f; --t-cmp:#8a3d6b; --t-urg:#b3261e; --t-mob:#2f7d6d; --t-entraide:#8a6d1f; --t-hdjpsy:#a8720c; --t-rehab:#2b7a46; --t-specialise:#4b5fa8; --t-clinique:#7a55a0; --t-consult:#3d7480; --t-gem:#b0367f; --t-famille:#b85a12; --t-repit:#2f7d6d; --t-logement:#0d5a88; --t-insertion:#5d6b2c; --t-ecoute:#b2473a; --t-droits:#55606b; --t-hospit:#8a3d6b;
   --sea:#bcd5e3; --sea-ink:#5f8aa6; --land:#ece6dc; --land-ink:#8a8173; --pin-ring:#ffffff; --pin-text:#ffffff;
   --band:#0f2a3f; --band-2:#1c3b53; --band-line:#2b4d66; --tile-mix:100%; --tile-base:#000; --cta:#0f2a3f;
   --shadow:0 8px 24px -12px rgba(20,40,55,.35);
@@ -5533,9 +5533,9 @@ mapsize.addEventListener("click",()=>{setMapSize(!mapwrap.classList.contains("ma
 setMapSize(store("addicto13.mapbig")==="1");
 function setMap(open,keep){mapwrap.classList.toggle("collapsed",!open);maptog.textContent=open?"Masquer":"Afficher la carte";maptog.setAttribute("aria-expanded",open);if(!keep)store("addicto13.map",open?"1":"0");if(open&&cur.length)drawMap(cur);}
 maptog.addEventListener("click",()=>setMap(mapwrap.classList.contains("collapsed")));
-/* Par défaut, carte affichée ; repliée sur les petits écrans (iPhone SE…) pour que la liste soit visible tout de suite.
+/* Par défaut, carte affichée ; repliée sur les très petits écrans (moins de 620 px de haut, iPhone SE…) pour que la liste soit visible tout de suite.
    Le choix de l'utilisateur (Masquer / Afficher) est ensuite mémorisé. */
-{const sv=store("addicto13.map");setMap(sv?sv!=="0":(innerHeight>=700||innerWidth>=900),true);}
+{const sv=store("addicto13.map");setMap(sv?sv!=="0":(innerHeight>=620||innerWidth>=900),true);}
 
 /* ---------- Résultats ---------- */
 /* ---------- Horaires : « ouvert / fermé » à l'heure de Paris ---------- */

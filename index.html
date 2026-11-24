@@ -242,6 +242,7 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .chip{flex:none;white-space:nowrap;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-full);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-sm);font-weight:600;display:inline-flex;gap:var(--sp-2);align-items:center;color:var(--fg)}
 .chip i{width:9px;height:9px;border-radius:50%;background:var(--c)}
 .chip.cond{background:var(--sunk);border-color:transparent;color:var(--muted)}
+.chip.assumed{border:1px dashed var(--muted);background:transparent}
 .chip.edit{color:var(--accent);border-style:dashed}
 .searchbox{padding:var(--sp-3) var(--sp-4) 0}
 .searchbox input{width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-3);font-size:var(--fs-md)}
@@ -263,6 +264,8 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .mapwrap.collapsed .mapbox,.mapwrap.collapsed .offmap{display:none!important}
 .maptog.mapsize{position:absolute;left:8px;bottom:8px;z-index:500;background:var(--surface);box-shadow:var(--shadow);min-height:36px}
 .mapwrap.collapsed #mapsize{display:none}
+.mapwrap.collapsed .legend{display:none}
+.mapwrap.collapsed .maptools{justify-content:flex-start}
 /* Mobile : la liste d'abord. Recherche au-dessus, carte compacte (agrandissable) */
 @media (max-width:899px){
   .res-grid{display:flex;flex-direction:column}
@@ -5204,7 +5207,7 @@ const OPTS=[["sevrage","Sevrage","Cure, post-cure, communauté"],["hdj","Hôpita
 /* ---------- État et filtres ---------- */
 const S={mode:"addicto",only:"",sub:"",csub:"",hsect:"",hlabel:"",types:[],lg:"oui",hm:"oui",sec:"all",arr:"",q:"",psy:{how:"",arr:"",sub:"",day:"",month:""}};
 const base=(d,s)=>{
-  if(s.q){const ix=sIndex(d);if(!qWords(s.q).every(({alts})=>alts.some(a=>hasAlt(ix.all,a))))return false;}
+  if(s.q){const ix=sIndex(d);if(!qWords(s.q).every(x=>qHit(d,ix,x)))return false;}
   const psyT=d.t.some(t=>PSYT.includes(t));
   if(s.mode==="psy"){if(!psyT)return false;if(!s.only)return true;
     if(!d.t.some(t=>famTypes(s.only).includes(t)))return false;
@@ -5271,7 +5274,7 @@ function paintQ2(){
   document.querySelectorAll("#v-q2 .seg").forEach(g=>g.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",S[g.dataset.key]===b.dataset.v)));
   document.getElementById("arr").value=S.arr;
 }
-document.getElementById("v-q2").addEventListener("click",e=>{const b=e.target.closest(".seg button");if(!b)return;S[b.closest(".seg").dataset.key]=b.dataset.v;paintQ2();});
+document.getElementById("v-q2").addEventListener("click",e=>{const b=e.target.closest(".seg button");if(!b)return;const k=b.closest(".seg").dataset.key;S[k]=b.dataset.v;if(k==="lg")S.lgSet=true;paintQ2();});
 document.getElementById("arr").addEventListener("change",e=>{S.arr=e.target.value;});
 document.getElementById("next2").addEventListener("click",()=>go("resultats"));
 
@@ -5528,9 +5531,11 @@ const mapsize=document.getElementById("mapsize");
 function setMapSize(big){mapwrap.classList.toggle("mapbig",big);mapsize.textContent=big?"Réduire":"Agrandir";mapsize.setAttribute("aria-pressed",big);store("addicto13.mapbig",big?"1":"0");if(REAL.on&&REAL.map)setTimeout(()=>REAL.map.invalidateSize(),40);}
 mapsize.addEventListener("click",()=>{setMapSize(!mapwrap.classList.contains("mapbig"));if(cur.length)setTimeout(()=>drawMap(cur),60);});
 setMapSize(store("addicto13.mapbig")==="1");
-function setMap(open){mapwrap.classList.toggle("collapsed",!open);maptog.textContent=open?"Masquer":"Afficher la carte";maptog.setAttribute("aria-expanded",open);store("addicto13.map",open?"1":"0");if(open&&cur.length)drawMap(cur);}
+function setMap(open,keep){mapwrap.classList.toggle("collapsed",!open);maptog.textContent=open?"Masquer":"Afficher la carte";maptog.setAttribute("aria-expanded",open);if(!keep)store("addicto13.map",open?"1":"0");if(open&&cur.length)drawMap(cur);}
 maptog.addEventListener("click",()=>setMap(mapwrap.classList.contains("collapsed")));
-setMap(store("addicto13.map")!=="0");
+/* Par défaut, carte affichée ; repliée sur les petits écrans (iPhone SE…) pour que la liste soit visible tout de suite.
+   Le choix de l'utilisateur (Masquer / Afficher) est ensuite mémorisé. */
+{const sv=store("addicto13.map");setMap(sv?sv!=="0":(innerHeight>=700||innerWidth>=900),true);}
 
 /* ---------- Résultats ---------- */
 /* ---------- Horaires : « ouvert / fermé » à l'heure de Paris ---------- */
@@ -5610,7 +5615,7 @@ function render(){
   else{
   if(S.types.length)ORDER.filter(t=>S.types.includes(t)).forEach(t=>ch.push(`<button type="button" class="chip" data-to="q1" style="--c:var(--t-${t})"><i></i>${t==="commu"&&S.csub?esc(comSubLabel(S.csub).split(" · ")[0]):L[t]}</button>`));
   else ch.push(`<button type="button" class="chip" data-to="q1">Tous les types</button>`);
-  if(n0.lg)ch.push(`<button type="button" class="chip cond" data-to="q2">Logement : ${S.lg}</button>`);
+  if(n0.lg)ch.push(`<button type="button" class="chip cond${S.lgSet?"":" assumed"}" data-to="q2"${S.lgSet?"":` aria-label="Logement : ${S.lg}, supposé par défaut. Modifier"`}>Logement : ${S.lg}${S.lgSet?"":" (supposé)"}</button>`);
   if(n0.hm)ch.push(`<button type="button" class="chip cond" data-to="q2">${S.hm==="oui"?"Hors Marseille accepté":"Marseille et Allauch"}</button>`);
   if(n0.lib){ch.push(`<button type="button" class="chip cond" data-to="q2">${S.sec==="all"?"Tous secteurs":SECL[S.sec]}</button>`);if(S.arr)ch.push(`<button type="button" class="chip cond" data-to="q2">${esc(ARRL[S.arr])}</button>`);}
   ch.push(`<button type="button" class="chip edit" data-to="q1">✎ Modifier</button>`);}
@@ -6006,14 +6011,22 @@ function paintP1(){
   else r.hidden=true;
   document.getElementById("pnext").textContent=m.c?"Voir sur la carte →":"Voir tous les CMP →";
 }
+/* Après un choix (arrondissement, quartier, date), amener la question suivante ou le CMP trouvé à l'écran,
+   au-dessus de la barre du bas (sinon la réponse reste cachée) */
+function revealP(){setTimeout(()=>{const r=document.getElementById("p-result"),sw=document.getElementById("p-subwrap");
+  const t=!r.hidden?r:(!sw.hidden?sw:null);if(!t)return;
+  const bb=document.querySelector("#v-p1 .bottombar"),bh=bb?bb.getBoundingClientRect().height:0,rc=t.getBoundingClientRect();
+  if(rc.top>=70&&rc.bottom<=innerHeight-bh-8)return;
+  const y=scrollY+rc.top-Math.max(70,(innerHeight-bh-rc.height)/2);
+  window.scrollTo({top:Math.max(0,y),behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});},40);}
 document.getElementById("v-p1").addEventListener("click",e=>{
   const h=e.target.closest("#p-how .op");if(h){S.psy.how=S.psy.how===h.dataset.how?"":h.dataset.how;paintP1();return;}
-  const sb=e.target.closest("#p-sub button");if(sb){S.psy.sub=sb.dataset.v;paintP1();return;}
+  const sb=e.target.closest("#p-sub button");if(sb){S.psy.sub=sb.dataset.v;paintP1();revealP();return;}
   const o=e.target.closest("[data-open]");if(o){push("fiche:"+o.dataset.open);}
 });
-document.getElementById("p-arr").addEventListener("change",e=>{S.psy.arr=e.target.value;S.psy.sub="";paintP1();});
-document.getElementById("p-day").addEventListener("change",e=>{S.psy.day=e.target.value;paintP1();});
-document.getElementById("p-month").addEventListener("change",e=>{S.psy.month=e.target.value;paintP1();});
+document.getElementById("p-arr").addEventListener("change",e=>{S.psy.arr=e.target.value;S.psy.sub="";paintP1();revealP();});
+document.getElementById("p-day").addEventListener("change",e=>{S.psy.day=e.target.value;paintP1();revealP();});
+document.getElementById("p-month").addEventListener("change",e=>{S.psy.month=e.target.value;paintP1();revealP();});
 document.getElementById("pnext").addEventListener("click",()=>{S.only="";S.sub="";S.hsect="";go("resultats");});
 document.getElementById("p-all").addEventListener("click",()=>{S.only="";S.sub="";S.hsect="";S.psy.how="";paintP1();go("resultats");});
 /* « Urgences » et « Équipes mobiles » : n'affichent que ce type */
@@ -6050,6 +6063,29 @@ subEl.addEventListener("click",e=>{if(e.target===subEl||e.target.closest("[data-
   const cs=e.target.closest("[data-csub]");if(cs){subEl.hidden=true;S.types=["commu"];S.csub=cs.dataset.csub;paintQ1();goQ2();return;}
   const b=e.target.closest("[data-sub]");if(b){if(subEl.dataset.k==="hospit"&&b.dataset.sub==="hospit"){openHospSect();return;}subEl.hidden=true;onlyType(subEl.dataset.k,b.dataset.sub);}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!subEl.hidden)subEl.hidden=true;});
+/* Panneaux (role=dialog) : le focus entre dans le panneau à l'ouverture, y reste (Tab / Maj+Tab),
+   et revient à l'élément d'origine à la fermeture. La fiche suit la même règle pour Tab. */
+const FOCUSABLE='a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]):not([hidden]),summary,[tabindex]:not([tabindex="-1"])';
+const sheetReturn=new WeakMap();
+const visibleIn=el=>[...el.querySelectorAll(FOCUSABLE)].filter(x=>x.offsetParent!==null||x===document.activeElement);
+const watchSheet=sc=>new MutationObserver(()=>{
+  if(!sc.hidden){if(!sheetReturn.has(sc))sheetReturn.set(sc,document.activeElement);
+    setTimeout(()=>{if(sc.hidden||sc.contains(document.activeElement))return;const h=sc.querySelector("[role=dialog] h2");
+      if(h){h.setAttribute("tabindex","-1");h.focus({preventScroll:true});}else{const f=visibleIn(sc)[0];if(f)f.focus({preventScroll:true});}},30);}
+  else{const r=sheetReturn.get(sc);sheetReturn.delete(sc);
+    if(r&&r.isConnected&&r.offsetParent!==null&&(document.activeElement===document.body||sc.contains(document.activeElement)))r.focus({preventScroll:true});}
+}).observe(sc,{attributes:true,attributeFilter:["hidden"]});
+document.querySelectorAll(".isheet-scrim").forEach(watchSheet);
+document.addEventListener("keydown",e=>{
+  if(e.key==="Tab"){const box=[...document.querySelectorAll(".isheet-scrim")].find(x=>!x.hidden)||(!fEl.hidden?fEl:null);if(!box)return;
+    const f=visibleIn(box);if(!f.length)return;const first=f[0],last=f[f.length-1],a=document.activeElement;
+    if(!box.contains(a)){e.preventDefault();first.focus();return;}
+    if(e.shiftKey&&(a===first||a===box||!f.includes(a)&&a.matches("h2,[tabindex='-1']"))){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&a===last){e.preventDefault();first.focus();}
+    return;}
+  /* Échap ferme la recherche globale (si aucun panneau ni fiche n'est ouvert) */
+  if(e.key==="Escape"&&!document.getElementById("v-search").hidden&&fEl.hidden&&![...document.querySelectorAll(".isheet-scrim")].some(x=>!x.hidden))back();
+});
 document.getElementById("p-urg").addEventListener("click",()=>onlyType("urg"));
 document.getElementById("p-mob").addEventListener("click",()=>onlyType("mob"));
 document.getElementById("p-more").addEventListener("click",e=>{const b=e.target.closest("[data-only]");if(!b)return;const k=b.dataset.only;if(FAM[k])openSub(k);else onlyType(k);});
@@ -6082,12 +6118,16 @@ const SYN=[
   ["sevrage","cure","detox"],
 ];
 const SYNMAP=new Map();SYN.forEach(g=>g.forEach(w=>SYNMAP.set(w,g)));
+/* Produits et conduites : les structures qui les prennent en charge, même si leur fiche ne cite pas le mot
+   (un CSAPA accueille tous les produits ; les CAARUD, les usagers de drogues) */
+const PRODTYPES={subutex:["csapa","rdr","hosp"],crack:["csapa","rdr","hosp"],alcool:["csapa","hosp","cure","postcure"],cannabis:["csapa","spec","hosp"],jeu:["csapa","hosp"],ecran:["csapa","spec"],chemsex:["csapa","rdr","hosp"]};
 /* Un mot de la requête : ses variantes (pluriel retiré, synonymes) */
 const qAlts=w=>{const st=w.length>3?w.replace(/(aux|s|x)$/,m=>m==="aux"?"al":""):w;const set=new Set([w,st]);[w,st].forEach(x=>(SYNMAP.get(x)||[]).forEach(y=>set.add(y)));return[...set].filter(x=>x.length>=2);};
 /* Mots courts (≤ 4 lettres) : mot entier, pour que « jeu » ne trouve pas « jeudi » */
 const RXC=new Map();
 const hasAlt=(txt,a)=>{if(a.length>4||a.includes(" "))return txt.includes(a);let r=RXC.get(a);if(!r){r=new RegExp("(^|[^a-z0-9])"+a.replace(/[^a-z0-9]/g,"")+"[sx]?(?![a-z0-9])");RXC.set(a,r);}return r.test(txt);};
-const qWords=q=>nrm(q).trim().split(/\s+/).filter(Boolean).map(w=>({w,alts:qAlts(w)}));
+const qWords=q=>nrm(q).trim().split(/\s+/).filter(Boolean).map(w=>{const alts=qAlts(w),g=alts.map(a=>SYNMAP.get(a)).find(Boolean);return{w,alts,types:g?PRODTYPES[g[0]]||null:null};});
+const qHit=(d,ix,{alts,types})=>alts.some(a=>hasAlt(ix.all,a))||!!(types&&d.t.some(t=>types.includes(t)));
 const SEARCHIDX=new Map();
 const sIndex=d=>{if(!SEARCHIDX.has(d.id))SEARCHIDX.set(d.id,{name:nrm(d.n+" "+(d.o||"")),all:nrm([d.n,d.o,d.a,d.p,(d.f||[]).join(" "),(d.act||[]).join(" "),(d.der||[]).join(" "),d.cover||"",d.sect||"",(d.c||[]).map(c=>c.join(" ")).join(" "),d.t.map(t=>TYPEWORDS[t]||"").join(" "),(d.tr||[]).map(x=>x.join(" ")).join(" "),accessText(d)].join(" "))});return SEARCHIDX.get(d.id);};
 const hl=(s,words)=>{let h=esc(s);words.forEach(w=>{if(w.length<2)return;const src=nrm(s);let out="",i=0,j;const plain=String(s);let k=0;let res="";let idx=src.indexOf(w);if(idx<0)return;
@@ -6100,13 +6140,15 @@ function paintSearch(focus){
   if(!q){out.innerHTML="";cnt.hidden=true;}
   else{
     const QW=qWords(inp.value);
-    const score=(d,need)=>{const ix=sIndex(d);let m=0,sc=0;QW.forEach(({w,alts})=>{if(!alts.some(a=>hasAlt(ix.all,a)))return;m++;if(alts.some(a=>hasAlt(ix.name,a)))sc+=10;if(ix.name.split(/\s+/).some(x=>x.startsWith(w)))sc+=5;});return m>=need?{d,sc:sc+m*20,m}:null;};
+    const score=(d,need)=>{const ix=sIndex(d);let m=0,sc=0;QW.forEach(x=>{const{w,alts}=x;if(!qHit(d,ix,x))return;m++;if(alts.some(a=>hasAlt(ix.all,a)))sc+=x.types?1:3;if(alts.some(a=>hasAlt(ix.name,a)))sc+=10;if(ix.name.split(/\s+/).some(x=>x.startsWith(w)))sc+=5;});if(/^Marseille|Allauch/.test(d.p||""))sc+=4;return m>=need?{d,sc:sc+m*20,m}:null;};
     const byScore=(a,b)=>b.sc-a.sc||a.d.n.localeCompare(b.d.n,"fr");
     let hits=D.map(d=>score(d,QW.length)).filter(Boolean).sort(byScore),partial=false;
     if(!hits.length&&QW.length>1){hits=D.map(d=>score(d,1)).filter(Boolean).sort(byScore);partial=hits.length>0;}
     const hw=[...new Set(QW.flatMap(x=>x.alts))];
+    const pt=[...new Set(QW.flatMap(x=>x.types||[]))];
+    const ptLine=pt.length&&hits.length?`<p class="qsub ptypes">Structures qui prennent en charge ${QW.filter(x=>x.types).map(x=>"« "+esc(x.w)+" »").join(", ")} : ${pt.map(t=>`${esc(GROUPS[t])} (${D.filter(d=>d.t.includes(t)).length})`).join(" · ")}. ARCA-Sud (<a href="tel:+33488926888">04 88 92 68 88</a>) aide à choisir.</p>`:"";
     cnt.hidden=false;cnt.textContent=hits.length?(partial?`Aucun lieu ne contient tous ces mots. ${hits.length} lieu${hits.length>1?"x":""} pour une partie de la recherche :`:`${hits.length} résultat${hits.length>1?"s":""}`):"Aucun résultat. Essayez un mot plus simple, ou une de ces recherches :";
-    out.innerHTML=(hits.length?"":`<div class="sugg" style="margin:0 0 12px">${SEARCH_SUGG.map(x=>`<button type="button" data-q="${esc(x)}">${esc(x)}</button>`).join("")}</div><p class="qsub" style="margin:0 0 8px">Un lieu manque ? ARCA-Sud (04 88 92 68 88) aide aussi à orienter.</p><button type="button" class="btn" data-suggest style="margin:4px 0 10px">Proposer un lieu manquant</button>`)+hits.slice(0,60).map(({d})=>`<button type="button" class="scard" data-open="${d.id}"><div class="tags">${tagsHtml(d)}${d.warn?`<span class="verify">${esc(d.warn)}</span>`:""}</div><h3>${hl(d.n,hw)}</h3><div class="org">${hl(d.o||"",hw)}</div><div class="where">${esc(d.p)}${d.cover?" · secteur "+esc(d.sect):""}</div>${transit(d)}</button>`).join("");
+    out.innerHTML=ptLine+(hits.length?"":`<div class="sugg" style="margin:0 0 12px">${SEARCH_SUGG.map(x=>`<button type="button" data-q="${esc(x)}">${esc(x)}</button>`).join("")}</div><p class="qsub" style="margin:0 0 8px">Un lieu manque ? ARCA-Sud (<a href="tel:+33488926888">04 88 92 68 88</a>) aide aussi à orienter.</p><button type="button" class="btn" data-suggest style="margin:4px 0 10px">Proposer un lieu manquant</button>`)+hits.slice(0,60).map(({d})=>`<button type="button" class="scard" data-open="${d.id}"><div class="tags">${tagsHtml(d)}${d.warn?`<span class="verify">${esc(d.warn)}</span>`:""}</div><h3>${hl(d.n,hw)}</h3><div class="org">${hl(d.o||"",hw)}</div><div class="where">${esc(d.p)}${d.cover?" · secteur "+esc(d.sect):""}</div>${transit(d)}</button>`).join("");
   }
   if(focus)setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(_){}},60);
 }

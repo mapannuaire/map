@@ -115,6 +115,15 @@ a{color:var(--accent)}
 .seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:var(--sp-2);background:var(--sunk);border-radius:var(--r-lg);padding:var(--sp-1)}
 .seg button{border:0;background:none;border-radius:var(--r-md);padding:var(--sp-3) var(--sp-2);font-weight:600;font-size:var(--fs-md);color:var(--muted);line-height:1.2}
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,.14)}
+.subq{font-size:var(--fs-md);font-weight:600;color:var(--fg)}
+.subopts{display:grid;gap:var(--sp-2)}
+.subopts button{display:flex;align-items:center;gap:var(--sp-3);text-align:left;min-height:52px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);border-radius:var(--r-md);padding:var(--sp-3);font-size:var(--fs-md);line-height:1.25}
+.subopts button b{display:block;font-weight:600}
+.subopts button small{display:block;color:var(--muted);font-size:var(--fs-sm);margin-top:2px}
+.subopts .dot{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center}
+.subopts button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.subopts button[aria-pressed="true"] .dot{border-color:var(--accent)}
+.subopts button[aria-pressed="true"] .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent)}
 .seg.four{grid-auto-flow:row;grid-template-columns:1fr 1fr}
 .hint{margin:0;font-size:var(--fs-sm);color:var(--muted);line-height:1.4}
 select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:var(--sp-3);font-size:var(--fs-md)}
@@ -1491,8 +1500,8 @@ html[data-sw] .hero::after{animation:mapOut var(--dur-3) var(--ease) both}
       <h3>Arrondissement ou commune</h3>
       <select id="p-arr" class="arrsel" aria-label="Arrondissement"><option value="">Choisir…</option></select>
       <div id="p-subwrap" hidden style="display:grid;gap:8px">
-        <span class="hint">Cet arrondissement est partagé entre deux secteurs :</span>
-        <div class="seg four" id="p-sub" style="grid-template-columns:1fr"></div>
+        <span class="subq" id="p-subq">Arrondissement partagé entre deux secteurs. Dans quel quartier vit la personne ?</span>
+        <div class="subopts" id="p-sub" role="group" aria-labelledby="p-subq"></div>
       </div>
       <p class="hint">Le secteur dépend de l'adresse exacte. En cas de doute, appelez le CMP : il réoriente si besoin.</p>
     </section>
@@ -5985,7 +5994,7 @@ function paintP1(){
   document.getElementById("p-sdf").hidden=P.how!=="sdf";
   document.getElementById("p-arr").value=P.arr;document.getElementById("p-day").value=P.day;document.getElementById("p-month").value=P.month;
   const v=ARR_SECT[P.arr],sw=document.getElementById("p-subwrap");
-  if(P.how==="addr"&&v&&typeof v==="object"){sw.hidden=false;document.getElementById("p-sub").innerHTML=["a","b"].map(k=>`<button type="button" data-v="${k}" aria-pressed="${P.sub===k}">${esc(v[k][0])}</button>`).join("");}
+  if(P.how==="addr"&&v&&typeof v==="object"){sw.hidden=false;document.getElementById("p-sub").innerHTML=["a","b"].map(k=>`<button type="button" data-v="${k}" aria-pressed="${P.sub===k}"><span class="dot" aria-hidden="true"></span><span><b>${esc(v[k][0])}</b><small>Secteur ${esc(v[k][1])}</small></span></button>`).join("");}
   else sw.hidden=true;
   const m=psyMatch(),r=document.getElementById("p-result");
   if(m.err){r.hidden=false;r.className="presult err";r.innerHTML=`<span class="lbl">Date</span><div>${esc(m.err)}</div>`;}

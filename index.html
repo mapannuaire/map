@@ -94,7 +94,7 @@ a{color:var(--accent)}
 .qsub{color:var(--muted);font-size:var(--fs-md);margin:2px 0 var(--sp-4)}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)}
 .op{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-3) var(--sp-3) var(--sp-3);display:grid;gap:3px;text-align:left;position:relative;align-content:start;min-height:132px;transition:border-color var(--dur-1),background var(--dur-1),transform var(--dur-1)}
-.op:active{transform:scale(.98)}
+.op:active{transform:scale(.96)}
 .op .ic{width:38px;height:38px;border-radius:var(--r-md);display:grid;place-items:center;margin-bottom:var(--sp-1);color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
 .op .ic svg{width:22px;height:22px}
 .op b{font-size:var(--fs-md);line-height:1.25}
@@ -430,7 +430,7 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 /* catégories : pavés */
 .opts{grid-template-columns:1fr 1fr;gap:var(--sp-2);margin-top:var(--sp-1)}
 .opts .op{--tile:color-mix(in srgb,var(--c) var(--tile-mix),var(--tile-base));display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr;column-gap:var(--sp-2);row-gap:var(--sp-1);align-content:start;border:0;background:var(--tile);color:#fff;padding:var(--sp-3) var(--sp-3) var(--sp-3);border-radius:var(--r-lg);min-height:82px;box-shadow:0 2px 6px -2px rgba(10,30,45,.35);transition:transform var(--dur-1),box-shadow var(--dur-1)}
-.opts .op:active{transform:scale(.98)}
+.opts .op:active{transform:scale(.96)}
 .opts .op .ic{grid-column:1;grid-row:1;width:auto;height:auto;margin:0;display:flex;flex-direction:row;justify-content:flex-start;align-items:center;background:none;color:#fff;padding:0}
 .opts .op .tx{grid-column:1/-1;grid-row:2}
 .opts .op em{grid-column:2;grid-row:1;align-self:center;justify-self:end;font:700 var(--fs-sm)/1 var(--mono);color:#fff;opacity:.92}
@@ -1399,7 +1399,7 @@ html:not([data-loaded]) .view:not([hidden]) main{animation:mapFade var(--dur-2) 
 .isheet-scrim:not([hidden]) .isheet{animation:mapSheet var(--dur-2) var(--ease) both}
 .fiche:not([hidden]){animation:mapSlide var(--dur-2) var(--ease) both}
 .op,.card,.btn,.alllink,.mobbtn,.searchopen,.modetabs button,.repchips button{transition:transform var(--dur-1) var(--ease),background-color var(--dur-1) var(--ease),color var(--dur-1) var(--ease),box-shadow var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease)}
-.op:active,.card:active,.btn:active,.mobbtn:active,.searchopen:active{transform:scale(.97)}
+.op:active,.card:active,.btn:active,.mobbtn:active,.searchopen:active{transform:scale(.96)}
 .modetabs button:active{transform:scale(.96)}
 @media (hover:hover){.op:hover,.card:hover{box-shadow:0 6px 18px -10px rgba(15,41,64,.35)}}
 
@@ -1437,6 +1437,14 @@ body{transition:background-color var(--dur-3) var(--ease)}
 .hero .wave{z-index:2}
 @keyframes mapOut{from{opacity:1}to{opacity:0}}
 html[data-sw] .hero::after{animation:mapOut var(--dur-3) var(--ease) both}
+
+/* 25/11 finitions : texte net, titres équilibrés, zones tactiles d'au moins 44 px sur téléphone */
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+h1,h2,h3{text-wrap:balance}
+.newsbtn::before{content:"";position:absolute;inset:-12px -10px}
+.big a,.big button,.acts .copy,.backlink,.srcdet summary{min-height:44px}
+.acts .copy{display:inline-flex;align-items:center;justify-content:center}
+.mmlink::after{content:"";position:absolute;inset:-8px -4px}
 </style>
 </head>
 <body>
@@ -5002,7 +5010,8 @@ if(!D.some(d=>d.id==="uhsa-marseille")){
  d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
  d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
  d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
- CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Fiche : les rubriques s'ouvrent repliées, sauf En bref, Contacts et l'envoi par e-mail ; un toucher les déplie");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Finitions : boutons plus faciles à toucher sur téléphone (appeler, copier, sources, retour), texte plus net");
+CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Fiche : les rubriques s'ouvrent repliées, sauf En bref, Contacts et l'envoi par e-mail ; un toucher les déplie");
 CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Une ambiance par domaine : bleu mer pour l'addictologie, prune pour la psychiatrie, avec un fondu au changement d'onglet");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Animations courtes et transitions douces ; « Proposer un nouveau lieu » aussi en Psychiatrie");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("En-tête aux couleurs du logo : du bleu nuit au prune");

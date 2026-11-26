@@ -1,0 +1,27 @@
+# MAP : empêche la mise en pause de la base Supabase gratuite (pause après 7 jours sans activité).
+# Une requête par jour suffit. Elle ajoute une ligne « veille » aux compteurs d'usage, facile à exclure des statistiques.
+# Si la base ne répond plus, la tâche échoue et GitHub prévient par e-mail le propriétaire du dépôt.
+name: MAP - garder la base active
+
+on:
+  schedule:
+    - cron: "23 4 * * *"   # chaque jour, vers 5 h ou 6 h à Paris
+  workflow_dispatch:        # bouton « Run workflow » pour tester à la main
+
+permissions: {}
+
+jobs:
+  eveil:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Interroger la base de MAP
+        env:
+          URL: https://jnbkxoxcxpwgahzeitid.supabase.co
+          KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYmt4b3hjeHB3Z2FoemVpdGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUwMjE4MTcsImV4cCI6MjExMDU5NzgxN30.jnyJuE_2gq6Bnp2Rh45O01pqb8wr3dwFm4Rlblev0Nc   # clé publique (anon), déjà visible dans l'appli
+        run: |
+          CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 -X POST "$URL/rest/v1/map_usage" \
+            -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
+            -H "Content-Type: application/json" -H "Prefer: return=minimal" \
+            -d '{"evenement":"ouverture","cle":"veille-auto","version":"veille"}')
+          echo "Réponse de la base : $CODE"
+          test "$CODE" = "201"

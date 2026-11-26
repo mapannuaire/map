@@ -1,0 +1,42 @@
+# MAP : contrôle mensuel des liens des fiches (sites, documents d'admission, sources).
+# Ouvre ou met à jour un ticket « Liens cassés » dans l'onglet Issues ; GitHub prévient par e-mail.
+name: MAP - contrôle des liens
+
+on:
+  schedule:
+    - cron: "41 5 2 * *"   # le 2 de chaque mois, vers 6 h ou 7 h à Paris
+  workflow_dispatch:        # bouton « Run workflow » pour lancer un contrôle à la main
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  liens:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tester les liens
+        run: python3 outils/verif-liens.py index.html
+
+      - name: Publier le rapport
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat rapport-liens.md >> "$GITHUB_STEP_SUMMARY"
+          N=$(cat nb-casses.txt)
+          TITRE="Liens cassés dans les fiches"
+          NUM=$(gh issue list --state open --search "in:title \"$TITRE\"" --json number --jq '.[0].number')
+          if [ "$N" -gt 0 ]; then
+            if [ -n "$NUM" ]; then
+              gh issue edit "$NUM" --body-file rapport-liens.md
+              gh issue comment "$NUM" --body "Nouveau contrôle : $N lien(s) cassé(s). Le détail est à jour en haut du ticket."
+            else
+              gh issue create --title "$TITRE" --body-file rapport-liens.md
+            fi
+          elif [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --body "Nouveau contrôle : plus aucun lien cassé."
+            gh issue close "$NUM"
+          fi

@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org; connect-src 'self' https://docs.google.com https://*.googleusercontent.com https://jnbkxoxcxpwgahzeitid.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>MAP · Marseille AddictoPsy</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -1707,9 +1709,10 @@ h1,h2,h3{text-wrap:balance}
         <input id="rep-file" type="file" accept="application/pdf,image/*" multiple>
         <p class="hint" style="margin:0">Plaquette, dossier d'admission, photo d'une affiche… PDF ou image, 3 fichiers au plus, 10 Mo chacun.</p>
       </div>
-      <label class="replab" for="rep-contact">Votre e-mail ou téléphone, si vous souhaitez une réponse <span style="font-weight:400;color:var(--muted)">(facultatif)</span></label>
+      <label class="replab" for="rep-contact">Votre nom ou pseudo et un e-mail ou un téléphone, si vous souhaitez une réponse <span style="font-weight:400;color:var(--muted)">(facultatif)</span></label>
       <input id="rep-contact" class="repinput" type="text" maxlength="200" autocomplete="email">
       <p class="hint" style="margin:0">Envoi anonyme à l'équipe MAP. N'indiquez aucune information sur un patient.</p>
+      <p class="hint rgpd" style="margin:0">Vos coordonnées servent uniquement à vous répondre et ne sont jamais transmises. Les messages sont supprimés au plus tard 12 mois après réception. Pour consulter ou faire effacer vos données : mapannuaire@gmail.com.</p>
       <p class="repstatus" id="rep-status" role="status" hidden></p>
       <button type="button" class="btn primary" id="rep-send" style="width:100%">Envoyer</button>
       <button type="button" class="linkbtn" id="rep-mail">Préférer l'envoi par e-mail</button>
@@ -5095,7 +5098,7 @@ function applySheet(text){
     if(g("quartier ou ville")!==undefined)d.p=g("quartier ou ville");
     if(g("adresse")!==undefined)d.a=g("adresse");
     if(g("contacts")!==undefined)d.c=sheetLines(g("contacts")).map(l=>{const m=l.match(/^(.*?)\s*:\s*(.+)$/);return m&&!/^https?$/i.test(m[1])?[m[1],m[2]]:[/@/.test(l)?"E-mail":"Téléphone",l];});
-    set("site",g("site"));
+    set("site",(v=>v===undefined||v===""||/^https?:\/\//i.test(v)?v:"")(g("site")));
     if(g("en bref")!==undefined)d.f=sheetLines(g("en bref")).map(x=>x.replace(/^[-•·]\s*/,""));
     set("send",g("admission"));
     if(g("documents")!==undefined)set("docs",sheetLines(g("documents")).map(l=>{const p=l.split("|").map(x=>x.trim());return [p[0]||"Document",p[1]||"",p[2]||"",sheetYes(p[3])||/admission/i.test(p[3]||"")?"form":""];}).filter(z=>/^https?:/.test(z[1])));
@@ -5858,7 +5861,7 @@ function printSheet(d){
 const loadJS=(local,cdn)=>new Promise((res,rej)=>{const t=(src,next)=>{const s=document.createElement("script");s.src=src;s.onload=res;s.onerror=()=>{s.remove();next?t(next,null):rej(new Error("script"));};document.head.appendChild(s);};t(local,cdn);});
 async function ficheFile(d,fmt){
   if(!window.html2canvas)await loadJS("vendor/html2canvas.min.js","https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
-  if(fmt==="pdf"&&!(window.jspdf&&window.jspdf.jsPDF))await loadJS("vendor/jspdf.umd.min.js","https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
+  if(fmt==="pdf"&&!(window.jspdf&&window.jspdf.jsPDF))await loadJS("vendor/jspdf.umd.min.js","https://cdn.jsdelivr.net/npm/jspdf@4.2.1/dist/jspdf.umd.min.js");
   printDone();
   const sh=document.createElement("div");sh.id="printsheet";sh.className="capture";sh.innerHTML=MLANG==="pro"?printSheet(d):patientSheet(d,MLANG);document.body.appendChild(sh);
   const mm=fEl.querySelector(".minimap");

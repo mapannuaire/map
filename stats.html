@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src https://jnbkxoxcxpwgahzeitid.supabase.co https://docs.google.com https://*.googleusercontent.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAP · statistiques</title>
+<style>
+:root{color-scheme:light dark;--bg:#f1f4f8;--surface:#fff;--ink:#0f2940;--muted:#55657a;--line:#d9dee6;--accent:#1e6fb8;--prune:#8a3c70;--warn:#b3261e;--r:12px}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1822;--surface:#152331;--ink:#e8eef5;--muted:#9aabbd;--line:#2a3a4b;--accent:#6aa9e6;--prune:#d08cbd;--warn:#f2b8b5}}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+header{background:linear-gradient(160deg,#0f2940,#174a7a 55%,#1e6fb8);color:#fff;padding:20px 16px 18px}
+header .in,main{max-width:960px;margin:0 auto}
+h1{margin:0;font-size:24px;line-height:1.1;text-wrap:balance}
+header p{margin:6px 0 0;opacity:.85;font-size:14px}
+.per{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.per button{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;font:600 14px/1 inherit;cursor:pointer;transition:background-color .15s,transform .15s}
+.per button[aria-pressed="true"]{background:#fff;color:#0f2940}
+.per button:active{transform:scale(.96)}
+main{padding:16px;display:grid;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi,.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.kpi b{display:block;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi span{font-size:13px;color:var(--muted)}
+h2{font-size:17px;margin:0 0 10px;text-wrap:balance}
+.bars{display:flex;align-items:flex-end;gap:2px;height:140px;border-bottom:1px solid var(--line)}
+.bars i{flex:1;background:var(--accent);border-radius:3px 3px 0 0;min-height:2px}
+.axis{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;font-size:14px}
+.rows .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rows .n{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600}
+.rows .bar{grid-column:1/-1;height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+.rows .bar i{display:block;height:100%;background:var(--prune)}
+.two{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.msg{border-top:1px solid var(--line);padding:10px 0;font-size:14px}
+.msg:first-of-type{border-top:0;padding-top:0}
+.msg .meta{color:var(--muted);font-size:13px}
+.msg p{margin:4px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:999px;background:var(--bg);margin-right:6px}
+.empty,.note{color:var(--muted);font-size:14px;margin:0}
+.err{color:var(--warn)}
+form{display:grid;gap:10px;max-width:420px}
+input{min-height:44px;font:16px inherit;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+form button{min-height:44px;border:0;border-radius:8px;background:var(--accent);color:#fff;font:600 16px inherit;cursor:pointer}
+</style>
+</head>
+<body>
+<header><div class="in">
+  <h1>MAP · statistiques</h1>
+  <p id="sub">Usage de l'annuaire et messages reçus</p>
+  <div class="per" role="group" aria-label="Période">
+    <button type="button" data-j="7" aria-pressed="false">7 jours</button>
+    <button type="button" data-j="30" aria-pressed="true">30 jours</button>
+    <button type="button" data-j="90" aria-pressed="false">3 mois</button>
+    <button type="button" data-j="365" aria-pressed="false">1 an</button>
+  </div>
+</div></header>
+<main id="main"><p class="note">Chargement…</p></main>
+<script>
+{
+const URL_RPC="https://jnbkxoxcxpwgahzeitid.supabase.co/rest/v1/rpc/map_stats";
+const KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYmt4b3hjeHB3Z2FoemVpdGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUwMjE4MTcsImV4cCI6MjExMDU5NzgxN30.jnyJuE_2gq6Bnp2Rh45O01pqb8wr3dwFm4Rlblev0Nc";
+const SHEET="https://docs.google.com/spreadsheets/d/1OvMK2Vcqw4762-3AzemTimyZ8yymhf6DgB7W-GE2o_E/gviz/tq?tqx=out:csv&sheet=Fiches";
+const CAT={sevrage:"Sevrage",cure:"Cure",postcure:"Post-cure",commu:"Communauté",hdj:"Hôpital de jour",resid:"Hébergement",csapa:"CSAPA",hosp:"Consultation hôpital",spec:"Publics spécifiques",amob:"Équipe mobile",rdr:"Réduction des risques",liberal:"Médecin libéral",entraide:"Entraide",cmp:"CMP",mob:"Équipes mobiles psy",urg:"Urgences psy",hdjpsy:"Hôpital de jour psy",rehab:"Réhabilitation",specialise:"Consultations spécialisées",clinique:"Cliniques",consult:"Consultations",gem:"GEM",famille:"Usagers, familles",repit:"Répit",logement:"Logement",insertion:"Insertion",ecoute:"Lignes d'écoute",droits:"Droits",hospit:"Hospitalisation","filtre-open":"Filtre ouvert maintenant","filtre-sr":"Filtre sans rendez-vous","filtre-cs":"Filtre sans couverture sociale"};
+const TYPES={erreur:"Commentaire",lieu_manquant:"Lieu proposé",message:"Message du site"};
+const $=s=>document.querySelector(s),main=$("#main");
+const ls={get:k=>{try{return localStorage.getItem(k)}catch(_){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}}};
+let cle=null,jours=30,names={};
+{const m=location.hash.match(/k=([A-Za-z0-9_-]+)/);if(m){cle=m[1];ls.set("map.stats.k",cle);history.replaceState(null,"",location.pathname);}else cle=ls.get("map.stats.k");}
+const el=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e;};
+const nf=n=>Number(n||0).toLocaleString("fr-FR");
+function parseCSV(t){const R=[];let r=[],f="",q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}else if(c==='"')q=true;else if(c===","){r.push(f);f="";}else if(c==="\n"){r.push(f);R.push(r);r=[];f="";}else if(c!=="\r")f+=c;}if(f||r.length){r.push(f);R.push(r);}return R;}
+fetch(SHEET).then(r=>r.ok?r.text():"").then(t=>{const R=parseCSV(t);if(!R.length)return;const h=R[0].map(x=>x.toLowerCase().trim()),i=h.indexOf("identifiant"),n=h.indexOf("nom");if(i<0||n<0)return;R.slice(1).forEach(r=>{if(r[i])names[r[i]]=r[n];});if(last)paint(last);}).catch(()=>{});
+let last=null;
+function askKey(msg){main.replaceChildren();const c=el("div","card");c.append(el("h2",null,"Clé d'accès"),el("p","note",msg||"Collez la clé reçue pour voir les statistiques."));
+  const f=el("form");const i=el("input");i.type="password";i.autocomplete="off";i.setAttribute("aria-label","Clé d'accès");const b=el("button",null,"Voir les statistiques");b.type="submit";f.append(i,b);
+  f.addEventListener("submit",e=>{e.preventDefault();cle=i.value.trim();if(cle){ls.set("map.stats.k",cle);load();}});c.append(f);main.append(c);}
+async function load(){
+  if(!cle)return askKey();
+  main.replaceChildren(el("p","note","Chargement…"));
+  try{const r=await fetch(URL_RPC,{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"},body:JSON.stringify({p_cle:cle,p_jours:jours})});
+    if(r.status===400||r.status===401||r.status===403){const t=await r.text();if(/cl[ée] invalide|42501/.test(t))return askKey("Cette clé n'est pas reconnue.");}
+    if(!r.ok)throw new Error("HTTP "+r.status);last=await r.json();paint(last);
+  }catch(e){main.replaceChildren(el("p","note err","Impossible de charger les chiffres ("+e.message+"). Réessayez plus tard."));}
+}
+function list(title,items,label){const c=el("section","card");c.append(el("h2",null,title));
+  if(!items||!items.length){c.append(el("p","empty","Rien sur la période."));return c;}
+  const max=Math.max(...items.map(x=>x.n)),ul=el("ul","rows");
+  items.forEach(x=>{const li=el("li");li.append(el("span","t",label(x)),el("span","n",nf(x.n)));const b=el("span","bar"),i=el("i");i.style.width=(100*x.n/max)+"%";b.append(i);li.append(b);ul.append(li);});
+  c.append(ul);return c;}
+function paint(d){
+  main.replaceChildren();
+  const E=d.par_evenement||{},ouv=E.ouverture||0;
+  const k=el("div","kpis");
+  [[ouv,"ouvertures de l'appli"],[E.fiche||0,"fiches consultées"],[(E.partage||0)+(E.impression||0),"fiches données (message, impression)"],[E.appel||0,"appels lancés"],[ouv?Math.round(100*(d.installe||0)/ouv)+" %":"–","ouvertures depuis l'appli installée"]]
+    .forEach(([v,l])=>{const b=el("div","kpi");b.append(el("b",null,typeof v==="number"?nf(v):v),el("span",null,l));k.append(b);});
+  main.append(k);
+  const c=el("section","card");c.append(el("h2",null,"Ouvertures par jour"));
+  const days=[],byDay=Object.fromEntries((d.par_jour||[]).map(x=>[x.jour,x.n]));
+  for(let i=d.jours-1;i>=0;i--){const t=new Date(Date.now()-i*864e5);days.push([t.toLocaleDateString("sv-SE",{timeZone:"Europe/Paris"}),0]);}
+  days.forEach(x=>x[1]=byDay[x[0]]||0);const mx=Math.max(1,...days.map(x=>x[1]));
+  const bars=el("div","bars");bars.setAttribute("role","img");bars.setAttribute("aria-label",nf(ouv)+" ouvertures sur "+d.jours+" jours");
+  days.forEach(([j,n])=>{const i=el("i");i.style.height=(100*n/mx)+"%";i.title=j.split("-").reverse().join("/")+" : "+n;bars.append(i);});
+  const ax=el("div","axis");ax.append(el("span",null,days[0][0].split("-").reverse().slice(0,2).join("/")),el("span",null,"aujourd'hui"));
+  c.append(bars,ax);main.append(c);
+  const M=d.modes||{};main.append(el("p","note","Addictologie : "+nf(M.addicto)+" · Psychiatrie : "+nf(M.psy)+" ouvertures"));
+  const two=el("div","two");
+  two.append(list("Fiches les plus consultées",d.fiches,x=>names[x.cle]||x.cle));
+  two.append(list("Catégories et filtres utilisés",d.categories,x=>CAT[x.cle]||x.cle));
+  two.append(list("Recherches sans résultat",d.recherches_vides,x=>"« "+x.cle+" »"));
+  two.append(list("Fiches données",d.partages,x=>({impression:"Impression",partage:"Message",appel:"Appel"}[x.evenement]||x.evenement)+(x.cle&&!/^[a-z0-9-]{12,}$/.test(x.cle)?" · "+x.cle:"")));
+  main.append(two);
+  const ms=el("section","card");ms.append(el("h2",null,"Messages reçus ("+(d.messages||[]).length+")"));
+  if(!(d.messages||[]).length)ms.append(el("p","empty","Aucun message sur la période."));
+  (d.messages||[]).forEach(m=>{const b=el("div","msg"),meta=el("div","meta");
+    meta.append(el("span","tag",TYPES[m.type]||m.type),document.createTextNode(new Date(m.date).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})+(m.fiche?" · "+m.fiche:"")+(m.motif?" · "+m.motif:"")+(m.fichiers?" · "+m.fichiers+" fichier(s)":"")+(m.traite?" · traité":"")));
+    b.append(meta,el("p",null,m.commentaire||""));if(m.contact)b.append(el("div","meta","Contact : "+m.contact));ms.append(b);});
+  main.append(ms);
+  main.append(el("p","note","Compteurs anonymes, sans cookie. Pièces jointes : Supabase › Storage › map-fichiers."));
+}
+document.querySelector(".per").addEventListener("click",e=>{const b=e.target.closest("[data-j]");if(!b)return;jours=+b.dataset.j;document.querySelectorAll(".per button").forEach(x=>x.setAttribute("aria-pressed",x===b));load();});
+load();
+}
+</script>
+</body>
+</html>

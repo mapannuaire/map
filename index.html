@@ -246,6 +246,18 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .chip.cond{background:var(--sunk);border-color:transparent;color:var(--muted)}
 .chip.assumed{border:1px dashed var(--muted);background:transparent}
 .chip.edit{color:var(--accent);border-style:dashed}
+.chsep{flex:none;width:1px;align-self:stretch;margin:var(--sp-1) var(--sp-1);background:var(--line)}
+.card .where sup,.fh sup{font-size:.72em;line-height:0;vertical-align:.45em}
+.big .ico{display:grid;justify-items:center;align-content:center;gap:2px}
+.big .ico .il{font:600 11px/1 var(--body);color:var(--muted)}
+.big .fav[aria-pressed="true"] .il{color:inherit}
+.bb-arca b svg{width:13px;height:13px;vertical-align:-1px;margin-right:4px}
+@media (max-width:899px){
+  .mapwrap:not(.mapbig):not(.collapsed){position:relative;isolation:isolate}
+  .mapwrap:not(.mapbig):not(.collapsed) .maptools{position:absolute;top:6px;left:6px;z-index:1001;padding:0}
+  .mapwrap:not(.mapbig):not(.collapsed) .legend{display:none}
+  .mapwrap:not(.mapbig):not(.collapsed) .maptog{background:var(--surface);box-shadow:var(--shadow);min-height:36px}
+}
 .searchbox{padding:var(--sp-3) var(--sp-4) 0}
 .searchbox input{width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-3);font-size:var(--fs-md)}
 
@@ -472,7 +484,7 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .big{display:flex;gap:var(--sp-2);margin-top:calc(-1 * var(--sp-5))}
 .big>*{flex:0 0 auto}
 .big>a:not(.ico){flex:1 1 auto;min-width:0}
-.big .ico{width:46px;padding:var(--sp-2) 0}
+.big .ico{width:54px;padding:var(--sp-2) 0}
 .big .telnum{font:600 var(--fs-md) var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .big a,.big button{display:flex;align-items:center;justify-content:center;gap:var(--sp-2);padding:var(--sp-2) var(--sp-2);border-radius:var(--r-md);font-size:var(--fs-sm);line-height:1.1}
 .big svg{width:18px;height:18px;flex:none}
@@ -555,7 +567,7 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .isheet-scrim#sharesheet{z-index:45}
 .shpre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:var(--fs-sm)/1.45 var(--body);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:var(--sp-3) var(--sp-3);max-height:30vh;overflow:auto}
 .shgrid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2)}
-.shgrid:has(>[hidden]){grid-template-columns:1fr}
+.shgrid:has(>[hidden]),.shgrid:has(>:only-child){grid-template-columns:1fr}
 .msgmeta:has(b:empty){display:none}
 .shgrid .btn{padding:var(--sp-3) var(--sp-2);font-size:var(--fs-md)}
 /* ---- nouveautés ---- */
@@ -1447,6 +1459,24 @@ h1,h2,h3{text-wrap:balance}
 .big a,.big button,.acts .copy,.backlink,.srcdet summary{min-height:44px}
 .acts .copy{display:inline-flex;align-items:center;justify-content:center}
 .mmlink::after{content:"";position:absolute;inset:-8px -4px}
+
+/* 26/11 : filtres d'accès, mes lieux, favori */
+.chip.tog{min-height:40px;color:var(--fg);transition:background-color var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease),color var(--dur-1) var(--ease)}
+.chip.tog[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.accnote{font-size:var(--fs-xs);color:var(--muted)}
+.mine{margin:var(--sp-5) 0 0;display:grid;gap:var(--sp-2)}
+.minehead{font-size:var(--fs-lg);margin:0}
+.minesub{font-size:var(--fs-sm);color:var(--muted);margin:var(--sp-2) 0 0;font-weight:600}
+.minehint{font-size:var(--fs-sm);color:var(--muted);margin:0}
+.minelist{display:grid;gap:var(--sp-2)}
+.mineitem{display:flex;align-items:center;gap:var(--sp-3);min-height:52px;width:100%;text-align:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:var(--sp-2) var(--sp-3);color:var(--fg);cursor:pointer;transition:transform var(--dur-1) var(--ease)}
+.mineitem:active{transform:scale(.96)}
+.mineitem i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--c)}
+.mineitem span{display:grid;min-width:0}
+.mineitem b{font-size:var(--fs-sm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mineitem small{font-size:var(--fs-xs);color:var(--muted)}
+.big .fav[aria-pressed="true"]{color:var(--warn)}
+.big .fav[aria-pressed="true"] svg{fill:currentColor}
 </style>
 </head>
 <body>
@@ -1469,6 +1499,7 @@ h1,h2,h3{text-wrap:balance}
     <h1 class="sr-only">Orienter en addictologie à Marseille</h1>
     <div class="prog" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
     <div class="opts" id="opts"></div>
+    <section class="mine" data-mine hidden></section>
     <button class="alllink" type="button" id="seeall">Tout voir, sans filtre →</button>
     <button class="alllink" type="button" data-suggest style="margin-top:-6px">＋ Proposer un nouveau lieu</button>
     <button class="installbtn" type="button" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M12 7.5v7M9 11.5l3 3 3-3"/></svg>Installer sur mon téléphone</button>
@@ -1480,7 +1511,7 @@ h1,h2,h3{text-wrap:balance}
     </div>
   </main>
   <div class="bottombar"><div class="col">
-    <a class="bb-arca" href="tel:+33488926888">Un doute ?<b>ARCA-Sud</b></a>
+    <a class="bb-arca" href="tel:+33488926888" aria-label="Un doute ? Appeler ARCA-Sud, 04 88 92 68 88">Un doute ? Appelez<b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>ARCA-Sud</b></a>
     <button class="cta" type="button" id="next1">Continuer →</button>
   </div></div>
 </div>
@@ -1527,6 +1558,7 @@ h1,h2,h3{text-wrap:balance}
     <div id="p-result" class="presult" hidden aria-live="polite"></div>
     <h2 class="qh qtitle" style="margin-top:22px">Autres ressources</h2>
     <div class="opts pmore" id="p-more"></div>
+    <section class="mine" data-mine hidden></section>
     <button class="alllink" type="button" id="p-all">Tout voir : CMP, urgences et autres ressources →</button>
     <button class="alllink" type="button" data-suggest style="margin-top:-6px">＋ Proposer un nouveau lieu</button>
     <button class="installbtn" type="button" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M12 7.5v7M9 11.5l3 3 3-3"/></svg>Installer sur mon téléphone</button>
@@ -1604,7 +1636,7 @@ h1,h2,h3{text-wrap:balance}
     </section>
   </main>
   <div class="bottombar"><div class="col">
-    <a class="bb-arca" href="tel:+33488926888">Un doute ?<b>ARCA-Sud</b></a>
+    <a class="bb-arca" href="tel:+33488926888" aria-label="Un doute ? Appeler ARCA-Sud, 04 88 92 68 88">Un doute ? Appelez<b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>ARCA-Sud</b></a>
     <button class="cta" type="button" id="next2">Voir les résultats →</button>
   </div></div>
 </div>
@@ -1615,7 +1647,7 @@ h1,h2,h3{text-wrap:balance}
     <div style="flex:1;min-width:0"><h1 id="count"></h1><div class="sub" id="countsub"></div></div>
     <button class="pill" type="button" id="modify">Modifier ✎</button>
   </div></div>
-  <div class="chips" id="chips" aria-label="Filtres actifs"></div>
+  <div class="chips" id="chips" role="group" aria-label="Filtres"></div>
   <main class="res-grid">
     <div class="res-map">
       <div class="mapwrap" id="mapwrap">
@@ -5013,7 +5045,10 @@ if(!D.some(d=>d.id==="uhsa-marseille")){
  d.site="https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest";
  d.docs=[["Formulaire d'admission (juin 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/mefformulaireadmissioncliniquecollinesdurevestjuin2026-1.pdf","à remplir par le médecin","form"],["Check-list des documents pour l'admission (janvier 2026, PDF)","https://www.emeis.fr/system/files/medias/documents/emeis-clinique-collines-revest-check-list-admission.pdf","",""]];
  d.note="Sevrage confirmé par le site de la clinique (novembre 2026) ; les fiches Alcool/Drogues Info Service indiquent encore que l'alcool et les opiacés doivent être sevrés avant l'entrée en SMR : préciser au téléphone. Sources : https://www.emeis.fr/fr/nos-cliniques-psy/provence-alpes-cote-dazur/var/revest-eaux/clinique-collines-revest, https://www.ptsm83.codes83.org/places/clinea-centre-de-soins-les-collines-du-revest/, https://alcool-info-service.fr/adresses-utiles/100753";
- CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Finitions : boutons plus faciles à toucher sur téléphone (appeler, copier, sources, retour), texte plus net");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Mes lieux : touchez ☆ sur une fiche pour la retrouver sur l'accueil, avec les fiches consultées récemment");
+CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Résultats : filtres « Ouvert maintenant », « Sans rendez-vous » et « Sans couverture sociale »");
+CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("SMS et messageries : texte court, traduit dans la langue choisie, horaires regroupés");
+CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Finitions : boutons plus faciles à toucher sur téléphone (appeler, copier, sources, retour), texte plus net");
 CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Fiche : les rubriques s'ouvrent repliées, sauf En bref, Contacts et l'envoi par e-mail ; un toucher les déplie");
 CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Une ambiance par domaine : bleu mer pour l'addictologie, prune pour la psychiatrie, avec un fondu au changement d'onglet");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Animations courtes et transitions douces ; « Proposer un nouveau lieu » aussi en Psychiatrie");
@@ -5059,6 +5094,15 @@ function parseCSV(t){
   if(f!==""||row.length){row.push(f);rows.push(row);}
   return rows;
 }
+/* 26/11 : accès « sans rendez-vous » et « sans couverture sociale ».
+   Valeurs de départ prudentes, tirées du type et du texte des fiches ; les colonnes du tableur font foi. */
+const ACC_RDV=/sans (rendez-vous|rendez vous|rdv)|accueil libre/i,ACC_NORDV=/pas sans rendez|uniquement sur (rendez-vous|rdv)/i;
+const ACC_CS=/gratuit(e|s)? et anonyme|anonyme et gratuit|permanence d.acc[eè]s aux soins|\bPASS\b/;
+const accTxt=d=>[d.n,d.o,...(d.f||[]),d.note||"",...(d.der||[]),d.send||"",d.sub||""].join(" ");
+function deriveAcc(d){const t=accTxt(d);
+  if(d.sr===undefined)d.sr=(d.t.includes("urg")||(ACC_RDV.test(t)&&!ACC_NORDV.test(t)))?1:0;
+  if(d.scs===undefined)d.scs=(d.t.includes("urg")||(d.t.includes("csapa")&&/CSAPA|CJC|jeunes consommateurs/i.test(d.n))||(d.t.includes("rdr")&&/CAARUD/i.test(d.n))||ACC_CS.test(t))?1:0;}
+D.forEach(deriveAcc);
 const sheetNorm=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
 const sheetYes=s=>/^(oui|o|yes|y|x|1|vrai|true)$/i.test(String(s||"").trim());
 const sheetLines=s=>String(s||"").split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
@@ -5104,6 +5148,7 @@ function applySheet(text){
     if(g("documents")!==undefined)set("docs",sheetLines(g("documents")).map(l=>{const p=l.split("|").map(x=>x.trim());return [p[0]||"Document",p[1]||"",p[2]||"",sheetYes(p[3])||/admission/i.test(p[3]||"")?"form":""];}).filter(z=>/^https?:/.test(z[1])));
     set("der",g("deroulement")!==undefined?sheetLines(g("deroulement")):undefined);
     set("act",g("activites")!==undefined?sheetLines(g("activites")):undefined);
+    {const v=g("sans rendez vous");if(v)d.sr=sheetYes(v)?1:0;}{const v=g("sans couverture sociale");if(v)d.scs=sheetYes(v)?1:0;}deriveAcc(d);
     if(DAYS.some(k=>g(k)!==undefined)||g("horaires precisions")!==undefined){
       const sem={};let any=false;DAYS.forEach((k,j)=>{const v=sheetDay(g(k));sem[j+1]=v;if(v.length)any=true;});
       const tx=g("horaires precisions")||"";
@@ -5177,6 +5222,7 @@ const accessText=d=>access(d).map(x=>`${x.lines.map(l=>l==="bus"?"bus":l).join("
 const tagsHtml=d=>ORDER.filter(t=>d.t.includes(t)).map(t=>`<span class="tag" style="--c:var(--t-${t})">${L[t]}</span>`).join("");
 
 const I={
+ star:'<path d="M12 3.6l2.55 5.2 5.75.84-4.15 4.05.98 5.72L12 16.73l-5.13 2.68.98-5.72L3.7 9.64l5.75-.84z"/>',
  cure:'<path d="M3 19V6M3 15h18v4M21 15v-2.5A3.5 3.5 0 0 0 17.5 9H11v6"/><circle cx="7" cy="11.5" r="2"/>',
  sevrage:'<path d="M3 19V6M3 15h18v4M21 15v-2.5A3.5 3.5 0 0 0 17.5 9H11v6"/><circle cx="7" cy="11.5" r="2"/>',
  commu:'<path d="M3 20h18"/><path d="M6 20v-7l6-5 6 5v7"/><path d="M2 11c2-2 3-2 5 0M17 11c2-2 3-2 5 0"/><circle cx="12" cy="5" r="1.5"/>',
@@ -5217,7 +5263,7 @@ const ico=(k,extra="")=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentCol
 const OPTS=[["sevrage","Sevrage","Cure, post-cure, communauté"],["hdj","Hôpital de jour","Retour le soir"],["resid","Hébergement","Centre, appartement"],["csapa","CSAPA","Suivi, substitution"],["hosp","Consultation hôpital","Addictologue, ELSA"],["spec","Publics spécifiques","Jeunes, parents"],["amob","Équipe mobile","Aller-vers"],["rdr","Réduction des risques","CAARUD et associations"],["liberal","Médecin libéral","Cabinet, substitution"],["entraide","Entraide","AA, NA, lignes d'écoute"]];
 
 /* ---------- État et filtres ---------- */
-const S={mode:"addicto",only:"",sub:"",csub:"",hsect:"",hlabel:"",types:[],lg:"oui",hm:"oui",sec:"all",arr:"",q:"",psy:{how:"",arr:"",sub:"",day:"",month:""}};
+const S={acc:{open:0,sr:0,cs:0},mode:"addicto",only:"",sub:"",csub:"",hsect:"",hlabel:"",types:[],lg:"oui",hm:"oui",sec:"all",arr:"",q:"",psy:{how:"",arr:"",sub:"",day:"",month:""}};
 const base=(d,s)=>{
   if(s.q){const ix=sIndex(d);if(!qWords(s.q).every(x=>qHit(d,ix,x)))return false;}
   const psyT=d.t.some(t=>PSYT.includes(t));
@@ -5282,7 +5328,7 @@ function paintQ2(){
   document.getElementById("q-sec").hidden=!n.lib;
   document.getElementById("q-arr").hidden=!n.lib;
   document.getElementById("hm-lbl").textContent=n.lib?"Pour les structures (pas les médecins)":"Pour les structures";
-  document.getElementById("q2-sub").textContent=S.types.length?"Pour : "+ORDER.filter(t=>S.types.includes(t)).map(t=>L[t].toLowerCase()).join(", ")+".":"Pour tous les types de lieux.";
+  document.getElementById("q2-sub").textContent=S.types.length?"Pour : "+ORDER.filter(t=>S.types.includes(t)).map(t=>/^[A-ZÉ]{2}/.test(L[t])?L[t]:L[t].charAt(0).toLowerCase()+L[t].slice(1)).join(", ")+".":"Pour tous les types de lieux.";
   document.querySelectorAll("#v-q2 .seg").forEach(g=>g.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",S[g.dataset.key]===b.dataset.v)));
   document.getElementById("arr").value=S.arr;
 }
@@ -5586,9 +5632,10 @@ function srcHtml(d){const raw=splitNote(d)[1];const urls=[...raw.matchAll(/https
   const items=urls.length?urls.map(u=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""))}</a></li>`).join(""):`<li>${esc(raw)}</li>`;
   return `<details class="srcdet"><summary>Sources<span class="chev" aria-hidden="true">▾</span></summary><ul>${items}</ul></details>`;}
 const docRow=([l,u,s,k])=>`<div class="doc"><div><b>${esc(l)}</b><small>${/\.pdf($|[?#])/i.test(u)?`<span class="pdf">PDF</span> `:""}${esc(s||"")}</small></div><a class="btn ${k==="form"?"primary":""}" href="${esc(u)}" target="_blank" rel="noopener">Ouvrir</a></div>`;
+const arrFmt=p=>esc(p).replace(/\b(\d+)(?:er|ᵉʳ)(?![a-zà-ÿ])/g,"$1<sup>er</sup>").replace(/(\d+)ᵉ/g,"$1<sup>e</sup>");
 const card=d=>`<button type="button" class="card" data-id="${d.id}" style="--c:var(--t-${kindOf[d.id]})" aria-label="Ouvrir la fiche ${esc(d.n)}">
   <div class="h"><span class="num" style="--c:var(--t-${kindOf[d.id]})">${numOf[d.id]}</span><div><h3>${esc(d.n)}</h3><div class="org">${esc(d.o)}</div></div></div>
-  <div class="tags">${tagsHtml(d)}${d.warn?`<span class="verify">${esc(d.warn)}</span>`:""}${d.v?`<span class="verify">À confirmer</span>`:""}${d.pub?"":`<span class="prive">Privé</span>`}${openBadge(d)}<span class="where">${esc(d.p.replace(/^Marseille /,""))}</span></div>
+  <div class="tags">${tagsHtml(d)}${d.warn?`<span class="verify">${esc(d.warn)}</span>`:""}${d.v?`<span class="verify">À confirmer</span>`:""}${d.pub?"":`<span class="prive">Privé</span>`}${openBadge(d)}<span class="where">${arrFmt(d.p.replace(/^Marseille /,""))}</span></div>
   <div class="fact">${esc(d.f[0]||"")}</div>
   ${transit(d)}
   ${(d.has||forms(d).length||d.sec||d.cover)?`<div class="badges">${d.cover?`<span class="b">Secteur ${esc(d.sect)} · ${esc(d.cover)}</span>`:""}${d.sec?`<span class="b">${SECL[d.sec]}</span>`:""}${d.has?`<span class="b ${d.has[0]}">HAS · ${LV[d.has[0]]}</span>`:""}${forms(d).length?`<span class="b form">Dossier en ligne</span>`:""}</div>`:""}
@@ -5602,7 +5649,7 @@ function cardsSplit(list){
 }
 function render(){
   const n0=needs();
-  const items=D.filter(d=>base(d,S)&&matched(d,S).length);
+  const items=D.filter(d=>base(d,S)&&matched(d,S).length&&accOk(d));
   const groups={};const psy=S.mode==="psy",mid=psy?psyMatch().id:null;
   items.forEach(d=>{const k=psy?(d.id===mid?"match":d.t[0]):ORDER[rank(d,S)];(groups[k]=groups[k]||[]).push(d);});
   numOf={};kindOf={};let i=1;const keys=(psy?["match",...PSYT]:ORDER).filter(k=>groups[k]);
@@ -5620,18 +5667,20 @@ function render(){
     if(F){const opts=F.subs.filter(([k])=>D.some(d=>d.t.some(t=>F.types.includes(t))&&F.subOf(d)===k));
       ch.push(`<label class="subpick" style="--c:var(--t-${S.only})"><i></i><select id="subsel" aria-label="${esc(F.ask)}"><option value="">${esc(F.all)}</option>${opts.map(([k,l])=>`<option value="${k}"${S.sub===k?" selected":""}>${esc(l)}</option>`).join("")}</select></label>`);}
     else ch.push(`<button type="button" class="chip" data-to="p1" style="--c:var(--t-${S.only})"><i></i>${S.only==="mob"?"Équipes mobiles":S.only==="urg"?"Urgences psy":GROUPS[S.only]}</button>`);
-    ch.push(`<button type="button" class="chip edit" data-to="p1">✎ Modifier</button>`);}
+}
   else if(psy){const pm=psyMatch();ch.push(`<button type="button" class="chip" data-to="p1" style="--c:var(--t-cmp)"><i></i>CMP adultes</button>`);
-    if(pm.label)ch.push(`<button type="button" class="chip cond" data-to="p1">${esc(pm.label)}</button>`);
-    ch.push(`<button type="button" class="chip edit" data-to="p1">✎ Modifier</button>`);}
+    if(pm.label)ch.push(`<button type="button" class="chip cond" data-to="p1">${esc(pm.label)}</button>`);}
   else{
   if(S.types.length)ORDER.filter(t=>S.types.includes(t)).forEach(t=>ch.push(`<button type="button" class="chip" data-to="q1" style="--c:var(--t-${t})"><i></i>${t==="commu"&&S.csub?esc(comSubLabel(S.csub).split(" · ")[0]):L[t]}</button>`));
   else ch.push(`<button type="button" class="chip" data-to="q1">Tous les types</button>`);
-  if(n0.lg)ch.push(`<button type="button" class="chip cond${S.lgSet?"":" assumed"}" data-to="q2"${S.lgSet?"":` aria-label="Logement : ${S.lg}, supposé par défaut. Modifier"`}>Logement : ${S.lg}${S.lgSet?"":" (supposé)"}</button>`);
-  if(n0.hm)ch.push(`<button type="button" class="chip cond" data-to="q2">${S.hm==="oui"?"Hors Marseille accepté":"Marseille et Allauch"}</button>`);
-  if(n0.lib){ch.push(`<button type="button" class="chip cond" data-to="q2">${S.sec==="all"?"Tous secteurs":SECL[S.sec]}</button>`);if(S.arr)ch.push(`<button type="button" class="chip cond" data-to="q2">${esc(ARRL[S.arr])}</button>`);}
-  ch.push(`<button type="button" class="chip edit" data-to="q1">✎ Modifier</button>`);}
-  document.getElementById("chips").innerHTML=ch.join("");
+  const cond=[];
+  if(n0.lg)cond.push(`logement : ${S.lg}${S.lgSet?"":" (supposé)"}`);
+  if(n0.hm)cond.push(S.hm==="oui"?"hors Marseille inclus":"Marseille et Allauch");
+  if(n0.lib){cond.push(S.sec==="all"?"tous secteurs":SECL[S.sec].toLowerCase());if(S.arr)cond.push(ARRL[S.arr].split(" · ")[0]);}
+  if(off)cond.push(`${off} hors carte`);
+  if(cond.length)document.getElementById("countsub").textContent=cond.join(" · ");}
+  if(S.acc.open)document.getElementById("countsub").textContent+=" · horaires connus seulement";
+  document.getElementById("chips").innerHTML=ch.join("")+`<span class="chsep" aria-hidden="true"></span>`+accHtml();
   const em=document.getElementById("empty");em.hidden=n>0;
   if(!n){
     const onlyLib=S.types.length===1&&S.types[0]==="liberal";
@@ -5639,10 +5688,17 @@ function render(){
     if(onlyLib)msg+=" Essayez un autre secteur ou un autre quartier.";
     else if(n0.lg&&S.hm==="non"&&S.lg==="non")msg+=" À Marseille, la seule cure publique est celle du CH d'Allauch : vérifiez les filtres.";
     else if(S.hm==="non")msg+=" Essayez d'accepter un lieu hors de Marseille.";
+    if(accOn())msg+=" Retirez un filtre « "+ACCF.filter(([k])=>S.acc[k]).map(([,l])=>l.toLowerCase()).join(" », « ")+" » pour voir plus de lieux.";
     em.textContent=msg+" ARCA-Sud (04 88 92 68 88) peut aider à trouver une solution.";
   }
   drawMap(items);
 }
+const ACCF=[["open","Ouvert maintenant"],["sr","Sans rendez-vous"],["cs","Sans couverture sociale"]];
+const accOn=()=>ACCF.some(([k])=>S.acc[k]);
+function accOk(d){return (!S.acc.open||(openState(d)||{}).open)&&(!S.acc.sr||d.sr)&&(!S.acc.cs||d.scs);}
+function accHtml(){return ACCF.map(([k,l])=>`<button type="button" class="chip tog" data-acc="${k}" aria-pressed="${!!S.acc[k]}">${S.acc[k]?"✓ ":""}${l}</button>`).join("");}
+document.getElementById("chips").addEventListener("click",e=>{const b=e.target.closest("[data-acc]");if(!b)return;const k=b.dataset.acc;S.acc[k]=S.acc[k]?0:1;
+  if(S.acc[k]&&typeof track==="function")track("categorie","filtre-"+k);selId=null;render();});
 document.getElementById("chips").addEventListener("change",e=>{if(e.target.id==="subsel"){S.sub=e.target.value;if(S.only==="hospit"&&S.sub==="hospit"&&!S.hsect){openHospSect();return;}selId=null;render();window.scrollTo({top:0});}});
 document.getElementById("chips").addEventListener("click",e=>{const c=e.target.closest("[data-to]");if(c)go(c.dataset.to);});
 document.getElementById("modify").addEventListener("click",()=>go(S.mode==="psy"?"p1":"q1"));
@@ -5674,6 +5730,21 @@ const keyDocs=(d,n=4)=>{const ds=d.docs||[],f=ds.filter(z=>z[3]==="form"),o=ds.f
 /* QR code en image (GIF en data URL) */
 const qrImg=(txt,cell=3,ec="M")=>{try{const q=qrcode(0,ec);q.addData(txt);q.make();return q.createDataURL(cell,0);}catch(_){return"";}};
 /* Texte court pour le patient (SMS, WhatsApp) */
+/* 26/11 : texte court traduit pour SMS et messageries (horaires regroupés) */
+function hoursShort(d,T){
+  const H=d.hours;if(!H)return "";const lab=T?T.hours:"Horaires";
+  if(H.h24)return lab+" : 24h/24";const W=H.semaine;if(!W)return "";
+  const days=T?T.days:JOURS,key=i=>(W[i+1]||[]).map(([a,b])=>fmtH(a)+"–"+fmtH(b)).join(", ");
+  const out=[];let i=0;while(i<7){const k=key(i);let j=i;while(j+1<7&&key(j+1)===k)j++;if(k)out.push((i===j?days[i]:days[i]+"–"+days[j])+" "+k);i=j+1;}
+  return out.length?lab+" : "+out.join(" ; "):"";
+}
+function smsText(d,lg){
+  const T=PT[lg]||PT.fr,ph=d.c.find(([l,v])=>telHref(v)&&!/fax/i.test(l));
+  const L=[d.n,T.addr+" : "+(d.a||"")];if(ph)L.push(T.phone+" : "+ph[1]);
+  const h=hoursShort(d,T);if(h)L.push(h);
+  L.push(T.call,"Google Maps : "+dirUrl(d),T.online+" : "+ficheUrl(d));
+  return L.join("\n");
+}
 function shareText(d){
   const ph=d.c.find(([l,v])=>telHref(v)&&!/fax/i.test(l));
   const lines=[d.n,d.a];
@@ -5696,8 +5767,9 @@ function fiche(d){
   const big=[];
   const em=d.c.find(([l,v])=>/@/.test(v));
   if(ph)big.push(`<a href="${telHref(ph[1])}" aria-label="Appeler le ${esc(ph[1])}">${ico("phone")}<span class="telnum">${esc(ph[1])}</span></a>`);
-  big.push(`<a class="ico" href="${dirUrl(d)}" target="_blank" rel="noopener" aria-label="Itinéraire" title="Itinéraire">${ico("route")}</a>`);
-  big.push(`<button type="button" class="ico" data-tomail aria-label="Donner la fiche au patient ou à l'équipe" title="Donner la fiche">${ico("share")}</button>`);
+  big.push(`<a class="ico" href="${dirUrl(d)}" target="_blank" rel="noopener" aria-label="Itinéraire" title="Itinéraire">${ico("route")}<span class="il">Trajet</span></a>`);
+  big.push(`<button type="button" class="ico fav" data-fav aria-pressed="${isFav(d.id)}" aria-label="${isFav(d.id)?"Retirer de mes lieux":"Ajouter à mes lieux"}" title="Mes lieux">${ico("star")}<span class="il">Garder</span></button>`);
+  big.push(`<button type="button" class="ico" data-tomail aria-label="Donner la fiche au patient ou à l'équipe" title="Donner la fiche">${ico("share")}<span class="il">Donner</span></button>`);
   const hasHtml=h?`<section class="sec"><h3>Évaluation HAS</h3><div class="box">
       <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline"><span class="has-lvl">${LV[h[0]]}</span><span class="b ${h[0]}">Décision du ${esc(h[1])}</span></div>
       ${h[0]==="non"||h[0]==="conditions"?`<div class="warnbox">${esc(h[4])}</div>`:`<div>${esc(h[4])}</div>`}
@@ -5708,10 +5780,10 @@ function fiche(d){
   const def=store("addicto13.mail")||"";
   return `<header class="fh"><div class="col">
       <button class="backlink" type="button" data-close>← Résultats</button>
-      <div class="tags">${tagsHtml(d)}${d.v?`<span class="verify">À confirmer</span>`:""}${d.pub?"":`<span class="prive">Privé</span>`}${d.sec?`<span class="prive">${SECL[d.sec]}</span>`:""}</div>
+      <div class="tags">${tagsHtml(d)}${d.sr?`<span class="prive">Sans rendez-vous</span>`:""}${d.scs?`<span class="prive">Sans couverture sociale</span>`:""}${d.v?`<span class="verify">À confirmer</span>`:""}${d.pub?"":`<span class="prive">Privé</span>`}${d.sec?`<span class="prive">${SECL[d.sec]}</span>`:""}</div>
       <h2 id="fh-title">${esc(d.n)}</h2>
       <div class="printonly">MAP · Marseille AddictoPsy · ${chkText(d).toLowerCase()} · ${esc(d.a)}</div>
-      <div class="org">${esc(d.o)} · ${esc(d.p)}</div>
+      <div class="org">${esc(d.o)} · ${arrFmt(d.p)}</div>
       ${transit(d)}
     </div><svg class="wave" viewBox="0 0 390 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 16 C55 4 110 24 190 13 S320 3 390 15 V26 H0Z"/></svg></header>
     <div class="col fpad">
@@ -5721,10 +5793,10 @@ function fiche(d){
         ${d.site?`<a class="btn" href="${esc(d.site)}" target="_blank" rel="noopener">${ico("web")}Site officiel</a>`:""}
         ${d.photos?`<a class="btn" href="${esc(d.photos)}" target="_blank" rel="noopener">${ico("photo")}Photos</a>`:""}
       </div>
-      ${miniMap(d)}
       ${d.cover?`<section class="sec"><h3>Secteur</h3><div class="box sectbox"><div><b>${/^13G/.test(d.sect)?"Secteur "+esc(d.sect):"CH Valvert"}</b> · ${esc(d.o.split(" · ")[0])}</div><div>Couvre : ${esc(d.cover)}</div>${d.sdf?`<div>Personnes sans domicile nées du ${esc(d.sdf)}</div>`:""}</div></section>`:""}
       ${hoursHtml(d)}
       <section class="sec"><h3>En bref</h3>${d.warn?`<div class="warnbox" style="margin-bottom:8px">${esc(d.warn)}${d.warnMore?" : "+esc(d.warnMore):" (selon ARCA-Sud) : appelez avant d'orienter."}</div>`:""}<p>${esc(d.a)}</p><ul class="ul">${d.f.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></section>
+      ${miniMap(d)}
       ${d.der?`<section class="sec"><h3>Déroulement</h3><ul class="ul">${d.der.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></section>`:""}
       ${d.act?`<section class="sec"><h3>Activités proposées</h3><div class="act">${d.act.map(x=>`<span>${esc(x)}</span>`).join("")}</div></section>`:""}
       ${hasHtml}
@@ -5756,13 +5828,26 @@ function fiche(d){
     </div>`;
 }
 const fEl=document.getElementById("fiche");let lastFocus=null;
+/* 26/11 : « Mes lieux » : favoris et fiches récentes, gardés sur ce téléphone seulement */
+const lsGet=k=>{try{const v=JSON.parse(store(k)||"[]");return Array.isArray(v)?v.filter(x=>typeof x==="string"):[];}catch(_){return[];}};
+const lsSet=(k,a)=>store(k,JSON.stringify(a));
+const isFav=id=>lsGet("map.fav").includes(id);
+function toggleFav(id){const f=lsGet("map.fav"),i=f.indexOf(id);if(i>=0)f.splice(i,1);else f.unshift(id);lsSet("map.fav",f.slice(0,40));renderMine();return i<0;}
+function addRecent(id){const r=lsGet("map.recent").filter(x=>x!==id);r.unshift(id);lsSet("map.recent",r.slice(0,12));renderMine();}
+function mineItem(d){return `<button type="button" class="mineitem" data-openfiche="${esc(d.id)}" style="--c:var(--t-${d.t[0]})"><i></i><span><b>${esc(d.n)}</b><small>${esc(d.p||"")}</small></span></button>`;}
+function renderMine(){const by=id=>D.find(d=>d.id===id);
+  const fav=lsGet("map.fav").map(by).filter(Boolean),fids=new Set(fav.map(d=>d.id));
+  const rec=lsGet("map.recent").map(by).filter(d=>d&&!fids.has(d.id)).slice(0,4);
+  document.querySelectorAll("[data-mine]").forEach(el=>{el.hidden=!fav.length&&!rec.length;if(el.hidden){el.innerHTML="";return;}
+    el.innerHTML=`<h2 class="minehead">Mes lieux</h2>${fav.length?`<div class="minelist" aria-label="Favoris">${fav.map(mineItem).join("")}</div>`:`<p class="minehint">Touchez ☆ sur une fiche pour la garder ici.</p>`}${rec.length?`<h3 class="minesub">Consultées récemment</h3><div class="minelist">${rec.map(mineItem).join("")}</div>`:""}`;});}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-openfiche]");if(b)go("fiche:"+b.dataset.openfiche);});
 function openFiche(id){
   const d=D.find(x=>x.id===id);if(!d)return;
   if(!fEl.hidden&&fEl.dataset.id===id)return;
   if(typeof track==="function")track("fiche",id);
   lastFocus=document.activeElement;
   fEl.innerHTML=fiche(d);fEl.dataset.id=id;fEl.hidden=false;document.body.classList.add("locked");fEl.scrollTop=0;
-  miniReal(d);foldSecs();
+  miniReal(d);foldSecs();addRecent(id);
   const to=document.getElementById("to-"+id),send=document.getElementById("send-"+id);
   const gsend=document.getElementById("gsend-"+id)||{};
   const ml=document.getElementById("mlang-"+id),bt=document.getElementById("body-"+id);
@@ -5783,6 +5868,7 @@ function hideFiche(){if(fEl.hidden)return;fEl.hidden=true;fEl.innerHTML="";fEl.d
 const closeFiche=()=>back();
 fEl.addEventListener("click",e=>{
   if(e.target.closest("[data-close]"))return closeFiche();
+  {const fb=e.target.closest("[data-fav]");if(fb){const on=toggleFav(fEl.dataset.id);fb.setAttribute("aria-pressed",on);fb.setAttribute("aria-label",on?"Retirer de mes lieux":"Ajouter à mes lieux");return;}}
   if(e.target.closest("[data-tomail]")){const ms=document.getElementById("mail-sec");ms.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});const ml=ms.querySelector("select");if(ml)setTimeout(()=>ml.focus({preventScroll:true}),350);return;}
   if(e.target.closest("[data-print]")){const ml=document.getElementById("mlang-"+fEl.dataset.id);PLANG=ml?ml.value:"pro";printFiche(D.find(x=>x.id===fEl.dataset.id));return;}
   const fb=e.target.closest("[data-file]");if(fb){const ml=document.getElementById("mlang-"+fEl.dataset.id);MLANG=ml?ml.value:"pro";sendFiche(D.find(x=>x.id===fEl.dataset.id),fb.dataset.file,fb);return;}
@@ -5798,7 +5884,7 @@ const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent);
 const shEl=document.getElementById("sharesheet");let shText="";
 function shareFiche(d){
   const ml=document.getElementById("mlang-"+d.id),lg=ml?ml.value:"pro";
-  shText=lg==="pro"?shareText(d):patientText(d,lg);
+  shText=lg==="pro"?shareText(d):smsText(d,lg);
   document.getElementById("sh-preview").textContent=shText;
   document.getElementById("sh-sms").href="sms:"+(IOS?"&":"?")+"body="+encodeURIComponent(shText);
   document.getElementById("sh-wa").href="https://wa.me/?text="+encodeURIComponent(shText);
@@ -5810,7 +5896,7 @@ shEl.addEventListener("click",e=>{
   if(e.target===shEl||e.target.closest("[data-closeshare]"))return closeShare();
   if(e.target.closest("#sh-native")){navigator.share({text:shText}).then(closeShare,()=>{});return;}
   const c=e.target.closest("#sh-copy");if(c)return copy(shText,c);
-  if(e.target.closest("#sh-sms,#sh-wa"))setTimeout(closeShare,300);
+  if(e.target.closest("#sh-sms,#sh-wa")){if(typeof track==="function")track("partage",e.target.closest("#sh-sms")?"sms":"whatsapp");setTimeout(closeShare,300);}
   const sf=e.target.closest("[data-shfile]");if(sf){const d=D.find(x=>x.id===fEl.dataset.id);if(d)sendFiche(d,sf.dataset.shfile,sf);}
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!shEl.hidden)closeShare();});
@@ -5968,6 +6054,7 @@ function patientText(d,lg){
 let MLANG="pro";
 
 setTimeout(()=>{document.documentElement.dataset.loaded="1";},1400);
+try{renderMine();}catch(_){}
 
 /* Domaine courant sur <html> : couleurs du fond et des en-têtes */
 {const h=document.documentElement;const upd=()=>{const b=document.querySelector('.modetabs [data-mode][aria-selected="true"]');if(b)h.dataset.mode=b.dataset.mode;};

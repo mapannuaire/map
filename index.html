@@ -336,7 +336,7 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .transit{display:flex;flex-wrap:wrap;gap:var(--sp-1) var(--sp-3);font-size:var(--fs-sm);color:var(--muted)}
 .transit .line{display:inline-flex;gap:var(--sp-1);align-items:center}
 .transit i{font:700 var(--fs-xs) var(--body);font-style:normal;color:#fff;border-radius:var(--r-sm);padding:1px var(--sp-2);background:var(--bus)}
-.transit i.M1{background:var(--m1)}.transit i.M2{background:var(--m2)}.transit i.T1{background:var(--t1);color:#fff}.transit i.T2{background:var(--t2);color:var(--ink)}.transit i.T3{background:var(--t3);color:#1b2a35}
+.transit i.M1{background:var(--m1)}.transit i.M2{background:var(--m2)}.transit i.T1{background:var(--t1);color:#1b1200}.transit i.T2{background:var(--t2);color:var(--ink)}.transit i.T3{background:var(--t3);color:#1b2a35}
 .transit em{font-style:normal;color:var(--muted)}
 .transit .line i+i{margin-left:-2px}
 .legend i.dash{background:repeating-linear-gradient(90deg,var(--c) 0 4px,transparent 4px 7px)}
@@ -1402,26 +1402,32 @@ select.repinput{appearance:auto}
 @keyframes mapUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes mapSheet{from{transform:translateY(100%)}to{transform:none}}
 @keyframes mapSlide{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
-html:not([data-loaded]) .view:not([hidden]) main{animation:mapFade var(--dur-2) var(--ease) both}
+html:not([data-loaded]) .view:not([hidden]) main{animation:mapFade var(--dur-2) var(--ease) backwards}
 
-.opts .op{animation:mapUp var(--dur-3) var(--ease) both}
+.opts .op{animation:mapUp var(--dur-3) var(--ease) backwards}
 .opts .op:nth-child(2){animation-delay:.03s}.opts .op:nth-child(3){animation-delay:.06s}.opts .op:nth-child(4){animation-delay:.09s}
 .opts .op:nth-child(5){animation-delay:.12s}.opts .op:nth-child(6){animation-delay:.15s}.opts .op:nth-child(7){animation-delay:.18s}
 .opts .op:nth-child(8){animation-delay:.21s}.opts .op:nth-child(n+9){animation-delay:.24s}
-.card{animation:mapUp var(--dur-2) var(--ease) both}
-.isheet-scrim:not([hidden]){animation:mapFade var(--dur-1) var(--ease) both}
-.isheet-scrim:not([hidden]) .isheet{animation:mapSheet var(--dur-2) var(--ease) both}
-.fiche:not([hidden]){animation:mapSlide var(--dur-2) var(--ease) both}
+.card{animation:mapUp var(--dur-2) var(--ease) backwards}
+.isheet-scrim:not([hidden]){animation:mapFade var(--dur-1) var(--ease) backwards}
+.isheet-scrim:not([hidden]) .isheet{animation:mapSheet var(--dur-2) var(--ease) backwards}
+.fiche:not([hidden]){animation:mapSlide var(--dur-2) var(--ease) backwards}
 .op,.card,.btn,.alllink,.mobbtn,.searchopen,.modetabs button,.repchips button{transition:transform var(--dur-1) var(--ease),background-color var(--dur-1) var(--ease),color var(--dur-1) var(--ease),box-shadow var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease)}
 .op:active,.card:active,.btn:active,.mobbtn:active,.searchopen:active{transform:scale(.96)}
 .modetabs button:active{transform:scale(.96)}
+/* 27/11 : retour visuel à l'appui sur tous les contrôles (teinte de la couleur du texte + léger enfoncement) */
+:is(button,a.btn,a.cta,.big a,.bb-arca,.chip,.copy,summary,.seg label,.linkbtn,.backlink,.mineitem):active:not(:disabled){box-shadow:inset 0 0 0 999px color-mix(in srgb,currentColor 12%,transparent);transition-duration:0s}
+:is(button,a.btn,a.cta,.big a,.chip,.copy,.mineitem):active:not(:disabled){transform:scale(.96)}
+.card:active,.op:active{box-shadow:inset 0 0 0 999px color-mix(in srgb,currentColor 6%,transparent)}
+:is(.linkbtn,.backlink,.bb-arca):active{box-shadow:none;opacity:.6}
+@media (prefers-reduced-motion:reduce){:is(button,a,.card,.op,.chip,.copy,.mineitem):active{transform:none!important}}
 @media (hover:hover){.op:hover,.card:hover{box-shadow:0 6px 18px -10px rgba(15,41,64,.35)}}
 
 /* 19/11 : passage Addictologie ⇄ Psychiatrie : le contenu glisse dans le sens de l'onglet, la pastille blanche coulisse */
 @keyframes mapFromR{from{opacity:0;transform:translateX(64px)}to{opacity:1;transform:none}}
 @keyframes mapFromL{from{opacity:0;transform:translateX(-64px)}to{opacity:1;transform:none}}
-html[data-sw="r"] .view:not([hidden]) main{animation:mapFromR var(--dur-3) var(--ease) both}
-html[data-sw="l"] .view:not([hidden]) main{animation:mapFromL var(--dur-3) var(--ease) both}
+html[data-sw="r"] .view:not([hidden]) main{animation:mapFromR var(--dur-3) var(--ease) backwards}
+html[data-sw="l"] .view:not([hidden]) main{animation:mapFromL var(--dur-3) var(--ease) backwards}
 html[data-loaded] .opts .op{animation:none}
 @supports selector(:has(*)){
   .modetabs{position:relative}
@@ -1510,8 +1516,8 @@ h1,h2,h3{text-wrap:balance}
       <span class="mono" style="font-size:12.5px">contact@arca-sud.fr</span>
     </div>
   </main>
-  <div class="bottombar"><div class="col">
-    <a class="bb-arca" href="tel:+33488926888" aria-label="Un doute ? Appeler ARCA-Sud, 04 88 92 68 88">Un doute ? Appelez<b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>ARCA-Sud</b></a>
+  <div class="bottombar" role="region" aria-label="Suite"><div class="col">
+    <a class="bb-arca" href="tel:+33488926888">Un doute ? Appelez<b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>ARCA-Sud</b></a>
     <button class="cta" type="button" id="next1">Continuer →</button>
   </div></div>
 </div>
@@ -1577,7 +1583,7 @@ h1,h2,h3{text-wrap:balance}
       <button type="button" class="btn" id="p-urg" style="justify-self:start;margin-top:4px">Voir les urgences sur la carte</button>
     </div>
   </main>
-  <div class="bottombar"><div class="col">
+  <div class="bottombar" role="region" aria-label="Suite"><div class="col">
     <a class="bb-arca bb-urg" href="tel:15" aria-label="Urgence : appeler le 15"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Urgence <b>15</b></a>
     <button class="cta" type="button" id="pnext">Voir sur la carte →</button>
   </div></div>
@@ -1635,19 +1641,19 @@ h1,h2,h3{text-wrap:balance}
       <p class="hint">Le cabinet ou l'un des lieux de consultation du médecin.</p>
     </section>
   </main>
-  <div class="bottombar"><div class="col">
-    <a class="bb-arca" href="tel:+33488926888" aria-label="Un doute ? Appeler ARCA-Sud, 04 88 92 68 88">Un doute ? Appelez<b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>ARCA-Sud</b></a>
+  <div class="bottombar" role="region" aria-label="Suite"><div class="col">
+    <a class="bb-arca" href="tel:+33488926888">Un doute ? Appelez<b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>ARCA-Sud</b></a>
     <button class="cta" type="button" id="next2">Voir les résultats →</button>
   </div></div>
 </div>
 
 <div id="v-res" class="view" data-view="resultats" hidden>
-  <div class="rtop"><div class="col" style="max-width:1240px">
+  <div class="rtop" role="region" aria-label="Filtres des résultats"><div class="col" style="max-width:1240px">
     <button class="iconback" type="button" data-back aria-label="Retour">←</button>
     <div style="flex:1;min-width:0"><h1 id="count"></h1><div class="sub" id="countsub"></div></div>
     <button class="pill" type="button" id="modify">Modifier ✎</button>
   </div></div>
-  <div class="chips" id="chips" role="group" aria-label="Filtres"></div>
+  <div class="chips" id="chips" role="region" aria-label="Filtres"></div>
   <main class="res-grid">
     <div class="res-map">
       <div class="mapwrap" id="mapwrap">
@@ -1657,7 +1663,7 @@ h1,h2,h3{text-wrap:balance}
         </div>
         <div class="mapbox">
           <div class="lmap" id="lmap" hidden aria-label="Carte de Marseille avec les lieux numérotés"></div>
-          <svg class="map" id="map" role="img" aria-label="Carte de Marseille avec les lieux numérotés" preserveAspectRatio="xMidYMid meet"></svg>
+          <svg class="map" id="map" role="group" aria-label="Carte de Marseille avec les lieux numérotés" preserveAspectRatio="xMidYMid meet"></svg>
           <div class="zoom" role="group" aria-label="Zoom"><button type="button" id="zin" aria-label="Zoomer">+</button><button type="button" id="zout" aria-label="Dézoomer">−</button><button type="button" id="zfit" aria-label="Recadrer sur les résultats">⤢</button></div>
           <button class="maptog mapsize" type="button" id="mapsize">Agrandir</button>
           <div class="bubble" id="bubble" hidden></div>
@@ -5633,7 +5639,7 @@ function srcHtml(d){const raw=splitNote(d)[1];const urls=[...raw.matchAll(/https
   return `<details class="srcdet"><summary>Sources<span class="chev" aria-hidden="true">▾</span></summary><ul>${items}</ul></details>`;}
 const docRow=([l,u,s,k])=>`<div class="doc"><div><b>${esc(l)}</b><small>${/\.pdf($|[?#])/i.test(u)?`<span class="pdf">PDF</span> `:""}${esc(s||"")}</small></div><a class="btn ${k==="form"?"primary":""}" href="${esc(u)}" target="_blank" rel="noopener">Ouvrir</a></div>`;
 const arrFmt=p=>esc(p).replace(/\b(\d+)(?:er|ᵉʳ)(?![a-zà-ÿ])/g,"$1<sup>er</sup>").replace(/(\d+)ᵉ/g,"$1<sup>e</sup>");
-const card=d=>`<button type="button" class="card" data-id="${d.id}" style="--c:var(--t-${kindOf[d.id]})" aria-label="Ouvrir la fiche ${esc(d.n)}">
+const card=d=>`<button type="button" class="card" data-id="${d.id}" style="--c:var(--t-${kindOf[d.id]})" >
   <div class="h"><span class="num" style="--c:var(--t-${kindOf[d.id]})">${numOf[d.id]}</span><div><h3>${esc(d.n)}</h3><div class="org">${esc(d.o)}</div></div></div>
   <div class="tags">${tagsHtml(d)}${d.warn?`<span class="verify">${esc(d.warn)}</span>`:""}${d.v?`<span class="verify">À confirmer</span>`:""}${d.pub?"":`<span class="prive">Privé</span>`}${openBadge(d)}<span class="where">${arrFmt(d.p.replace(/^Marseille /,""))}</span></div>
   <div class="fact">${esc(d.f[0]||"")}</div>
@@ -5696,6 +5702,7 @@ function render(){
 const ACCF=[["open","Ouvert maintenant"],["sr","Sans rendez-vous"],["cs","Sans couverture sociale"]];
 const accOn=()=>ACCF.some(([k])=>S.acc[k]);
 function accOk(d){return (!S.acc.open||(openState(d)||{}).open)&&(!S.acc.sr||d.sr)&&(!S.acc.cs||d.scs);}
+document.addEventListener("touchstart",()=>{},{passive:true});
 function accHtml(){return ACCF.map(([k,l])=>`<button type="button" class="chip tog" data-acc="${k}" aria-pressed="${!!S.acc[k]}">${S.acc[k]?"✓ ":""}${l}</button>`).join("");}
 document.getElementById("chips").addEventListener("click",e=>{const b=e.target.closest("[data-acc]");if(!b)return;const k=b.dataset.acc;S.acc[k]=S.acc[k]?0:1;
   if(S.acc[k]&&typeof track==="function")track("categorie","filtre-"+k);selId=null;render();});
@@ -5767,8 +5774,8 @@ function fiche(d){
   const big=[];
   const em=d.c.find(([l,v])=>/@/.test(v));
   if(ph)big.push(`<a href="${telHref(ph[1])}" aria-label="Appeler le ${esc(ph[1])}">${ico("phone")}<span class="telnum">${esc(ph[1])}</span></a>`);
-  big.push(`<a class="ico" href="${dirUrl(d)}" target="_blank" rel="noopener" aria-label="Itinéraire" title="Itinéraire">${ico("route")}<span class="il">Trajet</span></a>`);
-  big.push(`<button type="button" class="ico fav" data-fav aria-pressed="${isFav(d.id)}" aria-label="${isFav(d.id)?"Retirer de mes lieux":"Ajouter à mes lieux"}" title="Mes lieux">${ico("star")}<span class="il">Garder</span></button>`);
+  big.push(`<a class="ico" href="${dirUrl(d)}" target="_blank" rel="noopener" aria-label="Trajet (itinéraire)" title="Itinéraire">${ico("route")}<span class="il">Trajet</span></a>`);
+  big.push(`<button type="button" class="ico fav" data-fav aria-pressed="${isFav(d.id)}" aria-label="Garder dans mes lieux" title="Mes lieux">${ico("star")}<span class="il">Garder</span></button>`);
   big.push(`<button type="button" class="ico" data-tomail aria-label="Donner la fiche au patient ou à l'équipe" title="Donner la fiche">${ico("share")}<span class="il">Donner</span></button>`);
   const hasHtml=h?`<section class="sec"><h3>Évaluation HAS</h3><div class="box">
       <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline"><span class="has-lvl">${LV[h[0]]}</span><span class="b ${h[0]}">Décision du ${esc(h[1])}</span></div>
@@ -5868,7 +5875,7 @@ function hideFiche(){if(fEl.hidden)return;fEl.hidden=true;fEl.innerHTML="";fEl.d
 const closeFiche=()=>back();
 fEl.addEventListener("click",e=>{
   if(e.target.closest("[data-close]"))return closeFiche();
-  {const fb=e.target.closest("[data-fav]");if(fb){const on=toggleFav(fEl.dataset.id);fb.setAttribute("aria-pressed",on);fb.setAttribute("aria-label",on?"Retirer de mes lieux":"Ajouter à mes lieux");return;}}
+  {const fb=e.target.closest("[data-fav]");if(fb){const on=toggleFav(fEl.dataset.id);fb.setAttribute("aria-pressed",on);return;}}
   if(e.target.closest("[data-tomail]")){const ms=document.getElementById("mail-sec");ms.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});const ml=ms.querySelector("select");if(ml)setTimeout(()=>ml.focus({preventScroll:true}),350);return;}
   if(e.target.closest("[data-print]")){const ml=document.getElementById("mlang-"+fEl.dataset.id);PLANG=ml?ml.value:"pro";printFiche(D.find(x=>x.id===fEl.dataset.id));return;}
   const fb=e.target.closest("[data-file]");if(fb){const ml=document.getElementById("mlang-"+fEl.dataset.id);MLANG=ml?ml.value:"pro";sendFiche(D.find(x=>x.id===fEl.dataset.id),fb.dataset.file,fb);return;}

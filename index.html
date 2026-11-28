@@ -5631,7 +5631,7 @@ function realTiles(){
   const seen=[];
   ["M1","M2","T1","T2","T3"].forEach(r=>{const metro=r[0]==="M",col=cssVar("--"+r.toLowerCase());
     LINES[r].forEach(([nm,la,lo])=>{if(seen.some(([n2,a,b])=>(n2===nm&&Math.abs(a-la)<.003&&Math.abs(b-lo)<.003)||(Math.abs(a-la)<.0004&&Math.abs(b-lo)<.0004)))return;seen.push([nm,la,lo]);
-      LF.circleMarker([la,lo],{radius:metro?4:3,weight:metro?2.5:2,color:col,fillColor:"#fff",fillOpacity:1,opacity:metro?.9:.75,interactive:false,className:"lstopdot"})
+      LF.circleMarker([la,lo],{radius:metro?4.5:3.5,stroke:false,fillColor:col,fillOpacity:metro?.95:.85,interactive:false,className:"lstopdot"})
         .bindTooltip(nm,{permanent:true,direction:"right",offset:[5,0],className:"lstop"+(metro?" lstop-m":""),interactive:false,pane:"stopnames"}).addTo(REAL.lines);});});
   realZoomCls();
 }

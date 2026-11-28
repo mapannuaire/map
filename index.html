@@ -5588,8 +5588,8 @@ document.getElementById("bubble").addEventListener("click",e=>{
 /* ---------- Vraie carte OpenStreetMap (Leaflet) ; la carte dessinée reste en secours hors ligne ---------- */
 /* Leaflet expose window.L ; dans ce fichier, L désigne les libellés des types */
 const LF=window.L||null;
-/* Automates d'échange de seringues (Sleep In, 24h/24) : emplacements repérés précisément ; les autres restent dans la fiche */
-const AUTOMATES=[[43.32944,5.42731,"sortie du métro Frais Vallon (13013)"],[43.29158,5.40322,"devant la Timone, angle rue Saint-Pierre / bd Jean Moulin (13005)"],[43.28306,5.39413,"angle bd Rabatau / chemin de l'Argile (13010)"]];
+/* Automates d'échange de seringues (Sleep In, 24h/24) : emplacements de la cartographie RdR-Addicto (GoGoCarto) et de Drogues Info Service ; les autres restent dans la fiche */
+const AUTOMATES=[[43.32944,5.42731,"sortie du métro Frais Vallon (13013)"],[43.292138,5.401266,"devant la Timone, bd Jean Moulin (13005)"],[43.279304,5.399056,"109 chemin de l'Argile, angle bd Rabatau (13010)"],[43.274634,5.390289,"43 avenue du Prado (13008)"]];
 const SYRINGE='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></svg>';
 const REAL={on:false,map:null,tiles:null,layer:null,style:"",ok:0,err:0};
 const cssVar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim()||"#888";

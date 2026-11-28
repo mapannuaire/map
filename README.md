@@ -23,6 +23,7 @@ Le code de MAP · Marseille AddictoPsy (application, page de statistiques, scrip
 - **Les composants tiers**, qui gardent leur propre licence :
   - jsPDF et html2canvas (dossier `vendor/`) : licence MIT ;
   - qrcode-generator de Kazuhiko Arase, intégré à l'application : licence MIT ;
+  - Leaflet, intégré à l'application : licence BSD 2 clauses ;
   - polices Newsreader et IBM Plex : SIL Open Font License 1.1 ;
   - fonds de carte © contributeurs d'OpenStreetMap, données sous licence ODbL.
 - Les dossiers `bpm-marseille/` et `geocode/` relèvent d'autres projets.

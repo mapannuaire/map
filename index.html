@@ -5,6 +5,17 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org; connect-src 'self' https://docs.google.com https://*.googleusercontent.com https://jnbkxoxcxpwgahzeitid.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>MAP · Marseille AddictoPsy</title>
+<meta name="description" content="Annuaire gratuit pour orienter en addictologie et en psychiatrie à Marseille et dans la région : près de 300 lieux, CMP de secteur, urgences, fiches à remettre en 8 langues. Sans compte.">
+<link rel="canonical" href="https://mapannuaire.github.io/map/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MAP · Marseille AddictoPsy">
+<meta property="og:title" content="MAP · Marseille AddictoPsy">
+<meta property="og:description" content="Annuaire gratuit pour orienter en addictologie et en psychiatrie à Marseille et dans la région : près de 300 lieux, CMP de secteur, urgences, fiches à remettre en 8 langues. Sans compte.">
+<meta property="og:url" content="https://mapannuaire.github.io/map/">
+<meta property="og:image" content="https://mapannuaire.github.io/map/medias/apercu.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="627">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -17,7 +28,8 @@
 <meta name="theme-color" content="#0b1f2e" media="(prefers-color-scheme: dark)">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"></noscript>
 <style>
 :root{--fs-xs:11px;--fs-sm:13px;--fs-md:15px;--fs-lg:17px;--fs-xl:22px;--fs-2xl:28px;
 --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;--sp-6:24px;--sp-8:32px;
@@ -566,7 +578,12 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .lpin{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--c);color:var(--pin-text);font:700 var(--fs-sm)/1 var(--body);border:2.5px solid var(--pin-ring);box-shadow:0 1px 4px rgba(0,0,0,.35);transition:transform var(--dur-1)}
 .lpin.sel{transform:scale(1.3);box-shadow:0 0 0 3px var(--c),0 2px 8px rgba(0,0,0,.4)}
 .mapbox.real .zoom{z-index:500}
-.mapbox.real .bubble{z-index:600}
+.mapbox.real .bubble{z-index:600;max-height:calc(100% - 12px)}
+.mapbox:has(.bubble:not([hidden])) .mapsize{display:none}
+#mail-sec .mailbox>*{min-width:0}
+#mail-sec .mlang{display:grid;grid-template-columns:1fr;gap:4px}
+#mail-sec .mlang select{width:100%;min-width:0;max-width:100%}
+.ps-pat h2 small.ps-fr{display:inline-block;white-space:nowrap}
 .leaflet-container{font:inherit;background:var(--land)}
 .lmap .leaflet-tile-pane{filter:saturate(.55) brightness(1.03)}
 .lmap.dark .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(.9) saturate(.5)}
@@ -5226,7 +5243,7 @@ const dirUrl=d=>"https://www.google.com/maps/dir/?api=1&destination="+encodeURIC
 const forms=d=>(d.docs||[]).filter(x=>x[3]==="form");
 const isLib=d=>d.t.includes("liberal");
 function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(_){return null}}
-const telHref=v=>{const g=String(v).replace(/\D/g,"");return /^0\d{9}$/.test(g)?"tel:+33"+g.slice(1):/^(3114|15|112)$/.test(g)?"tel:"+g:null;};
+const telHref=v=>{const g=String(v).split(/[(\/]/)[0].replace(/\D/g,"");return /^0\d{9}$/.test(g)?"tel:+33"+g.slice(1):/^(3114|3989|15|112)$/.test(g)?"tel:"+g:null;};
 /* Métro et tram : arrêts relevés dans OpenStreetMap (octobre 2026) */
 const LINES={"T1":[["Noailles",43.2968,5.3812],["Eugène Pierre",43.2951,5.3896],["Camas",43.2954,5.3931],["George",43.2956,5.3971],["Jean Martin",43.2959,5.4017],["La Blancarde",43.2958,5.4062],["Sainte-Thérèse",43.294,5.4096],["Saint-Pierre",43.2918,5.4144],["La Parette",43.295,5.4192],["La Boiseraie",43.2949,5.4225],["Air-Bel",43.2943,5.429],["La Grognarde",43.2946,5.4323],["William Booth",43.2927,5.4368],["Les Caillols",43.2947,5.4439]],"T2":[["La Blancarde",43.2966,5.4055],["Foch Boisson",43.2981,5.4033],["Foch Sakakini",43.3003,5.4001],["Cinq Avenues",43.3023,5.3971],["Palais Longchamp",43.3033,5.3923],["Longchamp National",43.3015,5.3886],["Réformés Canebière",43.3,5.3855],["Noailles",43.2979,5.3816],["Canebière Capucins",43.2969,5.379],["Belsunce Alcazar",43.2985,5.3767],["Sadi Carnot",43.2999,5.3712],["République Dames",43.3022,5.3693],["Joliette",43.3054,5.3672],["Euroméditerranée Le Silo",43.3087,5.3682],["Arenc Euroméditerranée",43.3133,5.3681]],"T3":[["Gèze",43.327,5.3662],["Salengro Cougit",43.3216,5.3675],["Salengro Bachas",43.3173,5.3687],["Arenc Euroméditerranée",43.3133,5.3681],["Euroméditerranée Le Silo",43.3087,5.3681],["Joliette",43.3054,5.3672],["République Dames",43.3022,5.3693],["Sadi Carnot",43.2999,5.3712],["Belsunce Alcazar",43.2985,5.3766],["Cours Saint-Louis",43.296,5.378],["Rome Davso",43.2936,5.3794],["Place de Rome",43.2913,5.3807],["Rome Dragon",43.2891,5.382],["Castellane",43.2854,5.3848],["Parc du 26e Centenaire",43.2824,5.3903],["Cantini Rouet",43.2799,5.3949],["Place Ferrié",43.2769,5.3993],["Sainte-Marguerite Dromel",43.2712,5.4021],["Aubert Ganay",43.2664,5.4029],["Parc Sévigné",43.2619,5.4048],["Hôpital Sainte-Marguerite",43.2594,5.4088],["La Gaye",43.2568,5.411]],"M1":[["La Fourragère",43.3038,5.4241],["Saint-Barnabé",43.3033,5.4188],["Louis Armand",43.3,5.4135],["La Blancarde",43.2956,5.4062],["La Timone",43.2911,5.4004],["Baille",43.2881,5.392],["Castellane",43.2863,5.3846],["Estrangin - Préfecture",43.2902,5.3781],["Vieux Port",43.2956,5.3744],["Colbert",43.3003,5.3744],["Saint-Charles",43.3024,5.3801],["Réformés - Canebière",43.3004,5.3863],["Cinq Avenues Longchamp",43.3041,5.3963],["Chartreux",43.3091,5.4015],["Saint-Just",43.3154,5.4064],["Malpassé",43.321,5.4165],["Frais Vallon",43.3255,5.4232],["La Rose",43.3331,5.4297]],"M2":[["Capitaine Gèze",43.328,5.3673],["Bougainville",43.3208,5.3714],["National",43.3152,5.373],["Désirée Clary",43.3093,5.3722],["Joliette",43.3039,5.3679],["Jules Guesde",43.3019,5.374],["Saint-Charles",43.3024,5.38],["Noailles",43.2968,5.3812],["Notre-Dame-du-Mont - Cours Julien",43.2925,5.3837],["Castellane",43.285,5.3845],["Périer",43.2794,5.3876],["Rond-Point du Prado",43.2713,5.3926],["Sainte-Marguerite Dromel",43.2706,5.4022]]};
 const hav=(a,b)=>{const R=6371000,t=Math.PI/180,dl=(b[0]-a[0])*t,dg=(b[1]-a[1])*t;const x=Math.sin(dl/2)**2+Math.cos(a[0]*t)*Math.cos(b[0]*t)*Math.sin(dg/2)**2;return 2*R*Math.asin(Math.sqrt(x));};
@@ -5335,7 +5352,7 @@ function paintQ1(){
 }
 optsEl.addEventListener("click",e=>{const b=e.target.closest(".op");if(!b)return;
   if(b.dataset.k==="sevrage"){openSevrage();return;}
-  S.types=[b.dataset.k];S.csub="";paintQ1();goQ2();});
+  S.types=[b.dataset.k];S.csub="";S.q="";{const qi=document.getElementById("q");if(qi)qi.value="";}paintQ1();goQ2();});
 const SEVT=["cure","postcure","commu"];
 /* Sevrage : cure, post-cure ou communauté ; les communautés sont ensuite classées par type */
 function openSevrage(){const cnt=t=>D.filter(d=>d.t.includes(t)).length;
@@ -5580,8 +5597,10 @@ function realPins(){
     const m=LF.marker(at,{icon:LF.divIcon({className:"",html:`<span class="lclu" style="width:${s}px;height:${s}px">${n}</span>`,iconSize:[s,s],iconAnchor:[s/2,s/2]}),keyboard:true,title:n+" lieux : n° "+c.m.map(d=>numOf[d.id]).join(", ")+" (toucher pour zoomer)",zIndexOffset:500});
     m.on("click",e=>{LF.DomEvent.stopPropagation(e);closeBubble();
       const b=LF.latLngBounds(ll);
-      if(b.getNorthEast().distanceTo(b.getSouthWest())<25)REAL.map.setView(at,17);
-      else REAL.map.fitBounds(b,{padding:[50,50],maxZoom:Math.max(16,Math.ceil(z)+2)});});
+      if(b.getNorthEast().distanceTo(b.getSouthWest())<25){REAL.map.setView(at,17);return;}
+      /* 28/11 : sur la carte compacte, un toucher doit toujours zoomer */
+      const sz=REAL.map.getSize(),pad=Math.max(8,Math.min(50,Math.round(Math.min(sz.x,sz.y)/6))),zf=REAL.map.getBoundsZoom(b,false,[pad*2,pad*2]);
+      REAL.map.setView(b.getCenter(),Math.min(17,Math.max(zf,REAL.map.getZoom()+1.5)));});
     m.addTo(REAL.layer);});
 }
 function realFit(){if(REAL.on&&cur.length)drawMap(cur);}
@@ -5769,18 +5788,18 @@ function hoursShort(d,T){
   return out.length?lab+" : "+out.join(" ; "):"";
 }
 function smsText(d,lg){
-  const T=PT[lg]||PT.fr,ph=d.c.find(([l,v])=>telHref(v)&&!/fax/i.test(l));
-  const L=[d.n,T.addr+" : "+(d.a||"")];if(ph)L.push(T.phone+" : "+ph[1]);
+  const T=PT[lg]||PT.fr,ph=d.c.find(([l,v])=>telHref(v)&&!/fax/i.test(l+" "+v));
+  const L=[d.n];if(d.a)L.push(T.addr+" : "+d.a);if(ph)L.push(T.phone+" : "+ph[1]);
   const h=hoursShort(d,T);if(h)L.push(h);
-  L.push(T.call,"Google Maps : "+dirUrl(d),T.online+" : "+ficheUrl(d));
+  if(d.a)L.push(T.call,"Google Maps : "+dirUrl(d));L.push(T.online+" : "+ficheUrl(d));
   return L.join("\n");
 }
 function shareText(d){
-  const ph=d.c.find(([l,v])=>telHref(v)&&!/fax/i.test(l));
-  const lines=[d.n,d.a];
+  const ph=d.c.find(([l,v])=>telHref(v)&&!/fax/i.test(l+" "+v));
+  const lines=[d.n];if(d.a)lines.push(d.a);
   if(ph)lines.push("Tél. "+ph[1]);
   {const ac=accessText(d);if(ac)lines.push(ac);}
-  lines.push("Itinéraire : "+dirUrl(d));
+  if(d.a)lines.push("Itinéraire : "+dirUrl(d));
   keyDocs(d,3).forEach(([l,u])=>lines.push(l+" : "+u));
   lines.push("Fiche complète : "+ficheUrl(d));
   return lines.join("\n");
@@ -5793,7 +5812,7 @@ function miniMap(d){
 function fiche(d){
   const h=d.has,docs=d.docs||[],f=forms(d);
   const fdocs=docs.filter(z=>z[3]==="form"),idocs=docs.filter(z=>z[3]!=="form");
-  const ph=d.c.find(([l,v])=>telHref(v)&&!/fax/i.test(l));
+  const ph=d.c.find(([l,v])=>telHref(v)&&!/fax/i.test(l+" "+v));
   const big=[];
   const em=d.c.find(([l,v])=>/@/.test(v));
   if(ph)big.push(`<a href="${telHref(ph[1])}" aria-label="Appeler le ${esc(ph[1])}">${ico("phone")}<span class="telnum">${esc(ph[1])}</span></a>`);
@@ -5836,7 +5855,7 @@ function fiche(d){
         ${d.send?`<div style="border-top:1px solid var(--line);padding-top:8px">${esc(d.send)}</div>`:""}
       </div></section>`:""}
       ${idocs.length?`<section class="sec"><h3>Documents</h3><div class="box">${idocs.map(docRow).join("")}</div></section>`:""}
-      ${d.c.length?`<section class="sec"><h3>Contacts</h3><div class="box">${d.c.map(([l,v])=>{const t=telHref(v);return `<div class="crow"><div style="min-width:0"><span class="l">${esc(l)}</span><span class="v">${esc(v)}</span></div><div class="acts">${t&&!/fax/i.test(l)?`<a class="copy" href="${t}" style="text-decoration:none;color:inherit">Appeler</a>`:""}<button class="copy" type="button" data-v="${esc(v)}">Copier</button></div></div>`;}).join("")}</div>${noteOf(d)?`<p class="note" style="margin-top:8px">${esc(noteOf(d))}</p>`:""}</section>`:""}
+      ${d.c.length?`<section class="sec"><h3>Contacts</h3><div class="box">${d.c.map(([l,v])=>{const t=telHref(v);return `<div class="crow"><div style="min-width:0"><span class="l">${esc(l)}</span><span class="v">${esc(v)}</span></div><div class="acts">${t&&!/fax/i.test(l+" "+v)?`<a class="copy" href="${t}" style="text-decoration:none;color:inherit">Appeler</a>`:""}<button class="copy" type="button" data-v="${esc(v)}">Copier</button></div></div>`;}).join("")}</div>${noteOf(d)?`<p class="note" style="margin-top:8px">${esc(noteOf(d))}</p>`:""}</section>`:""}
       ${srcHtml(d)}
       <div class="chk"><span>${chkText(d)}</span><span class="chk-acts"><button type="button" class="linkbtn" data-report="${d.id}">Commentaires</button><button type="button" class="linkbtn" data-report="${d.id}" data-pre="photo">Envoyer une photo ou une plaquette</button></span></div>
       <button class="fab-back" type="button" data-close>← Retour</button>
@@ -5882,7 +5901,7 @@ function openFiche(id){
   const to=document.getElementById("to-"+id),send=document.getElementById("send-"+id);
   const gsend=document.getElementById("gsend-"+id)||{};
   const ml=document.getElementById("mlang-"+id),bt=document.getElementById("body-"+id);
-  const upd=()=>{const lg=ml?ml.value:"pro",t=to.value.trim(),su=lg==="pro"?"Addictologie – "+d.n:d.n,bo=lg==="pro"?mailText(d):patientText(d,lg);if(bt)bt.value=bo;
+  const upd=()=>{const lg=ml?ml.value:"pro",t=to.value.trim(),su=lg==="pro"?"MAP – "+d.n:d.n,bo=lg==="pro"?mailText(d):patientText(d,lg);if(bt)bt.value=bo;
     send.href="mailto:"+encodeURIComponent(t).replace(/%40/g,"@")+"?subject="+encodeURIComponent(su)+"&body="+encodeURIComponent(bo);
     gsend.href="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(t)+"&su="+encodeURIComponent(su)+"&body="+encodeURIComponent(bo);};
   upd();to.addEventListener("input",upd);if(ml)ml.addEventListener("change",upd);
@@ -6050,7 +6069,7 @@ function patientSheet(d,lg){
   const H=d.hours;
   const hrs=H&&H.semaine?T.days.map((j,i)=>{const sl=H.semaine[i+1]||[];return `<tr><td>${j}</td><td dir="ltr">${sl.length?sl.map(([a,b])=>fmtH(a)+"–"+fmtH(b)).join(", "):`<span dir="auto">${T.closed}</span>`}</td></tr>`;}).join(""):"";
   const tr=access(d).map(x=>`<span dir="ltr">${x.lines.join("/")} ${esc(x.txt)}</span>${x.min?(T.dir==="rtl"?` · <bdi dir="rtl" style="white-space:nowrap">${x.min} ${T.walk}</bdi>`:` (${x.min} ${T.walk})`):""}`).join("<br>");
-  const ph=d.c.filter(([l,v])=>telHref(v)&&!/fax/i.test(l)).slice(0,3),em=d.c.filter(([l,v])=>/e-?mail|courriel/i.test(l)).slice(0,1);
+  const ph=d.c.filter(([l,v])=>telHref(v)&&!/fax/i.test(l+" "+v)).slice(0,3),em=d.c.filter(([l,v])=>/e-?mail|courriel/i.test(l)).slice(0,1);
   return `<div class="ps-pat" dir="${T.dir}" lang="${lg==="ary"?"ar":lg==="ary-lat"?"ary-Latn":lg}">
   <div class="ps-head"><div class="ps-qr"><img src="${qrImg(ficheUrl(d),2)}" alt=""><span>${T.online}</span></div>
     <h1 dir="auto">${esc(d.n)}</h1><div class="ps-org" dir="auto">${esc(d.o||"")}</div></div>
@@ -6083,19 +6102,20 @@ window.addEventListener("afterprint",()=>{PLANG="pro";});
 
 /* Texte à envoyer à la personne, dans sa langue */
 function patientText(d,lg){
-  const T=PT[lg]||PT.fr,L=[d.n,"",T.intro,"",T.addr+" : "+(d.a||"")];
+  const T=PT[lg]||PT.fr,L=[d.n,"",T.intro,""];if(d.a)L.push(T.addr+" : "+d.a);
   const tr=access(d).map(x=>`${x.lines.join("/")} ${x.txt}${x.min?` (${x.min} ${T.walk})`:""}`).join(" · ");if(tr)L.push(T.access+" : "+tr);
-  d.c.filter(([l,v])=>telHref(v)&&!/fax/i.test(l)).slice(0,3).forEach(([l,v])=>L.push(T.phone+" : "+v));
+  d.c.filter(([l,v])=>telHref(v)&&!/fax/i.test(l+" "+v)).slice(0,3).forEach(([l,v])=>L.push(T.phone+" : "+v));
   d.c.filter(([l])=>/e-?mail|courriel/i.test(l)).slice(0,1).forEach(([l,v])=>L.push(T.email+" : "+v));
   const S=d.hours&&d.hours.semaine;
   if(S){L.push("",T.hours+" :");T.days.forEach((j,i)=>{const sl=S[i+1]||[];L.push(j+" : "+(sl.length?sl.map(([a,b])=>fmtH(a)+"–"+fmtH(b)).join(", "):T.closed));});}
-  L.push("",T.bring+" : "+T.list,T.call,"",T.urg,"","Google Maps : "+dirUrl(d),T.online+" : "+ficheUrl(d));
+  if(d.a)L.push("",T.bring+" : "+T.list,T.call);L.push("",T.urg,"");if(d.a)L.push("Google Maps : "+dirUrl(d));L.push(T.online+" : "+ficheUrl(d));
   return L.join("\n");
 }
 let MLANG="pro";
 
 setTimeout(()=>{document.documentElement.dataset.loaded="1";},1400);
 try{renderMine();}catch(_){}
+addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h.startsWith("fiche-")&&D.some(d=>d.id===h.slice(6))&&fEl.dataset.id!==h.slice(6))openFiche(h.slice(6));});
 
 /* Domaine courant sur <html> : couleurs du fond et des en-têtes */
 {const h=document.documentElement;const upd=()=>{const b=document.querySelector('.modetabs [data-mode][aria-selected="true"]');if(b)h.dataset.mode=b.dataset.mode;};
@@ -6290,7 +6310,7 @@ function paintSearch(focus){
     const pt=[...new Set(QW.flatMap(x=>x.types||[]))];
     const ptLine=pt.length&&hits.length?`<p class="qsub ptypes">Structures qui prennent en charge ${QW.filter(x=>x.types).map(x=>"« "+esc(x.w)+" »").join(", ")} : ${pt.map(t=>`${esc(GROUPS[t])} (${D.filter(d=>d.t.includes(t)).length})`).join(" · ")}. ARCA-Sud (<a href="tel:+33488926888">04 88 92 68 88</a>) aide à choisir.</p>`:"";
     cnt.hidden=false;cnt.textContent=hits.length?(partial?`Aucun lieu ne contient tous ces mots. ${hits.length} lieu${hits.length>1?"x":""} pour une partie de la recherche :`:`${hits.length} résultat${hits.length>1?"s":""}`):"Aucun résultat. Essayez un mot plus simple, ou une de ces recherches :";
-    out.innerHTML=ptLine+(hits.length?"":`<div class="sugg" style="margin:0 0 12px">${SEARCH_SUGG.map(x=>`<button type="button" data-q="${esc(x)}">${esc(x)}</button>`).join("")}</div><p class="qsub" style="margin:0 0 8px">Un lieu manque ? ARCA-Sud (<a href="tel:+33488926888">04 88 92 68 88</a>) aide aussi à orienter.</p><button type="button" class="btn" data-suggest style="margin:4px 0 10px">Proposer un lieu manquant</button>`)+hits.slice(0,60).map(({d})=>`<button type="button" class="scard" data-open="${d.id}"><div class="tags">${tagsHtml(d)}${d.warn?`<span class="verify">${esc(d.warn)}</span>`:""}</div><h3>${hl(d.n,hw)}</h3><div class="org">${hl(d.o||"",hw)}</div><div class="where">${esc(d.p)}${d.cover?" · secteur "+esc(d.sect):""}</div>${transit(d)}</button>`).join("");
+    out.innerHTML=ptLine+(hits.length?"":`<div class="sugg" style="margin:0 0 12px">${SEARCH_SUGG.map(x=>`<button type="button" data-q="${esc(x)}">${esc(x)}</button>`).join("")}</div><p class="qsub" style="margin:0 0 8px">Un lieu manque ? ARCA-Sud (<a href="tel:+33488926888">04 88 92 68 88</a>) aide aussi à orienter.</p><button type="button" class="btn" data-suggest style="margin:4px 0 10px">Proposer un lieu manquant</button>`)+hits.slice(0,60).map(({d})=>`<button type="button" class="scard" data-open="${d.id}"><div class="tags">${tagsHtml(d)}${d.warn?`<span class="verify">${esc(d.warn)}</span>`:""}</div><h3>${hl(d.n,hw)}</h3><div class="org">${hl(d.o||"",hw)}</div><div class="where">${esc(d.p)}${d.cover?" · secteur "+esc(d.sect):""}</div>${transit(d)}</button>`).join("")+(hits.length>60?`<p class="qsub">Les 60 premiers sont affichés. Ajoutez un mot (quartier, ville) pour préciser.</p>`:"");
   }
   if(focus)setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(_){}},60);
 }
@@ -6592,7 +6612,7 @@ async function refreshFromSheet(){
     /* on rafraîchit l'écran affiché */
     paintQ1();paintPMore();
     const cur=stack[stack.length-1]||"";
-    if(!fEl.hidden&&fEl.dataset.id&&D.some(d=>d.id===fEl.dataset.id))openFiche(fEl.dataset.id);
+    if(!fEl.hidden&&fEl.dataset.id&&D.some(d=>d.id===fEl.dataset.id))(id=>{fEl.dataset.id="";openFiche(id);})(fEl.dataset.id);
     else if(cur==="resultats")render();
   }catch(_){}
 }

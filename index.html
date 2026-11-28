@@ -6016,7 +6016,12 @@ function printFiche(d){
   const mm=fEl.querySelector(".minimap");
   if(mm){PR={mm,parent:mm.parentNode,next:mm.nextSibling};const w=mm.offsetWidth,h=mm.offsetHeight;document.getElementById("ps-map").appendChild(mm);mm.style.width=w+"px";mm.style.height=h+"px";}
   document.body.classList.add("printing");
-  setTimeout(()=>{try{window.print();}finally{setTimeout(printDone,400);}},350);
+  /* 28/11 : sur téléphone, window.print() rend la main tout de suite : on attend la fin réelle de l'impression avant de remettre la carte dans la fiche */
+  setTimeout(()=>{let done=false;const t0=Date.now(),mq=matchMedia("print");
+    const fin=()=>{if(done)return;done=true;removeEventListener("afterprint",fin);document.removeEventListener("pointerdown",late,true);if(mq.removeEventListener)mq.removeEventListener("change",onmq);printDone();};
+    const onmq=e=>{if(!e.matches)setTimeout(fin,150);},late=()=>{if(Date.now()-t0>1500)fin();};
+    addEventListener("afterprint",fin);if(mq.addEventListener)mq.addEventListener("change",onmq);document.addEventListener("pointerdown",late,true);setTimeout(fin,120000);
+    try{window.print();}catch(e){fin();}},350);
 }
 
 /* ---------- 18/11 : feuille à remettre à la personne, en plusieurs langues ---------- */

@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="application-name" content="MAP">
 <meta name="apple-mobile-web-app-title" content="MAP">
-<script>/* 28/11 : rien n'est peint avant que le bon écran soit choisi (évite le flash addicto → psy au lancement) */document.documentElement.classList.add("booting","nofx");setTimeout(function(){document.documentElement.classList.remove("booting","nofx")},4000);</script>
+<script>/* 28/11 : rien n'est peint avant que le bon écran soit choisi (évite le flash addicto → psy au lancement) */document.documentElement.classList.add("booting","nofx");setTimeout(function(){document.documentElement.classList.remove("booting")},4000);</script>
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: dark)">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -297,7 +297,8 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 @media (max-width:899px){.filt-b{display:grid;grid-template-columns:1fr 1fr}.ftog,.fsel{width:100%}}
 @media (min-width:900px){.filt{grid-template-columns:auto 1fr;align-items:center;padding-inline:max(var(--sp-4),calc((100% - 1240px)/2 + var(--sp-4)))}.filt-n{grid-column:1/-1}}
 html.booting body>*{visibility:hidden}
-html.nofx *,html.nofx *::before,html.nofx *::after{animation:none!important;transition:none!important}
+/* le premier écran n'est pas animé ; les animations reviennent dès qu'on change d'écran (sinon tout se rejouait une fois : effet « chargé deux fois ») */
+html.nofx *,html.nofx *::before,html.nofx *::after{animation:none!important}
 .chsep{flex:none;width:1px;align-self:stretch;margin:var(--sp-1) var(--sp-1);background:var(--line)}
 .card .where sup,.fh sup{font-size:.72em;line-height:0;vertical-align:.45em}
 .big .ico{display:grid;justify-items:center;align-content:center;gap:2px}
@@ -5933,7 +5934,7 @@ function renderMine(){const by=id=>D.find(d=>d.id===id);
   document.querySelectorAll("[data-mine]").forEach(el=>{el.hidden=!fav.length&&!rec.length;if(el.hidden){el.innerHTML="";return;}
     el.innerHTML=`<h2 class="minehead">Mes lieux</h2>${fav.length?`<div class="minelist" aria-label="Favoris">${fav.map(mineItem).join("")}</div>`:`<p class="minehint">Touchez ☆ sur une fiche pour la garder ici.</p>`}${rec.length?`<h3 class="minesub">Consultées récemment</h3><div class="minelist">${rec.map(mineItem).join("")}</div>`:""}`;});}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-openfiche]");if(b)go("fiche:"+b.dataset.openfiche);});
-function openFiche(id){
+function openFiche(id){document.documentElement.classList.remove("nofx");
   const d=D.find(x=>x.id===id);if(!d)return;
   if(!fEl.hidden&&fEl.dataset.id===id)return;
   if(typeof track==="function")track("fiche",id);
@@ -6382,6 +6383,7 @@ const PARENT=e=>e==="recherche"?(S.mode==="psy"?"p1":"q1"):e.startsWith("fiche:"
 let stack=[],skipPop=0,skipT=0;
 const tok=e=>e.replace(":","-");
 function show(v){
+  if(!document.documentElement.classList.contains("booting"))document.documentElement.classList.remove("nofx");
   Object.entries(VIEWS).forEach(([k,id])=>document.getElementById(id).hidden=k!==v);
   document.querySelectorAll(".modetabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.mode===S.mode));
   if(v==="q1")paintQ1();if(v==="p1")paintP1();if(v==="recherche")paintSearch(true);if(v==="q2")paintQ2();if(v==="resultats")render();
@@ -6438,7 +6440,7 @@ const STANDALONE=(()=>{try{return matchMedia("(display-mode: standalone)").match
   paintQ1();
   if(e.startsWith("fiche:")){stack=["resultats"];show("resultats");try{history.replaceState({i:1,e:"resultats"},"","#resultats");}catch(_){}push(e);}
   else{stack=[e];display(e);try{history.replaceState({i:1,e},"","#"+tok(e));}catch(_){}}
-  requestAnimationFrame(()=>{document.documentElement.classList.remove("booting");setTimeout(()=>document.documentElement.classList.remove("nofx"),400);});
+  requestAnimationFrame(()=>document.documentElement.classList.remove("booting"));
 })();
 
 /* ---------- Installer sur l'écran d'accueil ---------- */

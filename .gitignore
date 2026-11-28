@@ -2,3 +2,4 @@
 *CONFIDENTIEL*
 *import*.sql
 *.csv
+__pycache__/

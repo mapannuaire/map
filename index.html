@@ -253,6 +253,8 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .ps-entree{margin:3mm 0 0}.ps-entree img{display:block;width:100%;max-height:42mm;object-fit:cover;border-radius:2mm}.ps-entree figcaption{font-size:9pt;color:#555;margin-top:1mm}
 @media (prefers-color-scheme:dark){.entree-fig img{outline-color:oklch(1 0 0 / .1)}}
 .chk-acts{display:flex;flex-wrap:wrap;gap:var(--sp-1) var(--sp-3);justify-content:flex-end}
+.urgline{margin:0 0 var(--sp-3);font-size:var(--fs-sm);line-height:1.4;color:var(--muted);text-wrap:pretty}
+.urgline a{color:var(--t-urg);font-weight:700;text-decoration:none;padding:6px 2px;margin:-6px 0}
 .chsep{flex:none;width:1px;align-self:stretch;margin:var(--sp-1) var(--sp-1);background:var(--line)}
 .card .where sup,.fh sup{font-size:.72em;line-height:0;vertical-align:.45em}
 .big .ico{display:grid;justify-items:center;align-content:center;gap:2px}
@@ -1511,6 +1513,7 @@ h1,h2,h3{text-wrap:balance}
   <main class="col qpad">
     <h1 class="sr-only">Orienter en addictologie à Marseille</h1>
     <div class="prog" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+    <p class="urgline">Urgence vitale : <a href="tel:15">15</a> · Idées suicidaires : <a href="tel:3114">3114</a> · MAP n'est pas un service d'urgence.</p>
     <div class="opts" id="opts"></div>
     <section class="mine" data-mine hidden></section>
     <button class="alllink" type="button" id="seeall">Tout voir, sans filtre →</button>
@@ -4698,12 +4701,12 @@ D.push(...MOB);
 Object.assign(GEO,{"mob-marss":[43.28847,5.38159],"mob-emlpp":[43.38108,5.3596]});
 
 /* ---------- Version, nouveautés, signalement ---------- */
-const VERSION="2026-11-24";
+const VERSION="2026-11-28";
 const REPORT_TO="mapannuaire@gmail.com";
 /* Dernière vérification par défaut (mois du relevé) ; une fiche peut préciser d.chk="AAAA-MM-JJ" */
 const CHK_DEFAULT="2026-10";
 const CHANGELOG=[
-  ["2026-11-28",["Fiche : photo de l'entrée quand une équipe l'a envoyée, avec un lien Street View ; bouton « Envoyer une photo ou une plaquette » en bas de chaque fiche","Fiche imprimée pour le patient : photo de l'entrée sous le plan","Commentaires : nouveau sujet « Photo ou plaquette » pour envoyer une photo de l'entrée ou la plaquette d'une structure","Plus de retour visuel quand on touche un bouton, et corrections d'accessibilité"]],
+  ["2026-11-28",["Les liens directs vers une fiche (SMS, QR code) s'ouvrent de nouveau correctement","Accueil : rappel des numéros d'urgence 15 et 3114","Fiche : photo de l'entrée quand une équipe l'a envoyée, avec un lien Street View ; bouton « Envoyer une photo ou une plaquette » en bas de chaque fiche","Fiche imprimée pour le patient : photo de l'entrée sous le plan","Commentaires : nouveau sujet « Photo ou plaquette » pour envoyer une photo de l'entrée ou la plaquette d'une structure","Plus de retour visuel quand on touche un bouton, et corrections d'accessibilité"]],
   ["2026-11-24",["Sur téléphone, les résultats s'affichent tout de suite : carte compacte (bouton « Agrandir ») et recherche au-dessus","Recherche : synonymes cliniques (Subutex, TSO, méthadone, crack, cocaïne…), pluriels, et résultats partiels quand aucun lieu ne contient tous les mots","Fiche : Appeler, Itinéraire et Donner la fiche en haut ; impression, message, e-mail et PDF regroupés dans « Donner la fiche », avec la langue choisie une seule fois","Accessibilité : focus sur le titre à chaque écran, boutons plus faciles à toucher"]],
   ["2026-10-28",["Partager : le message contient le lien direct vers la fiche dans MAP et les liens des dossiers d'admission","Fiche imprimée et PDF : QR code vers la fiche en ligne et vers chaque document","Les fiches peuvent désormais être modifiées dans un tableau Google Sheets (mise en place en cours)","Ajout du SIDIIS (Groupe SOS) : suivi intensif à domicile pour les personnes souvent hospitalisées en psychiatrie, 8ᵉ, 9ᵉ et 10ᵉ","Logement : seuls les SAMSAH du handicap psychique sont gardés","Mon soutien psy : lien vers la page Ameli et son dépliant","Documents à télécharger vérifiés sur les sites des structures : 117 fiches ont maintenant des documents (210 au total), dont 22 avec un dossier d'admission. Dans chaque fiche, « Admission » regroupe les dossiers à remplir (PDF en premier) et « Documents » les plaquettes et livrets"]],
   ["2026-10-24",["Vérification croisée avec la cartographie RdR-Addicto : ajout du CAARUD Tekno (milieu festif techno) ; Plus Belle la Nuit à sa nouvelle adresse (13001) avec le Chill'In du jeudi ; numéro du Tipi festif ; adresses précisées pour Addictions France La Ciotat et Villa Floréal ; horaires d'accueil de Tremplin corrigés"]],
@@ -6350,6 +6353,10 @@ window.addEventListener("popstate",e=>{
   else if(!i&&stack.length>1){stack.length=1;display(stack[0]);}
 });
 document.querySelectorAll("[data-back]").forEach(b=>b.addEventListener("click",back));
+/* 28/11 : déclarés avant le démarrage, sinon un lien direct #fiche-… plantait (track appelé trop tôt) */
+const SUPA_URL="https://jnbkxoxcxpwgahzeitid.supabase.co",SUPA_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYmt4b3hjeHB3Z2FoemVpdGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUwMjE4MTcsImV4cCI6MjExMDU5NzgxN30.jnyJuE_2gq6Bnp2Rh45O01pqb8wr3dwFm4Rlblev0Nc";
+const ONLINE_APP=/^https?:$/.test(location.protocol)&&!EMBED;
+const STANDALONE=(()=>{try{return matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(_){return false}})();
 (()=>{const h=(location.hash||"").slice(1);
   const hd=h.startsWith("fiche-")&&D.find(d=>d.id===h.slice(6));
   if(hd?hd.t.some(t=>PSYT.includes(t)):(store("addicto13.mode")==="psy"||h==="p1"))S.mode="psy";
@@ -6417,6 +6424,8 @@ function infoPage(pg){const box=document.getElementById("info-body");
     box.innerHTML=`<div class="ab"><p><b>MAP</b> (Marseille AddictoPsy) est un annuaire d'orientation pour les équipes du soin et du social : cures, post-cures, communautés, CSAPA, réduction des risques, CMP de secteur, urgences, équipes mobiles, entraide et associations d'usagers.</p>
     <div class="stats3"><div><b>${D.length}</b>lieux</div><div><b>${nA}</b>addictologie</div><div><b>${nP}</b>psychiatrie</div></div>
     <p>Les informations viennent des sites des établissements, de l'ARS, d'ARCA-Sud, de Santé publique France, de la Fédération Addiction et de la cartographie collaborative RdR-Addicto. Chaque fiche porte sa date de vérification ; celles marquées « à confirmer » doivent être vérifiées avant d'orienter.</p>
+    <p>MAP est tenu bénévolement et de façon indépendante. Ce n'est pas un service d'urgence et il ne remplace pas un avis médical : en cas d'urgence vitale, appelez le 15 ; en cas d'idées suicidaires, le 3114. Les horaires et les contacts changent : appelez la structure avant d'y adresser quelqu'un, et signalez les erreurs avec « Commentaires » en bas de chaque fiche.</p>
+    <p>Le code de l'application est libre (licence EUPL 1.2).</p>
     <p>MAP est gratuit, fonctionne sans compte et sans cookie, et ne demande aucune information sur les patients. L'appli compte de façon anonyme les ouvertures et les fiches consultées, pour améliorer l'annuaire. Elle fait appel à GitHub (hébergement), Google (polices et tableau des fiches), Supabase (compteurs et messages) et OpenStreetMap (fond de carte), qui reçoivent l'adresse IP de l'appareil comme tout site web. Vos lieux gardés restent sur votre téléphone. Mise à jour automatique à chaque ouverture.</p></div>
     <button type="button" class="installbtn" data-install style="margin:0">Installer sur mon téléphone</button>
     <button type="button" class="btn backi" data-ipage="menu">← Retour</button>`;}
@@ -6473,14 +6482,11 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!msgEl.hidden)close
 
 
 /* ---------- 18/11 : signalements sans e-mail et mesure d'usage (base Supabase de MAP) ---------- */
-const SUPA_URL="https://jnbkxoxcxpwgahzeitid.supabase.co",SUPA_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuYmt4b3hjeHB3Z2FoemVpdGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUwMjE4MTcsImV4cCI6MjExMDU5NzgxN30.jnyJuE_2gq6Bnp2Rh45O01pqb8wr3dwFm4Rlblev0Nc";
-const ONLINE_APP=/^https?:$/.test(location.protocol)&&!EMBED;
 function supaPost(table,row,keep){
   return fetch(SUPA_URL+"/rest/v1/"+table,{method:"POST",keepalive:!!keep,headers:{apikey:SUPA_KEY,Authorization:"Bearer "+SUPA_KEY,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(row)})
     .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return true;});
 }
 /* Compteurs : aucun cookie, aucun identifiant ; rien n'est envoyé depuis la version de démonstration */
-const STANDALONE=(()=>{try{return matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(_){return false}})();
 function track(ev,cle,mode){
   if(!ONLINE_APP)return;
   try{supaPost("map_usage",{evenement:ev,cle:cle?String(cle).slice(0,80):null,mode:mode||(S&&S.mode==="psy"?"psy":"addicto"),installe:STANDALONE,version:VERSION},true).catch(()=>{});}catch(_){}

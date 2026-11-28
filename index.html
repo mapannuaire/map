@@ -1380,7 +1380,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 
 /* 18/11 : regroupement des lieux sur la carte, bouton Urgence 15, pas de bouton Retour flottant */
-.lclu{display:grid;place-items:center;border-radius:50%;background:var(--accent);color:var(--on-accent);font:700 var(--fs-md)/1 var(--body);border:3px solid var(--pin-ring);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 28%,transparent),0 2px 6px rgba(0,0,0,.35);font-variant-numeric:tabular-nums}
+/* 28/11 : un groupe se lit « 6 lieux » (pastille allongée, effet de pile), pour ne pas le confondre avec la fiche n° 6 */
+.lclu{display:flex;align-items:center;justify-content:center;gap:3px;height:30px;border-radius:15px;background:var(--surface);color:var(--fg);font:500 12px/1 var(--body);border:2px solid var(--accent);box-shadow:3px -3px 0 -1px var(--surface),3px -3px 0 1px var(--accent),0 2px 6px rgba(0,0,0,.3);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lauto{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--surface);color:var(--t-rdr);border:2px solid var(--t-rdr);box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.lclu b{font:700 var(--fs-md)/1 var(--body);color:var(--accent)}
 .fab-back{display:none}
 .bb-arca.bb-urg{display:flex;align-items:center;gap:var(--sp-2);min-height:48px;padding:0 var(--sp-4) 0 var(--sp-3);border-radius:var(--r-lg);background:var(--urgent);color:#fff;font:600 var(--fs-md)/1 var(--body)}
 .bb-arca.bb-urg b{display:inline;color:#fff;font:700 var(--fs-lg)/1 var(--mono)}
@@ -1549,6 +1552,7 @@ h1,h2,h3{text-wrap:balance}
 .mineitem small{font-size:var(--fs-xs);color:var(--muted)}
 .big .fav[aria-pressed="true"]{color:var(--warn)}
 .big .fav[aria-pressed="true"] svg{fill:currentColor}
+.foot .arca{text-align:center;align-items:center;justify-items:center}
 </style>
 </head>
 <body>
@@ -5584,6 +5588,9 @@ document.getElementById("bubble").addEventListener("click",e=>{
 /* ---------- Vraie carte OpenStreetMap (Leaflet) ; la carte dessinée reste en secours hors ligne ---------- */
 /* Leaflet expose window.L ; dans ce fichier, L désigne les libellés des types */
 const LF=window.L||null;
+/* Automates d'échange de seringues (Sleep In, 24h/24) : emplacements repérés précisément ; les autres restent dans la fiche */
+const AUTOMATES=[[43.32944,5.42731,"sortie du métro Frais Vallon (13013)"],[43.29158,5.40322,"devant la Timone, angle rue Saint-Pierre / bd Jean Moulin (13005)"],[43.28306,5.39413,"angle bd Rabatau / chemin de l'Argile (13010)"]];
+const SYRINGE='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></svg>';
 const REAL={on:false,map:null,tiles:null,layer:null,style:"",ok:0,err:0};
 const cssVar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim()||"#888";
 const isDark=()=>{const m=getComputedStyle(document.body).backgroundColor.match(/\d+/g)||[255,255,255];return (+m[0]*0.3+ +m[1]*0.59+ +m[2]*0.11)<110;};
@@ -5638,9 +5645,9 @@ function realPins(){
     cl.push({p,m:[d],sel:d.id===selId});});
   cl.forEach(c=>{
     if(c.m.length===1){realPin(c.m[0]);return;}
-    const ll=c.m.map(d=>GEO[d.id]),n=c.m.length,s=n<10?34:n<50?40:46;
+    const ll=c.m.map(d=>GEO[d.id]),n=c.m.length,s=n<10?62:n<100?70:78;
     const at=[ll.reduce((a,g)=>a+g[0],0)/n,ll.reduce((a,g)=>a+g[1],0)/n];
-    const m=LF.marker(at,{icon:LF.divIcon({className:"",html:`<span class="lclu" style="width:${s}px;height:${s}px">${n}</span>`,iconSize:[s,s],iconAnchor:[s/2,s/2]}),keyboard:true,title:n+" lieux : n° "+c.m.map(d=>numOf[d.id]).join(", ")+" (toucher pour zoomer)",zIndexOffset:500});
+    const m=LF.marker(at,{icon:LF.divIcon({className:"",html:`<span class="lclu" style="width:${s}px"><b>${n}</b> lieux</span>`,iconSize:[s,30],iconAnchor:[s/2,15]}),keyboard:true,title:n+" lieux : n° "+c.m.map(d=>numOf[d.id]).join(", ")+" (toucher pour zoomer)",zIndexOffset:500});
     m.on("click",e=>{LF.DomEvent.stopPropagation(e);closeBubble();
       const b=LF.latLngBounds(ll);
       if(b.getNorthEast().distanceTo(b.getSouthWest())<25){REAL.map.setView(at,17);return;}
@@ -5648,6 +5655,11 @@ function realPins(){
       const sz=REAL.map.getSize(),pad=Math.max(8,Math.min(50,Math.round(Math.min(sz.x,sz.y)/6))),zf=REAL.map.getBoundsZoom(b,false,[pad*2,pad*2]);
       REAL.map.setView(b.getCenter(),Math.min(17,Math.max(zf,REAL.map.getZoom()+1.5)));});
     m.addTo(REAL.layer);});
+  /* 28/11 : chaque automate d'échange de seringues a son petit logo sur le plan (en plus du numéro de la fiche) */
+  const AID="am-automates-distributeurs-echangeurs-de-se";
+  if(REAL.items.some(d=>d.id===AID))AUTOMATES.forEach(([lat,lng,lab])=>{
+    const m=LF.marker([lat,lng],{icon:LF.divIcon({className:"",html:`<span class="lauto">${SYRINGE}</span>`,iconSize:[24,24],iconAnchor:[12,12]}),keyboard:true,title:"Automate d'échange de seringues · "+lab,zIndexOffset:-2000});
+    m.on("click",e=>{LF.DomEvent.stopPropagation(e);bubblePin(AID);});m.addTo(REAL.layer);});
 }
 function realFit(){if(REAL.on&&cur.length)drawMap(cur);}
 /* Petite carte de la fiche : vraie carte OpenStreetMap si possible, sinon le dessin reste visible */

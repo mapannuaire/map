@@ -246,6 +246,13 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .chip.cond{background:var(--sunk);border-color:transparent;color:var(--muted)}
 .chip.assumed{border:1px dashed var(--muted);background:transparent}
 .chip.edit{color:var(--accent);border-style:dashed}
+.entree-fig{margin:0 0 var(--sp-3)}
+.entree-fig img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-md,12px);outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px;background:var(--line)}
+.entree-fig figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+.entree-acts{display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-2) var(--sp-3)}
+.ps-entree{margin:3mm 0 0}.ps-entree img{display:block;width:100%;max-height:42mm;object-fit:cover;border-radius:2mm}.ps-entree figcaption{font-size:9pt;color:#555;margin-top:1mm}
+@media (prefers-color-scheme:dark){.entree-fig img{outline-color:oklch(1 0 0 / .1)}}
+.chk-acts{display:flex;flex-wrap:wrap;gap:var(--sp-1) var(--sp-3);justify-content:flex-end}
 .chsep{flex:none;width:1px;align-self:stretch;margin:var(--sp-1) var(--sp-1);background:var(--line)}
 .card .where sup,.fh sup{font-size:.72em;line-height:0;vertical-align:.45em}
 .big .ico{display:grid;justify-items:center;align-content:center;gap:2px}
@@ -1726,6 +1733,7 @@ h1,h2,h3{text-wrap:balance}
         <button type="button" role="radio" aria-checked="false" data-motif="horaires">Horaires</button>
         <button type="button" role="radio" aria-checked="false" data-motif="ferme">Fermé ou déménagé</button>
         <button type="button" role="radio" aria-checked="false" data-motif="admission">Conditions d'admission</button>
+        <button type="button" role="radio" aria-checked="false" data-motif="photo">Photo ou plaquette</button>
         <button type="button" role="radio" aria-checked="false" data-motif="autre">Autre</button>
       </div>
       <div id="rep-lieu" style="display:grid;gap:10px" hidden>
@@ -1745,7 +1753,8 @@ h1,h2,h3{text-wrap:balance}
       <div class="repfile">
         <label class="replab" for="rep-file">Joindre un fichier <span style="font-weight:400;color:var(--muted)">(facultatif)</span></label>
         <input id="rep-file" type="file" accept="application/pdf,image/*" multiple>
-        <p class="hint" style="margin:0">Plaquette, dossier d'admission, photo d'une affiche… PDF ou image, 3 fichiers au plus, 10 Mo chacun.</p>
+        <p class="hint" style="margin:0">Plaquette de présentation, dossier d'admission, photo de l'entrée… PDF ou image, 3 fichiers au plus, 10 Mo chacun.</p>
+        <p class="hint" style="margin:0">Photo de l'entrée : prise depuis la rue, sans personne reconnaissable ni plaque d'immatriculation. En l'envoyant, vous acceptez qu'elle soit publiée dans MAP.</p>
       </div>
       <label class="replab" for="rep-contact">Votre nom ou pseudo et un e-mail ou un téléphone, si vous souhaitez une réponse <span style="font-weight:400;color:var(--muted)">(facultatif)</span></label>
       <input id="rep-contact" class="repinput" type="text" maxlength="200" autocomplete="email">
@@ -4694,6 +4703,7 @@ const REPORT_TO="mapannuaire@gmail.com";
 /* Dernière vérification par défaut (mois du relevé) ; une fiche peut préciser d.chk="AAAA-MM-JJ" */
 const CHK_DEFAULT="2026-10";
 const CHANGELOG=[
+  ["2026-11-28",["Fiche : photo de l'entrée quand une équipe l'a envoyée, avec un lien Street View ; bouton « Envoyer une photo ou une plaquette » en bas de chaque fiche","Fiche imprimée pour le patient : photo de l'entrée sous le plan","Commentaires : nouveau sujet « Photo ou plaquette » pour envoyer une photo de l'entrée ou la plaquette d'une structure","Plus de retour visuel quand on touche un bouton, et corrections d'accessibilité"]],
   ["2026-11-24",["Sur téléphone, les résultats s'affichent tout de suite : carte compacte (bouton « Agrandir ») et recherche au-dessus","Recherche : synonymes cliniques (Subutex, TSO, méthadone, crack, cocaïne…), pluriels, et résultats partiels quand aucun lieu ne contient tous les mots","Fiche : Appeler, Itinéraire et Donner la fiche en haut ; impression, message, e-mail et PDF regroupés dans « Donner la fiche », avec la langue choisie une seule fois","Accessibilité : focus sur le titre à chaque écran, boutons plus faciles à toucher"]],
   ["2026-10-28",["Partager : le message contient le lien direct vers la fiche dans MAP et les liens des dossiers d'admission","Fiche imprimée et PDF : QR code vers la fiche en ligne et vers chaque document","Les fiches peuvent désormais être modifiées dans un tableau Google Sheets (mise en place en cours)","Ajout du SIDIIS (Groupe SOS) : suivi intensif à domicile pour les personnes souvent hospitalisées en psychiatrie, 8ᵉ, 9ᵉ et 10ᵉ","Logement : seuls les SAMSAH du handicap psychique sont gardés","Mon soutien psy : lien vers la page Ameli et son dépliant","Documents à télécharger vérifiés sur les sites des structures : 117 fiches ont maintenant des documents (210 au total), dont 22 avec un dossier d'admission. Dans chaque fiche, « Admission » regroupe les dossiers à remplir (PDF en premier) et « Documents » les plaquettes et livrets"]],
   ["2026-10-24",["Vérification croisée avec la cartographie RdR-Addicto : ajout du CAARUD Tekno (milieu festif techno) ; Plus Belle la Nuit à sa nouvelle adresse (13001) avec le Chill'In du jeudi ; numéro du Tipi festif ; adresses précisées pour Addictions France La Ciotat et Villa Floréal ; horaires d'accueil de Tremplin corrigés"]],
@@ -5110,6 +5120,11 @@ function deriveAcc(d){const t=accTxt(d);
   if(d.scs===undefined)d.scs=(d.t.includes("urg")||(d.t.includes("csapa")&&/CSAPA|CJC|jeunes consommateurs/i.test(d.n))||(d.t.includes("rdr")&&/CAARUD/i.test(d.n))||ACC_CS.test(t))?1:0;}
 D.forEach(deriveAcc);
 const sheetNorm=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+/* 28/11 : photo de l'entrée et plaquette : un nom de fichier du dossier « medias » du dépôt, ou une adresse sur mapannuaire.github.io */
+const mediaUrl=v=>{v=String(v||"").trim();if(!v)return null;
+  if(/^[\w.-]+\.(jpe?g|png|webp|pdf)$/i.test(v))return new URL("medias/"+v,APP_URL).href;
+  if(/^https:\/\/mapannuaire\.github\.io\/map\/medias\/[\w.-]+$/i.test(v))return v;return null;};
+const svUrl=d=>{const g=GEO[d.id];return g&&d.a&&!d.noSV&&!d.t.some(t=>["resid","logement","repit"].includes(t))?`https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${g[0]},${g[1]}`:null;};
 const sheetYes=s=>/^(oui|o|yes|y|x|1|vrai|true)$/i.test(String(s||"").trim());
 const sheetLines=s=>String(s||"").split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
 const sheetNum=s=>{const n=parseFloat(String(s||"").replace(/\s/g,"").replace(",","."));return isFinite(n)?n:null;};
@@ -5152,6 +5167,8 @@ function applySheet(text){
     if(g("en bref")!==undefined)d.f=sheetLines(g("en bref")).map(x=>x.replace(/^[-•·]\s*/,""));
     set("send",g("admission"));
     if(g("documents")!==undefined)set("docs",sheetLines(g("documents")).map(l=>{const p=l.split("|").map(x=>x.trim());return [p[0]||"Document",p[1]||"",p[2]||"",sheetYes(p[3])||/admission/i.test(p[3]||"")?"form":""];}).filter(z=>/^https?:/.test(z[1])));
+    {const v=g("photo de l entree");if(v!==undefined){delete d.photo;delete d.noSV;if(/^non$/i.test(v))d.noSV=1;else{const u=mediaUrl(v);if(u)d.photo=u;}}}
+    {const v=g("plaquette");if(v){const u=mediaUrl(v);if(u&&!(d.docs||[]).some(z=>z[1]===u))d.docs=[...(d.docs||[]),["Plaquette de présentation",u,"PDF",""]];}}
     set("der",g("deroulement")!==undefined?sheetLines(g("deroulement")):undefined);
     set("act",g("activites")!==undefined?sheetLines(g("activites")):undefined);
     {const v=g("sans rendez vous");if(v)d.sr=sheetYes(v)?1:0;}{const v=g("sans couverture sociale");if(v)d.scs=sheetYes(v)?1:0;}deriveAcc(d);
@@ -5803,6 +5820,7 @@ function fiche(d){
       ${d.cover?`<section class="sec"><h3>Secteur</h3><div class="box sectbox"><div><b>${/^13G/.test(d.sect)?"Secteur "+esc(d.sect):"CH Valvert"}</b> · ${esc(d.o.split(" · ")[0])}</div><div>Couvre : ${esc(d.cover)}</div>${d.sdf?`<div>Personnes sans domicile nées du ${esc(d.sdf)}</div>`:""}</div></section>`:""}
       ${hoursHtml(d)}
       <section class="sec"><h3>En bref</h3>${d.warn?`<div class="warnbox" style="margin-bottom:8px">${esc(d.warn)}${d.warnMore?" : "+esc(d.warnMore):" (selon ARCA-Sud) : appelez avant d'orienter."}</div>`:""}<p>${esc(d.a)}</p><ul class="ul">${d.f.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></section>
+      ${entreeHtml(d)}
       ${miniMap(d)}
       ${d.der?`<section class="sec"><h3>Déroulement</h3><ul class="ul">${d.der.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></section>`:""}
       ${d.act?`<section class="sec"><h3>Activités proposées</h3><div class="act">${d.act.map(x=>`<span>${esc(x)}</span>`).join("")}</div></section>`:""}
@@ -5814,7 +5832,7 @@ function fiche(d){
       ${idocs.length?`<section class="sec"><h3>Documents</h3><div class="box">${idocs.map(docRow).join("")}</div></section>`:""}
       ${d.c.length?`<section class="sec"><h3>Contacts</h3><div class="box">${d.c.map(([l,v])=>{const t=telHref(v);return `<div class="crow"><div style="min-width:0"><span class="l">${esc(l)}</span><span class="v">${esc(v)}</span></div><div class="acts">${t&&!/fax/i.test(l)?`<a class="copy" href="${t}" style="text-decoration:none;color:inherit">Appeler</a>`:""}<button class="copy" type="button" data-v="${esc(v)}">Copier</button></div></div>`;}).join("")}</div>${noteOf(d)?`<p class="note" style="margin-top:8px">${esc(noteOf(d))}</p>`:""}</section>`:""}
       ${srcHtml(d)}
-      <div class="chk"><span>${chkText(d)}</span><button type="button" class="linkbtn" data-report="${d.id}">Commentaires</button></div>
+      <div class="chk"><span>${chkText(d)}</span><span class="chk-acts"><button type="button" class="linkbtn" data-report="${d.id}">Commentaires</button><button type="button" class="linkbtn" data-report="${d.id}" data-pre="photo">Envoyer une photo ou une plaquette</button></span></div>
       <button class="fab-back" type="button" data-close>← Retour</button>
       <section class="sec" id="mail-sec"><h3>Donner la fiche</h3>
         <div class="box mailbox">
@@ -5866,7 +5884,7 @@ function openFiche(id){
 }
 /* 24/11 : partage, e-mail, impression et fichiers regroupés dans « Donner la fiche » (langue choisie une seule fois) */
 /* 22/11 : à l'ouverture d'une fiche, seules « En bref », « Contacts » et l'envoi par e-mail restent dépliées */
-const FOLD_KEEP=/^(En bref|Contacts|Donner la fiche)/i;
+const FOLD_KEEP=/^(En bref|L.entrée|Contacts|Donner la fiche)/i;
 function foldSecs(){fEl.querySelectorAll("section.sec").forEach(sec=>{const h=sec.querySelector(":scope>h3");if(!h||FOLD_KEEP.test(h.textContent.trim()))return;
   const dt=document.createElement("details");dt.className="hdet fold";const sm=document.createElement("summary");
   sm.innerHTML=`<span class="hsum">${esc(h.textContent)}</span><span class="chev" aria-hidden="true">▾</span>`;h.remove();dt.appendChild(sm);
@@ -5998,7 +6016,12 @@ function printFiche(d){
   const mm=fEl.querySelector(".minimap");
   if(mm){PR={mm,parent:mm.parentNode,next:mm.nextSibling};const w=mm.offsetWidth,h=mm.offsetHeight;document.getElementById("ps-map").appendChild(mm);mm.style.width=w+"px";mm.style.height=h+"px";}
   document.body.classList.add("printing");
-  setTimeout(()=>{try{window.print();}finally{setTimeout(printDone,400);}},350);
+  /* 28/11 : sur téléphone, window.print() rend la main tout de suite : on attend la fin réelle de l'impression avant de remettre la carte dans la fiche */
+  setTimeout(()=>{let done=false;const t0=Date.now(),mq=matchMedia("print");
+    const fin=()=>{if(done)return;done=true;removeEventListener("afterprint",fin);document.removeEventListener("pointerdown",late,true);if(mq.removeEventListener)mq.removeEventListener("change",onmq);printDone();};
+    const onmq=e=>{if(!e.matches)setTimeout(fin,150);},late=()=>{if(Date.now()-t0>1500)fin();};
+    addEventListener("afterprint",fin);if(mq.addEventListener)mq.addEventListener("change",onmq);document.addEventListener("pointerdown",late,true);setTimeout(fin,120000);
+    try{window.print();}catch(e){fin();}},350);
 }
 
 /* ---------- 18/11 : feuille à remettre à la personne, en plusieurs langues ---------- */
@@ -6012,6 +6035,10 @@ const PT={
  ary:{dir:"rtl",intro:"صيفطوك لهاد البلاصة. ورّي هاد الورقة فالاستقبال.",addr:"العنوان",access:"كيفاش توصل",walk:"دقايق على رجليك",contacts:"باش تتاصل",phone:"التيليفون",email:"الإيميل",hours:"الأوقات",closed:"مسدود",days:["الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت","الحد"],bring:"جيب معاك إلا كانو عندك",list:"كارط Vitale، لاكارط ولا الباسبور، الأوردونونص والدوا اللي كتاخد",call:"عيّط قبل ما تجي باش تأكد الوقت.",urg:"إلا كانت حالة خطيرة: 15 ولا 112 · إلا جاوك أفكار ديال الانتحار: 3114 (فابور، ليل ونهار)",rdv:"الموعد والملاحظات",f:["النهار","الساعة","مع"],online:"فالأنترنيت",check:"المعلومات يقدرو يتبدلو: تأكد بالتيليفون."},
  "ary-lat":{dir:"ltr",intro:"Siftouk l had lblassa. Werri had lwer9a f l'accueil.",addr:"L'adresse",access:"Kifach twsel",walk:"d9aye9 3la rjlik",contacts:"Bach tt3ayet",phone:"Tilifoun",email:"Email",hours:"Lw9at",closed:"msdoud",days:["Letnin","Tlata","Larb3a","Lkhmis","Jjem3a","Ssebt","L7ed"],bring:"Jib m3ak ila kanou 3ndek",list:"Carte Vitale, la carte d'identité wla lpasseport, les ordonnances w ddwa li katakhod",call:"3eyyet 9bel ma tji bach t2ekked lwe9t.",urg:"Ila kanet 7ala khatira: 15 wla 112 · Ila jawek afkar dyal linti7ar: 3114 (fabor, lil w nhar)",rdv:"Lmaw3id w lmola7adat",f:["Nhar","Sa3a","M3a"],online:"F l'internet",check:"Lma3loumat y9edrou ytbeddlou: t2ekked b tilifoun."},
  ka:{dir:"ltr",intro:"თქვენ გადმოგამისამართეს ამ დაწესებულებაში. აჩვენეთ ეს ფურცელი მიმღებში.",addr:"მისამართი",access:"როგორ მივიდეთ",walk:"წთ ფეხით",contacts:"კონტაქტები",phone:"ტელეფონი",email:"ელ-ფოსტა",hours:"სამუშაო საათები",closed:"დაკეტილია",days:["ორშაბათი","სამშაბათი","ოთხშაბათი","ხუთშაბათი","პარასკევი","შაბათი","კვირა"],bring:"თან იქონიეთ, თუ გაქვთ",list:"Vitale-ს ბარათი (სამედიცინო დაზღვევის ბარათი), პირადობის დამადასტურებელი დოკუმენტი, რეცეპტები და მიმდინარე მედიკამენტები",call:"მოსვლამდე დარეკეთ, რომ დრო დაადასტუროთ.",urg:"სიცოცხლისთვის საშიში მდგომარეობა: 15 ან 112 · სუიციდური აზრები: 3114 (უფასო, 24/7)",rdv:"ვიზიტი და შენიშვნები",f:["თარიღი","დრო","ვისთან"],online:"ონლაინ",check:"ინფორმაცია შეიძლება შეიცვალოს: გადაამოწმეთ ტელეფონით."}};
+function entreeHtml(d){const sv=svUrl(d);if(!d.photo)return "";
+  return `<section class="sec entree"><h3>L'entrée</h3>${d.photo?`<figure class="entree-fig"><img src="${esc(d.photo)}" alt="Entrée de ${esc(d.n)}" loading="lazy" decoding="async" width="800" height="600" onerror="this.closest('figure').remove()"><figcaption>Photo proposée par une équipe de soins</figcaption></figure>`:""}
+    <div class="entree-acts">${sv?`<a class="btn" href="${sv}" target="_blank" rel="noopener">${ico("photo")}Voir la rue (Street View)</a>`:""}<button type="button" class="linkbtn" data-report="${d.id}" data-pre="photo">Proposer une photo plus récente</button></div></section>`;}
+const PT_ENT={fr:"L'entrée",en:"The entrance",es:"La entrada",it:"L'ingresso",ar:"المدخل","ary":"الباب ديال البلاصة","ary-lat":"L-bab dyal l-blasa",ka:"შესასვლელი"};
 function patientSheet(d,lg){
   const T=PT[lg]||PT.fr,F=PT.fr,bi=(t,f)=>lg==="fr"?t:`${t}<small class="ps-fr" dir="ltr" lang="fr">${f}</small>`;
   const H=d.hours;
@@ -6030,6 +6057,7 @@ function patientSheet(d,lg){
     <p><b>${T.call}</b></p>
   </div><div class="ps-right">
     <div id="ps-map"></div>
+    ${d.photo?`<figure class="ps-entree"><img src="${esc(d.photo)}" alt=""><figcaption>${PT_ENT[lg]||PT_ENT.fr}</figcaption></figure>`:""}
     ${hrs?`<h2>${bi(T.hours,F.hours)}</h2><table class="ps-h">${hrs}</table>`:""}
   </div></div>
   <p class="ps-urg">${T.urg}</p>
@@ -6432,7 +6460,7 @@ function openMsg(title,[su,bo],to){
 function closeMsg(){msgEl.hidden=true;}
 document.getElementById("msg-body").addEventListener("input",paintMsgLinks);
 document.addEventListener("click",e=>{
-  const rp=e.target.closest("[data-report]");if(rp){const d=D.find(x=>x.id===rp.dataset.report);if(d)openRep("erreur",d);return;}
+  const rp=e.target.closest("[data-report]");if(rp){const d=D.find(x=>x.id===rp.dataset.report);if(d){openRep("erreur",d);if(rp.dataset.pre){const b=document.querySelector(`#rep-motifs [data-motif="${rp.dataset.pre}"]`);if(b)b.click();}}return;}
   if(e.target.closest("[data-suggest]")){e.preventDefault();openRep("lieu_manquant");return;}
 });
 msgEl.addEventListener("click",e=>{
@@ -6498,7 +6526,8 @@ function repMail(){
 }
 repEl.addEventListener("click",e=>{
   if(e.target===repEl||e.target.closest("[data-closerep]")){repEl.hidden=true;return;}
-  const m=e.target.closest("[data-motif]");if(m){REP.motif=m.dataset.motif;repEl.querySelectorAll("[data-motif]").forEach(b=>b.setAttribute("aria-checked",String(b===m)));return;}
+  const m=e.target.closest("[data-motif]");if(m){REP.motif=m.dataset.motif;repEl.querySelectorAll("[data-motif]").forEach(b=>b.setAttribute("aria-checked",String(b===m)));
+    document.getElementById("rep-lab").textContent=REP.motif==="photo"?"Ce que montre la photo ou le document (facultatif)":"Votre commentaire (et sa source, si possible)";return;}
   if(e.target.closest("#rep-mail")){repMail();return;}
   if(e.target.closest("#rep-send")){
     let txt=document.getElementById("rep-text").value.trim();const stt=document.getElementById("rep-status"),sb=document.getElementById("rep-send");
@@ -6512,7 +6541,7 @@ repEl.addEventListener("click",e=>{
     if(!txt&&!files.length&&!(REP.type==="erreur"&&REP.motif)){stt.hidden=false;stt.className="repstatus";stt.textContent="Écrivez quelques mots avant d'envoyer.";document.getElementById("rep-text").focus();return;}
     if(!ONLINE_APP){stt.hidden=false;stt.className="repstatus err";stt.textContent="L'envoi direct ne marche que dans l'appli (mapannuaire.github.io/map). Utilisez l'envoi par e-mail ci-dessous.";return;}
     sb.disabled=true;sb.textContent="Envoi…";
-    const motifs={numero:"Numéro faux",adresse:"Adresse",horaires:"Horaires",ferme:"Fermé ou déménagé",admission:"Conditions d'admission",autre:"Autre"};
+    const motifs={numero:"Numéro faux",adresse:"Adresse",horaires:"Horaires",ferme:"Fermé ou déménagé",admission:"Conditions d'admission",photo:"Photo ou plaquette",autre:"Autre"};
     const up=f=>{const nm="depots/"+new Date().toISOString().slice(0,10)+"-"+Math.random().toString(36).slice(2,10)+"-"+nrm(f.name).replace(/[^a-z0-9.]+/g,"-").slice(-60);
       return fetch(SUPA_URL+"/storage/v1/object/map-fichiers/"+nm,{method:"POST",headers:{apikey:SUPA_KEY,Authorization:"Bearer "+SUPA_KEY,"Content-Type":f.type||"application/octet-stream","x-upsert":"false"},body:f}).then(r=>{if(!r.ok)throw new Error("fichier "+r.status);return nm;});};
     if(files.length)sb.textContent="Envoi des fichiers…";

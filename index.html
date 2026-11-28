@@ -267,6 +267,9 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .chk-acts{display:flex;flex-wrap:wrap;gap:var(--sp-1) var(--sp-3);justify-content:flex-end}
 .urgline{margin:0 0 var(--sp-3);font-size:var(--fs-sm);line-height:1.4;color:var(--muted);text-wrap:pretty}
 .urgline a{color:var(--t-urg);font-weight:700;text-decoration:none;padding:6px 2px;margin:-6px 0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) :is(.transit,.stlab) i.M1{color:#04213a}}
+:root[data-theme="dark"] :is(.transit,.stlab) i.M1{color:#04213a}
+@media (max-width:339px){.brand .brandlong{display:none}}
 .chsep{flex:none;width:1px;align-self:stretch;margin:var(--sp-1) var(--sp-1);background:var(--line)}
 .card .where sup,.fh sup{font-size:.72em;line-height:0;vertical-align:.45em}
 .big .ico{display:grid;justify-items:center;align-content:center;gap:2px}
@@ -641,6 +644,7 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .ps-nr{display:flex;align-items:flex-end;gap:5pt;font-size:10pt}
 .ps-nr i{flex:1;border-bottom:1px solid #777;height:12pt}.ps-nr i.s{flex:.45}
 .ps-nf{height:24mm;margin-top:6pt;background:repeating-linear-gradient(to bottom,transparent 0,transparent 7.6mm,#bbb 7.6mm,#bbb calc(7.6mm + 1px))}
+.ps-dense .ps-nf{height:8mm}
 .ps-foot{margin-top:8pt;padding-top:4pt;border-top:1px solid #999;font:7.5pt var(--mono);color:#444}
 #printsheet *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 #printsheet.capture{position:fixed;left:0;top:0;z-index:-5;width:186mm;padding:6mm;font:9.5pt/1.35 var(--body)}
@@ -1518,7 +1522,7 @@ h1,h2,h3{text-wrap:balance}
   <header class="hero">
     <div class="col">
       <button class="backlink" type="button" data-back data-ifhist hidden>← Retour</button>
-      <div class="eyebrow"><span class="brand"><svg class="brandmark" viewBox="70 38 462 512" aria-hidden="true"><circle cx="356" cy="153" r="65" fill="#f5b91d"/><path d="M80 292 Q155 235 211 229 L244 197 L264 197 L264 170 L281 156 L299 171 L299 201 L331 196 L331 135 Q331 126 340 126 L340 94 Q340 83 347 76 Q354 70 347 63 Q340 55 349 49 Q361 45 365 58 Q369 66 361 73 Q370 86 370 96 L370 126 Q379 127 379 136 L379 195 L406 198 Q421 211 430 225 Q475 236 522 274 L522 332 Q415 308 316 336 Q200 291 80 355Z" fill="#f5f5f7"/><path d="M80 365 Q170 321 261 350 L317 412 Q208 387 121 461 Q94 437 80 412Z" fill="#1e6fb8"/><path d="M129 473 Q227 401 317 429 Q419 361 522 353 L522 459 Q469 511 374 512 L178 512Z" fill="#7a3a6e"/><path d="M316 315 C265 315 228 353 228 403 C228 447 283 503 316 543 C349 503 404 447 404 403 C404 353 367 315 316 315Z" fill="#7a3a6e" stroke="white" stroke-width="17" stroke-linejoin="round"/><circle cx="316" cy="399" r="36" fill="white"/></svg><span style="overflow:hidden;text-overflow:ellipsis"><b>MAP</b> · Marseille AddictoPsy</span></span><button type="button" class="newsbtn themebtn" data-theme-toggle aria-label="Thème">Auto</button><button type="button" class="newsbtn infobtn" data-info aria-label="Informations, nouveautés et contact">i</button></div>
+      <div class="eyebrow"><span class="brand"><svg class="brandmark" viewBox="70 38 462 512" aria-hidden="true"><circle cx="356" cy="153" r="65" fill="#f5b91d"/><path d="M80 292 Q155 235 211 229 L244 197 L264 197 L264 170 L281 156 L299 171 L299 201 L331 196 L331 135 Q331 126 340 126 L340 94 Q340 83 347 76 Q354 70 347 63 Q340 55 349 49 Q361 45 365 58 Q369 66 361 73 Q370 86 370 96 L370 126 Q379 127 379 136 L379 195 L406 198 Q421 211 430 225 Q475 236 522 274 L522 332 Q415 308 316 336 Q200 291 80 355Z" fill="#f5f5f7"/><path d="M80 365 Q170 321 261 350 L317 412 Q208 387 121 461 Q94 437 80 412Z" fill="#1e6fb8"/><path d="M129 473 Q227 401 317 429 Q419 361 522 353 L522 459 Q469 511 374 512 L178 512Z" fill="#7a3a6e"/><path d="M316 315 C265 315 228 353 228 403 C228 447 283 503 316 543 C349 503 404 447 404 403 C404 353 367 315 316 315Z" fill="#7a3a6e" stroke="white" stroke-width="17" stroke-linejoin="round"/><circle cx="316" cy="399" r="36" fill="white"/></svg><span style="overflow:hidden;text-overflow:ellipsis"><b>MAP</b><span class="brandlong"> · Marseille AddictoPsy</span></span></span><button type="button" class="newsbtn themebtn" data-theme-toggle aria-label="Thème">Auto</button><button type="button" class="newsbtn infobtn" data-info aria-label="Informations, nouveautés et contact">i</button></div>
       <button class="searchopen" type="button" data-search><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>Rechercher un lieu, un nom…</button>
       <div class="modetabs" role="tablist" aria-label="Domaine">
         <button type="button" role="tab" data-mode="addicto">Addictologie</button>
@@ -1538,7 +1542,7 @@ h1,h2,h3{text-wrap:balance}
     <button class="installbtn" type="button" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M12 7.5v7M9 11.5l3 3 3-3"/></svg>Installer sur mon téléphone</button>
     <div class="arca">
       <b>Un doute sur l'orientation ? ARCA-Sud</b>
-      <span>Appui régional à l'orientation, pour les équipes de soin, les personnes concernées et leurs proches.</span>
+      <span>Appui régional à l'orientation, pour les équipes de soins, les personnes concernées et leurs proches.</span>
       <a class="arcanum" href="tel:+33488926888">04 88 92 68 88</a>
       <span class="mono" style="font-size:12.5px">contact@arca-sud.fr</span>
     </div>
@@ -1553,7 +1557,7 @@ h1,h2,h3{text-wrap:balance}
   <header class="hero">
     <div class="col">
       <button class="backlink" type="button" data-back data-ifhist hidden>← Retour</button>
-      <div class="eyebrow"><span class="brand"><svg class="brandmark" viewBox="70 38 462 512" aria-hidden="true"><circle cx="356" cy="153" r="65" fill="#f5b91d"/><path d="M80 292 Q155 235 211 229 L244 197 L264 197 L264 170 L281 156 L299 171 L299 201 L331 196 L331 135 Q331 126 340 126 L340 94 Q340 83 347 76 Q354 70 347 63 Q340 55 349 49 Q361 45 365 58 Q369 66 361 73 Q370 86 370 96 L370 126 Q379 127 379 136 L379 195 L406 198 Q421 211 430 225 Q475 236 522 274 L522 332 Q415 308 316 336 Q200 291 80 355Z" fill="#f5f5f7"/><path d="M80 365 Q170 321 261 350 L317 412 Q208 387 121 461 Q94 437 80 412Z" fill="#1e6fb8"/><path d="M129 473 Q227 401 317 429 Q419 361 522 353 L522 459 Q469 511 374 512 L178 512Z" fill="#7a3a6e"/><path d="M316 315 C265 315 228 353 228 403 C228 447 283 503 316 543 C349 503 404 447 404 403 C404 353 367 315 316 315Z" fill="#7a3a6e" stroke="white" stroke-width="17" stroke-linejoin="round"/><circle cx="316" cy="399" r="36" fill="white"/></svg><span style="overflow:hidden;text-overflow:ellipsis"><b>MAP</b> · Marseille AddictoPsy</span></span><button type="button" class="newsbtn themebtn" data-theme-toggle aria-label="Thème">Auto</button><button type="button" class="newsbtn infobtn" data-info aria-label="Informations, nouveautés et contact">i</button></div>
+      <div class="eyebrow"><span class="brand"><svg class="brandmark" viewBox="70 38 462 512" aria-hidden="true"><circle cx="356" cy="153" r="65" fill="#f5b91d"/><path d="M80 292 Q155 235 211 229 L244 197 L264 197 L264 170 L281 156 L299 171 L299 201 L331 196 L331 135 Q331 126 340 126 L340 94 Q340 83 347 76 Q354 70 347 63 Q340 55 349 49 Q361 45 365 58 Q369 66 361 73 Q370 86 370 96 L370 126 Q379 127 379 136 L379 195 L406 198 Q421 211 430 225 Q475 236 522 274 L522 332 Q415 308 316 336 Q200 291 80 355Z" fill="#f5f5f7"/><path d="M80 365 Q170 321 261 350 L317 412 Q208 387 121 461 Q94 437 80 412Z" fill="#1e6fb8"/><path d="M129 473 Q227 401 317 429 Q419 361 522 353 L522 459 Q469 511 374 512 L178 512Z" fill="#7a3a6e"/><path d="M316 315 C265 315 228 353 228 403 C228 447 283 503 316 543 C349 503 404 447 404 403 C404 353 367 315 316 315Z" fill="#7a3a6e" stroke="white" stroke-width="17" stroke-linejoin="round"/><circle cx="316" cy="399" r="36" fill="white"/></svg><span style="overflow:hidden;text-overflow:ellipsis"><b>MAP</b><span class="brandlong"> · Marseille AddictoPsy</span></span></span><button type="button" class="newsbtn themebtn" data-theme-toggle aria-label="Thème">Auto</button><button type="button" class="newsbtn infobtn" data-info aria-label="Informations, nouveautés et contact">i</button></div>
       <button class="searchopen" type="button" data-search><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>Rechercher un lieu, un nom…</button>
       <div class="modetabs" role="tablist" aria-label="Domaine">
         <button type="button" role="tab" data-mode="addicto">Addictologie</button>
@@ -1611,7 +1615,7 @@ h1,h2,h3{text-wrap:balance}
     </div>
   </main>
   <div class="bottombar" role="region" aria-label="Suite"><div class="col">
-    <a class="bb-arca bb-urg" href="tel:15" aria-label="Urgence : appeler le 15"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Urgence <b>15</b></a>
+    <a class="bb-arca bb-urg" href="tel:15" aria-label="Urgence 15 : appeler le SAMU"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Urgence <b>15</b></a>
     <button class="cta" type="button" id="pnext">Voir sur la carte →</button>
   </div></div>
 </div>
@@ -1813,7 +1817,7 @@ h1,h2,h3{text-wrap:balance}
   <div class="isheet" role="dialog" aria-modal="true" aria-labelledby="pl-title">
     <div class="grab"></div>
     <h2 id="pl-title">Imprimer la fiche</h2>
-    <button type="button" class="btn primary" data-plang="pro">Fiche complète, pour l'équipe de soin</button>
+    <button type="button" class="btn primary" data-plang="pro">Fiche complète, pour l'équipe de soins</button>
     <p class="hint" style="margin:0">Feuille simplifiée à remettre à la personne : adresse, accès, horaires, contacts, rendez-vous. Choisir la langue :</p>
     <div class="shgrid">
       <button type="button" class="btn" data-plang="fr">Français</button>
@@ -1833,7 +1837,7 @@ h1,h2,h3{text-wrap:balance}
   <div class="isheet" role="dialog" aria-modal="true" aria-labelledby="sh-title">
     <div class="grab"></div>
     <h2 id="sh-title">Partager la fiche</h2>
-    <pre class="shpre" id="sh-preview"></pre>
+    <pre class="shpre" id="sh-preview" tabindex="0" aria-label="Aperçu du message"></pre>
     <div class="shgrid">
       <a class="btn primary" id="sh-sms" href="#">SMS</a>
       <a class="btn primary" id="sh-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
@@ -5045,7 +5049,7 @@ D.forEach(d=>{const p=PATCH[d.id];if(!p)return;const {addF,addC,addDocs,...rest}
  if(d=g("ss-clinique-l-emeraude-etablissement-de-san")){d.chk="2026-11-16";if(!d.c.some(x=>x[1].startsWith("04 91 40 92 17")))d.c.unshift(["Téléphone (site emeis)","04 91 40 92 17"]);}
  if(d=g("lib-vermersch")){d.v=1;d.warn="Adresse à vérifier";d.warnMore="Un signalement d'octobre 2026 indique que l'adresse et le téléphone de Belsunce sont périmés. Doctolib l'affiche au 24 bd Georges Clemenceau (13004). Vérifiez avant d'orienter.";}
  if(d=g("co-fraternite-de-moreuil-les-moreuils")){d.v=1;d.warn="Association dissoute";d.warnMore="L'association gestionnaire a été dissoute en 2025 et aucune activité n'a été retrouvée en 2026 : appelez avant d'orienter.";}
- CHANGELOG.unshift(["2026-11-16",["Vérification des structures de Marseille : ajout de REPÈRE, lieu temporaire de réduction des risques près de la gare Saint-Charles (relais du Sleep In, toujours fermé, réouverture annoncée début 2027)","MDPH 13 : accueil d'Arenc fermé le vendredi à partir du 20 novembre","Clinique des Trois Lucs : numéro direct et horaires d'accueil ; Clinique L'Émeraude : numéro du site officiel","Dr Vermersch et Fraternité de Moreuil : avertissement, à vérifier avant d'orienter"]]);
+ CHANGELOG.unshift(["2026-11-16",["Vérification des structures de Marseille : ajout de REPÈRE, lieu temporaire de réduction des risques près de la gare Saint-Charles (relais du Sleep In, toujours fermé, réouverture annoncée début 2027)","MDPH 13 : accueil d'Arenc fermé le vendredi à partir du 20 novembre","Clinique des Trois Lucs : numéro direct et horaires d'accueil ; Clinique L'Émeraude : numéro du site officiel","Dr Vermersch et Fraternité de Moreuil : avertissement, à vérifier avant d'orienter"]]);CHANGELOG.sort((a,b)=>b[0].localeCompare(a[0]));
 }
 
 /* ---------- Ajout du 17 novembre 2026 : CUMP 13 ---------- */
@@ -5092,12 +5096,12 @@ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Une ambiance par domain
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Nouveau logo et nouveau nom : MAP · Marseille AddictoPsy");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("« Signaler une erreur » devient « Commentaires »");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Proposer un nouveau lieu : formulaire détaillé, accessible depuis l'accueil ; possibilité de joindre une plaquette ou un dossier (PDF ou image)");
- CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Formulations inclusives dans les menus (équipe de soin, personnes concernées)");
- CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Envoi d'une fiche (texte, PDF, image) : au choix pour l'équipe de soin ou pour la personne, dans sa langue");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Formulations inclusives dans les menus (équipe de soins, personnes concernées)");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Envoi d'une fiche (texte, PDF, image) : au choix pour l'équipe de soins ou pour la personne, dans sa langue");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Les fiches se mettent à jour depuis le tableau Google Sheets MAP-fiches");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Signaler une erreur ou proposer un lieu se fait maintenant directement dans l'appli, sans e-mail (l'e-mail reste possible) ; comptage anonyme des consultations, sans cookie");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Nouvelle adresse : mapannuaire.github.io/map ; les messages arrivent à mapannuaire@gmail.com");
- CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Imprimer : au choix la fiche complète pour l'équipe de soin, ou une feuille simplifiée à remettre à la personne en français, anglais, arabe, darija (en lettres arabes ou latines), espagnol, italien ou géorgien");
+ CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Imprimer : au choix la fiche complète pour l'équipe de soins, ou une feuille simplifiée à remettre à la personne en français, anglais, arabe, darija (en lettres arabes ou latines), espagnol, italien ou géorgien");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Fiche imprimée ou en PDF : un cadre « Rendez-vous et notes » en bas, à remplir à la main");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Accessibilité : contour visible pour la navigation au clavier, animations réduites si le téléphone le demande, boutons plus faciles à toucher ; tailles de texte harmonisées");
  CHANGELOG[0][0]==="2026-11-16"&&CHANGELOG[0][1].unshift("Accueil plus sobre : vignettes blanches, la couleur du type reste sur l'icône");
@@ -5862,7 +5866,7 @@ function fiche(d){
       <section class="sec" id="mail-sec"><h3>Donner la fiche</h3>
         <div class="box mailbox">
           <label class="mlang"><span>Pour</span><select id="mlang-${d.id}" aria-label="Destinataire et langue de la fiche">
-            <option value="pro">l'équipe de soin (fiche complète)</option>
+            <option value="pro">l'équipe de soins (fiche complète)</option>
             <optgroup label="la personne, en :"><option value="fr">français</option><option value="en">anglais</option><option value="ar">arabe</option><option value="ary">darija (lettres arabes)</option><option value="ary-lat">darija (lettres latines)</option><option value="es">espagnol</option><option value="it">italien</option><option value="ka">géorgien</option></optgroup>
           </select></label>
           <div class="shgrid"><button type="button" class="btn primary" data-print>${ico("print")}Imprimer</button><button type="button" class="btn primary" data-share>${ico("share")}Message</button></div>
@@ -6036,7 +6040,7 @@ async function sendFiche(d,fmt,btn){
 let PR=null;
 function printFiche(d){
   if(!d)return;printDone();if(typeof track==="function")track("impression",PLANG+":"+d.id);
-  const sh=document.createElement("div");sh.id="printsheet";sh.innerHTML=PLANG==="pro"?printSheet(d):patientSheet(d,PLANG);document.body.appendChild(sh);
+  const sh=document.createElement("div");sh.id="printsheet";sh.innerHTML=PLANG==="pro"?printSheet(d):patientSheet(d,PLANG);document.body.appendChild(sh);if(PLANG==="pro"&&(d.c||[]).length+(d.docs||[]).length*2>12)sh.classList.add("ps-dense");
   /* la carte de la fiche est déplacée dans la feuille, à taille fixe, puis remise en place */
   const mm=fEl.querySelector(".minimap");
   if(mm){PR={mm,parent:mm.parentNode,next:mm.nextSibling};const w=mm.offsetWidth,h=mm.offsetHeight;document.getElementById("ps-map").appendChild(mm);mm.style.width=w+"px";mm.style.height=h+"px";}
@@ -6129,7 +6133,7 @@ function printDone(){
 }
 window.addEventListener("afterprint",()=>{if(document.body.classList.contains("printing"))setTimeout(printDone,100);});
 /* impression lancée par le navigateur (menu) sur une fiche ouverte */
-window.addEventListener("beforeprint",()=>{if(!document.body.classList.contains("printing")&&!fEl.hidden&&fEl.dataset.id){const d=D.find(x=>x.id===fEl.dataset.id);if(d){const sh=document.createElement("div");sh.id="printsheet";sh.innerHTML=PLANG==="pro"?printSheet(d):patientSheet(d,PLANG);document.body.appendChild(sh);const mm=fEl.querySelector(".minimap");if(mm){PR={mm,parent:mm.parentNode,next:mm.nextSibling};const w=mm.offsetWidth,h=mm.offsetHeight;document.getElementById("ps-map").appendChild(mm);mm.style.width=w+"px";mm.style.height=h+"px";}document.body.classList.add("printing");}}});
+window.addEventListener("beforeprint",()=>{if(!document.body.classList.contains("printing")&&!fEl.hidden&&fEl.dataset.id){const d=D.find(x=>x.id===fEl.dataset.id);if(d){const sh=document.createElement("div");sh.id="printsheet";sh.innerHTML=PLANG==="pro"?printSheet(d):patientSheet(d,PLANG);document.body.appendChild(sh);if(PLANG==="pro"&&(d.c||[]).length+(d.docs||[]).length*2>12)sh.classList.add("ps-dense");const mm=fEl.querySelector(".minimap");if(mm){PR={mm,parent:mm.parentNode,next:mm.nextSibling};const w=mm.offsetWidth,h=mm.offsetHeight;document.getElementById("ps-map").appendChild(mm);mm.style.width=w+"px";mm.style.height=h+"px";}document.body.classList.add("printing");}}});
 function copy(text,btn,el){
   if(!btn.dataset.label)btn.dataset.label=btn.textContent;
   const label=btn.dataset.label;
@@ -6263,10 +6267,10 @@ const nrm=s=>String(s??"").replace(/ᵉ/g,"e").normalize("NFD").replace(/[\u0300
 const TYPEWORDS={cure:"cure sevrage hospitalisation",postcure:"post-cure postcure ssr smr",hdj:"hopital de jour hdj",resid:"hebergement appartement therapeutique residentiel",csapa:"csapa",hosp:"consultation hopital elsa",spec:"jeunes consommateurs cjc parents",amob:"equipe mobile",rdr:"reduction des risques caarud rdr",liberal:"medecin liberal generaliste",cmp:"cmp centre medico-psychologique psychiatrie secteur",urg:"urgences psychiatriques crise",mob:"equipe mobile rue precarite",entraide:"entraide alcooliques anonymes narcotiques vie libre groupe de parole",hdjpsy:"hopital de jour cattp psychiatrie",rehab:"rehabilitation remediation cognitive retablissement",specialise:"consultation specialisee centre expert psychotrauma tca perinatalite autisme tdah",clinique:"clinique psychiatrique privee",consult:"consultation psychotherapie psychologue",gem:"gem groupe d'entraide mutuelle",famille:"familles usagers unafam",repit:"repit alternative hospitalisation",logement:"logement samsah savs residence accueil chez soi",insertion:"insertion emploi esat",ecoute:"ecoute telephone ligne",droits:"droits mdph clsm",hospit:"hospitalisation temps plein admission soins sans consentement sdt sdre"};
 /* Synonymes cliniques : un mot tapé cherche aussi ses équivalents (sans accents, en minuscules) */
 const SYN=[
-  ["subutex","buprenorphine","bupre","tso","methadone","substitution","opiace","opioide","heroine","morphine"],
+  ["subutex","subutx","subutexe","buprenorphine","bupre","tso","methadone","metadone","methadonne","substitution","opiace","opioide","heroine","morphine"],
   ["crack","cocaine","coke","freebase","psychostimulant","stimulant"],
-  ["alcool","alcoolique","alcoolisme"],
-  ["cannabis","shit","beuh"],
+  ["alcool","alcol","alcohol","alcoolique","alcoolisme"],
+  ["cannabis","canabis","cannabi","shit","beuh"],
   ["tabac","nicotine","cigarette","tabacologie"],
   ["jeu","jeux","gambling"],
   ["ecran","ecrans","internet","numerique"],
@@ -6274,7 +6278,8 @@ const SYN=[
   ["jeune","adolescent","cjc","mineur"],
   ["sdf","sans domicile","sans abri","precarite","errance"],
   ["femme","femmes","perinatalite","grossesse"],
-  ["rdr","reduction des risques","caarud","seringue"],
+  ["rdr","reduction des risques","caarud","caarrud","carud","seringue"],
+  ["csapa","csappa","capsa"],
   ["sevrage","cure","detox"],
 ];
 const SYNMAP=new Map();SYN.forEach(g=>g.forEach(w=>SYNMAP.set(w,g)));
@@ -6314,7 +6319,7 @@ function paintSearch(focus){
   }
   if(focus)setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(_){}},60);
 }
-const SEARCH_SUGG=["Méthadone","Jeunes","CMP 13ᵉ","Allauch","Castellane","Urgences","Sans rendez-vous","Alcool"];
+const SEARCH_SUGG=["Méthadone","Jeunes","CMP 13ᵉ","Allauch","Castellane","Urgences","CAARUD","Alcool"];
 (()=>{const s=SEARCH_SUGG;
   document.getElementById("sugg").innerHTML=s.map(x=>`<button type="button" data-q="${esc(x)}">${esc(x)}</button>`).join("");})();
 document.getElementById("sq").addEventListener("input",()=>paintSearch(false));
@@ -6448,8 +6453,9 @@ function infoPage(pg){const box=document.getElementById("info-body");
     box.innerHTML=`<div class="ab"><p><b>MAP</b> (Marseille AddictoPsy) est un annuaire d'orientation pour les équipes du soin et du social : cures, post-cures, communautés, CSAPA, réduction des risques, CMP de secteur, urgences, équipes mobiles, entraide et associations d'usagers.</p>
     <div class="stats3"><div><b>${D.length}</b>lieux</div><div><b>${nA}</b>addictologie</div><div><b>${nP}</b>psychiatrie</div></div>
     <p>Les informations viennent des sites des établissements, de l'ARS, d'ARCA-Sud, de Santé publique France, de la Fédération Addiction et de la cartographie collaborative RdR-Addicto. Chaque fiche porte sa date de vérification ; celles marquées « à confirmer » doivent être vérifiées avant d'orienter.</p>
-    <p>MAP est tenu bénévolement et de façon indépendante. Ce n'est pas un service d'urgence et il ne remplace pas un avis médical : en cas d'urgence vitale, appelez le 15 ; en cas d'idées suicidaires, le 3114. Les horaires et les contacts changent : appelez la structure avant d'y adresser quelqu'un, et signalez les erreurs avec « Commentaires » en bas de chaque fiche.</p>
+    <p>MAP est tenu bénévolement et de façon indépendante par Julien Aron. Ce n'est pas un service d'urgence et il ne remplace pas un avis médical : en cas d'urgence vitale, appelez le 15 ; en cas d'idées suicidaires, le 3114. Les horaires et les contacts changent : appelez la structure avant d'y adresser quelqu'un, et signalez les erreurs avec « Commentaires » en bas de chaque fiche.</p>
     <p>Le code de l'application est libre (licence EUPL 1.2).</p>
+    <p><b>Mentions légales.</b> Éditeur et responsable de la publication : Julien Aron, à titre bénévole. Contact : mapannuaire@gmail.com. Hébergement : GitHub Pages, GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Messages et compteurs : Supabase.</p>
     <p>MAP est gratuit, fonctionne sans compte et sans cookie, et ne demande aucune information sur les patients. L'appli compte de façon anonyme les ouvertures et les fiches consultées, pour améliorer l'annuaire. Elle fait appel à GitHub (hébergement), Google (polices et tableau des fiches), Supabase (compteurs et messages) et OpenStreetMap (fond de carte), qui reçoivent l'adresse IP de l'appareil comme tout site web. Vos lieux gardés restent sur votre téléphone. Mise à jour automatique à chaque ouverture.</p></div>
     <button type="button" class="installbtn" data-install style="margin:0">Installer sur mon téléphone</button>
     <button type="button" class="btn backi" data-ipage="menu">← Retour</button>`;}
@@ -6527,6 +6533,7 @@ document.addEventListener("click",e=>{
 /* Formulaire de signalement */
 const repEl=document.getElementById("repsheet");let REP={type:"erreur",d:null,motif:null};
 function openRep(type,d){
+  const same=REP&&REP.type===type&&(REP.d?REP.d.id:null)===(d?d.id:null)&&!document.getElementById("rep-form").hidden,keep=same?[document.getElementById("rep-text").value,document.getElementById("rep-contact").value]:null;
   REP={type,d:d||null,motif:null};
   const t={erreur:"Commentaires sur la fiche",lieu_manquant:"Proposer un nouveau lieu",message:"Écrire à l'équipe MAP"}[type];
   document.getElementById("rep-title").textContent=t;
@@ -6539,7 +6546,7 @@ function openRep(type,d){
   document.getElementById("rep-file").value="";
   repEl.querySelectorAll("[data-motif]").forEach(b=>b.setAttribute("aria-checked","false"));
   document.getElementById("rep-lab").textContent=type==="erreur"?(d?"Votre commentaire (et sa source, si possible)":"Le lieu concerné, et votre commentaire"):type==="lieu_manquant"?"Public accueilli, conditions d'admission, source de l'information":"Votre message";
-  const ta=document.getElementById("rep-text");ta.value="";document.getElementById("rep-contact").value="";
+  const ta=document.getElementById("rep-text");ta.value=keep?keep[0]:"";document.getElementById("rep-contact").value=keep?keep[1]:"";
   const stt=document.getElementById("rep-status");stt.hidden=true;stt.textContent="";
   document.getElementById("rep-form").hidden=false;document.getElementById("rep-done").hidden=true;
   const sb=document.getElementById("rep-send");sb.disabled=false;sb.textContent="Envoyer";

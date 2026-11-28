@@ -85,7 +85,7 @@ async function load(){
   try{const r=await fetch(URL_RPC,{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"},body:JSON.stringify({p_cle:cle,p_jours:jours})});
     if(r.status===400||r.status===401||r.status===403){const t=await r.text();if(/cl[ée] invalide|42501/.test(t))return askKey("Cette clé n'est pas reconnue.");}
     if(!r.ok)throw new Error("HTTP "+r.status);last=await r.json();paint(last);
-  }catch(e){main.replaceChildren(el("p","note err","Impossible de charger les chiffres ("+e.message+"). Réessayez plus tard."));}
+  }catch(e){const bk=el("button",null,"Changer de clé");bk.type="button";bk.style.cssText="min-height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 15px inherit;cursor:pointer;justify-self:start";bk.addEventListener("click",()=>{cle=null;ls.set("map.stats.k","");askKey();});main.replaceChildren(el("p","note err","Impossible de charger les chiffres ("+e.message+"). Réessayez plus tard."),bk);}
 }
 function list(title,items,label){const c=el("section","card");c.append(el("h2",null,title));
   if(!items||!items.length){c.append(el("p","empty","Rien sur la période."));return c;}
@@ -117,7 +117,7 @@ function paint(d){
   const ms=el("section","card");ms.append(el("h2",null,"Messages reçus ("+(d.messages||[]).length+")"));
   if(!(d.messages||[]).length)ms.append(el("p","empty","Aucun message sur la période."));
   (d.messages||[]).forEach(m=>{const b=el("div","msg"),meta=el("div","meta");
-    meta.append(el("span","tag",TYPES[m.type]||m.type),document.createTextNode(new Date(m.date).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})+(m.fiche?" · "+m.fiche:"")+(m.motif?" · "+m.motif:"")+(m.fichiers?" · "+m.fichiers+" fichier(s)":"")+(m.traite?" · traité":"")));
+    meta.append(el("span","tag",TYPES[m.type]||m.type),document.createTextNode(new Date(m.date).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"})+(m.fiche?" · "+m.fiche:"")+(m.motif?" · "+({numero:"Numéro faux",adresse:"Adresse",horaires:"Horaires",ferme:"Fermé ou déménagé",admission:"Conditions d'admission",photo:"Photo ou plaquette",autre:"Autre"}[m.motif]||m.motif):"")+(m.fichiers?" · "+m.fichiers+" fichier(s)":"")+(m.traite?" · traité":"")));
     b.append(meta,el("p",null,m.commentaire||""));if(m.contact)b.append(el("div","meta","Contact : "+m.contact));ms.append(b);});
   main.append(ms);
   main.append(el("p","note","Compteurs anonymes, sans cookie. Pièces jointes : Supabase › Storage › map-fichiers."));

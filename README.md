@@ -1,4 +1,4 @@
-# Annuaire Santé Mentale Marseille
+# MAP · Marseille AddictoPsy
 
 Application web installable (sur iPhone et Android, sans store) pour orienter les patients en consultation :
 addictologie (cures, post-cures, hôpitaux de jour, CSAPA, hébergement, réduction des risques, médecins libéraux),
@@ -14,7 +14,7 @@ Les informations (numéros, adresses, formulaires) évoluent : vérifier avant t
 
 Le code de MAP · Marseille AddictoPsy (application, page de statistiques, scripts du dossier `outils/` et actions GitHub) est publié sous **licence publique de l'Union européenne, EUPL 1.2** : voir le fichier [LICENSE](LICENSE). Vous pouvez le réutiliser, le modifier et le redistribuer, par exemple pour créer l'annuaire d'un autre territoire. Si vous diffusez une version modifiée, elle doit rester sous EUPL (ou une licence compatible) et son code doit rester accessible.
 
-© 2026 les contributeurs de MAP · Marseille AddictoPsy.
+© 2026 Julien Aron et les contributeurs de MAP · Marseille AddictoPsy.
 
 ### Ce que la licence ne couvre pas
 

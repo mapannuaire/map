@@ -3,6 +3,7 @@
   "short_name": "MAP",
   "description": "Addictologie, CMP de secteur, urgences psychiatriques et équipes mobiles à Marseille et dans les Bouches-du-Rhône.",
   "lang": "fr",
+  "id": "/map/",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

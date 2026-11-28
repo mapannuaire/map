@@ -5072,12 +5072,12 @@ D.forEach(d=>{const p=PATCH[d.id];if(!p)return;const {addF,addC,addDocs,...rest}
   if(!rest.v)delete d.v;});
 /* ---------- Vérification du 16 novembre 2026 ---------- */
 {const g=id=>D.find(d=>d.id===id);let d;
- if(d=g("sleepin")){d.warn="Fermé pour travaux, réouverture début 2027";d.warnMore="En attendant, l'équipe accueille à REPÈRE, boulevard Voltaire (gare Saint-Charles).";d.chk="2026-11-16";if(d.hours)d.hours.texte="Fermé depuis fin mai 2026 (insalubrité), travaux en cours, réouverture annoncée début 2027. L'équipe accueille à REPÈRE, boulevard Voltaire.";}
+ if(d=g("sleepin")){d.warn="Fermé temporairement, réouverture annoncée début décembre 2026";d.warnMore="Date à confirmer par téléphone. En attendant, l'équipe accueille à REPÈRE, boulevard Voltaire (gare Saint-Charles).";d.chk="2026-11-28";if(d.hours)d.hours.texte="Fermé depuis fin mai 2026 (insalubrité), travaux en cours, réouverture annoncée début décembre 2026. En attendant, l'équipe accueille à REPÈRE, boulevard Voltaire.";}
  if(!g("repere")){D.push({id:"repere",t:["rdr"],pub:1,mrs:1,chk:"2026-11-16",p:"Marseille 1er",n:"REPÈRE, lieu temporaire de réduction des risques (gare Saint-Charles)",o:"Groupe SOS Solidarités (équipe du CAARUD Sleep In) · associatif",
   a:"Boulevard Voltaire, 13001 Marseille (modules sur un terrain SNCF, près de la gare Saint-Charles)",
   f:["Usagers de drogues en grande précarité ; accueil sans rendez-vous","Matériel de réduction des risques, premiers soins, dépistage, naloxone","Entretiens, orientation, espace de repos","Ce n'est pas une salle de consommation"],
   c:[["E-mail (Sleep In)","sleepin.marseille@groupe-sos.org"]],send:"Accès libre, sans rendez-vous, aux heures d'ouverture.",
-  warn:"Lieu temporaire, jusqu'à début 2027",warnMore:"Ouvert le 19 octobre 2026 pour environ 4 mois, jusqu'à la réouverture du Sleep In.",
+  warn:"Lieu temporaire, jusqu'à la réouverture du Sleep In",warnMore:"Ouvert le 19 octobre 2026 ; la réouverture du Sleep In est annoncée début décembre 2026, vérifiez avant d'orienter.",
   site:"https://www.groupe-sos.org/actualites/repere-un-lieu-temporaire-de-reduction-des-risques-ouvre-pres-de-la-gare-saint-charles-a-marseille/",
   hours:{semaine:{"1":[["13:00","16:30"]],"2":[["09:30","16:30"]],"3":[["09:30","16:30"]],"4":[["09:30","16:30"]],"5":[["09:30","16:30"]],"6":[],"7":[]},texte:"Lundi 13h–16h30, mardi à vendredi 9h30–16h30",src:"https://www.groupe-sos.org/actualites/repere-un-lieu-temporaire-de-reduction-des-risques-ouvre-pres-de-la-gare-saint-charles-a-marseille/"},
   note:"Numéro de rue et téléphone non publiés. Sources : https://www.groupe-sos.org/actualites/repere-un-lieu-temporaire-de-reduction-des-risques-ouvre-pres-de-la-gare-saint-charles-a-marseille/, https://marsactu.fr/bref/un-centre-temporaire-pour-les-usagers-de-drogues-ouvre-au-sein-de-la-gare-saint-charles/"});
@@ -5911,7 +5911,7 @@ function fiche(d){
       </div>
       ${d.cover?`<section class="sec"><h3>Secteur</h3><div class="box sectbox"><div><b>${/^13G/.test(d.sect)?"Secteur "+esc(d.sect):"CH Valvert"}</b> · ${esc(d.o.split(" · ")[0])}</div><div>Couvre : ${esc(d.cover)}</div>${d.sdf?`<div>Personnes sans domicile nées du ${esc(d.sdf)}</div>`:""}</div></section>`:""}
       ${hoursHtml(d)}
-      <section class="sec"><h3>En bref</h3>${d.warn?`<div class="warnbox" style="margin-bottom:8px">${esc(d.warn)}${d.warnMore?" : "+esc(d.warnMore):" (selon ARCA-Sud) : appelez avant d'orienter."}</div>`:""}<p>${esc(d.a)}</p><ul class="ul">${d.f.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></section>
+      <section class="sec"><h3>En bref</h3>${d.warn?`<div class="warnbox" style="margin-bottom:8px">${esc(d.warn)}${d.warnMore?" : "+esc(d.warnMore):" : appelez avant d'orienter."}</div>`:""}<p>${esc(d.a)}</p><ul class="ul">${d.f.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></section>
       ${entreeHtml(d)}
       ${miniMap(d)}
       ${d.der?`<section class="sec"><h3>Déroulement</h3><ul class="ul">${d.der.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></section>`:""}

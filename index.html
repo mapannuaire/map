@@ -24,7 +24,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="application-name" content="MAP">
 <meta name="apple-mobile-web-app-title" content="MAP">
-<script>/* 28/11 : rien n'est peint avant que le bon écran soit choisi (évite le flash addicto → psy au lancement) */document.documentElement.classList.add("booting","nofx");setTimeout(function(){document.documentElement.classList.remove("booting")},4000);</script>
+<script>/* 28/11 : rien n'est peint avant que le bon écran soit choisi (évite le flash addicto → psy au lancement) */document.documentElement.classList.add("booting","nofx");try{var t0=localStorage.getItem("addicto13.theme");if(t0==="light"||t0==="dark")document.documentElement.setAttribute("data-theme",t0);}catch(e){}setTimeout(function(){document.documentElement.classList.remove("booting")},4000);</script>
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: dark)">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -1508,7 +1508,7 @@ html[data-mode="addicto"]{--domain-grad:var(--amb-addicto);--bg:var(--amb-addict
 html[data-mode="psy"]{--domain-grad:var(--amb-psy);--bg:var(--amb-psy-bg)}
 #v-q1 .hero{background:var(--amb-addicto)}
 #v-p1 .hero{background:var(--amb-psy)}
-body{transition:background-color var(--dur-3) var(--ease)}
+body{transition:background-color var(--dur-3) var(--ease)}html.booting body,html.nofx body{transition:none}.op.pressing,.opts .op.pressing,[data-sev].pressing,[data-csub].pressing,[data-sub].pressing,.mobbtn.pressing{transform:scale(.96);box-shadow:inset 0 0 0 999px color-mix(in srgb,currentColor 8%,transparent)}
 .hero::after{content:"";position:absolute;inset:0;opacity:0;pointer-events:none;z-index:0}
 #v-q1 .hero::after{background:var(--amb-psy)}
 #v-p1 .hero::after{background:var(--amb-addicto)}
@@ -5386,7 +5386,12 @@ function paintQ1(){
 }
 optsEl.addEventListener("click",e=>{const b=e.target.closest(".op");if(!b)return;
   if(b.dataset.k==="sevrage"){openSevrage();return;}
-  S.types=[b.dataset.k];S.csub="";S.q="";{const qi=document.getElementById("q");if(qi)qi.value="";}paintQ1();goQ2();});
+  pressGo(b,()=>{S.types=[b.dataset.k];S.csub="";S.q="";{const qi=document.getElementById("q");if(qi)qi.value="";}paintQ1();goQ2();});});
+/* 28/11 : le bouton reste enfoncé un instant avant d'ouvrir les résultats, sinon l'écran change avant qu'on voie l'appui */
+function pressGo(b,fn){fn();}
+{let relay=false;document.addEventListener("click",e=>{if(relay||e.detail===0&&!e.isTrusted)return;const b=e.target.closest(".op,.mobbtn,[data-sev],[data-csub],[data-sub]");if(!b||b.disabled||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  e.stopImmediatePropagation();e.preventDefault();if(b.classList.contains("pressing"))return;b.classList.add("pressing");
+  setTimeout(()=>{b.classList.remove("pressing");relay=true;try{b.click();}finally{relay=false;}},140);},true);}
 const SEVT=["cure","postcure","commu"];
 /* Sevrage : cure, post-cure ou communauté ; les communautés sont ensuite classées par type */
 function openSevrage(){const cnt=t=>D.filter(d=>d.t.includes(t)).length;
@@ -6264,8 +6269,8 @@ subEl.addEventListener("click",e=>{if(e.target===subEl||e.target.closest("[data-
     box.scrollIntoView({block:"nearest"});return;}
   if(e.target.closest("#hs-dob")){const d=+document.getElementById("hs-day").value,mo=+document.getElementById("hs-month").value,sc=sectFromDob(d,mo);
     if(sc){subEl.hidden=true;onlyType("hospit","hospit",sc,"sans domicile, né(e) le "+(d===1?"1er":d)+" "+MOIS[mo-1]);}return;}
-  const sv=e.target.closest("[data-sev]");if(sv){if(sv.dataset.sev==="commu"){openCommu();return;}subEl.hidden=true;S.types=[sv.dataset.sev];S.csub="";paintQ1();goQ2();return;}
-  const cs=e.target.closest("[data-csub]");if(cs){subEl.hidden=true;S.types=["commu"];S.csub=cs.dataset.csub;paintQ1();goQ2();return;}
+  const sv=e.target.closest("[data-sev]");if(sv){if(sv.dataset.sev==="commu"){openCommu();return;}pressGo(sv,()=>{subEl.hidden=true;S.types=[sv.dataset.sev];S.csub="";paintQ1();goQ2();});return;}
+  const cs=e.target.closest("[data-csub]");if(cs){pressGo(cs,()=>{subEl.hidden=true;S.types=["commu"];S.csub=cs.dataset.csub;paintQ1();goQ2();});return;}
   const b=e.target.closest("[data-sub]");if(b){if(subEl.dataset.k==="hospit"&&b.dataset.sub==="hospit"){openHospSect();return;}subEl.hidden=true;onlyType(subEl.dataset.k,b.dataset.sub);}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!subEl.hidden)subEl.hidden=true;});
 /* Panneaux (role=dialog) : le focus entre dans le panneau à l'ouverture, y reste (Tab / Maj+Tab),

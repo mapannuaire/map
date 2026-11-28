@@ -5148,6 +5148,7 @@ function applySheet(text){
     const g=k=>{const i=col(k);return i<0?undefined:String(r[i]??"").trim();};
     const name=g("nom");if(!name)return;
     const id=g("identifiant")||("g-"+sheetSlug(name));
+    if(!/^[A-Za-z0-9_-]{1,80}$/.test(id)){SHEET_LOG.push(`ligne ${ri+2} : identifiant refusé (lettres, chiffres et tirets seulement)`);return;}
     const types=(g("categories")||"").split(/[,;\s]+/).map(x=>x.trim().toLowerCase()).filter(Boolean);
     const bad=types.filter(t=>!ORDER_ALL.includes(t));
     if(!types.length||bad.length){SHEET_LOG.push(`ligne ${ri+2} (${name}) : catégorie inconnue ${bad.join(", ")||"(vide)"}`);return;}
@@ -5215,7 +5216,7 @@ const PSYT=["cmp","mob","urg","hdjpsy","rehab","specialise","clinique","consult"
 const L={cure:"Cure",postcure:"Post-cure",commu:"Communauté",hdj:"Hôpital de jour",resid:"Hébergement",csapa:"CSAPA",hosp:"Consultation hospitalière",spec:"Public spécifique",amob:"Équipe mobile",rdr:"Réduction des risques",liberal:"Médecin libéral",entraide:"Entraide",cmp:"CMP adulte",mob:"Équipe mobile",urg:"Urgences psy",hdjpsy:"Hôpital de jour",rehab:"Réhabilitation",specialise:"Consultation spécialisée",clinique:"Clinique",consult:"Consultation",gem:"GEM",famille:"Entraide, familles",repit:"Répit",logement:"Logement",insertion:"Insertion",ecoute:"Écoute",droits:"Droits",hospit:"Hospitalisation"};
 const LV={mention:"Certifié avec mention",confirmee:"Qualité des soins confirmée",conditions:"Certifié sous conditions",non:"Non certifié"};
 const GROUPS={cure:"Cure · sevrage hospitalier",postcure:"Post-cure",commu:"Communautés · séjour long, vie collective",hdj:"Hôpital de jour",resid:"Hébergement thérapeutique",csapa:"CSAPA",hosp:"Consultations d'addictologie à l'hôpital",spec:"Consultations pour publics spécifiques",amob:"Équipes mobiles d'addictologie",rdr:"Réduction des risques · CAARUD et associations",liberal:"Médecins libéraux",cmp:"CMP adultes de Marseille",match:"CMP de rattachement",urg:"Urgences psychiatriques et crise",mob:"Équipes mobiles · personnes à la rue",entraide:"Groupes d'entraide · AA, NA, Vie Libre…",hdjpsy:"Hôpitaux de jour et CATTP",rehab:"Réhabilitation psychosociale",specialise:"Consultations spécialisées",clinique:"Cliniques psychiatriques privées",consult:"Consultations et psychothérapies",gem:"GEM · groupes d'entraide mutuelle",famille:"Associations d'usagers et de familles",repit:"Répit et alternatives à l'hospitalisation",logement:"Logement accompagné · SAMSAH, résidences",insertion:"Insertion et emploi",ecoute:"Lignes d'écoute",droits:"Droits et accompagnement",hospit:"Hospitalisation temps plein · admissions"};
-const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const dest=d=>(/Microstructures/.test(d.n)?"":d.n+", ")+d.a;
 const mapUrl=d=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(dest(d));
 const dirUrl=d=>"https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(dest(d))+"&travelmode=transit";
@@ -6416,7 +6417,7 @@ function infoPage(pg){const box=document.getElementById("info-body");
     box.innerHTML=`<div class="ab"><p><b>MAP</b> (Marseille AddictoPsy) est un annuaire d'orientation pour les équipes du soin et du social : cures, post-cures, communautés, CSAPA, réduction des risques, CMP de secteur, urgences, équipes mobiles, entraide et associations d'usagers.</p>
     <div class="stats3"><div><b>${D.length}</b>lieux</div><div><b>${nA}</b>addictologie</div><div><b>${nP}</b>psychiatrie</div></div>
     <p>Les informations viennent des sites des établissements, de l'ARS, d'ARCA-Sud, de Santé publique France, de la Fédération Addiction et de la cartographie collaborative RdR-Addicto. Chaque fiche porte sa date de vérification ; celles marquées « à confirmer » doivent être vérifiées avant d'orienter.</p>
-    <p>MAP ne demande et ne garde aucune information personnelle. Gratuit, sans compte, mis à jour automatiquement à chaque ouverture.</p></div>
+    <p>MAP est gratuit, fonctionne sans compte et sans cookie, et ne demande aucune information sur les patients. L'appli compte de façon anonyme les ouvertures et les fiches consultées, pour améliorer l'annuaire. Elle fait appel à GitHub (hébergement), Google (polices et tableau des fiches), Supabase (compteurs et messages) et OpenStreetMap (fond de carte), qui reçoivent l'adresse IP de l'appareil comme tout site web. Vos lieux gardés restent sur votre téléphone. Mise à jour automatique à chaque ouverture.</p></div>
     <button type="button" class="installbtn" data-install style="margin:0">Installer sur mon téléphone</button>
     <button type="button" class="btn backi" data-ipage="menu">← Retour</button>`;}
   else if(pg==="contact"){box.innerHTML=`<p class="hint" style="margin:0">Une erreur, un lieu qui manque, une idée : les messages arrivent à l'équipe de MAP.</p><div class="sublist">

@@ -1753,7 +1753,7 @@ h1,h2,h3{text-wrap:balance}
           <span class="mono" style="font-size:12.5px">contact@arca-sud.fr</span>
         </div>
         <div class="mailbar"><label for="defmail">Adresse d'envoi par défaut des fiches</label><input id="defmail" type="email" placeholder="secretariat@votre-structure.fr" autocomplete="email"></div>
-        <p style="margin:0;font-size:12.5px">Sources : ARCA-Sud, Santé publique France, Fédération Addiction, <a href="https://rdr-addicto.gogocarto.fr/" target="_blank" rel="noopener">cartographie RdR-Addicto</a>, établissements, <a href="https://www.has-sante.fr/jcms/c_1725555/fr/qualiscope-qualite-des-hopitaux-et-des-cliniques" target="_blank" rel="noopener">HAS</a> (octobre 2026). Vérifiez avant tout envoi.</p>
+        <p style="margin:0;font-size:12.5px">Sources : <a href="https://rdr-addicto.gogocarto.fr/" target="_blank" rel="noopener">cartographie collaborative RdR-Addicto</a>, établissements, Santé publique France, Fédération Addiction, <a href="https://www.has-sante.fr/jcms/c_1725555/fr/qualiscope-qualite-des-hopitaux-et-des-cliniques" target="_blank" rel="noopener">HAS</a> et ARCA-Sud (2026). Vérifiez avant tout envoi.</p>
         <button class="installbtn" type="button" data-install style="margin:0">Installer sur mon téléphone</button>
         <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn" id="suggest" data-suggest>Proposer un lieu manquant</button><button class="btn" type="button" data-news id="footnews">Nouveautés et version</button></div>
       </footer>
@@ -4543,19 +4543,19 @@ D.push(
  n:"CAARUD Sleep In",o:"Groupe SOS Solidarités · associatif",a:"8 rue Marcel Sembat, 13001 Marseille",
  f:["Usagers en grande précarité et jeunes en errance","Accueil de jour (jusqu'à 50 personnes) et 15 places d'hébergement d'urgence à la nuitée","Consultations médico-psycho-sociales sans rendez-vous le matin, sur rendez-vous l'après-midi"],
  der:["Hébergement d'urgence : réservation uniquement sur place, à midi","Entrée à partir de 18h en semaine (19h sans réservation), 20h30 le week-end","Maraudes mardi et jeudi après-midi : Porte d'Aix, Colbert, Saint-Charles, Réformés, Gambetta"],
- c:[["Téléphone","04 91 62 84 84"],["E-mail","sleepin.marseille@groupe-sos.org"]],note:ARCA},
+ c:[["Téléphone","04 91 62 84 84"],["E-mail","sleepin.marseille@groupe-sos.org"]],note:"Sources : cartographie collaborative RdR-Addicto (GoGoCarto) et annuaire ARCA-Sud, 2026."},
 {id:"tipi",t:["rdr"],pub:1,mrs:1,p:"Marseille 1er",tr:[["M2","Notre-Dame-du-Mont"]],
  n:"CAARUD ASUD Le Tipi",o:"ASUD Marseille · association d'usagers",a:"26A rue de la Bibliothèque, 13001 Marseille",
  f:["Accueil collectif sans rendez-vous : mardi et jeudi 14h–17h45, mercredi 9h30–13h","Matériel de réduction des risques lundi et vendredi (9h30–13h, 14h–17h45)","Accueil réservé aux femmes le mardi, 14h–16h30"],
- c:[["Téléphone","04 91 92 53 11"],["E-mail","asud.equipe@gmail.com"]],note:ARCA},
+ c:[["Téléphone","04 91 92 53 11"],["E-mail","asud.equipe@gmail.com"]],note:"Sources : cartographie collaborative RdR-Addicto (GoGoCarto) et annuaire ARCA-Sud, 2026."},
 {id:"caarudbus",t:["rdr"],pub:1,mrs:1,p:"Marseille 5ᵉ",
  n:"CAARUD Bus 31/32",o:"Bus 31/32, avec Médecins du Monde · associatif",a:"129 avenue de Toulon, 13005 Marseille",
  f:["Sans rendez-vous : matériel de réduction des risques, dépistages, soins infirmiers","Permanence médicosociale mardi et jeudi 9h30–12h30, avec inclusions méthadone","Point de collecte Drug Lab pour faire analyser un produit, anonyme et gratuit"],
- c:[["Téléphone","04 86 11 09 14"],["E-mail","bus3132@bus3132.org"]],note:ARCA},
+ c:[["Téléphone","04 86 11 09 14"],["E-mail","bus3132@bus3132.org"]],note:"Sources : cartographie collaborative RdR-Addicto (GoGoCarto) et annuaire ARCA-Sud, 2026."},
 {id:"protox",t:["rdr"],pub:1,mrs:1,p:"Marseille 9ᵉ",tr:[["M2","Sainte-Marguerite Dromel"]],
  n:"CAARUD Protox",o:"AP-HM, hôpital Sainte-Marguerite · public",a:"270 bd de Sainte-Marguerite, 13009 Marseille",
  f:["Sans rendez-vous, anonyme, gratuit et inconditionnel","Usagers, personnes précaires et entourage","Lundi, mardi, jeudi et vendredi 9h–16h15 ; mercredi 13h–16h15"],
- c:[["Téléphone","04 91 74 61 87"],["E-mail","csapa-caarud@ap-hm.fr"]],note:ARCA}
+ c:[["Téléphone","04 91 74 61 87"],["E-mail","csapa-caarud@ap-hm.fr"]],note:"Sources : cartographie collaborative RdR-Addicto (GoGoCarto) et annuaire ARCA-Sud, 2026."}
 );
 /* Numéros donnés par ARCA-Sud, les anciens gardés à côté */
 (()=>{const g=id=>D.find(d=>d.id===id);
@@ -6532,7 +6532,7 @@ function infoPage(pg){const box=document.getElementById("info-body");
   if(pg==="about"){const nA=D.filter(d=>!d.t.some(t=>PSYT.includes(t))).length,nP=D.length-nA;
     box.innerHTML=`<div class="ab"><p><b>MAP</b> (Marseille AddictoPsy) est un annuaire d'orientation pour les équipes du soin et du social : cures, post-cures, communautés, CSAPA, réduction des risques, CMP de secteur, urgences, équipes mobiles, entraide et associations d'usagers.</p>
     <div class="stats3"><div><b>${D.length}</b>lieux</div><div><b>${nA}</b>addictologie</div><div><b>${nP}</b>psychiatrie</div></div>
-    <p>Les informations viennent des sites des établissements, de l'ARS, d'ARCA-Sud, de Santé publique France, de la Fédération Addiction et de la cartographie collaborative RdR-Addicto. Chaque fiche porte sa date de vérification ; celles marquées « à confirmer » doivent être vérifiées avant d'orienter.</p>
+    <p>Les informations viennent en priorité de la cartographie collaborative et libre RdR-Addicto (GoGoCarto) et des sites des établissements, puis de l'ARS, de Santé publique France, de la Fédération Addiction et de l'annuaire ARCA-Sud. Chaque fiche porte sa date de vérification ; celles marquées « à confirmer » doivent être vérifiées avant d'orienter.</p>
     <p>MAP est tenu bénévolement et de façon indépendante par Julien Aron. Ce n'est pas un service d'urgence et il ne remplace pas un avis médical : en cas d'urgence vitale, appelez le 15 ; en cas d'idées suicidaires, le 3114. Les horaires et les contacts changent : appelez la structure avant d'y adresser quelqu'un, et signalez les erreurs avec « Commentaires » en bas de chaque fiche.</p>
     <p>Le code de l'application est libre (licence EUPL 1.2).</p>
     <p><b>Mentions légales.</b> Éditeur et responsable de la publication : Julien Aron, à titre bénévole. Contact : mapannuaire@gmail.com. Hébergement : GitHub Pages, GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Messages et compteurs : Supabase.</p>

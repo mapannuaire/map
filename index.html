@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org; connect-src 'self' https://docs.google.com https://*.googleusercontent.com https://jnbkxoxcxpwgahzeitid.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org; connect-src 'self' https://docs.google.com https://*.googleusercontent.com https://jnbkxoxcxpwgahzeitid.supabase.co https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>MAP · Marseille AddictoPsy</title>
 <meta name="description" content="Annuaire gratuit pour orienter en addictologie et en psychiatrie à Marseille et dans la région : près de 300 lieux, CMP de secteur, urgences, fiches à remettre en 8 langues. Sans compte.">
@@ -27,10 +27,17 @@
 <meta name="theme-color" content="#0f2a3f" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b1f2e" media="(prefers-color-scheme: dark)">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"></noscript>
 <style>
+/* 28/11 : polices servies par le site lui-même (plus d'appel à Google Fonts) */
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/newsreader-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/newsreader-latin-600-normal.woff2") format("woff2")}
+
 :root{--fs-xs:11px;--fs-sm:13px;--fs-md:15px;--fs-lg:17px;--fs-xl:22px;--fs-2xl:28px;
 --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;--sp-6:24px;--sp-8:32px;
 --r-xs:4px;--r-sm:8px;--r-md:12px;--r-lg:16px;--r-full:999px;--focus:var(--accent);
@@ -270,6 +277,10 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) :is(.transit,.stlab) i.M1{color:#04213a}}
 :root[data-theme="dark"] :is(.transit,.stlab) i.M1{color:#04213a}
 @media (max-width:339px){.brand .brandlong{display:none}}
+@media (max-width:359px){.big{display:grid!important;grid-template-columns:repeat(3,1fr)}.big>a:first-child:not(.ico){grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:var(--sp-2)}.big .telnum{white-space:nowrap;overflow:visible}.big .ico{width:auto}}
+.sigles{margin:0 0 var(--sp-4);display:grid;gap:2px}
+.sigles dt{font:700 var(--fs-md) var(--mono);color:var(--accent);margin-top:var(--sp-3)}
+.sigles dd{margin:0;font-size:var(--fs-md);line-height:1.45}
 .chsep{flex:none;width:1px;align-self:stretch;margin:var(--sp-1) var(--sp-1);background:var(--line)}
 .card .where sup,.fh sup{font-size:.72em;line-height:0;vertical-align:.45em}
 .big .ico{display:grid;justify-items:center;align-content:center;gap:2px}
@@ -329,7 +340,7 @@ select.arrsel{width:100%;border:1.5px solid var(--line);background:var(--surface
 .bubble b{font:600 var(--fs-md)/1.25 var(--display)}
 .bubble .meta{font-size:var(--fs-sm);color:var(--muted)}
 .bubble .x{border:0;background:var(--sunk);border-radius:50%;width:30px;height:30px;flex:none;font-size:var(--fs-lg);line-height:1}
-.bubble .row{display:flex;gap:var(--sp-2);flex-wrap:wrap}
+.bubble .row{display:flex;gap:var(--sp-2);flex-wrap:wrap;position:sticky;bottom:0;background:var(--surface)}
 .bubble .blist{display:grid;gap:var(--sp-2)}
 .bubble .blist button{text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:var(--r-md);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-md);font-weight:600}
 .bubble .blist small{display:block;font-weight:400;color:var(--muted);font-size:var(--fs-sm)}
@@ -1590,7 +1601,7 @@ h1,h2,h3{text-wrap:balance}
       <span class="lbl">Sans domicile</span>
       <h3>Date de naissance</h3>
       <div class="dob"><select id="p-day" class="arrsel" aria-label="Jour"><option value="">Jour</option></select><select id="p-month" class="arrsel" aria-label="Mois"><option value="">Mois</option></select></div>
-      <p class="hint">Règle marseillaise pour les personnes sans domicile sans suivi, ou dont le suivi est interrompu depuis plus de 6 mois. S'il est déjà suivi, il reste dans son CMP. Si son état ne lui permet pas d'aller loin, le CMP de rattachement oriente vers le CMP le plus proche.</p>
+      <p class="hint">Règle marseillaise pour les personnes sans domicile sans suivi, ou dont le suivi est interrompu depuis plus de 6 mois. Une personne déjà suivie reste dans son CMP. Si son état ne lui permet pas d'aller loin, le CMP de rattachement oriente vers le CMP le plus proche.</p>
     </section>
     <div id="p-result" class="presult" hidden aria-live="polite"></div>
     <h2 class="qh qtitle" style="margin-top:22px">Autres ressources</h2>
@@ -1623,7 +1634,7 @@ h1,h2,h3{text-wrap:balance}
 <div id="v-search" class="view" data-view="recherche" hidden>
   <div class="stop"><div class="col">
     <button class="iconback" type="button" data-back aria-label="Retour">←</button>
-    <div class="sfield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg><input id="sq" type="search" placeholder="Nom, ville, quartier, produit…" aria-label="Rechercher dans l'annuaire" autocomplete="off" enterkeyhint="search"><button type="button" id="sqclear" aria-label="Effacer" hidden>×</button></div>
+    <div class="sfield" role="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg><input id="sq" type="search" placeholder="Nom, ville, quartier, produit…" aria-label="Rechercher dans l'annuaire" autocomplete="off" enterkeyhint="search"><button type="button" id="sqclear" aria-label="Effacer" hidden>×</button></div>
   </div></div>
   <main class="col" style="padding-top:12px;padding-bottom:40px">
     <h1 class="sr-only">Rechercher dans tout l'annuaire</h1>
@@ -1632,6 +1643,7 @@ h1,h2,h3{text-wrap:balance}
       <div class="sugg" id="sugg"></div>
     </div>
     <p class="qsub" id="scount" hidden></p>
+    <h2 class="sr-only">Résultats</h2>
     <div class="cards" id="sout"></div>
   </main>
 </div>
@@ -4727,7 +4739,7 @@ const REPORT_TO="mapannuaire@gmail.com";
 /* Dernière vérification par défaut (mois du relevé) ; une fiche peut préciser d.chk="AAAA-MM-JJ" */
 const CHK_DEFAULT="2026-10";
 const CHANGELOG=[
-  ["2026-11-28",["Les liens directs vers une fiche (SMS, QR code) s'ouvrent de nouveau correctement","Accueil : rappel des numéros d'urgence 15 et 3114","Fiche : photo de l'entrée quand une équipe l'a envoyée, avec un lien Street View ; bouton « Envoyer une photo ou une plaquette » en bas de chaque fiche","Fiche imprimée pour le patient : photo de l'entrée sous le plan","Commentaires : nouveau sujet « Photo ou plaquette » pour envoyer une photo de l'entrée ou la plaquette d'une structure","Plus de retour visuel quand on touche un bouton, et corrections d'accessibilité"]],
+  ["2026-11-28",["Bouton « i » : nouvelles pages « Pour vous ou un proche » et « Sigles »","Recherche : les lieux de Marseille puis les plus proches d'abord ; fautes de frappe courantes tolérées","Polices servies par le site lui-même, sans appel à Google","Les liens directs vers une fiche (SMS, QR code) s'ouvrent de nouveau correctement","Accueil : rappel des numéros d'urgence 15 et 3114","Fiche : photo de l'entrée quand une équipe l'a envoyée, avec un lien Street View ; bouton « Envoyer une photo ou une plaquette » en bas de chaque fiche","Fiche imprimée pour le patient : photo de l'entrée sous le plan","Commentaires : nouveau sujet « Photo ou plaquette » pour envoyer une photo de l'entrée ou la plaquette d'une structure","Plus de retour visuel quand on touche un bouton, et corrections d'accessibilité"]],
   ["2026-11-24",["Sur téléphone, les résultats s'affichent tout de suite : carte compacte (bouton « Agrandir ») et recherche au-dessus","Recherche : synonymes cliniques (Subutex, TSO, méthadone, crack, cocaïne…), pluriels, et résultats partiels quand aucun lieu ne contient tous les mots","Fiche : Appeler, Itinéraire et Donner la fiche en haut ; impression, message, e-mail et PDF regroupés dans « Donner la fiche », avec la langue choisie une seule fois","Accessibilité : focus sur le titre à chaque écran, boutons plus faciles à toucher"]],
   ["2026-10-28",["Partager : le message contient le lien direct vers la fiche dans MAP et les liens des dossiers d'admission","Fiche imprimée et PDF : QR code vers la fiche en ligne et vers chaque document","Les fiches peuvent désormais être modifiées dans un tableau Google Sheets (mise en place en cours)","Ajout du SIDIIS (Groupe SOS) : suivi intensif à domicile pour les personnes souvent hospitalisées en psychiatrie, 8ᵉ, 9ᵉ et 10ᵉ","Logement : seuls les SAMSAH du handicap psychique sont gardés","Mon soutien psy : lien vers la page Ameli et son dépliant","Documents à télécharger vérifiés sur les sites des structures : 117 fiches ont maintenant des documents (210 au total), dont 22 avec un dossier d'admission. Dans chaque fiche, « Admission » regroupe les dossiers à remplir (PDF en premier) et « Documents » les plaquettes et livrets"]],
   ["2026-10-24",["Vérification croisée avec la cartographie RdR-Addicto : ajout du CAARUD Tekno (milieu festif techno) ; Plus Belle la Nuit à sa nouvelle adresse (13001) avec le Chill'In du jeudi ; numéro du Tipi festif ; adresses précisées pour Addictions France La Ciotat et Villa Floréal ; horaires d'accueil de Tremplin corrigés"]],
@@ -5579,7 +5591,7 @@ function realDraw(items){
   REAL.items=items.filter(d=>GEO[d.id]).sort((a,b)=>numOf[a.id]-numOf[b.id]);
   const ll=REAL.items.map(d=>GEO[d.id]).filter(inFrame);
   REAL.busy=true;
-  if(ll.length)REAL.map.fitBounds(ll,{padding:[34,34],maxZoom:15});else REAL.map.setView([43.296,5.381],12);
+  if(ll.length){const pd=REAL.map.getSize().y<260?12:34;REAL.map.fitBounds(ll,{padding:[pd,pd],maxZoom:15});}else REAL.map.setView([43.296,5.381],12);
   REAL.busy=false;realPins();
 }
 /* Regroupement des lieux proches : un rond avec le nombre, qui zoome quand on le touche */
@@ -5740,6 +5752,7 @@ function render(){
     if(onlyLib)msg+=" Essayez un autre secteur ou un autre quartier.";
     else if(n0.lg&&S.hm==="non"&&S.lg==="non")msg+=" À Marseille, la seule cure publique est celle du CH d'Allauch : vérifiez les filtres.";
     else if(S.hm==="non")msg+=" Essayez d'accepter un lieu hors de Marseille.";
+    if(S.acc.cs&&S.types.some(t=>["cure","postcure","commu","sevrage","hdj","resid"].includes(t)))msg+=" Pour les cures et les séjours, cette information n'est pas encore renseignée dans MAP : ce n'est pas un refus, appelez la structure.";
     if(accOn())msg+=" Retirez un filtre « "+ACCF.filter(([k])=>S.acc[k]).map(([,l])=>l.toLowerCase()).join(" », « ")+" » pour voir plus de lieux.";
     em.textContent=msg+" ARCA-Sud (04 88 92 68 88) peut aider à trouver une solution.";
   }
@@ -5909,6 +5922,8 @@ function openFiche(id){
     send.href="mailto:"+encodeURIComponent(t).replace(/%40/g,"@")+"?subject="+encodeURIComponent(su)+"&body="+encodeURIComponent(bo);
     gsend.href="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(t)+"&su="+encodeURIComponent(su)+"&body="+encodeURIComponent(bo);};
   upd();to.addEventListener("input",upd);if(ml)ml.addEventListener("change",upd);
+  {const okMail=()=>{const t=to.value.trim(),ok=!t||/^[^\s@,;]+@[^\s@,;]+\.[^\s@,;]{2,}$/.test(t);to.setAttribute("aria-invalid",String(!ok));return ok;};
+   to.addEventListener("blur",okMail);[send,gsend].forEach(a=>a&&a.addEventListener&&a.addEventListener("click",e=>{if(!okMail()){e.preventDefault();to.focus();to.setCustomValidity("Adresse e-mail incomplète");to.reportValidity();to.setCustomValidity("");}}));}
   fEl.focus({preventScroll:true});
 }
 /* 24/11 : partage, e-mail, impression et fichiers regroupés dans « Donner la fiche » (langue choisie une seule fois) */
@@ -6278,7 +6293,11 @@ const SYN=[
   ["jeune","adolescent","cjc","mineur"],
   ["sdf","sans domicile","sans abri","precarite","errance"],
   ["femme","femmes","perinatalite","grossesse"],
-  ["rdr","reduction des risques","caarud","caarrud","carud","seringue"],
+  ["rdr","reduction des risques","caarud","caarrud","carud","seringue","seringues","steribox","kit","materiel"],
+  ["benzodiazepine","benzodiazepines","benzo","benzos","medicament","medicaments","anxiolytique","somnifere"],
+  ["douche","douches","hygiene","laverie","accueil de jour"],
+  ["aa","alcooliques anonymes"],["na","narcotiques anonymes"],
+  ["proche","proches","entourage","famille","familles","parent","parents","fils","fille","conjoint"],
   ["csapa","csappa","capsa"],
   ["sevrage","cure","detox"],
 ];
@@ -6446,6 +6465,8 @@ paintNewsBadge();
 const infoEl=document.createElement("div");infoEl.className="isheet-scrim infosheet";infoEl.id="infosheet";infoEl.hidden=true;document.body.appendChild(infoEl);
 const infoMenu=()=>`<div class="sublist">
   <button type="button" data-ipage="about" style="--c:var(--accent)"><span><b>À propos de l'application</b><br><small>Ce que contient MAP, d'où viennent les informations</small></span><em>›</em></button>
+  <button type="button" data-ipage="aide" style="--c:var(--t-urg)"><span><b>Pour vous ou un proche</b><br><small>Lignes d'écoute gratuites, urgences, premier contact</small></span><em>›</em></button>
+  <button type="button" data-ipage="sigles" style="--c:var(--accent)"><span><b>Sigles</b><br><small>CSAPA, CAARUD, CMP, ELSA… ce que ça veut dire</small></span><em>›</em></button>
   <button type="button" data-inews style="--c:var(--accent)"><span><b>Nouveautés</b><br><small>Version du ${fmtDate(VERSION)}${store("addicto13.seen")!==VERSION?" · nouvelle version":""}</small></span><em>›</em></button>
   <button type="button" data-ipage="contact" style="--c:var(--accent)"><span><b>Contact</b><br><small>Écrire, signaler une erreur, proposer un lieu</small></span><em>›</em></button></div>`;
 function infoPage(pg){const box=document.getElementById("info-body");
@@ -6456,9 +6477,17 @@ function infoPage(pg){const box=document.getElementById("info-body");
     <p>MAP est tenu bénévolement et de façon indépendante par Julien Aron. Ce n'est pas un service d'urgence et il ne remplace pas un avis médical : en cas d'urgence vitale, appelez le 15 ; en cas d'idées suicidaires, le 3114. Les horaires et les contacts changent : appelez la structure avant d'y adresser quelqu'un, et signalez les erreurs avec « Commentaires » en bas de chaque fiche.</p>
     <p>Le code de l'application est libre (licence EUPL 1.2).</p>
     <p><b>Mentions légales.</b> Éditeur et responsable de la publication : Julien Aron, à titre bénévole. Contact : mapannuaire@gmail.com. Hébergement : GitHub Pages, GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Messages et compteurs : Supabase.</p>
-    <p>MAP est gratuit, fonctionne sans compte et sans cookie, et ne demande aucune information sur les patients. L'appli compte de façon anonyme les ouvertures et les fiches consultées, pour améliorer l'annuaire. Elle fait appel à GitHub (hébergement), Google (polices et tableau des fiches), Supabase (compteurs et messages) et OpenStreetMap (fond de carte), qui reçoivent l'adresse IP de l'appareil comme tout site web. Vos lieux gardés restent sur votre téléphone. Mise à jour automatique à chaque ouverture.</p></div>
+    <p>MAP est gratuit, fonctionne sans compte et sans cookie, et ne demande aucune information sur les patients. L'appli compte de façon anonyme les ouvertures, les fiches consultées et les mots cherchés seuls qui n'ont donné aucun résultat, pour améliorer l'annuaire. N'écrivez jamais le nom d'un patient dans la recherche. Elle fait appel à GitHub (hébergement), Google (tableau des fiches), Supabase (compteurs et messages) et OpenStreetMap (fond de carte), qui reçoivent l'adresse IP de l'appareil comme tout site web. Vos lieux gardés restent sur votre téléphone. Mise à jour automatique à chaque ouverture.</p></div>
     <button type="button" class="installbtn" data-install style="margin:0">Installer sur mon téléphone</button>
     <button type="button" class="btn backi" data-ipage="menu">← Retour</button>`;}
+  else if(pg==="aide"){const fb=(id,l,sub)=>D.some(d=>d.id===id)?`<button type="button" data-openfiche="${id}" style="--c:var(--accent)"><span><b>${l}</b><br><small>${sub}</small></span><em>›</em></button>`:"";
+    box.innerHTML=`<div class="ab"><p>MAP est fait pour les équipes de soins, mais vous pouvez l'utiliser pour vous-même ou pour un proche. Vous n'avez pas besoin de savoir quel lieu choisir : les lignes ci-dessous écoutent, informent et orientent, gratuitement et sans donner votre nom.</p>
+    <p><b>En cas d'urgence</b> : appelez le <a href="tel:15">15</a> (urgence vitale) ou le <a href="tel:3114">3114</a> (idées suicidaires, 24h/24).</p></div>
+    <div class="sublist">${fb("ligne-drogues-info","Drogues Info Service","0 800 23 13 13, tous les jours")}${fb("ligne-alcool-info","Alcool Info Service","0 980 980 930, tous les jours")}${fb("ligne-ecoute-cannabis","Écoute Cannabis","Ligne nationale")}${fb("ligne-joueurs-info","Joueurs Info Service","Jeux d'argent et jeux vidéo")}${fb("ligne-tabac-info","Tabac Info Service","39 89")}${fb("se-ecoute-famille-unafam-ligne-nationale","Écoute-famille UNAFAM","Pour les proches d'une personne en souffrance psychique")}${fb("am-arca-sud-delegation-des-bouches-du-rhone","ARCA-Sud","Appui à l'orientation en addictologie, 04 88 92 68 88")}</div>
+    <div class="ab"><p>Pour un premier rendez-vous près de chez vous : en addictologie, un <b>CSAPA</b> reçoit gratuitement, sans avance de frais ; en psychiatrie, le <b>CMP</b> de votre quartier (onglet Psychiatrie, « Par adresse »). Votre médecin traitant peut aussi vous orienter.</p></div>
+    <button type="button" class="btn backi" data-ipage="menu">← Retour</button>`;}
+  else if(pg==="sigles"){const G=[["CSAPA","Centre de soins, d'accompagnement et de prévention en addictologie. Consultations gratuites : médecin, infirmier, psychologue, travailleur social ; traitements de substitution."],["CAARUD","Centre d'accueil et d'accompagnement à la réduction des risques pour usagers de drogues. Accueil sans rendez-vous, anonyme : matériel, soins, repos."],["CJC","Consultation jeunes consommateurs, pour les 12-25 ans et leur entourage."],["ELSA","Équipe de liaison et de soins en addictologie : intervient auprès des patients hospitalisés."],["RdR","Réduction des risques."],["TSO","Traitement de substitution aux opiacés (méthadone, buprénorphine)."],["CTR","Centre thérapeutique résidentiel : séjour de soins de plusieurs mois."],["AT","Appartement thérapeutique."],["SMR","Soins médicaux et de réadaptation (ancien SSR) : la « post-cure »."],["CMP","Centre médico-psychologique : consultations de psychiatrie publique, gratuites, selon le secteur du domicile."],["CATTP","Centre d'accueil thérapeutique à temps partiel : activités de soins en groupe."],["HDJ","Hôpital de jour : soins dans la journée, retour au domicile le soir."],["CAP","Centre d'accueil permanent : urgences psychiatriques (CAP 48 à la Timone, CAP 72 à l'hôpital Nord)."],["UHSA","Unité hospitalière spécialement aménagée : hospitalisation psychiatrique des personnes détenues."],["GEM","Groupe d'entraide mutuelle : association d'usagers, lieu de rencontre et d'activités."],["SAMSAH","Service d'accompagnement médico-social pour adultes handicapés (sur orientation MDPH)."],["SAVS","Service d'accompagnement à la vie sociale (sur orientation MDPH)."],["PASS","Permanence d'accès aux soins de santé : soins pour les personnes sans couverture sociale."],["LHSS","Lits halte soins santé : hébergement avec soins pour les personnes sans domicile."],["MDPH","Maison départementale des personnes handicapées."],["ARS","Agence régionale de santé."]];
+    box.innerHTML=`<dl class="sigles">${G.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl><button type="button" class="btn backi" data-ipage="menu">← Retour</button>`;}
   else if(pg==="contact"){box.innerHTML=`<p class="hint" style="margin:0">Une erreur, un lieu qui manque, une idée : les messages arrivent à l'équipe de MAP.</p><div class="sublist">
     <button type="button" data-imsg="write" style="--c:var(--accent)"><span><b>Écrire à l'équipe</b><br><small>${esc(REPORT_TO)}</small></span><em>›</em></button>
     <button type="button" data-imsg="error" style="--c:var(--accent)"><span><b>Commentaires</b><br><small>Sur une fiche, un numéro, une adresse</small></span><em>›</em></button>
@@ -6473,6 +6502,7 @@ document.addEventListener("click",e=>{if(e.target.closest("[data-info]"))openInf
 infoEl.addEventListener("click",e=>{
   if(e.target===infoEl||e.target.closest("[data-closeinfo]")){closeInfo();return;}
   const pg=e.target.closest("[data-ipage]");if(pg){infoPage(pg.dataset.ipage);return;}
+  if(e.target.closest("[data-openfiche]")){closeInfo();return;}
   if(e.target.closest("[data-inews]")){closeInfo();openNews();return;}
   if(e.target.closest("[data-install]")){closeInfo();return;}
   const m=e.target.closest("[data-imsg]");if(m){closeInfo();const k=m.dataset.imsg;
@@ -6527,9 +6557,10 @@ document.addEventListener("click",e=>{
   const tel=e.target.closest('a[href^="tel:"]');if(tel)track("appel",(!fEl.hidden&&fEl.dataset.id)||tel.getAttribute("href").slice(4));
   const sh=e.target.closest("[data-share]");if(sh)track("partage",fEl.dataset.id||"");
 },true);
+/* 28/11 : on ne garde qu'un mot seul, en lettres (jamais une phrase ni un nom complet), et seulement s'il n'a donné aucune fiche */
 {let st=null;document.getElementById("sq").addEventListener("input",()=>{clearTimeout(st);st=setTimeout(()=>{
-  const q=nrm(document.getElementById("sq").value).replace(/[0-9@]/g,"").replace(/\s+/g," ").trim().slice(0,40);
-  if(q.length>=3&&!document.getElementById("sout").children.length)track("recherche_vide",q);},2500);});}
+  const q=nrm(document.getElementById("sq").value).trim();
+  if(/^[a-z]{3,20}$/.test(q)&&!document.querySelector("#sout .scard"))track("recherche_vide",q);},2500);});}
 /* Formulaire de signalement */
 const repEl=document.getElementById("repsheet");let REP={type:"erreur",d:null,motif:null};
 function openRep(type,d){
@@ -6572,6 +6603,8 @@ repEl.addEventListener("click",e=>{
     const files=[...document.getElementById("rep-file").files];
     if(REP.type==="lieu_manquant"){const v=i=>document.getElementById(i).value.trim();
       if(!v("rl-nom")){stt.hidden=false;stt.className="repstatus err";stt.textContent="Indiquez au moins le nom du lieu.";document.getElementById("rl-nom").focus();return;}
+      {const si=document.getElementById("rl-site");let u=si.value.trim();if(u&&!/^https?:\/\//i.test(u))u="https://"+u;
+        if(u&&!/^https?:\/\/[^\s.]+\.[^\s]{2,}$/i.test(u)){stt.hidden=false;stt.className="repstatus err";stt.textContent="L'adresse du site ne semble pas complète (exemple : https://www.exemple.fr). Corrigez-la ou laissez le champ vide.";si.focus();return;}si.value=u;}
       const ty=document.getElementById("rl-type");
       txt=["Nom : "+v("rl-nom"),ty.value?"Type : "+ty.options[ty.selectedIndex].text:"",v("rl-adr")?"Adresse : "+v("rl-adr"):"",v("rl-tel")?"Téléphone : "+v("rl-tel"):"",v("rl-site")?"Site : "+v("rl-site"):"",txt?"\n"+txt:""].filter(Boolean).join("\n");}
     if(files.length>3||files.some(f=>f.size>10485760)){stt.hidden=false;stt.className="repstatus err";stt.textContent="3 fichiers au plus, de 10 Mo maximum chacun.";return;}

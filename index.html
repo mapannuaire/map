@@ -1383,6 +1383,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 /* 28/11 : un groupe se lit « 6 lieux » (pastille allongée, effet de pile), pour ne pas le confondre avec la fiche n° 6 */
 .lclu{display:flex;align-items:center;justify-content:center;gap:3px;height:30px;border-radius:15px;background:var(--surface);color:var(--fg);font:500 12px/1 var(--body);border:2px solid var(--accent);box-shadow:3px -3px 0 -1px var(--surface),3px -3px 0 1px var(--accent),0 2px 6px rgba(0,0,0,.3);font-variant-numeric:tabular-nums;white-space:nowrap}
 .lauto{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--surface);color:var(--t-rdr);border:2px solid var(--t-rdr);box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.leaflet-tooltip.lstop{display:none;background:color-mix(in srgb,var(--surface) 88%,transparent);color:var(--fg);border:0;box-shadow:none;padding:1px 4px;border-radius:4px;font:500 11px/1.2 var(--body);white-space:nowrap}
+.leaflet-tooltip.lstop::before{display:none}
+#lmap.zst .leaflet-tooltip.lstop,#lmap.zst-m .leaflet-tooltip.lstop-m{display:block}
+#lmap:not(.zdot) .lstopdot{display:none}
 .lclu b{font:700 var(--fs-md)/1 var(--body);color:var(--accent)}
 .fab-back{display:none}
 .bb-arca.bb-urg{display:flex;align-items:center;gap:var(--sp-2);min-height:48px;padding:0 var(--sp-4) 0 var(--sp-3);border-radius:var(--r-lg);background:var(--urgent);color:#fff;font:600 var(--fs-md)/1 var(--body)}
@@ -1491,8 +1495,8 @@ html:not([data-loaded]) .view:not([hidden]) main{animation:mapFade var(--dur-2) 
 html[data-sw="r"] .view:not([hidden]) main{animation:mapFromR var(--dur-3) var(--ease) backwards}
 html[data-sw="l"] .view:not([hidden]) main{animation:mapFromL var(--dur-3) var(--ease) backwards}
 html[data-loaded] .opts .op{animation:none}
-@keyframes mapBackIn{from{opacity:.4;transform:translateX(-36px)}to{opacity:1;transform:none}}
-@keyframes mapFwdIn{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+@keyframes mapBackIn{from{opacity:0;transform:translateX(-64px)}to{opacity:1;transform:none}}
+@keyframes mapFwdIn{from{opacity:0;transform:translateX(64px)}to{opacity:1;transform:none}}
 @keyframes mapLeave{from{opacity:1;transform:none}to{opacity:0;transform:translateX(48px)}}
 html[data-nav="back"] .view:not([hidden]) main{animation:mapBackIn var(--dur-3) var(--ease) backwards}
 html[data-nav="fwd"] .view:not([hidden]) main{animation:mapFwdIn var(--dur-3) var(--ease) backwards}
@@ -5601,9 +5605,11 @@ function realInit(){
   REAL.map=LF.map(el,{zoomControl:false,attributionControl:true,minZoom:6,maxZoom:18,zoomSnap:0.5,tap:true}).setView([43.296,5.381],12);
   REAL.map.attributionControl.setPrefix(false);
   REAL.layer=LF.layerGroup().addTo(REAL.map);
-  REAL.map.on("click",()=>closeBubble());REAL.map.on("zoomend",realPins);
+  REAL.map.on("click",()=>closeBubble());REAL.map.on("zoomend",()=>{realZoomCls();realPins();});
   /* métro (trait plein) et tram (pointillés) aux couleurs RTM, sous les lieux */
   REAL.lines=LF.layerGroup().addTo(REAL.map);
+  /* noms de stations sous les numéros des lieux */
+  REAL.map.createPane("stopnames").style.zIndex=590;REAL.map.getPane("stopnames").style.pointerEvents="none";
   return true;
 }
 function realTiles(){
@@ -5621,7 +5627,15 @@ function realTiles(){
   REAL.lines.clearLayers();
   ["T1","T2","T3"].forEach(r=>LF.polyline(LPTS(r),{color:cssVar("--"+r.toLowerCase()),weight:4,dashArray:"7 6",opacity:.55,interactive:false}).addTo(REAL.lines));
   ["M1","M2"].forEach(r=>LF.polyline(LPTS(r),{color:cssVar("--"+r.toLowerCase()),weight:5,opacity:.45,interactive:false}).addTo(REAL.lines));
+  /* 28/11 : stations en points ; leur nom apparaît quand on zoome (voir realZoomCls) */
+  const seen=[];
+  ["M1","M2","T1","T2","T3"].forEach(r=>{const metro=r[0]==="M",col=cssVar("--"+r.toLowerCase());
+    LINES[r].forEach(([nm,la,lo])=>{if(seen.some(([n2,a,b])=>(n2===nm&&Math.abs(a-la)<.003&&Math.abs(b-lo)<.003)||(Math.abs(a-la)<.0004&&Math.abs(b-lo)<.0004)))return;seen.push([nm,la,lo]);
+      LF.circleMarker([la,lo],{radius:metro?4:3,weight:metro?2.5:2,color:col,fillColor:"#fff",fillOpacity:1,opacity:metro?.9:.75,interactive:false,className:"lstopdot"})
+        .bindTooltip(nm,{permanent:true,direction:"right",offset:[5,0],className:"lstop"+(metro?" lstop-m":""),interactive:false,pane:"stopnames"}).addTo(REAL.lines);});});
+  realZoomCls();
 }
+function realZoomCls(){if(!REAL.map)return;const z=REAL.map.getZoom(),el=document.getElementById("lmap");el.classList.toggle("zst",z>=16);el.classList.toggle("zst-m",z>=14.5);el.classList.toggle("zdot",z>=12);}
 function realDraw(items){
   document.getElementById("map").setAttribute("hidden","");const el=document.getElementById("lmap");el.hidden=false;document.querySelector(".mapbox").classList.add("real");
   REAL.map.invalidateSize();realTiles();

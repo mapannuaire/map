@@ -18,7 +18,7 @@ Le code de MAP · Marseille AddictoPsy (application, page de statistiques, scrip
 
 ### Ce que la licence ne couvre pas
 
-- **Les données des fiches** (lieux, horaires, contacts, textes) : elles ne sont pas sous licence libre pour l'instant. Une partie provient de l'annuaire ARCA-Sud et d'autres sources citées dans les fiches.
+- **Les données des fiches** (lieux, horaires, contacts, textes) : elles ne sont pas sous licence libre pour l'instant. Une partie provient de cartographies réalisées avec GoGoCarto et d'autres sources citées dans les fiches.
 - **Les photos et plaquettes** du dossier `medias/` : elles restent la propriété de leurs auteurs, qui ont accepté leur publication dans MAP.
 - **Les composants tiers**, qui gardent leur propre licence :
   - jsPDF et html2canvas (dossier `vendor/`) : licence MIT ;
